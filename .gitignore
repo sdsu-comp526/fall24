@@ -1,0 +1,5 @@
+.vscode/
+_build/
+re
+slides/.ipynb_checkpoints/
+sys
