@@ -1,0 +1,648 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Introduction to version control with git &#8212; Computational Methods for Scientists</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'slides/2024-08-26-first-class';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Computational Methods for Scientists</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/sdsu-comp526/fall24" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/sdsu-comp526/fall24/issues/new?title=Issue%20on%20page%20%2Fslides/2024-08-26-first-class.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/slides/2024-08-26-first-class.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introduction to version control with git</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#identity">Identity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forks-and-branches">Forks and branches</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#some-useful-tips">Some useful tips</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#develop-your-feature">Develop your feature</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Some useful tips</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#squash-and-rebase">Squash and rebase</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Some useful tips</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-reviews">Code reviews</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-version-control-with-git">
+<h1>Introduction to version control with <code class="docutils literal notranslate"><span class="pre">git</span></code><a class="headerlink" href="#introduction-to-version-control-with-git" title="Link to this heading">#</a></h1>
+<p>Version control Software (VCS) is also referred as SCM (Source Code Management) or RCS (Revision Control System) tools. Version control, also known as source control, is the practice of tracking and managing changes to source files. Version control systems are software tools that help teams of contributors manage changes to source code over time. There are several options: <code class="docutils literal notranslate"><span class="pre">git</span></code>, <code class="docutils literal notranslate"><span class="pre">CVS</span></code>, <code class="docutils literal notranslate"><span class="pre">SVN</span></code>, etc.</p>
+<p>For this workshop, we will focus on <a class="reference external" href="https://git-scm.com/docs"><code class="docutils literal notranslate"><span class="pre">git</span></code></a> in particular.</p>
+<blockquote>
+<div><p>“<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code> is only 3 characters longer than <code class="docutils literal notranslate"><span class="pre">mkdir</span></code>”, Jed Brown, Asst. Prof., CU Boulder</p>
+</div></blockquote>
+<p>Some of the material presented in this overview is largely re-adapted from ClimateMachine.jl’s <a class="reference external" href="https://clima.github.io/ClimateMachine.jl/latest/Contributing/#Contributing">contributing guide</a>.</p>
+<p>If you are unfamiliar with <code class="docutils literal notranslate"><span class="pre">git</span></code> and version control, the following guides can be helpful:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.atlassian.com/git/tutorials">Atlassian (bitbucket) git tutorials</a>. A set of tips and tricks for getting started with <code class="docutils literal notranslate"><span class="pre">git</span></code>.</p></li>
+<li><p><a class="reference external" href="https://try.github.io/">GitHub’s git tutorials</a>. A set of resources from  GitHub to learn <code class="docutils literal notranslate"><span class="pre">git</span></code>.</p></li>
+</ul>
+<p>We provide a brief guide here.</p>
+<section id="identity">
+<h2>Identity<a class="headerlink" href="#identity" title="Link to this heading">#</a></h2>
+<p>First make sure <code class="docutils literal notranslate"><span class="pre">git</span></code> knows your name and email address:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git config --global user.name &quot;A. Climate Developer&quot;
+$ git config --global user.email &quot;a.climate.developer@eg.com&quot;
+</pre></div>
+</div>
+</section>
+<section id="forks-and-branches">
+<h2>Forks and branches<a class="headerlink" href="#forks-and-branches" title="Link to this heading">#</a></h2>
+<p>Create your own fork of the desired repository and check out your copy. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/&lt;username&gt;/ClimaCore.jl.git
+$ cd ClimateMachine.jl
+$ git remote add upstream https://github.com/CliMA/ClimaCore.jl
+</pre></div>
+</div>
+<p>What is the difference between using the <code class="docutils literal notranslate"><span class="pre">https</span></code> or the <code class="docutils literal notranslate"><span class="pre">ssh</span></code> protocol? If you use <code class="docutils literal notranslate"><span class="pre">https</span></code> the primary downside for most people is that you must enter your Git password/token every time you push. While it gets added to a cache, it’s not configured to cache permanently (though this can be changed). With SSH keys, it just uses the key file on disk every time so you don’t have to enter your Git password/token at every push. Check this guide to <a class="reference external" href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">generate SSH keys and add them to the ssh-agent</a>.</p>
+<p>Now you have two remote repositories: <code class="docutils literal notranslate"><span class="pre">origin</span></code>, which is your fork (hosted on your cloud account), and <code class="docutils literal notranslate"><span class="pre">upstream</span></code>, which is the main <code class="docutils literal notranslate"><span class="pre">ClimateCore.jl</span></code> repository.</p>
+<p>When part of an organization, people who contribute to an open-source project do not generally fork the repository, but <code class="docutils literal notranslate"><span class="pre">clone</span></code> it directly on their local machine. If you are not sure about the differences <a class="reference external" href="https://www.toolsqa.com/git/difference-between-git-clone-and-git-fork/#:~:text=When%20you%20fork%20a%20repository,with%20the%20help%20of%20Git.">between forking and cloning</a>, check this helpful article.</p>
+<p>Create a branch for your feature; this will hold your contribution:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git checkout -b &lt;branchname&gt;
+</pre></div>
+</div>
+<section id="some-useful-tips">
+<h3>Some useful tips<a class="headerlink" href="#some-useful-tips" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>When you start working on a new feature branch, make sure you start from master by running: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">main</span></code>.</p></li>
+<li><p>When you create a new branch and check it out, as in <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">-b</span> <span class="pre">&lt;branchname&gt;</span></code>, a common convention is to make <code class="docutils literal notranslate"><span class="pre">branchname</span></code> something along the lines of <code class="docutils literal notranslate"><span class="pre">&lt;yourname&gt;/&lt;affected-module&gt;-&lt;short-description&gt;</span></code>.</p></li>
+</ul>
+</section>
+</section>
+<section id="develop-your-feature">
+<h2>Develop your feature<a class="headerlink" href="#develop-your-feature" title="Link to this heading">#</a></h2>
+<p>Follow the recommended <a class="reference external" href="https://clima.github.io/ClimateMachine.jl/latest/DevDocs/CodeStyle/#Coding-conventions">Coding conventions</a>, especially remember that readability and accessibility are very important aspects to make a codebase inclusive. For instance,  <code class="docutils literal notranslate"><span class="pre">snake_case</span></code> or <code class="docutils literal notranslate"><span class="pre">CamelCase</span></code> are more accessible than <code class="docutils literal notranslate"><span class="pre">nocase</span></code> for people who have vision problems.</p>
+<p>If you recognize the need for a feature that you and others may use in your work, please consider contributing this feature yourself. First by opening an issue, if one associated to this feature is not already open.</p>
+<p>Then, when adding your contribution, please make sure you add appropriate unit tests for your code in <code class="docutils literal notranslate"><span class="pre">test/</span></code> and appropriate documentation in the code and/or in <code class="docutils literal notranslate"><span class="pre">docs/</span></code>.</p>
+<section id="id1">
+<h3>Some useful tips<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Once you have written some code, inspect changes by running <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>.</p></li>
+<li><p>Commit all files changed: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-a</span></code> or</p></li>
+<li><p>Commit selected files: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">&lt;file1&gt;</span> <span class="pre">&lt;file2&gt;</span></code> or</p></li>
+<li><p>Add new files to be committed: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">&lt;file1&gt;</span> <span class="pre">&lt;file2&gt;</span></code> (or more briefly,
+<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">-u</span></code> to stage all updated files at once) followed by <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code>.
+Modified files can be added to a commit in the same way.</p></li>
+<li><p>Push feature branch to the remote for review: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">origin</span> <span class="pre">&lt;branchname&gt;</span></code></p></li>
+<li><p>Use descriptive, useful commit messages, and don’t swear if you don’t want your commit message to be shared publicly by the <a class="reference external" href="https://twitter.com/gitlost?lang=en">&#64;gitlost Twitter bot</a>!</p></li>
+</ul>
+</section>
+</section>
+<section id="squash-and-rebase">
+<h2>Squash and rebase<a class="headerlink" href="#squash-and-rebase" title="Link to this heading">#</a></h2>
+<p>Only <em>after</em> a reviewer is done with their review and your PR is approved, it is good to squash your commits history before merging the PR. Use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span></code> (not <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code> so you don’t bring all commits history in) to sync your work:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git fetch upstream
+$ git rebase upstream/main
+</pre></div>
+</div>
+<p>You might find it easier to <a class="reference external" href="https://github.com/edx/edx-platform/wiki/How-to-Rebase-a-Pull-Request#squash-your-changes">squash your commits</a> first.</p>
+<section id="id2">
+<h3>Some useful tips<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>When cleaning up your local branches, some of the following commands might be useful:</p>
+<ul class="simple">
+<li><p>Show local and remote-tracking branches: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">-a</span></code>.</p></li>
+<li><p>Show available remotes: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">-v</span></code>.</p></li>
+<li><p>Show all branches available on remote: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">ls-remote</span></code>.
+Use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">show</span> <span class="pre">origin</span></code> for a complete summary.</p></li>
+<li><p>Delete a local branch: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">-D</span> <span class="pre">&lt;branchname&gt;</span></code> (only after merge to
+<code class="docutils literal notranslate"><span class="pre">master</span></code> is complete).</p></li>
+<li><p>Delete remote branch: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">origin</span> <span class="pre">:&lt;branchname&gt;</span></code> (mind the colon in
+front of the branch name).</p></li>
+</ul>
+<p>Additionally, when debugging or inspecting the code for some potentially problematic changes introduced, some of the following commands can be used:</p>
+<ul class="simple">
+<li><p>Show logs: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code>. (A more powerful version of this that can track all
+changes, even after potential rebases, is <a class="reference external" href="https://git-scm.com/docs/git-reflog"><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reflog</span></code></a>).</p></li>
+<li><p>Show logs for file or folder: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">&lt;file&gt;</span></code>.</p></li>
+<li><p>Show changes for each log: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">-p</span></code> (add file or folder name if required).</p></li>
+<li><p>Show diff with current working tree: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span> <span class="pre">path/to/file</span></code>.</p></li>
+<li><p>Show diff with other commit: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span> <span class="pre">&lt;SHA1&gt;</span> <span class="pre">path/to/file</span></code>.</p></li>
+<li><p>Compare version of file in two commits: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span> <span class="pre">&lt;SHA1&gt;</span> <span class="pre">&lt;SHA1&gt;</span> <span class="pre">path/to/file</span></code>.</p></li>
+<li><p>Show changes that are in <code class="docutils literal notranslate"><span class="pre">master</span></code>, but not yet in my current branch:
+<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log..master</span></code>.</p></li>
+<li><p>Discard changes to a file which are not yet committed: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">&lt;file&gt;</span></code>.
+(If the file was aready staged via <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">&lt;file&gt;</span></code>, then use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span> <span class="pre">&lt;file&gt;</span></code>
+first, and then <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">&lt;file&gt;</span></code> to discard local changes).</p></li>
+<li><p>Discard all changes to the current working tree: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">-f</span></code>.</p></li>
+</ul>
+</section>
+</section>
+<section id="code-reviews">
+<h2>Code reviews<a class="headerlink" href="#code-reviews" title="Link to this heading">#</a></h2>
+<p>Code reviews are possibly the most under-rated service in open-source/community projects. The best way to get familiar with a code base is reviewing other contributors’ code. Unless the PR is only touching on some documentation (for which you can inspect the preview on GitHub—see the <code class="docutils literal notranslate"><span class="pre">documenter/deploy</span></code> action in the image below), you want to checkout the branch associated with the PR and test/run the code. If output is expected, inspect it. If some things are not clear, perhaps more documentation is needed, hence, you can ask contributors to improve it.</p>
+<p><img alt="" src="slides/GHAction-Documentation.png" /></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "sdsu-comp526/fall24",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "julia-1.8"
+        },
+        kernelOptions: {
+            name: "julia-1.8",
+            path: "./slides"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'julia-1.8'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#identity">Identity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forks-and-branches">Forks and branches</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#some-useful-tips">Some useful tips</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#develop-your-feature">Develop your feature</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Some useful tips</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#squash-and-rebase">Squash and rebase</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Some useful tips</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-reviews">Code reviews</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Valeria Barra
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
