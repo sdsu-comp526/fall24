@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
   
@@ -58,8 +58,10 @@
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
+    <link rel="icon" href="_static/SDSU-comp526_logo.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Syllabus" href="syllabus.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -146,8 +148,14 @@
   
   
   
+    
+    
+      
+    
+    
+    <img src="_static/SDSU-comp526_logo.png" class="logo__image only-light" alt="Computational Methods for Scientists - Home"/>
+    <script>document.write(`<img src="_static/SDSU-comp526_logo.png" class="logo__image only-dark" alt="Computational Methods for Scientists - Home"/>`);</script>
   
-    <p class="title logo__title">Computational Methods for Scientists</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -171,7 +179,14 @@
                 </a>
             </li>
         </ul>
-        
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="syllabus.html">Syllabus</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="slides.html">Slides</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="slides/2024-08-26-first-class.html">Introduction to version control with <code class="docutils literal notranslate"><span class="pre">git</span></code></a></li>
+</ul><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary>
+</details></li>
+</ul>
+
     </div>
 </nav></div>
     </div>
@@ -375,15 +390,31 @@ document.write(`
 <ul class="simple">
 <li><p>Office hours: by appointment</p></li>
 </ul>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Who am I?</p>
+<ul class="simple">
+<li><p><em>Assistant Professor</em> in the Department of Mathematics &amp; Statistics and the Computational Science Research Center</p></li>
+<li><p>Previously:</p>
+<ul>
+<li><p>Research Software Engineer for 3+ years at Caltech, in the <a class="reference external" href="https://clima.caltech.edu/">CliMA</a> group</p></li>
+<li><p>Postdoctoral Research Associate at CU Boulder, in <a class="reference external" href="https://jedbrown.org/">Jed Brown</a>’s <a class="reference external" href="https://phypid.org/">PhyPID</a> group</p></li>
+<li><p>PhD in Applied Math from NJIT</p></li>
+<li><p>some industry experience with CAD/CAM system development and at Pixar in the <a class="reference external" href="https://graphics.pixar.com/research/">Research</a> group</p></li>
+</ul>
+</li>
+</ul>
+</div>
 <div class="admonition-resources admonition">
 <p class="admonition-title">Resources</p>
 <ul class="simple">
-<li><p><a class="reference external" href="http://www.siam.org/students/memberships.php">SIAM Membership</a> is free for CU students (30% discount on SIAM books)</p></li>
+<li><p><a class="reference external" href="http://www.siam.org/students/memberships.php">SIAM Membership</a> is free for students (30% discount on SIAM books)</p></li>
 <li><p>Books</p>
 <ul>
 <li><p><a class="reference external" href="https://tobydriscoll.net/fnc-julia/">Driscoll and Braun, <strong>Fundamentals of Numerical Computation</strong></a></p>
 <ul>
-<li><p>free, in Julia with demo notebooks</p></li>
+<li><p>free, in Julia with demo notebooks and <a class="reference external" href="https://github.com/fncbook/FundamentalsNumericalComputation.jl?tab=readme-ov-file">Julia codes</a></p></li>
 </ul>
 </li>
 <li><p><a class="reference external" href="https://press.princeton.edu/titles/9763.html">Greenbaum and Chartier (2012), <strong>Numerical Methods Design, Analysis, and Computer Implementation of Algorithms</strong></a></p>
@@ -424,14 +455,7 @@ document.write(`
 </li>
 </ul>
 </li>
-<li><p>Papers</p>
-<ul>
-<li><p><a class="reference external" href="https://cu-numcomp.github.io/spring24/downloads/Butler-EnhancingAndUnderminingIntrinsicMotivation-1988.pdf">Butler, <strong>Enhancing and undermining intrinsic motivation: The effects of task-involving and ego-involving evaluation on interest and performance</strong></a></p></li>
-<li><p><a class="reference external" href="https://dl.acm.org/doi/10.1145/2484762.2484782">Turk, <strong>Scaling a code in the human dimension</strong></a> <a class="reference external" href="https://arxiv.org/pdf/1301.7064.pdf">arXiv</a></p></li>
 </ul>
-</li>
-</ul>
-</div>
 </div>
 <div class="toctree-wrapper compound">
 </div>
@@ -467,6 +491,15 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="right-next"
+       href="syllabus.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Syllabus</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               

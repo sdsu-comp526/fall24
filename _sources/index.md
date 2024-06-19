@@ -4,13 +4,24 @@ Welcome to **Computational Methods for Scientists**, Comp-526
 
 :::{admonition} Logistics
 * Office hours: by appointment
+:::
+
+:::{note} Who am I?
+- _Assistant Professor_ in the Department of Mathematics & Statistics and the Computational Science Research Center
+- Previously:
+  * Research Software Engineer for 3+ years at Caltech, in the [CliMA](https://clima.caltech.edu/) group
+  * Postdoctoral Research Associate at CU Boulder, in [Jed Brown](https://jedbrown.org/)'s [PhyPID](https://phypid.org/) group
+  * PhD in Applied Math from NJIT
+  * some industry experience with CAD/CAM system development and at Pixar in the [Research](https://graphics.pixar.com/research/) group
+:::
+
 
 :::{admonition} Resources
 
-* [SIAM Membership](http://www.siam.org/students/memberships.php) is free for CU students (30% discount on SIAM books)
+* [SIAM Membership](http://www.siam.org/students/memberships.php) is free for students (30% discount on SIAM books)
 * Books
   * [Driscoll and Braun, **Fundamentals of Numerical Computation**](https://tobydriscoll.net/fnc-julia/)
-    * free, in Julia with demo notebooks
+    * free, in Julia with demo notebooks and [Julia codes](https://github.com/fncbook/FundamentalsNumericalComputation.jl?tab=readme-ov-file)
   * [Greenbaum and Chartier (2012), **Numerical Methods Design, Analysis, and Computer Implementation of Algorithms**](https://press.princeton.edu/titles/9763.html)
     * an excellent, comprehensive book
     * not free, uses Matlab for limited numerical examples
@@ -26,7 +37,4 @@ Welcome to **Computational Methods for Scientists**, Comp-526
     * linear algebra with attention to performance; free PDF and videos
   * [Eijkhout (2023), **The Art of HPC**](https://theartofhpc.com/)
     * collection of free books on numerical and scientific computing, plus "carpentry"
-* Papers
-  * [Butler, **Enhancing and undermining intrinsic motivation: The effects of task-involving and ego-involving evaluation on interest and performance**](https://cu-numcomp.github.io/spring24/downloads/Butler-EnhancingAndUnderminingIntrinsicMotivation-1988.pdf)
-  * [Turk, **Scaling a code in the human dimension**](https://dl.acm.org/doi/10.1145/2484762.2484782) [arXiv](https://arxiv.org/pdf/1301.7064.pdf)
 :::
