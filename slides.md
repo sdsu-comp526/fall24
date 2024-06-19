@@ -1,7 +1,7 @@
 # Slides
 
-I make interactive Jupyter-based slides using RISE for use during class.
-You can view them here, or open them to interact.
+I make interactive Jupyter-based notebooks. These can be used and visualized as slides using [RISE](https://github.com/damianavila/RISE) (this is optional) for use during class.
+You can view them here, or open them to interact. You can use any environment for your local development environment, or use the SDSU's [JupyterHub](https://jupyterhub.sdsu.edu/) to experiment and develop without a local install. If you have never logged-in before, check SDSU's Research & Cyberinfrastructure [resources for students](https://sdsu-research-ci.github.io/instructionalcluster/students).
 
 ## Environment
 
@@ -9,15 +9,63 @@ This explains how I configure my environment so you can experiment with the slid
 
 ### Install Dependencies
 
-TL;DR:
+First of all, download and install [Julia](https://julialang.org/downloads/).
 
-    pip3 install -r requirements.txt
-    jupyter contrib nbextension install --user
+To interact with the notebooks, you want to install JupyterLab (newer environement), via
 
-And for these (using Julia in Jupyter)
+```
+pip install jupyterlab
+```
 
-    julia -e 'import Pkg; Pkg.add("IJulia")'
+Once installed, launch JupyterLab with:
 
+```
+jupyter lab
+```
+and selcet the Notebook app.
+
+You can also only install the classic Jupyter Notebook standalone app via
+
+```
+pip install notebook
+```
+
+and to run the notebook type:
+
+```
+jupyter notebook
+```
+
+And for these (using Julia in Jupyter) you can run
+
+```
+julia -e 'import Pkg; Pkg.add("IJulia")'
+```
+
+from your terminal, or first start a Julia session with
+```
+julia
+```
+
+and then type:
+```julia
+]add IJulia
+```
+
+go back to your Julia REPL using backspace and type
+
+```julia
+julia> using IJulia
+```
+
+and then
+```julia
+julia> notebook()
+```
+
+to run the notebook.
+
+#### Additional resources
 You can open these notebooks as normal notebooks (continuous scroll). If you wish to use them as slides, the key packages are
 
 * [RISE](https://github.com/damianavila/RISE): General editing and presentation of slides
@@ -25,27 +73,8 @@ You can open these notebooks as normal notebooks (continuous scroll). If you wis
   * Shift-I: toggle slides
   * Shift-G: toggle fragment (incrementally revealed cells)
 
-* [splitcell](https://www.markroepke.me/posts/2019/06/05/tips-for-slideshows-in-jupyter.html): create two columns
-
-    jupyter nbextension enable splitcell/splitcell
-
-  * Shift-S: toggle splitting this cell
-
-* [hide_code](https://github.com/kirbs-/hide_code): Hide code and/or prompts from view
-
-    jupyter nbextension install --py hide_code
-
-  * This is what you want for interactive figures where the code that created the figure is not relevant to the viewer.
-
-### Load the presentation
-
-Open in your browser
-
-    jupyter-nbclassic --notebook-dir=. slides/the-slides.ipynb
-
-Toggle slide-show mode using `Alt-R`.
 
 ### Best practices
 
 * When saving, use `Kernel -> Restart & Clear Output` to keep the stored data and diffs in the notebook small.
-* PDF files are not web-friendly. PDF images can be converted to SVG using `pdf2svg`, and the result will still look sharp (unlike PNG).
+* For your images, several formats will do. Just keep in mind that PDF files are not web-friendly. PDF images can be converted to SVG using `pdf2svg`, and the result will still look sharp (unlike PNG) no matter the scale or zoom.

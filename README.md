@@ -1,6 +1,6 @@
 # COMP526: Computational Methods for Scientists
 
-View the [documentation site]().
+View the [documentation site](https://sdsu-comp526.github.io/fall24/).
 
 ## License
 

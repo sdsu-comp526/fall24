@@ -5,7 +5,8 @@
 Comp-526
 
 
-### Instructor: [Valeria Barra](https://valeriabarra.org) vbarra @ sdsu . edu
+### Instructor: [Valeria Barra](https://valeriabarra.org)
+Email: vbarra @ sdsu . edu
 
 
 **Office Hours**: by appointment.
@@ -91,7 +92,7 @@ We'll use Git with GitHub Classroom for managing activities and feedback.
 
 I will primarily use Julia and [Jupyter notebooks](https://jupyter.org/) for slides and activities in class. This environment is convenient to work with, general purpose, and has extensive library support.  It is possible to write fast code in Julia, though performance implications can be mysterious. C, C++, and Fortran are popular languages for writing production numerical software, sometimes called from a higher level programming language like Python.  MATLAB is also popular for numerical computing, though it is a proprietary environment and lacks general-purpose libraries.
 
-Most HPC facilities use a Linux operating system and many open source software packages and libraries will have the best documentation and testing on Linux systems. You can use any environment for your local development environment, or use the SDSU's [JupyterHub](https://jupyterhub.sdsu.edu/) to experiment and develop without a local install.
+Most HPC facilities use a Linux operating system and many open source software packages and libraries will have the best documentation and testing on Linux systems. You can use any environment for your local development environment, or use the SDSU's [JupyterHub](https://jupyterhub.sdsu.edu/) to experiment and develop without a local install. If you have never logged-in before, check SDSU's Research & Cyberinfrastructure [resources for students](https://sdsu-research-ci.github.io/instructionalcluster/students).
 
 ## Target audience
 
