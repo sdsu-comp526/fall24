@@ -400,7 +400,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="slides">
 <h1>Slides<a class="headerlink" href="#slides" title="Link to this heading">#</a></h1>
-<p>I make interactive Jupyter-based notebooks. These can be used and visualized as slides using <a class="reference external" href="https://github.com/damianavila/RISE">RISE</a> (this is optional) for use during class.
+<p>The class material includes Jupyter-based notebooks. These can be used and visualized as slides using <a class="reference external" href="https://github.com/damianavila/RISE">RISE</a> (this is optional) for use during class.
 You can view them here, or open them to interact. You can use any environment for your local development environment, or use the SDSU’s <a class="reference external" href="https://jupyterhub.sdsu.edu/">JupyterHub</a> to experiment and develop without a local install. If you have never logged-in before, check SDSU’s Research &amp; Cyberinfrastructure <a class="reference external" href="https://sdsu-research-ci.github.io/instructionalcluster/students">resources for students</a>.</p>
 <section id="environment">
 <h2>Environment<a class="headerlink" href="#environment" title="Link to this heading">#</a></h2>
@@ -408,7 +408,7 @@ You can view them here, or open them to interact. You can use any environment fo
 <section id="install-dependencies">
 <h3>Install Dependencies<a class="headerlink" href="#install-dependencies" title="Link to this heading">#</a></h3>
 <p>First of all, download and install <a class="reference external" href="https://julialang.org/downloads/">Julia</a>.</p>
-<p>To interact with the notebooks, you want to install JupyterLab (newer environement), via</p>
+<p>To interact with the notebooks, you want to install JupyterLab (new, richer ecosystem), via</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">jupyterlab</span>
 </pre></div>
 </div>
@@ -437,6 +437,15 @@ You can view them here, or open them to interact. You can use any environment fo
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="p">]</span><span class="n">add</span><span class="w"> </span><span class="n">IJulia</span>
 </pre></div>
 </div>
+<p>go back to your Julia REPL using backspace and type</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">IJulia</span>
+</pre></div>
+</div>
+<p>and then</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">notebook</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>to run the notebook.</p>
 <section id="additional-resources">
 <h4>Additional resources<a class="headerlink" href="#additional-resources" title="Link to this heading">#</a></h4>
 <p>You can open these notebooks as normal notebooks (continuous scroll). If you wish to use them as slides, the key packages are</p>

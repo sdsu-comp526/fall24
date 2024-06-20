@@ -5,7 +5,8 @@
 Comp-526
 
 
-### Instructor: [Valeria Barra](https://valeriabarra.org) vbarra @ sdsu . edu
+### Instructor: [Valeria Barra](https://valeriabarra.org)
+Email: vbarra @ sdsu . edu
 
 
 **Office Hours**: by appointment.

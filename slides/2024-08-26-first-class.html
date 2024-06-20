@@ -414,14 +414,11 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#some-useful-tips">Some useful tips</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#develop-your-feature">Develop your feature</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#community-projects">Community projects</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Some useful tips</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#squash-and-rebase">Squash and rebase</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Some useful tips</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing">Contributing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-reviews">Code reviews</a></li>
 </ul>
             </nav>
@@ -437,16 +434,19 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-version-control-with-git">
 <h1>Introduction to version control with <code class="docutils literal notranslate"><span class="pre">git</span></code><a class="headerlink" href="#introduction-to-version-control-with-git" title="Link to this heading">#</a></h1>
 <p>Version control Software (VCS) is also referred as SCM (Source Code Management) or RCS (Revision Control System) tools. Version control, also known as source control, is the practice of tracking and managing changes to source files. Version control systems are software tools that help teams of contributors manage changes to source code over time. There are several options: <code class="docutils literal notranslate"><span class="pre">git</span></code>, <code class="docutils literal notranslate"><span class="pre">CVS</span></code>, <code class="docutils literal notranslate"><span class="pre">SVN</span></code>, etc.</p>
-<p>For this workshop, we will focus on <a class="reference external" href="https://git-scm.com/docs"><code class="docutils literal notranslate"><span class="pre">git</span></code></a> in particular.</p>
-<blockquote>
-<div><p>“<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code> is only 3 characters longer than <code class="docutils literal notranslate"><span class="pre">mkdir</span></code>”, Jed Brown, Asst. Prof., CU Boulder</p>
-</div></blockquote>
-<p>Some of the material presented in this overview is largely re-adapted from ClimateMachine.jl’s <a class="reference external" href="https://clima.github.io/ClimateMachine.jl/latest/Contributing/#Contributing">contributing guide</a>.</p>
+<p>In this class, we will focus on <a class="reference external" href="https://git-scm.com/docs"><code class="docutils literal notranslate"><span class="pre">git</span></code></a> in particular.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>First of all, if you want to install <code class="docutils literal notranslate"><span class="pre">git</span></code> on your machine, follow this GitHub <a class="reference external" href="https://github.com/git-guides/install-git">guide</a>.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <p>If you are unfamiliar with <code class="docutils literal notranslate"><span class="pre">git</span></code> and version control, the following guides can be helpful:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.atlassian.com/git/tutorials">Atlassian (bitbucket) git tutorials</a>. A set of tips and tricks for getting started with <code class="docutils literal notranslate"><span class="pre">git</span></code>.</p></li>
 <li><p><a class="reference external" href="https://try.github.io/">GitHub’s git tutorials</a>. A set of resources from  GitHub to learn <code class="docutils literal notranslate"><span class="pre">git</span></code>.</p></li>
 </ul>
+</div>
 <p>We provide a brief guide here.</p>
 <section id="identity">
 <h2>Identity<a class="headerlink" href="#identity" title="Link to this heading">#</a></h2>
@@ -459,13 +459,13 @@ $ git config --global user.email &quot;a.climate.developer@eg.com&quot;
 <section id="forks-and-branches">
 <h2>Forks and branches<a class="headerlink" href="#forks-and-branches" title="Link to this heading">#</a></h2>
 <p>Create your own fork of the desired repository and check out your copy. For example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/&lt;username&gt;/ClimaCore.jl.git
-$ cd ClimateMachine.jl
-$ git remote add upstream https://github.com/CliMA/ClimaCore.jl
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/sdsu-comp526/fall24.git
+$ cd fall24
+$ git remote add upstream https://github.com/sdsu-comp526/fall24.git
 </pre></div>
 </div>
 <p>What is the difference between using the <code class="docutils literal notranslate"><span class="pre">https</span></code> or the <code class="docutils literal notranslate"><span class="pre">ssh</span></code> protocol? If you use <code class="docutils literal notranslate"><span class="pre">https</span></code> the primary downside for most people is that you must enter your Git password/token every time you push. While it gets added to a cache, it’s not configured to cache permanently (though this can be changed). With SSH keys, it just uses the key file on disk every time so you don’t have to enter your Git password/token at every push. Check this guide to <a class="reference external" href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">generate SSH keys and add them to the ssh-agent</a>.</p>
-<p>Now you have two remote repositories: <code class="docutils literal notranslate"><span class="pre">origin</span></code>, which is your fork (hosted on your cloud account), and <code class="docutils literal notranslate"><span class="pre">upstream</span></code>, which is the main <code class="docutils literal notranslate"><span class="pre">ClimateCore.jl</span></code> repository.</p>
+<p>Now you have two remote repositories: <code class="docutils literal notranslate"><span class="pre">origin</span></code>, which is your fork (hosted on your cloud account), and <code class="docutils literal notranslate"><span class="pre">upstream</span></code>, which is the main <code class="docutils literal notranslate"><span class="pre">sdsu-comp526/fall24</span></code> repository.</p>
 <p>When part of an organization, people who contribute to an open-source project do not generally fork the repository, but <code class="docutils literal notranslate"><span class="pre">clone</span></code> it directly on their local machine. If you are not sure about the differences <a class="reference external" href="https://www.toolsqa.com/git/difference-between-git-clone-and-git-fork/#:~:text=When%20you%20fork%20a%20repository,with%20the%20help%20of%20Git.">between forking and cloning</a>, check this helpful article.</p>
 <p>Create a branch for your feature; this will hold your contribution:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git checkout -b &lt;branchname&gt;
@@ -474,16 +474,29 @@ $ git remote add upstream https://github.com/CliMA/ClimaCore.jl
 <section id="some-useful-tips">
 <h3>Some useful tips<a class="headerlink" href="#some-useful-tips" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>When you start working on a new feature branch, make sure you start from master by running: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">main</span></code>.</p></li>
-<li><p>When you create a new branch and check it out, as in <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">-b</span> <span class="pre">&lt;branchname&gt;</span></code>, a common convention is to make <code class="docutils literal notranslate"><span class="pre">branchname</span></code> something along the lines of <code class="docutils literal notranslate"><span class="pre">&lt;yourname&gt;/&lt;affected-module&gt;-&lt;short-description&gt;</span></code>.</p></li>
+<li><p>When you start working on a new feature branch, make sure you start from <code class="docutils literal notranslate"><span class="pre">main</span></code> by running: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">main</span></code>.</p></li>
+<li><p>When you create a new branch and check it out, as in <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">-b</span> <span class="pre">&lt;branchname&gt;</span></code>, a common convention is to make <code class="docutils literal notranslate"><span class="pre">branchname</span></code> something along the lines of <code class="docutils literal notranslate"><span class="pre">&lt;yourname&gt;/&lt;short-description&gt;</span></code>.</p></li>
 </ul>
 </section>
 </section>
-<section id="develop-your-feature">
-<h2>Develop your feature<a class="headerlink" href="#develop-your-feature" title="Link to this heading">#</a></h2>
-<p>Follow the recommended <a class="reference external" href="https://clima.github.io/ClimateMachine.jl/latest/DevDocs/CodeStyle/#Coding-conventions">Coding conventions</a>, especially remember that readability and accessibility are very important aspects to make a codebase inclusive. For instance,  <code class="docutils literal notranslate"><span class="pre">snake_case</span></code> or <code class="docutils literal notranslate"><span class="pre">CamelCase</span></code> are more accessible than <code class="docutils literal notranslate"><span class="pre">nocase</span></code> for people who have vision problems.</p>
-<p>If you recognize the need for a feature that you and others may use in your work, please consider contributing this feature yourself. First by opening an issue, if one associated to this feature is not already open.</p>
-<p>Then, when adding your contribution, please make sure you add appropriate unit tests for your code in <code class="docutils literal notranslate"><span class="pre">test/</span></code> and appropriate documentation in the code and/or in <code class="docutils literal notranslate"><span class="pre">docs/</span></code>.</p>
+<section id="community-projects">
+<h2>Community projects<a class="headerlink" href="#community-projects" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>There are several open-source, community projects hosted on major platforms like GitHub, GiLab or BitBucket. These are collaborative projects, often led or maintained by volunteers or not-for-profit organizations.</p></li>
+<li><p>Here are a few I contributed to:</p>
+<ul>
+<li><p><a class="reference external" href="https://github.com/CEED/libCEED">libCEED</a> (main contributor)</p></li>
+<li><p><a class="reference external" href="https://gitlab.com/petsc/petsc">PETSc</a> (minor contributor  -</p></li>
+<li><p><a class="reference external" href="https://github.com/CliMA/ClimaCore.jl">ClimaCore.jl</a> (main contributor  -</p></li>
+<li><p><a class="reference external" href="https://github.com/CliMA/ClimaAtmos.jl/">ClimaAtmos.jl</a> (contributor  -</p></li>
+<li><p><a class="reference external" href="https://github.com/CliMA/ClimaCoupler.jl/">ClimaCoupler.jl</a> (contributor)</p></li>
+</ul>
+</li>
+<li><p>You may want to check out a few of these online communities, and if you think you want to propose any suggested changes to their repositories, you can propose your own suggestions</p></li>
+<li><p>Before proposing any contributions, when checking out open-source, community projects, make sure to read about their coding conventions or style guides</p></li>
+<li><p>If you recognize the need for a feature that you and others may use in your work, please consider contributing this feature yourself. First by opening an Issue, if one associated to this feature is not already open.</p></li>
+<li><p>Readability and accessibility are very important aspects to make a codebase inclusive. For instance, <code class="docutils literal notranslate"><span class="pre">snake_case</span></code> or <code class="docutils literal notranslate"><span class="pre">CamelCase</span></code> are more accessible than <code class="docutils literal notranslate"><span class="pre">nocase</span></code> for people who have vision problems.</p></li>
+</ul>
 <section id="id1">
 <h3>Some useful tips<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <ul class="simple">
@@ -494,20 +507,8 @@ $ git remote add upstream https://github.com/CliMA/ClimaCore.jl
 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">-u</span></code> to stage all updated files at once) followed by <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code>.
 Modified files can be added to a commit in the same way.</p></li>
 <li><p>Push feature branch to the remote for review: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">origin</span> <span class="pre">&lt;branchname&gt;</span></code></p></li>
-<li><p>Use descriptive, useful commit messages, and don’t swear if you don’t want your commit message to be shared publicly by the <a class="reference external" href="https://twitter.com/gitlost?lang=en">&#64;gitlost Twitter bot</a>!</p></li>
+<li><p>Use descriptive, useful commit messages</p></li>
 </ul>
-</section>
-</section>
-<section id="squash-and-rebase">
-<h2>Squash and rebase<a class="headerlink" href="#squash-and-rebase" title="Link to this heading">#</a></h2>
-<p>Only <em>after</em> a reviewer is done with their review and your PR is approved, it is good to squash your commits history before merging the PR. Use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span></code> (not <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code> so you don’t bring all commits history in) to sync your work:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git fetch upstream
-$ git rebase upstream/main
-</pre></div>
-</div>
-<p>You might find it easier to <a class="reference external" href="https://github.com/edx/edx-platform/wiki/How-to-Rebase-a-Pull-Request#squash-your-changes">squash your commits</a> first.</p>
-<section id="id2">
-<h3>Some useful tips<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
 <p>When cleaning up your local branches, some of the following commands might be useful:</p>
 <ul class="simple">
 <li><p>Show local and remote-tracking branches: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">-a</span></code>.</p></li>
@@ -521,8 +522,7 @@ front of the branch name).</p></li>
 </ul>
 <p>Additionally, when debugging or inspecting the code for some potentially problematic changes introduced, some of the following commands can be used:</p>
 <ul class="simple">
-<li><p>Show logs: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code>. (A more powerful version of this that can track all
-changes, even after potential rebases, is <a class="reference external" href="https://git-scm.com/docs/git-reflog"><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reflog</span></code></a>).</p></li>
+<li><p>Show logs: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code>.</p></li>
 <li><p>Show logs for file or folder: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">&lt;file&gt;</span></code>.</p></li>
 <li><p>Show changes for each log: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">-p</span></code> (add file or folder name if required).</p></li>
 <li><p>Show diff with current working tree: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span> <span class="pre">path/to/file</span></code>.</p></li>
@@ -537,10 +537,13 @@ first, and then <code class="docutils literal notranslate"><span class="pre">git
 </ul>
 </section>
 </section>
+<section id="contributing">
+<h2>Contributing<a class="headerlink" href="#contributing" title="Link to this heading">#</a></h2>
+<p>To propose your contribution to any community project you want to create a so-called Pull Request (PR) in GitHub lingo or a Merge Request (MR) in GitLab lingo. The repository maintainers will review your proposed changes, make comments if needed, request further changes and reject or approve your contributions.</p>
+</section>
 <section id="code-reviews">
 <h2>Code reviews<a class="headerlink" href="#code-reviews" title="Link to this heading">#</a></h2>
-<p>Code reviews are possibly the most under-rated service in open-source/community projects. The best way to get familiar with a code base is reviewing other contributors’ code. Unless the PR is only touching on some documentation (for which you can inspect the preview on GitHub—see the <code class="docutils literal notranslate"><span class="pre">documenter/deploy</span></code> action in the image below), you want to checkout the branch associated with the PR and test/run the code. If output is expected, inspect it. If some things are not clear, perhaps more documentation is needed, hence, you can ask contributors to improve it.</p>
-<p><img alt="" src="slides/GHAction-Documentation.png" /></p>
+<p>Code reviews are possibly the most under-rated service in open-source/community projects. The best way to get familiar with a code base is reviewing other contributors’ code.</p>
 </section>
 </section>
 
@@ -553,16 +556,16 @@ first, and then <code class="docutils literal notranslate"><span class="pre">git
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "julia-1.8"
+            mode: "julia-1.10"
         },
         kernelOptions: {
-            name: "julia-1.8",
+            name: "julia-1.10",
             path: "./slides"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'julia-1.8'</script>
+    <script>kernelName = 'julia-1.10'</script>
 
                 </article>
               
@@ -604,14 +607,11 @@ first, and then <code class="docutils literal notranslate"><span class="pre">git
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#some-useful-tips">Some useful tips</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#develop-your-feature">Develop your feature</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#community-projects">Community projects</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Some useful tips</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#squash-and-rebase">Squash and rebase</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Some useful tips</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing">Contributing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-reviews">Code reviews</a></li>
 </ul>
   </nav></div>

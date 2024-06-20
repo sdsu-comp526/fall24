@@ -1,6 +1,6 @@
 # Slides
 
-I make interactive Jupyter-based notebooks. These can be used and visualized as slides using [RISE](https://github.com/damianavila/RISE) (this is optional) for use during class.
+The class material includes Jupyter-based notebooks. These can be used and visualized as slides using [RISE](https://github.com/damianavila/RISE) (this is optional) for use during class.
 You can view them here, or open them to interact. You can use any environment for your local development environment, or use the SDSU's [JupyterHub](https://jupyterhub.sdsu.edu/) to experiment and develop without a local install. If you have never logged-in before, check SDSU's Research & Cyberinfrastructure [resources for students](https://sdsu-research-ci.github.io/instructionalcluster/students).
 
 ## Environment
@@ -11,7 +11,7 @@ This explains how I configure my environment so you can experiment with the slid
 
 First of all, download and install [Julia](https://julialang.org/downloads/).
 
-To interact with the notebooks, you want to install JupyterLab (newer environement), via
+To interact with the notebooks, you want to install JupyterLab (new, richer ecosystem), via
 
 ```
 pip install jupyterlab
@@ -51,6 +51,19 @@ and then type:
 ```julia
 ]add IJulia
 ```
+
+go back to your Julia REPL using backspace and type
+
+```julia
+julia> using IJulia
+```
+
+and then
+```julia
+julia> notebook()
+```
+
+to run the notebook.
 
 #### Additional resources
 You can open these notebooks as normal notebooks (continuous scroll). If you wish to use them as slides, the key packages are
