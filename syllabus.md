@@ -44,7 +44,7 @@ it to solve it using computers.
 
 ## Organization
 
-We will start by giving an introduction on version control and reproducibility, key apects in modern computational sciences.
+We will start by giving an introduction of version control and reproducibility, key apects in modern computational sciences.
 Then we will introduce the Linux filesystem and some basic shell commands.
 
 We'll procede with evaluation of functions and introduce the concepts of conditioning and stability, which we'll apply to every topic we encounter.
@@ -83,6 +83,9 @@ Upon completing this course, students will be able to
 3. Make an honest attempt on activities, projects, etc.
 4. Interact with the class notebooks and read reference material
 5. Individual or group projects
+
+![](img/Henry2019-Table1.png)
+
 
 ## GitHub
 
