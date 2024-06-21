@@ -3,7 +3,7 @@
 
 title: Computational Methods for Scientists
 author: Valeria Barra
-logo: img/SDSU-comp526_logo.png
+logo: img/SDSU-comp526_logo.svg
 
 exclude_patterns: [VENV/*, README.md, activities/*, nbgrader/*, portfolio/*]
 
@@ -39,7 +39,7 @@ repository:
 html:
   use_issues_button: true
   use_repository_button: true
-  favicon: img/SDSU-comp526_logo.png
+  favicon: img/SDSU-comp526_logo.svg
 
 launch_buttons:
   thebe: true
