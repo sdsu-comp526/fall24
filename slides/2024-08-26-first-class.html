@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Introduction to version control with git &#8212; Computational Methods for Scientists</title>
+    <title>1. Reproducibility in computational sciences &#8212; Computational Methods for Scientists</title>
   
   
   
@@ -58,9 +58,10 @@
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'slides/2024-08-26-first-class';</script>
-    <link rel="icon" href="../_static/SDSU-comp526_logo.png"/>
+    <link rel="icon" href="../_static/SDSU-comp526_logo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2. The Linux Filesystem and commands" href="2024-08-28-linux.html" />
     <link rel="prev" title="Slides" href="../slides.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -151,8 +152,8 @@
       
     
     
-    <img src="../_static/SDSU-comp526_logo.png" class="logo__image only-light" alt="Computational Methods for Scientists - Home"/>
-    <script>document.write(`<img src="../_static/SDSU-comp526_logo.png" class="logo__image only-dark" alt="Computational Methods for Scientists - Home"/>`);</script>
+    <img src="../_static/SDSU-comp526_logo.svg" class="logo__image only-light" alt="Computational Methods for Scientists - Home"/>
+    <script>document.write(`<img src="../_static/SDSU-comp526_logo.svg" class="logo__image only-dark" alt="Computational Methods for Scientists - Home"/>`);</script>
   
   
 </a></div>
@@ -180,7 +181,8 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../syllabus.html">Syllabus</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../slides.html">Slides</a><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Introduction to version control with <code class="docutils literal notranslate"><span class="pre">git</span></code></a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">1. Reproducibility in computational sciences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2024-08-28-linux.html">2. The Linux Filesystem and commands</a></li>
 </ul><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary>
 </details></li>
 </ul>
@@ -399,7 +401,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Introduction to version control with git</h1>
+    <h1>1. Reproducibility in computational sciences</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -409,17 +411,27 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#identity">Identity</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forks-and-branches">Forks and branches</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#some-useful-tips">Some useful tips</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-reproducibile-code">What is reproducibile code?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-can-we-make-our-code-reproducible">How can we make our code reproducible?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keeping-track-with-git">1. Keeping track with <code class="docutils literal notranslate"><span class="pre">git</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-version-control-with-git">Introduction to version control with <code class="docutils literal notranslate"><span class="pre">git</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#identity">Identity</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#forks-and-branches">Forks and branches</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#some-useful-tips">Some useful tips</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#community-projects">Community projects</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#some-other-useful-tips">Some other useful tips</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing">Contributing</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#code-reviews">Code reviews</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#community-projects">Community projects</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Some useful tips</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing">Contributing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-reviews">Code reviews</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-environments">2. Specifying environments</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#julia-pkg-jl">Julia Pkg.jl</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Python</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#containers">Containers</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -431,8 +443,34 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-version-control-with-git">
-<h1>Introduction to version control with <code class="docutils literal notranslate"><span class="pre">git</span></code><a class="headerlink" href="#introduction-to-version-control-with-git" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="reproducibility-in-computational-sciences">
+<h1>1. Reproducibility in computational sciences<a class="headerlink" href="#reproducibility-in-computational-sciences" title="Link to this heading">#</a></h1>
+<section id="what-is-reproducibile-code">
+<h2>What is reproducibile code?<a class="headerlink" href="#what-is-reproducibile-code" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p>“But it works on my machine!”</p>
+</div></blockquote>
+<p>Code is reproducible if someone is able to easily re-run it and get the same results.</p>
+<p>Why might code not be reproducible:</p>
+<ul class="simple">
+<li><p>software or packages are not installed</p></li>
+<li><p>software uses different versions</p></li>
+<li><p>different configurations (environment variables, optimization flags)</p></li>
+<li><p>differences between platforms: operating systems (Windows, Linux, MacOS), architectures (x86, ARM, GPUs)</p></li>
+</ul>
+<p>Some of these are unavoidable (e.g. going from working locally on a Mac to the Linux cluster), but we can do our best to minimize these</p>
+<ul class="simple">
+<li><p>we’re not aiming for “bit-for-bit” reproducibility</p></li>
+</ul>
+</section>
+<section id="how-can-we-make-our-code-reproducible">
+<h2>How can we make our code reproducible?<a class="headerlink" href="#how-can-we-make-our-code-reproducible" title="Link to this heading">#</a></h2>
+<p>We need to supply both the code, and the “environment” used to run the code, and we need to keep track of it as we run experiments.</p>
+</section>
+<section id="keeping-track-with-git">
+<h2>1. Keeping track with <code class="docutils literal notranslate"><span class="pre">git</span></code><a class="headerlink" href="#keeping-track-with-git" title="Link to this heading">#</a></h2>
+<section id="introduction-to-version-control-with-git">
+<h3>Introduction to version control with <code class="docutils literal notranslate"><span class="pre">git</span></code><a class="headerlink" href="#introduction-to-version-control-with-git" title="Link to this heading">#</a></h3>
 <p>Version control Software (VCS) is also referred as SCM (Source Code Management) or RCS (Revision Control System) tools. Version control, also known as source control, is the practice of tracking and managing changes to source files. Version control systems are software tools that help teams of contributors manage changes to source code over time. There are several options: <code class="docutils literal notranslate"><span class="pre">git</span></code>, <code class="docutils literal notranslate"><span class="pre">CVS</span></code>, <code class="docutils literal notranslate"><span class="pre">SVN</span></code>, etc.</p>
 <p>In this class, we will focus on <a class="reference external" href="https://git-scm.com/docs"><code class="docutils literal notranslate"><span class="pre">git</span></code></a> in particular.</p>
 <div class="admonition tip">
@@ -449,7 +487,7 @@ document.write(`
 </div>
 <p>We provide a brief guide here.</p>
 <section id="identity">
-<h2>Identity<a class="headerlink" href="#identity" title="Link to this heading">#</a></h2>
+<h4>Identity<a class="headerlink" href="#identity" title="Link to this heading">#</a></h4>
 <p>First make sure <code class="docutils literal notranslate"><span class="pre">git</span></code> knows your name and email address:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git config --global user.name &quot;A. Climate Developer&quot;
 $ git config --global user.email &quot;a.climate.developer@eg.com&quot;
@@ -457,7 +495,7 @@ $ git config --global user.email &quot;a.climate.developer@eg.com&quot;
 </div>
 </section>
 <section id="forks-and-branches">
-<h2>Forks and branches<a class="headerlink" href="#forks-and-branches" title="Link to this heading">#</a></h2>
+<h4>Forks and branches<a class="headerlink" href="#forks-and-branches" title="Link to this heading">#</a></h4>
 <p>Create your own fork of the desired repository and check out your copy. For example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/sdsu-comp526/fall24.git
 $ cd fall24
@@ -471,16 +509,16 @@ $ git remote add upstream https://github.com/sdsu-comp526/fall24.git
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git checkout -b &lt;branchname&gt;
 </pre></div>
 </div>
+</section>
 <section id="some-useful-tips">
-<h3>Some useful tips<a class="headerlink" href="#some-useful-tips" title="Link to this heading">#</a></h3>
+<h4>Some useful tips<a class="headerlink" href="#some-useful-tips" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>When you start working on a new feature branch, make sure you start from <code class="docutils literal notranslate"><span class="pre">main</span></code> by running: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">main</span></code>.</p></li>
 <li><p>When you create a new branch and check it out, as in <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">-b</span> <span class="pre">&lt;branchname&gt;</span></code>, a common convention is to make <code class="docutils literal notranslate"><span class="pre">branchname</span></code> something along the lines of <code class="docutils literal notranslate"><span class="pre">&lt;yourname&gt;/&lt;short-description&gt;</span></code>.</p></li>
 </ul>
 </section>
-</section>
 <section id="community-projects">
-<h2>Community projects<a class="headerlink" href="#community-projects" title="Link to this heading">#</a></h2>
+<h4>Community projects<a class="headerlink" href="#community-projects" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>There are several open-source, community projects hosted on major platforms like GitHub, GiLab or BitBucket. These are collaborative projects, often led or maintained by volunteers or not-for-profit organizations.</p></li>
 <li><p>Here are a few I contributed to:</p>
@@ -497,8 +535,9 @@ $ git remote add upstream https://github.com/sdsu-comp526/fall24.git
 <li><p>If you recognize the need for a feature that you and others may use in your work, please consider contributing this feature yourself. First by opening an Issue, if one associated to this feature is not already open.</p></li>
 <li><p>Readability and accessibility are very important aspects to make a codebase inclusive. For instance, <code class="docutils literal notranslate"><span class="pre">snake_case</span></code> or <code class="docutils literal notranslate"><span class="pre">CamelCase</span></code> are more accessible than <code class="docutils literal notranslate"><span class="pre">nocase</span></code> for people who have vision problems.</p></li>
 </ul>
-<section id="id1">
-<h3>Some useful tips<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+</section>
+<section id="some-other-useful-tips">
+<h4>Some other useful tips<a class="headerlink" href="#some-other-useful-tips" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>Once you have written some code, inspect changes by running <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>.</p></li>
 <li><p>Commit all files changed: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-a</span></code> or</p></li>
@@ -516,7 +555,7 @@ Modified files can be added to a commit in the same way.</p></li>
 <li><p>Show all branches available on remote: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">ls-remote</span></code>.
 Use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">show</span> <span class="pre">origin</span></code> for a complete summary.</p></li>
 <li><p>Delete a local branch: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">-D</span> <span class="pre">&lt;branchname&gt;</span></code> (only after merge to
-<code class="docutils literal notranslate"><span class="pre">master</span></code> is complete).</p></li>
+<code class="docutils literal notranslate"><span class="pre">main</span></code> is complete).</p></li>
 <li><p>Delete remote branch: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">origin</span> <span class="pre">:&lt;branchname&gt;</span></code> (mind the colon in
 front of the branch name).</p></li>
 </ul>
@@ -528,22 +567,132 @@ front of the branch name).</p></li>
 <li><p>Show diff with current working tree: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span> <span class="pre">path/to/file</span></code>.</p></li>
 <li><p>Show diff with other commit: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span> <span class="pre">&lt;SHA1&gt;</span> <span class="pre">path/to/file</span></code>.</p></li>
 <li><p>Compare version of file in two commits: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span> <span class="pre">&lt;SHA1&gt;</span> <span class="pre">&lt;SHA1&gt;</span> <span class="pre">path/to/file</span></code>.</p></li>
-<li><p>Show changes that are in <code class="docutils literal notranslate"><span class="pre">master</span></code>, but not yet in my current branch:
-<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log..master</span></code>.</p></li>
+<li><p>Show changes that are in <code class="docutils literal notranslate"><span class="pre">main</span></code>, but not yet in my current branch:
+<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log..main</span></code>.</p></li>
 <li><p>Discard changes to a file which are not yet committed: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">&lt;file&gt;</span></code>.
 (If the file was aready staged via <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">&lt;file&gt;</span></code>, then use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span> <span class="pre">&lt;file&gt;</span></code>
 first, and then <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">&lt;file&gt;</span></code> to discard local changes).</p></li>
 <li><p>Discard all changes to the current working tree: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">-f</span></code>.</p></li>
 </ul>
 </section>
-</section>
 <section id="contributing">
-<h2>Contributing<a class="headerlink" href="#contributing" title="Link to this heading">#</a></h2>
+<h4>Contributing<a class="headerlink" href="#contributing" title="Link to this heading">#</a></h4>
 <p>To propose your contribution to any community project you want to create a so-called Pull Request (PR) in GitHub lingo or a Merge Request (MR) in GitLab lingo. The repository maintainers will review your proposed changes, make comments if needed, request further changes and reject or approve your contributions.</p>
 </section>
 <section id="code-reviews">
-<h2>Code reviews<a class="headerlink" href="#code-reviews" title="Link to this heading">#</a></h2>
+<h4>Code reviews<a class="headerlink" href="#code-reviews" title="Link to this heading">#</a></h4>
 <p>Code reviews are possibly the most under-rated service in open-source/community projects. The best way to get familiar with a code base is reviewing other contributors’ code.</p>
+<blockquote>
+<div><h4 class="rubric" id="exercise-1-1">Exercise 1.1</h4>
+<p>Initialize a git repository via <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code></p>
+</div></blockquote>
+<p>Often, when we run a numerical experiment/example, there may be output files generated (plots, datasets, etc). We usually don’t want to store the output in the repository, so we can tell git to ignore them. There are a couple of ways we can specify this:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.gitignore</span></code>: this is specific to this repository, and is checked into the repository</p>
+<ul>
+<li><p>output or temporary files that are specific to this experiment</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">~/.config/git/ignore</span></code>: this is specific to your machine</p>
+<ul>
+<li><p>temporary files used by editors (<code class="docutils literal notranslate"><span class="pre">emacs</span></code>, <code class="docutils literal notranslate"><span class="pre">vim</span></code>) or more sofisticated Integrated Development Environments (IDEs) like <code class="docutils literal notranslate"><span class="pre">VSCode</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.DS_Store</span></code> files on Mac</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.git/info/exclude</span></code>: specific to this repository <em>and</em> your machine (not checked into git)</p>
+<ul>
+<li><p>occasionally useful</p></li>
+</ul>
+</li>
+</ul>
+<p>Files are specified according to patterns, e.g.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>*.nc # ignore all files with a .nc extension
+!test.nc # except test.nc
+</pre></div>
+</div>
+<p>See <a class="reference external" href="https://git-scm.com/docs/gitignore">Git manual: gitignore</a> for more information</p>
+<blockquote>
+<div><h4 class="rubric" id="exercise-1-2">Exercise 1.2</h4>
+<p>Set up your <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> file in this <code class="docutils literal notranslate"><span class="pre">test/</span></code> directory</p>
+</div></blockquote>
+</section>
+</section>
+</section>
+<section id="specifying-environments">
+<h2>2. Specifying environments<a class="headerlink" href="#specifying-environments" title="Link to this heading">#</a></h2>
+<section id="julia-pkg-jl">
+<h3>Julia Pkg.jl<a class="headerlink" href="#julia-pkg-jl" title="Link to this heading">#</a></h3>
+<p>The Julia environment is tracked with two files:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Project.toml</span></code>: contains “user-editable” information:</p>
+<ul>
+<li><p>dependencies you use directly (e.g. loaded by <code class="docutils literal notranslate"><span class="pre">using</span></code> or <code class="docutils literal notranslate"><span class="pre">import</span></code>)</p></li>
+<li><p>dependency version constraints (optional)</p></li>
+<li><p>package metadata (optional: only if the project is also a package)</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Manifest.toml</span></code>: contains the “derived” information necessary to recreate the environment exactly</p>
+<ul>
+<li><p>all the recursive dependencies (i.e. the dependencies, their dependencies, etc.)</p></li>
+<li><p>the exact version used (version number / branch name + git sha hash)</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>To be able to reproduce your code, you need to check in both files to git</strong></p>
+<p>You can recreate this on another machine by doing:</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Pkg</span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">instantiate</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>or at the REPL:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">]</span><span class="n">instantiate</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>if you have the <code class="docutils literal notranslate"><span class="pre">Manifest.toml</span></code>, this will create an environment with the exact versions used</p></li>
+<li><p>if you don’t have the <code class="docutils literal notranslate"><span class="pre">Manifest.toml</span></code>, this will resolve it (see below)</p></li>
+</ul>
+<p>Specifying dependencies:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">]add</span> <span class="pre">PackageName</span></code> / <code class="docutils literal notranslate"><span class="pre">Pkg.add(&quot;PackageName&quot;</span></code>): this will add the most recent registered version</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">]add</span> <span class="pre">PackageName</span> <span class="pre">&#64;version</span></code> / <code class="docutils literal notranslate"><span class="pre">Pkg.add(name=&quot;PackageName&quot;,</span> <span class="pre">version=&quot;version&quot;)</span></code>: use a specific version</p></li>
+</ul>
+<p>Other useful Pkg operations:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">]resolve</span></code> / <code class="docutils literal notranslate"><span class="pre">Pkg.resolve()</span></code>: creates or updates the Manifest if it isn’t in sync with the Project.toml or its dependencies</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">]up</span></code> / <code class="docutils literal notranslate"><span class="pre">Pkg.update()</span></code>: update dependencies to their latest versions (subject to compatiblity contraints)</p>
+<ul>
+<li><p>This will modify the <code class="docutils literal notranslate"><span class="pre">Manifest.toml</span></code> file</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="python">
+<h3>Python<a class="headerlink" href="#python" title="Link to this heading">#</a></h3>
+<p>Analog reproducible environments in Python can be obtained via <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/index.html">Conda</a>. For example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">env</span> <span class="n">export</span> <span class="o">&gt;</span> <span class="n">environment</span><span class="o">.</span><span class="n">yml</span>
+</pre></div>
+</div>
+<p>will give you an exact snapshot of the packages installed, which can be stored in version control. It can be reproduced with</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">env</span> <span class="n">create</span> <span class="o">-</span><span class="n">f</span> <span class="n">environment</span><span class="o">.</span><span class="n">yml</span>
+</pre></div>
+</div>
+<p>Unlike Julia, Conda environments are <em>not</em> reproducible across platforms (e.g. MacOS =&gt; Linux). And they can also export only the direct dependencies:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">env</span> <span class="o">--</span><span class="n">from</span><span class="o">-</span><span class="n">history</span> <span class="n">export</span> <span class="o">&gt;</span> <span class="n">environment</span><span class="o">.</span><span class="n">yml</span>
+</pre></div>
+</div>
+<p>but it may resolve differently. See <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#sharing-an-environment">Conda: manage environments: sharing an environment</a> for more information.</p>
+<p><a class="reference external" href="https://pipenv.pypa.io">pipenv</a> (another Python environment manager) has <code class="docutils literal notranslate"><span class="pre">pipfile</span></code> and <code class="docutils literal notranslate"><span class="pre">pipfile.lock</span></code>: roughly analogous to <code class="docutils literal notranslate"><span class="pre">Project.toml</span></code> and <code class="docutils literal notranslate"><span class="pre">Manifest.toml</span></code>, but again the <code class="docutils literal notranslate"><span class="pre">pipfile.lock</span></code> is tied to a specific platform.</p>
+</section>
+<section id="containers">
+<h3>Containers<a class="headerlink" href="#containers" title="Link to this heading">#</a></h3>
+<p><img alt="" src="https://i.imgur.com/3eTKEZp.jpg" /></p>
+<p>Containers are another way to create an isolated environment that can be easily shared. These include:</p>
+<ul class="simple">
+<li><p>Docker: widely used</p></li>
+<li><p>Singularity (now Apptainer): supported on several HPC systems.</p></li>
+</ul>
+</section>
 </section>
 </section>
 
@@ -586,6 +735,15 @@ first, and then <code class="docutils literal notranslate"><span class="pre">git
         <p class="prev-next-title">Slides</p>
       </div>
     </a>
+    <a class="right-next"
+       href="2024-08-28-linux.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">2. The Linux Filesystem and commands</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -602,17 +760,27 @@ first, and then <code class="docutils literal notranslate"><span class="pre">git
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#identity">Identity</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forks-and-branches">Forks and branches</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#some-useful-tips">Some useful tips</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-reproducibile-code">What is reproducibile code?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-can-we-make-our-code-reproducible">How can we make our code reproducible?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keeping-track-with-git">1. Keeping track with <code class="docutils literal notranslate"><span class="pre">git</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-version-control-with-git">Introduction to version control with <code class="docutils literal notranslate"><span class="pre">git</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#identity">Identity</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#forks-and-branches">Forks and branches</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#some-useful-tips">Some useful tips</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#community-projects">Community projects</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#some-other-useful-tips">Some other useful tips</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing">Contributing</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#code-reviews">Code reviews</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#community-projects">Community projects</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Some useful tips</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing">Contributing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-reviews">Code reviews</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-environments">2. Specifying environments</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#julia-pkg-jl">Julia Pkg.jl</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Python</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#containers">Containers</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
