@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>1. Reproducibility in computational sciences &#8212; Computational Methods for Scientists</title>
+    <title>First Class &#8212; Computational Methods for Scientists</title>
   
   
   
@@ -61,7 +61,6 @@
     <link rel="icon" href="../_static/SDSU-comp526_logo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2. The Linux Filesystem and commands" href="2024-08-28-linux.html" />
     <link rel="prev" title="Slides" href="../slides.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -181,8 +180,8 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../syllabus.html">Syllabus</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../slides.html">Slides</a><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">1. Reproducibility in computational sciences</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2024-08-28-linux.html">2. The Linux Filesystem and commands</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">First Class</a></li>
+
 </ul><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary>
 </details></li>
 </ul>
@@ -401,7 +400,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>1. Reproducibility in computational sciences</h1>
+    <h1>First Class</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -411,9 +410,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">First Class</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#reproducibility-in-computational-sciences">1. Reproducibility in computational sciences</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-reproducibile-code">What is reproducibile code?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-can-we-make-our-code-reproducible">How can we make our code reproducible?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keeping-track-with-git">1. Keeping track with <code class="docutils literal notranslate"><span class="pre">git</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keeping-track-with-git">2. Keeping track with <code class="docutils literal notranslate"><span class="pre">git</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-version-control-with-git">Introduction to version control with <code class="docutils literal notranslate"><span class="pre">git</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#identity">Identity</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#forks-and-branches">Forks and branches</a></li>
@@ -426,13 +427,20 @@ document.write(`
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-environments">2. Specifying environments</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#julia-pkg-jl">Julia Pkg.jl</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-environments">3. Specifying environments</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#julia">3.1 Julia</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-julia-repl">The Julia REPL</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#julia-pkg-jl">Julia Pkg.jl</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python">3.2 Python</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#containers">Containers</a></li>
 </ul>
 </li>
 </ul>
+</li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -443,7 +451,17 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="reproducibility-in-computational-sciences">
+  <section class="tex2jax_ignore mathjax_ignore" id="first-class">
+<h1>First Class<a class="headerlink" href="#first-class" title="Link to this heading">#</a></h1>
+<ol class="arabic simple">
+<li><p>Reproducibility</p></li>
+<li><p>Git</p></li>
+<li><p>Package environments and managers<br />
+3.1. Julia<br />
+3.2. Python</p></li>
+</ol>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="reproducibility-in-computational-sciences">
 <h1>1. Reproducibility in computational sciences<a class="headerlink" href="#reproducibility-in-computational-sciences" title="Link to this heading">#</a></h1>
 <section id="what-is-reproducibile-code">
 <h2>What is reproducibile code?<a class="headerlink" href="#what-is-reproducibile-code" title="Link to this heading">#</a></h2>
@@ -468,7 +486,7 @@ document.write(`
 <p>We need to supply both the code, and the “environment” used to run the code, and we need to keep track of it as we run experiments.</p>
 </section>
 <section id="keeping-track-with-git">
-<h2>1. Keeping track with <code class="docutils literal notranslate"><span class="pre">git</span></code><a class="headerlink" href="#keeping-track-with-git" title="Link to this heading">#</a></h2>
+<h2>2. Keeping track with <code class="docutils literal notranslate"><span class="pre">git</span></code><a class="headerlink" href="#keeping-track-with-git" title="Link to this heading">#</a></h2>
 <section id="introduction-to-version-control-with-git">
 <h3>Introduction to version control with <code class="docutils literal notranslate"><span class="pre">git</span></code><a class="headerlink" href="#introduction-to-version-control-with-git" title="Link to this heading">#</a></h3>
 <p>Version control Software (VCS) is also referred as SCM (Source Code Management) or RCS (Revision Control System) tools. Version control, also known as source control, is the practice of tracking and managing changes to source files. Version control systems are software tools that help teams of contributors manage changes to source code over time. There are several options: <code class="docutils literal notranslate"><span class="pre">git</span></code>, <code class="docutils literal notranslate"><span class="pre">CVS</span></code>, <code class="docutils literal notranslate"><span class="pre">SVN</span></code>, etc.</p>
@@ -583,7 +601,7 @@ first, and then <code class="docutils literal notranslate"><span class="pre">git
 <h4>Code reviews<a class="headerlink" href="#code-reviews" title="Link to this heading">#</a></h4>
 <p>Code reviews are possibly the most under-rated service in open-source/community projects. The best way to get familiar with a code base is reviewing other contributors’ code.</p>
 <blockquote>
-<div><h4 class="rubric" id="exercise-1-1">Exercise 1.1</h4>
+<div><h4 class="rubric" id="exercise-2-1">Exercise 2.1</h4>
 <p>Initialize a git repository via <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code></p>
 </div></blockquote>
 <p>Often, when we run a numerical experiment/example, there may be output files generated (plots, datasets, etc). We usually don’t want to store the output in the repository, so we can tell git to ignore them. There are a couple of ways we can specify this:</p>
@@ -612,16 +630,55 @@ first, and then <code class="docutils literal notranslate"><span class="pre">git
 </div>
 <p>See <a class="reference external" href="https://git-scm.com/docs/gitignore">Git manual: gitignore</a> for more information</p>
 <blockquote>
-<div><h4 class="rubric" id="exercise-1-2">Exercise 1.2</h4>
+<div><h4 class="rubric" id="exercise-2-2">Exercise 2.2</h4>
 <p>Set up your <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> file in this <code class="docutils literal notranslate"><span class="pre">test/</span></code> directory</p>
 </div></blockquote>
 </section>
 </section>
 </section>
 <section id="specifying-environments">
-<h2>2. Specifying environments<a class="headerlink" href="#specifying-environments" title="Link to this heading">#</a></h2>
+<h2>3. Specifying environments<a class="headerlink" href="#specifying-environments" title="Link to this heading">#</a></h2>
+<section id="julia">
+<h3>3.1 Julia<a class="headerlink" href="#julia" title="Link to this heading">#</a></h3>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you haven’t already, download and install <a class="reference external" href="https://julialang.org/downloads/">Julia</a>.</p>
+</div>
+<p>Julia is a relatively new programming language. Think of it as MATLAB done right, open source, and fast. It’s nominally general-purpose, but mostly for numerical/scientific/statistical computing. There are great <a class="reference external" href="https://julialang.org/learning/">learning resources</a>. We’ll introduce concepts and language features as we go.</p>
+<section id="the-julia-repl">
+<h4>The Julia REPL<a class="headerlink" href="#the-julia-repl" title="Link to this heading">#</a></h4>
+<p>Julia has an interactive command-line REPL (read-eval-print loop). See the dedicated <a class="reference external" href="https://docs.julialang.org/en/v1/stdlib/REPL/">REPL documentation page</a>.</p>
+<p>Different modes:</p>
+<ul class="simple">
+<li><p>The Julia interpreter:</p></li>
+</ul>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span>
+<span class="mi">2</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Help mode. Toggled by <code class="docutils literal notranslate"><span class="pre">?</span></code></p></li>
+</ul>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="c"># upon typing ?, the prompt changes (in place) to: help?&gt;</span>
+
+<span class="n">help</span><span class="o">?&gt;</span><span class="w"> </span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The shell mode, toggled by <code class="docutils literal notranslate"><span class="pre">;</span></code> and immediately followed by a shell command (if you are using Jupyter notebook; otherwise, you can go to a new line with the shell command)</p></li>
+</ul>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">echo</span><span class="w"> </span><span class="n">hello</span><span class="w"> </span><span class="c"># upon typing ;, the prompt changes (in place) to: shell&gt;</span>
+
+<span class="n">shell</span><span class="o">&gt;</span><span class="w"> </span><span class="n">echo</span><span class="w"> </span><span class="n">hello</span>
+<span class="n">hello</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The package manager mode, toggled by <code class="docutils literal notranslate"><span class="pre">]</span></code></p></li>
+</ul>
+</section>
 <section id="julia-pkg-jl">
-<h3>Julia Pkg.jl<a class="headerlink" href="#julia-pkg-jl" title="Link to this heading">#</a></h3>
+<h4>Julia Pkg.jl<a class="headerlink" href="#julia-pkg-jl" title="Link to this heading">#</a></h4>
 <p>The Julia environment is tracked with two files:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Project.toml</span></code>: contains “user-editable” information:</p>
@@ -667,8 +724,9 @@ first, and then <code class="docutils literal notranslate"><span class="pre">git
 </li>
 </ul>
 </section>
+</section>
 <section id="python">
-<h3>Python<a class="headerlink" href="#python" title="Link to this heading">#</a></h3>
+<h3>3.2 Python<a class="headerlink" href="#python" title="Link to this heading">#</a></h3>
 <p>Analog reproducible environments in Python can be obtained via <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/index.html">Conda</a>. For example</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">env</span> <span class="n">export</span> <span class="o">&gt;</span> <span class="n">environment</span><span class="o">.</span><span class="n">yml</span>
 </pre></div>
@@ -735,15 +793,6 @@ first, and then <code class="docutils literal notranslate"><span class="pre">git
         <p class="prev-next-title">Slides</p>
       </div>
     </a>
-    <a class="right-next"
-       href="2024-08-28-linux.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">2. The Linux Filesystem and commands</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -760,9 +809,11 @@ first, and then <code class="docutils literal notranslate"><span class="pre">git
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">First Class</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#reproducibility-in-computational-sciences">1. Reproducibility in computational sciences</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-reproducibile-code">What is reproducibile code?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-can-we-make-our-code-reproducible">How can we make our code reproducible?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keeping-track-with-git">1. Keeping track with <code class="docutils literal notranslate"><span class="pre">git</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keeping-track-with-git">2. Keeping track with <code class="docutils literal notranslate"><span class="pre">git</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-version-control-with-git">Introduction to version control with <code class="docutils literal notranslate"><span class="pre">git</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#identity">Identity</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#forks-and-branches">Forks and branches</a></li>
@@ -775,13 +826,20 @@ first, and then <code class="docutils literal notranslate"><span class="pre">git
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-environments">2. Specifying environments</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#julia-pkg-jl">Julia Pkg.jl</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-environments">3. Specifying environments</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#julia">3.1 Julia</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-julia-repl">The Julia REPL</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#julia-pkg-jl">Julia Pkg.jl</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python">3.2 Python</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#containers">Containers</a></li>
 </ul>
 </li>
 </ul>
+</li>
+</ul>
+
   </nav></div>
 
 </div></div>

@@ -3,6 +3,8 @@
 ## Logistics
 
 Comp-526
+*Class time*: **M-W-F: 9-9:50 am**
+*Location*: **LH 247**
 
 
 ### Instructor: [Valeria Barra](https://valeriabarra.org)
