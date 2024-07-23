@@ -9,6 +9,7 @@ Comp-526
 
 ### Instructor: [Valeria Barra](https://valeriabarra.org)
 Email: vbarra @ sdsu . edu
+Office: GMCS 593
 
 
 **Office Hours**: by appointment.
@@ -115,15 +116,21 @@ Both students and faculty are responsible for maintaining an appropriate learnin
 
 ## Accommodation for Disabilities
 
-If you think you may qualify for accommodations because of a disability, please contact SDSU Student Ability Success Center and make your faculty member aware in a timely manner so that your needs can be addressed.
+If you think you may qualify for accommodations because of a disability, please contact [SDSU Student Ability Success Center](https://sds.sdsu.edu/) and make your faculty member aware in a timely manner so that your needs can be addressed. Please allow 10-14 business days for this process.
+
 
 ## Preferred Student Names and Pronouns
 
-We recognize that students' legal information doesn't always align with how they identify. If you feel that the name that appears on the class roster does not reflect your preferred name or pronoun, let your faculty member know.
+We recognize that students' legal information doesn't always align with how they identify. Class rosters are provided to the instructor with the student's legal name. If you feel that the name that appears on the class roster does not reflect your preferred name or pronoun, let your faculty member know.
 
 ## Academic Honesty
 
 SDSU has strict codes of conduct and policies regarding [cheating and plagiarism](https://sacd.sdsu.edu/student-rights/academic-dishonesty/cheating-and-plagiarism). Become familiar with the policy and what constitutes plagiarism. Any cheating or plagiarism will result in failing this class and a disciplinary review by the University. These actions may lead to probation, suspension, or expulsion.
+
+## Use of AI
+In May 2024, the University Senate extended its definition of plagiarism to include the un-cited use of generative AI applications, specifically: "representing work produced by generative Artificial Intelligence as one’s own." Academic freedom ensures that instructors are empowered to determine whether students may use genAI in their classes and to what extent. To minimize confusion, we report here a statement regarding the use of AI in this class.
+
+Students should not use generative AI applications in this course except as approved by the instructor. Any use of generative AI outside of instructor-approved guidelines constitutes misuse. Misuse of generative AI is a violation of the course policy on academic honesty and will be reported to the Center for Student Rights and Responsibilities
 
 ## Sexual Misconduct, Discrimination, Harassment and/or Related Retaliation
 
