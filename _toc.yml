@@ -11,3 +11,4 @@ chapters:
   - file: slides/2024-08-30-linux.ipynb
   - file: slides/2024-09-04-functions-and-fpa.ipynb
   - file: slides/2024-09-09-intro-to-c.md
+  - file: slides/2024-09-11-c-pointers.md
