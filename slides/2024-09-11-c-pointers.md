@@ -74,9 +74,9 @@ To declare multiple variables (of the same type) in one statement, you can just 
 int* ptr_a, ptr_b; // two pointers of the type int
 ```
 
-**Note:** this is true for all types of variables, not only pointers.
+**note:** this is true for all types of variables, not only pointers.
 
-:::{tip}
+:::{note}
 The space matters!
 You would think that the type of `ptr_b` would be `int *`, as it is `ptr_a`, right? Wrong!!
 :::
@@ -96,7 +96,7 @@ It’s possible to do the single-line declaration in a clear way. This is the im
 int *ptr_a, ptr_b;
 ```
 
-:::{tip}
+:::{note}
 Note: the asterisk has moved. It is now right next to the word `ptr_a`.
 :::
 
@@ -154,11 +154,253 @@ It’s also possible to write to a dereference expression (the C way of saying t
 ## Other type examples
 
 ```c
-int ∗ip;     // pointer to an int
-double ∗dp;  // pointer to a double
-float ∗fp;   // pointer to a float
-char ∗ch;    // pointer to a char
+int *ip;     // pointer to an int
+double *dp;  // pointer to a double
+float *fp;   // pointer to a float
+char *ch;    // pointer to a char
 ```
 
-## Arrays
+## A word on Arrays and Pointers
+
+We have not introduced Arrays yet, but let's just add an interlude for the purpose of illustrating their relationship with pointers.
+
+If you declare a three-`int` array (i.e., an array that contains three `int`s) with the following statement
+
+```c
+int array[] = {42, 77, 89};
+```
+note that we are using the `[]` notation to indicate that this is a collection of items (an array). If we had accidentally declared this as a pointer to a collection of items, i.e., `int *array[] = {42, 77, 89}`, the compiler would have errored, not accepting the assigment of the elements `{42, 77, 89}` to initialize the array variable.
+
+This variable, array, is an extra-big box: three `int`s’ worth of storage.
+
+If you try to display the content of the array by printing via
+
+```c
+printf("Array %p\n", array); // it will print some hexadecimal string like 0x7fffa66c0fac
+```
+Note that we used the format identifier `%p` for pointers. But when we use the _name_ of the array, `array`, you are actually using a pointer to the first element of the array (in C terms, `&array[0]`). This is called 'decaying': the array 'decays' to a pointer. Any usage of `array` is equivalent to if `array` had been declared as a pointer (with the exception that `array` is not an lvalue: you can’t assign to it or increment or decrement it, like you can with a real pointer variable - we will see more of this later).
+
+So when you passed `array` to `printf`, you really passed a pointer to its first element.
+
+`Decaying` is like an implicit 'address-of' `&` operator.
+
+:::{note}
+```c
+array == &array == &array[0]
+```
+:::
+
+In English, these expressions read '`array`', 'pointer to `array`', and 'pointer to the first element of `array`' (in the latter, the index operator, `[]`, has higher precedence than the address-of operator). But in C, all three expressions mean the same thing.
+
+So, how do we actually print the _content_ of `array`? Before printing a multi-entry variable like a whole array (we'll see this just in a bit), let's recap how it looks like for a single element:
+
+```c
+# include <stdio.h>
+
+int main() {
+
+    int var = 20; // an int variable declaration
+    int *iptr;    // pointer variable declaration
+    iptr = &var;  // store address of var in pointer variable
+    printf("Address of var variable: %p \n", &var); //address stored in pointer variable
+    printf("Address stored in iptr variable: %p\n", iptr); // access the value using the pointer
+    printf("Value of ∗iptr variable: %d \n", *iptr); // what iptr points to
+    printf("Value of int variable: %d \n", var); // just the plain int variable
+
+    return 0;
+}
+```
+
+It produces the following output
+
+```bash
+Address of var variable: 0x7ffe645cc05c
+Address stored in iptr variable: 0x7ffe645cc05c
+Value of ∗iptr variable: 20
+Value of int variable: 20
+```
+
+### Exercise
+Check out and run the `pointer-dereferencing.c` program.
+
+## A word on NULL pointers
+
+- It is always a good practice to assign a NULL value to a pointer variable if you do not have the exact address to be assigned
+- This is done at the time of variable declaration, as in `type pointer_name = NULL;` (or the quivalent version `type pointer_name = 0;`)
+- A pointer that is assigned to `NULL` is called a null pointer
+- In most operative systems programs are not permitted to
+access memory at address 0
+- If a pointer contains the `NULL` (or zero) value, it is assumed to
+point to nothing
+
+Example:
+
+```c
+#include <stdio.h>
+
+int main() {
+    int *ptr = NULL;
+    printf("The value of ptr is: %p \n", ptr);
+
+    return 0;
+}
+```
+
+Output:
+```bash
+The value of ptr is: (nil)
+```
+
+## Pointer arithmetic
+
+Let's go back to printing all three elements of the array called `array` introduced earlier.
+
+```c
+int *array_ptr = array;
+printf(" first element: %i\n", *(array_ptr++));
+printf("second element: %i\n", *(array_ptr++));
+printf(" third element: %i\n", *array_ptr);
+```
+
+Output:
+
+```bash
+First element of array: 42
+Second element of array: 77
+Third element of array: 89
+```
+
+In case you’re not familiar with the `++` operator: it adds 1 to a variable, the same as `variable += 1` (remember that because we used the postfix expression `array_ptr++`, rather than the prefix expression `++array_ptr`, the expression evaluated to the value of `array_ptr` from _before_ it was incremented rather than after).
+
+If you are not familiar with pre/post-fix expressions:
+
+:::{note}
+
+```c
+int i = 10;   // (1)
+int j = ++i;  // (2)
+int k = i++;  // (3)
+```
+
+For a pre-fix expression `int j = ++i;`, the variable `i` is incremented by one (`i = i + 1`, so `i = 11`), and then it's deep copied to `j` (so `j = 11`). For the post-fix expression int `k = i++`;, the variable `i` (which is still 11), is first deep copied to `k` (so `k = 11`), and then `i` is incremented by one (so `i = 12`)
+:::
+
+Going back to our example, the type of a pointer matters. The type of the pointer here is `int`. When you add to or subtract from a pointer, the amount by which you do that is multiplied by the size of the type of the pointer. In the case of our three increments, each 1 that you added was multiplied by `sizeof(int)`.
+
+We could have printed the values in the array in a for-loop:
+
+```c
+#include <stdio.h>
+
+int main(){
+    int array[] = {42, 77, 89};
+
+    int i, *ptr;
+    ptr = array; // this way the address of the first entry of array is stored in ptr
+
+    for (i=0; i<3; i++) {
+        printf("Address of array [%d] = %p \n", i, ptr);
+        printf("Value of array [%d] = %i \n", i, *ptr);
+
+        // point to the next location
+        ptr++;
+    }
+
+    return 0;
+}
+```
+
+Output:
+
+```bash
+Address of array [0] = 0x7ffd1f9a773c
+Value of array [0] = 42
+Address of array [1] = 0x7ffd1f9a7740
+Value of array [1] = 77
+Address of array [2] = 0x7ffd1f9a7744
+Value of array [2] = 89
+```
+
+## Indexing
+
+To print the first entry of the array `array` we can use:
+```c
+printf("%i\n", array[0]);
+```
+which will show the value `42`. Technically, the index operator (e.g. `array[0]`) has _nothing to do with arrays_, even though it is its most common usage. Remember that arrays decay to pointers. That’s a _pointer_ you passed to that operator, not an array.
+
+One could do:
+
+```c
+int array[] = {42, 77, 89};
+int *array_ptr = &array[1];
+printf("%i\n", array_ptr[1]);
+```
+
+What happened is displayed in the following diagram
+
+![](../img/array_indexing.png)
+
+
+`array` points to the first element of the array; `array_ptr` is set to `&array[1]`, so it points to the second element of the array. So `array_ptr[1]` is equivalent to `array[2]` (`array_ptr` starts at the second element of the array `array`, so the second element of `array_ptr` is the third element of the array `array`).
+
+Also, you might notice that because the first element is `sizeof(int)` bytes wide (being an `int`), the second element is `sizeof(int)` bytes forward of the start of the array. You are correct: `array[1]` is equivalent to `*(array + 1)`. (Remember that the number added to or subtracted from a pointer is multiplied by the size of the pointer’s type, so that `1` adds `sizeof(int)` bytes to the pointer value.)
+
+## Indirection or pointer to pointer
+
+- A pointer to a pointer is a form of multiple indirection, or chain of pointers
+- Normally, a pointer contains the address of a variable
+- When one defines a pointer to a pointer, the first pointer contains the address of the second pointer, which points to the location that contains the actual value
+- A variable that is a pointer to a pointer must be declared as such. Place an additional asterisk in front of its name
+- When a target value is indirectly pointed to by a pointer to a pointer, accessing that value requires that the asterisk operator be applied twice
+
+Example:
+
+```c
+#include <stdio.h>
+
+int main(){
+
+    int var;
+    int *ptr;
+    int **pptr;
+
+    var = 3000;
+
+    // let ptr to point to the address of var (using the address-of operator &)
+    ptr = &var;
+    // let pptr to point to the address of ptr (using the address-of operator &)
+    pptr = &ptr;
+
+    printf("Value of var = %d \n", var);
+    printf("Value pointed to by ptr: *ptr = %d \n", *ptr);
+    printf("Value pointed to by pptr: ∗∗pptr = %d \n", **pptr);
+    // they are all pointing to the same value!
+    return 0;
+}
+```
+
+Output:
+
+```bash
+Value of var = 3000
+Value pointed to by ptr: *ptr = 3000
+Value pointed to by pptr: ∗∗pptr = 3000
+```
+
+Dereferencing a pointer-to-pointer works in the same way. Example:
+
+```c
+int    a =  3;
+int   *b = &a;
+int  **c = &b;
+int ***d = &c;
+```
+
+```c
+*d == c; // Dereferencing an (int ***) once gets you an (int **)
+**d ==  *c ==  b; // Dereferencing an (int ***) twice, or an (int **) once, gets you an (int *)
+***d == **c == *b == a == 3; // Dereferencing an (int ***) thrice, or an (int **) twice, or an (int *) once, gets you an int
+```
+
 
