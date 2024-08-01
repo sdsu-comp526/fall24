@@ -7,9 +7,10 @@ chapters:
 - file: syllabus
 - file: slides
   sections:
-  - file: slides/2024-08-26-first-class.ipynb
-  - file: slides/2024-08-30-linux.ipynb
-  - file: slides/2024-09-04-functions-and-fpa.ipynb
-  - file: slides/2024-09-09-intro-to-c.md
-  - file: slides/2024-09-11-c-pointers.md
-  - file: slides/2024-09-16-function-errors.ipynb
+  - file: slides/module1-1-first-class.ipynb
+  - file: slides/module1-2-linux.ipynb
+  - file: slides/module1-3-functions-and-fpa.ipynb
+  - file: slides/module2-1-intro-to-c.md
+  - file: slides/module2-2-c-pointers.md
+  - file: slides/module3-1-function-errors.ipynb
+  - file: slides/module3-2-conditioning.ipynb
