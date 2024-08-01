@@ -1,8 +1,18 @@
 # 5) Intro to C pointers
 
+Today:
+ 1. Definition
+ 2. Declaration Syntax
+ 3. Assignment and pointers
+ 4. Dereferencing
+ 5. Pointer arithmetic
+ 6. Indexing
+ 7. Indirection or pointer to pointer
+
+
 The material for this class is largely adapted from this great [SDSU resource](https://edoras.sdsu.edu/doc/c/pointers-1.2.2/).
 
-## Definition
+## 1 Definition
 A pointer is a memory address.
 
 ## Examples
@@ -67,7 +77,7 @@ Address of var2 is 0x7fff804e0024
 Address of var3 is 0x7fff804e0033
 ```
 
-## Declaration syntax
+## 2 Declaration syntax
 To declare multiple variables (of the same type) in one statement, you can just simply separate their names by commas, after the type declaration, i.e.,
 
 ```c
@@ -120,7 +130,7 @@ Incidentally, C allows zero or more levels of parentheses around the variable na
 int ((not_a_pointer)), (*ptr_a), (((*ptr_b)));
 ```
 
-## Assignment and pointers
+## 3 Assignment and pointers
 Now, how do you assign an `int` to this pointer? This solution might be obvious:
 
 ```c
@@ -135,7 +145,7 @@ Any direct assignment to a pointer variable will change the address in the varia
 
 So how do you access the value at a pointer? You must dereference it.
 
-## Dereferencing
+## 4 Dereferencing
 
 ```c
 int bar = *foo_ptr;
@@ -149,7 +159,7 @@ It’s also possible to write to a dereference expression:
 *foo_ptr = 42; // Sets foo to 42
 ```
 
-## Other type examples
+### Other type examples
 
 ```c
 int *ip;     // pointer to an int
@@ -158,7 +168,7 @@ float *fp;   // pointer to a float
 char *ch;    // pointer to a char
 ```
 
-## A word on Arrays and Pointers
+### A word on Arrays and Pointers
 
 We have not introduced Arrays yet, but let's just add an interlude for the purpose of illustrating their relationship with pointers.
 
@@ -221,7 +231,7 @@ Value of int variable: 20
 ### Exercise
 Check out and run the `pointer-dereferencing.c` program.
 
-## A word on NULL pointers
+### A word on NULL pointers
 
 - It is always a good practice to assign a NULL value to a pointer variable if you do not have the exact address to be assigned
 - This is done at the time of variable declaration, as in `type *pointer_name = NULL;` (or the quivalent version `type *pointer_name = 0;`)
@@ -249,7 +259,7 @@ Output:
 The value of ptr is: (nil)
 ```
 
-## Pointer arithmetic
+## 5 Pointer arithmetic
 
 Let's go back to printing all three elements of the array called `array` introduced earlier.
 
@@ -319,7 +329,7 @@ Address of array [2] = 0x7ffd1f9a7744
 Value of array [2] = 89
 ```
 
-## Indexing
+## 6 Indexing
 
 To print the first entry of the array `array` we can use:
 ```c
@@ -344,7 +354,7 @@ What happened is displayed in the following diagram
 
 Also, you might notice that because the first element is `sizeof(int)` bytes wide (being an `int`), the second element is `sizeof(int)` bytes forward of the start of the array. You are correct: `array[1]` is equivalent to `*(array + 1)`. (Remember that the number added to or subtracted from a pointer is multiplied by the size of the pointer’s type, so that `1` adds `sizeof(int)` bytes to the pointer value.)
 
-## Indirection or pointer to pointer
+## 7 Indirection or pointer to pointer
 
 - A pointer to a pointer is a form of multiple indirection, or chain of pointers
 - Normally, a pointer contains the address of a variable

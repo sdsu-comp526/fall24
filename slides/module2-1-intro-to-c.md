@@ -1,6 +1,12 @@
 # 4) Intro to C
 
-## Compiling a C program
+## Today
+
+ 1. Compiling a C program
+ 2. Variables and Basic Data Types
+
+
+## 1 Compiling a C program
 
 Contrary to the examples you have seen in the previous lectures in Julia, C programs need to be compiled first, before being executed. This is a drawback of a compiled language (e.g., C, Fortran, Java, etc) Vs an interpreted language (e.g., MATLAB, Python, Julia, etc) in which the interpreter compiles and executes at the same time.
 
@@ -27,7 +33,7 @@ To run/execute your program, simply type `./name_of_your_program` in your termin
 
 ```
 
-## Variables and Basic Data Types
+## 2 Variables and Basic Data Types
 
 Our first C program: a `Hello, World!` print statement.
 
@@ -63,7 +69,7 @@ Note:
 - Do not use reserved words
 
 ### Basic Data Types
-- `int`, `float`, `double`, `char` (single character)
+- `int`, `float`, `double`, `char` (single character), and `_Bool` (or `bool` if you include the header `stdbool.h`)
 - Constant: any number, single character or character string
 - Constant expressions: entirely of constant values
 
