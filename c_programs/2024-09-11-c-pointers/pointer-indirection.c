@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int main(){
+int main(void){
 
     int var;
     int *ptr;
@@ -17,5 +17,10 @@ int main(){
     printf("Value pointed to by ptr: *ptr = %d \n", *ptr);
     printf("Value pointed to by pptr: ∗∗pptr = %d \n", **pptr);
     // they are all pointing to the same value!
+    printf("Address of var is %p \n", &var);
+    printf("Address of ptr is %p \n", &ptr);
+    printf("Address of pptr is %p \n", &pptr);
+    printf("Value of ptr is %p \n", ptr);
+    printf("Value of pptr is %p \n", pptr);
     return 0;
 }

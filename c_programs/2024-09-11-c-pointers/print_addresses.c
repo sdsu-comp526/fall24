@@ -5,7 +5,7 @@ int main (void)
 
     double var1;
     int var2;
-    char var3 [5];
+    char var3[5];
 
     printf("Address of var1 is %p \n", &var1);
     printf("Address of var2 is %p \n", &var2);
