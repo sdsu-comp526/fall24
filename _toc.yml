@@ -16,3 +16,4 @@ chapters:
   - file: slides/module2-4_c_memory.md
   - file: slides/module3-1_function_errors.ipynb
   - file: slides/module3-2_conditioning.ipynb
+  - file: slides/module3-3_root_finding.ipynb
