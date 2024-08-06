@@ -1,6 +1,12 @@
 # 4) Intro to C
 
-## Compiling a C program
+## Today
+
+ 1. Compiling a C program
+ 2. Variables and Basic Data Types
+
+
+## 1 Compiling a C program
 
 Contrary to the examples you have seen in the previous lectures in Julia, C programs need to be compiled first, before being executed. This is a drawback of a compiled language (e.g., C, Fortran, Java, etc) Vs an interpreted language (e.g., MATLAB, Python, Julia, etc) in which the interpreter compiles and executes at the same time.
 
@@ -13,7 +19,7 @@ To compile a C program, you need a compiler. This may vary accoriding to the sys
 Example in Linux, using `gcc`:
 
 ```
-gcc 2024-09-09-intro_to_c_programs.c -o 2024-09-09-intro_to_c_programs
+gcc hellp.c -o hello
 ```
 
 The `gcc` command invokes the compiler, then you pass the source file you want to compile (`2024-09-09-intro_to_c_programs.c` in this case), and then after the `-o` target, you can specify the output file for the compiled program (otherwise, the compiler will automatically create `a.out`) for you.
@@ -27,7 +33,7 @@ To run/execute your program, simply type `./name_of_your_program` in your termin
 
 ```
 
-## Variables and Basic Data Types
+## 2 Variables and Basic Data Types
 
 Our first C program: a `Hello, World!` print statement.
 
@@ -35,7 +41,7 @@ Our first C program: a `Hello, World!` print statement.
 #include <stdio.h> // includes the standard input-output header to be able to use standard IO functions, such as printf() and scanf(), to perform input and output operations.
 
 // a "main" program is required in all C programs
-int main()
+int main(void)
 {
      printf("Hello, world!\n"); // this printf statement will print formatted output in the standard output (your terminal screen)
 }
@@ -61,43 +67,42 @@ Note:
 - In C, you need to declare the variable type before the variable is used
 - Variable names begin with letters, `_`, followed by combination of letters, `_`, or digits `0-9`
 - Do not use reserved words
+- C is **case-sensitive**!
 
 ### Basic Data Types
-- `int`, `float`, `double`, `char` (single character), `_Bool`
+- `int`, `float`, `double`, `char` (single character), and `_Bool` (or `bool` if you include the header `stdbool.h`)
 - Constant: any number, single character or character string
 - Constant expressions: entirely of constant values
 
 **int**
-- Integer constant: consist of one or more digits (IEEE)
-- Decimal, octal (`0`, `%o`, `%#o`), and hexadecimal (`0x`, `%x`,`%#x`, `0X`, `%X`, `%#X`) notations
-- Range of values of int are associated to the type amount
-of storage. Typically machine and architecture dependent
-6float or double
+- Integer constant: consist of one or more digits
+- Decimal, octal (prefix `0`) and hexadecimal (prefix `0x` or `0X`) notations, with print format specifiers `%o` for octal and `%x` and `%X` for hexadecimal
+- Range of values of `int` are associated to the type amount
+of storage (size). Typically this is machine and architecture dependent
+
 
 **float** or **double**
-- Floating-point constants (decimal point), (IEEE)
+- Floating-point literals (decimal point)
 - A variable type double can store roughly twice as many
 significant digits as can a variable type float
 - Floating and scientific notation (mantissa d. and exponent)
-- `%f`, `%e`, `%g` (if `< −4` or `> 5`, `%e` is used)
-- Hexadecimal floating constants (`0x0.Ap10` is $10/16 × 2^{10}$)
+- `%f`, `%e`, `%g` (if `< 4` or `> 5`, `%e` is used)
 
 ```c
-float
-length = 190.4;
+float length = 190.4;
 printf("Length= %f \n",length);
 ```
 
 **char**
-- Variable of type char can store a single character (enclosed by quotes)
-- Special characters (e.g., `\n`)
-- char characterVar = `z`;
+- A variable of type `char` can store a single character (enclosed by quotes)
+- Special characters (e.g., `'\n'`)
+- `char characterVar = 'z';`
 - `printf("Character variable %c\n", characterVar);`
 
 **Bool**
-- Variable of type `_Bool` takes only values `0` [or `false`]  and `1` [or `true`]
+- A variable of type `_Bool` (or `bool`, if you include the header `stdbool.h`) takes only values `0` [or `false`]  and `1` [or `true`]
 - When assigning, `0` stores `0` in the variable whereas any nonzero stores `1`
-- `_Bool` `booleanVar` = 9;
+- `_Bool booleanVar = 9;`
 - `printf("Boolean variable %i\n", booleanVar);`
 
 

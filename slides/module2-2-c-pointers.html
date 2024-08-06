@@ -57,11 +57,12 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'slides/2024-09-11-c-pointers';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'slides/module2-2-c-pointers';</script>
     <link rel="icon" href="../_static/SDSU-comp526_logo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="4) Intro to C" href="2024-09-09-intro-to-c.html" />
+    <link rel="next" title="6) C structs and functions" href="module2-3-c-structs-and-functions.html" />
+    <link rel="prev" title="4) Intro to C" href="module2-1-intro-to-c.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -180,20 +181,42 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../syllabus.html">Syllabus</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../slides.html">Slides</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="2024-08-26-first-class.html">1) First Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module1-1-first-class.html">1) First Class</a></li>
 
-<li class="toctree-l2"><a class="reference internal" href="2024-08-30-linux.html">2) The Linux Filesystem and commands</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2024-09-04-functions-and-fpa.html">3) Functions</a></li>
-
-
+<li class="toctree-l2"><a class="reference internal" href="module1-2-linux.html">2) The Linux Filesystem and commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module1-3-functions-and-fpa.html">3) Functions</a></li>
 
 
 
-
-
-
-<li class="toctree-l2"><a class="reference internal" href="2024-09-09-intro-to-c.html">4) Intro to C</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module2-1-intro-to-c.html">4) Intro to C</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">5) Intro to C pointers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module2-3-c-structs-and-functions.html">6) C structs and functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module3-1-function-errors.html">7) Function errors</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="module3-2-conditioning.html">8) Conditioning</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
 </ul><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary>
 </details></li>
 </ul>
@@ -267,7 +290,7 @@
       
       
       
-      <li><a href="https://github.com/sdsu-comp526/fall24/issues/new?title=Issue%20on%20page%20%2Fslides/2024-09-11-c-pointers.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/sdsu-comp526/fall24/issues/new?title=Issue%20on%20page%20%2Fslides/module2-2-c-pointers.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -297,7 +320,7 @@
       
       
       
-      <li><a href="../_sources/slides/2024-09-11-c-pointers.md" target="_blank"
+      <li><a href="../_sources/slides/module2-2-c-pointers.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -391,23 +414,23 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">Definition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">1 Definition</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#print-some-addresses">Print some addresses</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#declaration-syntax">Declaration syntax</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment-and-pointers">Assignment and pointers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dereferencing">Dereferencing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-type-examples">Other type examples</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-word-on-arrays-and-pointers">A word on Arrays and Pointers</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#declaration-syntax">2 Declaration syntax</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment-and-pointers">3 Assignment and pointers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dereferencing">4 Dereferencing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-type-examples">Other type examples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-word-on-arrays-and-pointers">A word on Arrays and Pointers</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-word-on-null-pointers">A word on NULL pointers</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-word-on-null-pointers">A word on NULL pointers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pointer-arithmetic">Pointer arithmetic</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing">Indexing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indirection-or-pointer-to-pointer">Indirection or pointer to pointer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pointer-arithmetic">5 Pointer arithmetic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing">6 Indexing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indirection-or-pointer-to-pointer">7 Indirection or pointer to pointer</a></li>
 </ul>
             </nav>
         </div>
@@ -421,9 +444,19 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="intro-to-c-pointers">
 <h1>5) Intro to C pointers<a class="headerlink" href="#intro-to-c-pointers" title="Link to this heading">#</a></h1>
+<p>Today:</p>
+<ol class="arabic simple">
+<li><p>Definition</p></li>
+<li><p>Declaration Syntax</p></li>
+<li><p>Assignment and pointers</p></li>
+<li><p>Dereferencing</p></li>
+<li><p>Pointer arithmetic</p></li>
+<li><p>Indexing</p></li>
+<li><p>Indirection or pointer to pointer</p></li>
+</ol>
 <p>The material for this class is largely adapted from this great <a class="reference external" href="https://edoras.sdsu.edu/doc/c/pointers-1.2.2/">SDSU resource</a>.</p>
 <section id="definition">
-<h2>Definition<a class="headerlink" href="#definition" title="Link to this heading">#</a></h2>
+<h2>1 Definition<a class="headerlink" href="#definition" title="Link to this heading">#</a></h2>
 <p>A pointer is a memory address.</p>
 </section>
 <section id="examples">
@@ -432,7 +465,7 @@ document.write(`
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">foo</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>This variable occupies some memory. On a PowerPC, it occupies four bytes of memory (because an int is four bytes wide).</p>
+<p>This variable occupies some memory. On modern architectures, it occupies four bytes of memory (because an int is four bytes wide).</p>
 <p>Now let’s declare another variable.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">foo_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">foo</span><span class="p">;</span>
 </pre></div>
@@ -442,8 +475,8 @@ document.write(`
 <p>Think of every variable as a box. <code class="docutils literal notranslate"><span class="pre">foo</span></code> is a box that is <code class="docutils literal notranslate"><span class="pre">sizeof(int)</span></code> bytes in size. The location of this box is its address. When you access the address, you actually access the contents of the box it points to.</p>
 <p>This is true of all variables, regardless of type. In fact, grammatically speaking, there is no such thing as a “pointer variable”: all variables are the same. There are, however, variables with different types. <code class="docutils literal notranslate"><span class="pre">foo</span></code>’s type is int. <code class="docutils literal notranslate"><span class="pre">foo_ptr</span></code>’s type is <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">*</span></code>. (Thus, “pointer variable” really means “variable of a pointer type”.)</p>
 <p><img alt="" src="../_images/pointers_boxes.png" /></p>
-<p>The sense of that is that the pointer is not the variable. The pointer to <code class="docutils literal notranslate"><span class="pre">foo</span></code> is the contents of <code class="docutils literal notranslate"><span class="pre">foo_ptr</span></code>. You could put a different pointer in the <code class="docutils literal notranslate"><span class="pre">foo_ptr</span></code> box, and the box would still be <code class="docutils literal notranslate"><span class="pre">foo_ptr</span></code>. But it would no longer point to <code class="docutils literal notranslate"><span class="pre">foo</span></code>.</p>
-<p>The pointer has a type, too, by the way. In this case, its type is <code class="docutils literal notranslate"><span class="pre">int</span></code>. Thus it is an “int pointer” (a pointer to <code class="docutils literal notranslate"><span class="pre">int</span></code>). An int <code class="docutils literal notranslate"><span class="pre">**</span></code>’s type is <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">*</span></code> (it points to a pointer to int). The use of pointers to pointers is called multiple indirection. More on that in a bit.</p>
+<p>The sense of that is that the pointer is not the variable. The pointer to <code class="docutils literal notranslate"><span class="pre">foo</span></code> is the contents of <code class="docutils literal notranslate"><span class="pre">foo_ptr</span></code>. You could refer to a different address in the <code class="docutils literal notranslate"><span class="pre">foo_ptr</span></code> box, and the box would still be <code class="docutils literal notranslate"><span class="pre">foo_ptr</span></code>. But it would no longer point to <code class="docutils literal notranslate"><span class="pre">foo</span></code>.</p>
+<p>The pointer has a type, too, by the way. In this case, its type is <code class="docutils literal notranslate"><span class="pre">int</span></code>. Thus it is an “int pointer” (a pointer to <code class="docutils literal notranslate"><span class="pre">int</span></code>). An <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">**</span></code>’s type is <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">*</span></code> (it points to a pointer to int). The use of pointers to pointers is called multiple indirection. More on that in a bit.</p>
 <section id="print-some-addresses">
 <h3>Print some addresses<a class="headerlink" href="#print-some-addresses" title="Link to this heading">#</a></h3>
 <p>Let’s visualize this.</p>
@@ -459,7 +492,7 @@ memory location has an address.</p></li>
 
 <span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">var1</span><span class="p">;</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">var2</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">var3</span><span class="w"> </span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">var3</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
 
 <span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Address of var1 is %p </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">var1</span><span class="p">);</span>
 <span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Address of var2 is %p </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">var2</span><span class="p">);</span>
@@ -478,7 +511,7 @@ Address<span class="w"> </span>of<span class="w"> </span>var3<span class="w"> </
 </section>
 </section>
 <section id="declaration-syntax">
-<h2>Declaration syntax<a class="headerlink" href="#declaration-syntax" title="Link to this heading">#</a></h2>
+<h2>2 Declaration syntax<a class="headerlink" href="#declaration-syntax" title="Link to this heading">#</a></h2>
 <p>To declare multiple variables (of the same type) in one statement, you can just simply separate their names by commas, after the type declaration, i.e.,</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">ptr_a</span><span class="p">,</span><span class="w"> </span><span class="n">ptr_b</span><span class="p">;</span><span class="w"> </span><span class="c1">// two pointers of the type int</span>
 </pre></div>
@@ -519,7 +552,7 @@ You would think that the type of <code class="docutils literal notranslate"><spa
 </div>
 </section>
 <section id="assignment-and-pointers">
-<h2>Assignment and pointers<a class="headerlink" href="#assignment-and-pointers" title="Link to this heading">#</a></h2>
+<h2>3 Assignment and pointers<a class="headerlink" href="#assignment-and-pointers" title="Link to this heading">#</a></h2>
 <p>Now, how do you assign an <code class="docutils literal notranslate"><span class="pre">int</span></code> to this pointer? This solution might be obvious:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">foo_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
 </pre></div>
@@ -530,19 +563,17 @@ You would think that the type of <code class="docutils literal notranslate"><spa
 <p>So how do you access the value at a pointer? You must dereference it.</p>
 </section>
 <section id="dereferencing">
-<h2>Dereferencing<a class="headerlink" href="#dereferencing" title="Link to this heading">#</a></h2>
+<h2>4 Dereferencing<a class="headerlink" href="#dereferencing" title="Link to this heading">#</a></h2>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">bar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">foo_ptr</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>In this statement, the dereference operator (prefix <code class="docutils literal notranslate"><span class="pre">*</span></code>, not to be confused with the multiplication operator) looks up the value that exists at an address. (On the PowerPC, this called a <code class="docutils literal notranslate"><span class="pre">load</span></code> operation.)</p>
-<p>It’s also possible to write to a dereference expression (the C way of saying this: a dereference expression is an <code class="docutils literal notranslate"><span class="pre">lvalue</span></code>, meaning that it can appear on the left side of an assignment):</p>
+<p>In this statement, the dereference operator (prefix <code class="docutils literal notranslate"><span class="pre">*</span></code>, not to be confused with the multiplication operator) looks up the value that exists at an address.</p>
+<p>It’s also possible to write to a dereference expression:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="o">*</span><span class="n">foo_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span><span class="w"> </span><span class="c1">// Sets foo to 42</span>
 </pre></div>
 </div>
-<p>(On the PowerPC, this is called a <code class="docutils literal notranslate"><span class="pre">store</span></code> operation.)</p>
-</section>
 <section id="other-type-examples">
-<h2>Other type examples<a class="headerlink" href="#other-type-examples" title="Link to this heading">#</a></h2>
+<h3>Other type examples<a class="headerlink" href="#other-type-examples" title="Link to this heading">#</a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">ip</span><span class="p">;</span><span class="w">     </span><span class="c1">// pointer to an int</span>
 <span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="n">dp</span><span class="p">;</span><span class="w">  </span><span class="c1">// pointer to a double</span>
 <span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">fp</span><span class="p">;</span><span class="w">   </span><span class="c1">// pointer to a float</span>
@@ -551,32 +582,32 @@ You would think that the type of <code class="docutils literal notranslate"><spa
 </div>
 </section>
 <section id="a-word-on-arrays-and-pointers">
-<h2>A word on Arrays and Pointers<a class="headerlink" href="#a-word-on-arrays-and-pointers" title="Link to this heading">#</a></h2>
+<h3>A word on Arrays and Pointers<a class="headerlink" href="#a-word-on-arrays-and-pointers" title="Link to this heading">#</a></h3>
 <p>We have not introduced Arrays yet, but let’s just add an interlude for the purpose of illustrating their relationship with pointers.</p>
 <p>If you declare a three-<code class="docutils literal notranslate"><span class="pre">int</span></code> array (i.e., an array that contains three <code class="docutils literal notranslate"><span class="pre">int</span></code>s) with the following statement</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">array</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">42</span><span class="p">,</span><span class="w"> </span><span class="mi">77</span><span class="p">,</span><span class="w"> </span><span class="mi">89</span><span class="p">};</span>
 </pre></div>
 </div>
 <p>note that we are using the <code class="docutils literal notranslate"><span class="pre">[]</span></code> notation to indicate that this is a collection of items (an array). If we had accidentally declared this as a pointer to a collection of items, i.e., <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">*array[]</span> <span class="pre">=</span> <span class="pre">{42,</span> <span class="pre">77,</span> <span class="pre">89}</span></code>, the compiler would have errored, not accepting the assigment of the elements <code class="docutils literal notranslate"><span class="pre">{42,</span> <span class="pre">77,</span> <span class="pre">89}</span></code> to initialize the array variable.</p>
-<p>This variable, array, is an extra-big box: three <code class="docutils literal notranslate"><span class="pre">int</span></code>s’ worth of storage.</p>
+<p>This variable, <code class="docutils literal notranslate"><span class="pre">array</span></code>, is an extra-big box: three <code class="docutils literal notranslate"><span class="pre">int</span></code>s’ worth of storage.</p>
 <p>If you try to display the content of the array by printing via</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Array %p</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">array</span><span class="p">);</span><span class="w"> </span><span class="c1">// it will print some hexadecimal string like 0x7fffa66c0fac</span>
 </pre></div>
 </div>
-<p>Note that we used the format identifier <code class="docutils literal notranslate"><span class="pre">%p</span></code> for pointers. But when we use the <em>name</em> of the array, <code class="docutils literal notranslate"><span class="pre">array</span></code>, you are actually using a pointer to the first element of the array (in C terms, <code class="docutils literal notranslate"><span class="pre">&amp;array[0]</span></code>). This is called ‘decaying’: the array ‘decays’ to a pointer. Any usage of <code class="docutils literal notranslate"><span class="pre">array</span></code> is equivalent to if <code class="docutils literal notranslate"><span class="pre">array</span></code> had been declared as a pointer (with the exception that <code class="docutils literal notranslate"><span class="pre">array</span></code> is not an lvalue: you can’t assign to it or increment or decrement it, like you can with a real pointer variable - we will see more of this later).</p>
+<p>Note that we used the format identifier <code class="docutils literal notranslate"><span class="pre">%p</span></code> for pointers. But when we use the <em>name</em> of the array, <code class="docutils literal notranslate"><span class="pre">array</span></code>, you are actually using a pointer to the first element of the array (in C terms, <code class="docutils literal notranslate"><span class="pre">&amp;array[0]</span></code>). This is called ‘decaying’: the array ‘decays’ to a pointer. Any usage of <code class="docutils literal notranslate"><span class="pre">array</span></code> is equivalent to if <code class="docutils literal notranslate"><span class="pre">array</span></code> had been declared as a pointer (with some caveats: you can’t assign to it or increment or decrement it, like you can with a real pointer variable - we will see more of this later).</p>
 <p>So when you passed <code class="docutils literal notranslate"><span class="pre">array</span></code> to <code class="docutils literal notranslate"><span class="pre">printf</span></code>, you really passed a pointer to its first element.</p>
-<p><code class="docutils literal notranslate"><span class="pre">Decaying</span></code> is like an implicit ‘address-of’ <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> operator.</p>
+<p>‘Decaying’ is like an implicit ‘address-of’ <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> operator.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">array</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">&amp;</span><span class="n">array</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">&amp;</span><span class="n">array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
-<p>In English, these expressions read ‘<code class="docutils literal notranslate"><span class="pre">array</span></code>’, ‘pointer to <code class="docutils literal notranslate"><span class="pre">array</span></code>’, and ‘pointer to the first element of <code class="docutils literal notranslate"><span class="pre">array</span></code>’ (in the latter, the index operator, <code class="docutils literal notranslate"><span class="pre">[]</span></code>, has higher precedence than the address-of operator). But in C, all three expressions mean the same thing.</p>
+<p>In English, these expressions read “<code class="docutils literal notranslate"><span class="pre">array</span></code>”, “address of <code class="docutils literal notranslate"><span class="pre">array</span></code>”, and “address of the first element of <code class="docutils literal notranslate"><span class="pre">array</span></code>” (in the latter, the index operator, <code class="docutils literal notranslate"><span class="pre">[]</span></code>, has higher precedence than the address-of operator). But in C, all three expressions mean the same thing.</p>
 <p>So, how do we actually print the <em>content</em> of <code class="docutils literal notranslate"><span class="pre">array</span></code>? Before printing a multi-entry variable like a whole array (we’ll see this just in a bit), let’s recap how it looks like for a single element:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#</span><span class="w"> </span><span class="cp">include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span><span class="w"> </span><span class="c1">// an int variable declaration</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">iptr</span><span class="p">;</span><span class="w">    </span><span class="c1">// pointer variable declaration</span>
@@ -597,18 +628,18 @@ Value<span class="w"> </span>of<span class="w"> </span>∗iptr<span class="w"> <
 Value<span class="w"> </span>of<span class="w"> </span>int<span class="w"> </span>variable:<span class="w"> </span><span class="m">20</span>
 </pre></div>
 </div>
+</section>
 <section id="exercise">
 <h3>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
 <p>Check out and run the <code class="docutils literal notranslate"><span class="pre">pointer-dereferencing.c</span></code> program.</p>
 </section>
-</section>
 <section id="a-word-on-null-pointers">
-<h2>A word on NULL pointers<a class="headerlink" href="#a-word-on-null-pointers" title="Link to this heading">#</a></h2>
+<h3>A word on NULL pointers<a class="headerlink" href="#a-word-on-null-pointers" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>It is always a good practice to assign a NULL value to a pointer variable if you do not have the exact address to be assigned</p></li>
-<li><p>This is done at the time of variable declaration, as in <code class="docutils literal notranslate"><span class="pre">type</span> <span class="pre">pointer_name</span> <span class="pre">=</span> <span class="pre">NULL;</span></code> (or the quivalent version <code class="docutils literal notranslate"><span class="pre">type</span> <span class="pre">pointer_name</span> <span class="pre">=</span> <span class="pre">0;</span></code>)</p></li>
+<li><p>This is done at the time of variable declaration, as in <code class="docutils literal notranslate"><span class="pre">type</span> <span class="pre">*pointer_name</span> <span class="pre">=</span> <span class="pre">NULL;</span></code> (or the quivalent version <code class="docutils literal notranslate"><span class="pre">type</span> <span class="pre">*pointer_name</span> <span class="pre">=</span> <span class="pre">0;</span></code>)</p></li>
 <li><p>A pointer that is assigned to <code class="docutils literal notranslate"><span class="pre">NULL</span></code> is called a null pointer</p></li>
-<li><p>In most operative systems programs are not permitted to
+<li><p>In most operating systems programs are not permitted to
 access memory at address 0</p></li>
 <li><p>If a pointer contains the <code class="docutils literal notranslate"><span class="pre">NULL</span></code> (or zero) value, it is assumed to
 point to nothing</p></li>
@@ -629,12 +660,13 @@ point to nothing</p></li>
 </pre></div>
 </div>
 </section>
+</section>
 <section id="pointer-arithmetic">
-<h2>Pointer arithmetic<a class="headerlink" href="#pointer-arithmetic" title="Link to this heading">#</a></h2>
+<h2>5 Pointer arithmetic<a class="headerlink" href="#pointer-arithmetic" title="Link to this heading">#</a></h2>
 <p>Let’s go back to printing all three elements of the array called <code class="docutils literal notranslate"><span class="pre">array</span></code> introduced earlier.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">array_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">array</span><span class="p">;</span>
-<span class="n">printf</span><span class="p">(</span><span class="s">&quot; first element: %i</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="n">array_ptr</span><span class="o">++</span><span class="p">));</span>
-<span class="n">printf</span><span class="p">(</span><span class="s">&quot;second element: %i</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="n">array_ptr</span><span class="o">++</span><span class="p">));</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">&quot; first element: %i</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">array_ptr</span><span class="o">++</span><span class="p">);</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">&quot;second element: %i</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">array_ptr</span><span class="o">++</span><span class="p">);</span>
 <span class="n">printf</span><span class="p">(</span><span class="s">&quot; third element: %i</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">array_ptr</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -655,19 +687,19 @@ Third<span class="w"> </span>element<span class="w"> </span>of<span class="w"> <
 </div>
 <p>For a pre-fix expression <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">j</span> <span class="pre">=</span> <span class="pre">++i;</span></code>, the variable <code class="docutils literal notranslate"><span class="pre">i</span></code> is incremented by one (<code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">=</span> <span class="pre">i</span> <span class="pre">+</span> <span class="pre">1</span></code>, so <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">=</span> <span class="pre">11</span></code>), and then it’s deep copied to <code class="docutils literal notranslate"><span class="pre">j</span></code> (so <code class="docutils literal notranslate"><span class="pre">j</span> <span class="pre">=</span> <span class="pre">11</span></code>). For the post-fix expression int <code class="docutils literal notranslate"><span class="pre">k</span> <span class="pre">=</span> <span class="pre">i++</span></code>;, the variable <code class="docutils literal notranslate"><span class="pre">i</span></code> (which is still 11), is first deep copied to <code class="docutils literal notranslate"><span class="pre">k</span></code> (so <code class="docutils literal notranslate"><span class="pre">k</span> <span class="pre">=</span> <span class="pre">11</span></code>), and then <code class="docutils literal notranslate"><span class="pre">i</span></code> is incremented by one (so <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">=</span> <span class="pre">12</span></code>)</p>
 </div>
-<p>Going back to our example, the type of a pointer matters. The type of the pointer here is <code class="docutils literal notranslate"><span class="pre">int</span></code>. When you add to or subtract from a pointer, the amount by which you do that is multiplied by the size of the type of the pointer. In the case of our three increments, each 1 that you added was multiplied by <code class="docutils literal notranslate"><span class="pre">sizeof(int)</span></code>.</p>
+<p>Going back to our example, the type of a pointer matters. The type of the pointer here is <code class="docutils literal notranslate"><span class="pre">int</span></code>. When you add to or subtract from a pointer, the amount by which you do that is multiplied by the size of the type of the pointer. In the case of our two increments, each one that you added was multiplied by <code class="docutils literal notranslate"><span class="pre">sizeof(int)</span></code>.</p>
 <p>We could have printed the values in the array in a for-loop:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">array</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">42</span><span class="p">,</span><span class="w"> </span><span class="mi">77</span><span class="p">,</span><span class="w"> </span><span class="mi">89</span><span class="p">};</span>
 
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">ptr</span><span class="p">;</span>
 <span class="w">    </span><span class="n">ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">array</span><span class="p">;</span><span class="w"> </span><span class="c1">// this way the address of the first entry of array is stored in ptr</span>
 
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Address of array [%d] = %p </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">ptr</span><span class="p">);</span>
-<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Value of array [%d] = %i </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">ptr</span><span class="p">);</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Address of array[%d] = %p </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">ptr</span><span class="p">);</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Value of array[%d] = %i </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">ptr</span><span class="p">);</span>
 
 <span class="w">        </span><span class="c1">// point to the next location</span>
 <span class="w">        </span><span class="n">ptr</span><span class="o">++</span><span class="p">;</span>
@@ -688,7 +720,7 @@ Value<span class="w"> </span>of<span class="w"> </span>array<span class="w"> </s
 </div>
 </section>
 <section id="indexing">
-<h2>Indexing<a class="headerlink" href="#indexing" title="Link to this heading">#</a></h2>
+<h2>6 Indexing<a class="headerlink" href="#indexing" title="Link to this heading">#</a></h2>
 <p>To print the first entry of the array <code class="docutils literal notranslate"><span class="pre">array</span></code> we can use:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%i</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">array</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
 </pre></div>
@@ -706,7 +738,7 @@ Value<span class="w"> </span>of<span class="w"> </span>array<span class="w"> </s
 <p>Also, you might notice that because the first element is <code class="docutils literal notranslate"><span class="pre">sizeof(int)</span></code> bytes wide (being an <code class="docutils literal notranslate"><span class="pre">int</span></code>), the second element is <code class="docutils literal notranslate"><span class="pre">sizeof(int)</span></code> bytes forward of the start of the array. You are correct: <code class="docutils literal notranslate"><span class="pre">array[1]</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">*(array</span> <span class="pre">+</span> <span class="pre">1)</span></code>. (Remember that the number added to or subtracted from a pointer is multiplied by the size of the pointer’s type, so that <code class="docutils literal notranslate"><span class="pre">1</span></code> adds <code class="docutils literal notranslate"><span class="pre">sizeof(int)</span></code> bytes to the pointer value.)</p>
 </section>
 <section id="indirection-or-pointer-to-pointer">
-<h2>Indirection or pointer to pointer<a class="headerlink" href="#indirection-or-pointer-to-pointer" title="Link to this heading">#</a></h2>
+<h2>7 Indirection or pointer to pointer<a class="headerlink" href="#indirection-or-pointer-to-pointer" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>A pointer to a pointer is a form of multiple indirection, or chain of pointers</p></li>
 <li><p>Normally, a pointer contains the address of a variable</p></li>
@@ -725,15 +757,20 @@ Value<span class="w"> </span>of<span class="w"> </span>array<span class="w"> </s
 
 <span class="w">    </span><span class="n">var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3000</span><span class="p">;</span>
 
-<span class="w">    </span><span class="c1">// let ptr to point to the address of var (using the address-of operator &amp;)</span>
+<span class="w">    </span><span class="c1">// let ptr point to the address of var (using the address-of operator &amp;)</span>
 <span class="w">    </span><span class="n">ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">var</span><span class="p">;</span>
-<span class="w">    </span><span class="c1">// let pptr to point to the address of ptr (using the address-of operator &amp;)</span>
+<span class="w">    </span><span class="c1">// let pptr point to the address of ptr (using the address-of operator &amp;)</span>
 <span class="w">    </span><span class="n">pptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ptr</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Value of var = %d </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">var</span><span class="p">);</span>
 <span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Value pointed to by ptr: *ptr = %d </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">ptr</span><span class="p">);</span>
 <span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Value pointed to by pptr: ∗∗pptr = %d </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">pptr</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">// they are all pointing to the same value!</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Address of var is %p </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">var</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Address of ptr is %p </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ptr</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Address of pptr is %p </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pptr</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Value of ptr is %p </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ptr</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Value of pptr is %p </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">pptr</span><span class="p">);</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
@@ -742,6 +779,11 @@ Value<span class="w"> </span>of<span class="w"> </span>array<span class="w"> </s
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Value<span class="w"> </span>of<span class="w"> </span><span class="nv">var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3000</span>
 Value<span class="w"> </span>pointed<span class="w"> </span>to<span class="w"> </span>by<span class="w"> </span>ptr:<span class="w"> </span>*ptr<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3000</span>
 Value<span class="w"> </span>pointed<span class="w"> </span>to<span class="w"> </span>by<span class="w"> </span>pptr:<span class="w"> </span>∗∗pptr<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3000</span>
+Address<span class="w"> </span>of<span class="w"> </span>var<span class="w"> </span>is<span class="w"> </span>0x7ffce4c71174
+Address<span class="w"> </span>of<span class="w"> </span>ptr<span class="w"> </span>is<span class="w"> </span>0x7ffce4c71178
+Address<span class="w"> </span>of<span class="w"> </span>pptr<span class="w"> </span>is<span class="w"> </span>0x7ffce4c71180
+Value<span class="w"> </span>of<span class="w"> </span>ptr<span class="w"> </span>is<span class="w"> </span>0x7ffce4c71174
+Value<span class="w"> </span>of<span class="w"> </span>pptr<span class="w"> </span>is<span class="w"> </span>0x7ffce4c71178
 </pre></div>
 </div>
 <p>Dereferencing a pointer-to-pointer works in the same way. Example:</p>
@@ -756,6 +798,12 @@ Value<span class="w"> </span>pointed<span class="w"> </span>to<span class="w"> <
 <span class="o">***</span><span class="n">d</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">**</span><span class="n">c</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">*</span><span class="n">b</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"> </span><span class="c1">// Dereferencing an (int ***) thrice, or an (int **) twice, or an (int *) once, gets you an int</span>
 </pre></div>
 </div>
+<p>TODO:</p>
+<ul class="simple">
+<li><p>Structs</p></li>
+<li><p>Functions</p></li>
+<li><p>malloc &amp; calloc ? (explain why we may want to use them, if we exceed the stack)</p></li>
+</ul>
 </section>
 </section>
 
@@ -790,13 +838,22 @@ Value<span class="w"> </span>pointed<span class="w"> </span>to<span class="w"> <
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="2024-09-09-intro-to-c.html"
+       href="module2-1-intro-to-c.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">4) Intro to C</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="module2-3-c-structs-and-functions.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">6) C structs and functions</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -814,23 +871,23 @@ Value<span class="w"> </span>pointed<span class="w"> </span>to<span class="w"> <
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">Definition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">1 Definition</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#print-some-addresses">Print some addresses</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#declaration-syntax">Declaration syntax</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment-and-pointers">Assignment and pointers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dereferencing">Dereferencing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-type-examples">Other type examples</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-word-on-arrays-and-pointers">A word on Arrays and Pointers</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#declaration-syntax">2 Declaration syntax</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment-and-pointers">3 Assignment and pointers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dereferencing">4 Dereferencing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-type-examples">Other type examples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-word-on-arrays-and-pointers">A word on Arrays and Pointers</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-word-on-null-pointers">A word on NULL pointers</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-word-on-null-pointers">A word on NULL pointers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pointer-arithmetic">Pointer arithmetic</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing">Indexing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indirection-or-pointer-to-pointer">Indirection or pointer to pointer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pointer-arithmetic">5 Pointer arithmetic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing">6 Indexing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indirection-or-pointer-to-pointer">7 Indirection or pointer to pointer</a></li>
 </ul>
   </nav></div>
 
