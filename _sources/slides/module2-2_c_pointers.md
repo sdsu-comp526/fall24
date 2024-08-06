@@ -52,22 +52,9 @@ memory location has an address.
 
 - Addresses in memory can be accessed using ampersand (`&` or the address operator) and the printf `%p` formatting option.
 
-```c
-#include <stdio.h>
-
-int main (void)
-{
-
-    double var1;
-    int var2;
-    char var3[5];
-
-    printf("Address of var1 is %p \n", &var1);
-    printf("Address of var2 is %p \n", &var2);
-    printf("Address of var3 is %p \n", &var3);
-    return 0;
-
-}
+```{literalinclude} ../c_programs/module2-2_c_pointers/print_addresses.c
+:language: c
+:linenos: false
 ```
 
 Output:
@@ -233,7 +220,7 @@ Check out and run the `pointer-dereferencing.c` program.
 
 ### A word on NULL pointers
 
-- It is always a good practice to assign a NULL value to a pointer variable if you do not have the exact address to be assigned
+- It is always a good practice to assign a `NULL` value to a pointer variable if you do not have the exact address to be assigned
 - This is done at the time of variable declaration, as in `type *pointer_name = NULL;` (or the quivalent version `type *pointer_name = 0;`)
 - A pointer that is assigned to `NULL` is called a null pointer
 - In most operating systems programs are not permitted to
@@ -297,25 +284,9 @@ Going back to our example, the type of a pointer matters. The type of the pointe
 
 We could have printed the values in the array in a for-loop:
 
-```c
-#include <stdio.h>
-
-int main(void){
-    int array[] = {42, 77, 89};
-
-    int i, *ptr;
-    ptr = array; // this way the address of the first entry of array is stored in ptr
-
-    for (i=0; i<3; i++) {
-        printf("Address of array[%d] = %p \n", i, ptr);
-        printf("Value of array[%d] = %i \n", i, *ptr);
-
-        // point to the next location
-        ptr++;
-    }
-
-    return 0;
-}
+```{literalinclude} ../c_programs/module2-2_c_pointers/print_array.c
+:language: c
+:linenos: false
 ```
 
 Output:
@@ -364,33 +335,9 @@ Also, you might notice that because the first element is `sizeof(int)` bytes wid
 
 Example:
 
-```c
-#include <stdio.h>
-
-int main(){
-
-    int var;
-    int *ptr;
-    int **pptr;
-
-    var = 3000;
-
-    // let ptr point to the address of var (using the address-of operator &)
-    ptr = &var;
-    // let pptr point to the address of ptr (using the address-of operator &)
-    pptr = &ptr;
-
-    printf("Value of var = %d \n", var);
-    printf("Value pointed to by ptr: *ptr = %d \n", *ptr);
-    printf("Value pointed to by pptr: ∗∗pptr = %d \n", **pptr);
-    // they are all pointing to the same value!
-    printf("Address of var is %p \n", &var);
-    printf("Address of ptr is %p \n", &ptr);
-    printf("Address of pptr is %p \n", &pptr);
-    printf("Value of ptr is %p \n", ptr);
-    printf("Value of pptr is %p \n", pptr);
-    return 0;
-}
+```{literalinclude} ../c_programs/module2-2_c_pointers/pointer_indirection.c
+:language: c
+:linenos: false
 ```
 
 Output:
@@ -421,9 +368,5 @@ int ***d = &c;
 ***d == **c == *b == a == 3; // Dereferencing an (int ***) thrice, or an (int **) twice, or an (int *) once, gets you an int
 ```
 
-TODO:
-- Structs
-- Functions
-- malloc & calloc ? (explain why we may want to use them, if we exceed the stack)
 
 

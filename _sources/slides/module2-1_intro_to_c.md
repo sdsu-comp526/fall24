@@ -19,17 +19,17 @@ To compile a C program, you need a compiler. This may vary accoriding to the sys
 Example in Linux, using `gcc`:
 
 ```
-gcc hellp.c -o hello
+gcc hello.c -o hello
 ```
 
-The `gcc` command invokes the compiler, then you pass the source file you want to compile (`2024-09-09-intro_to_c_programs.c` in this case), and then after the `-o` target, you can specify the output file for the compiled program (otherwise, the compiler will automatically create `a.out`) for you.
+The `gcc` command invokes the compiler, then you pass the source file you want to compile (`hello.c` in this case), and then after the `-o` target, you can specify the output file for the compiled program (otherwise, the compiler will automatically create `a.out`) for you.
 
 Inspect the directory after compiling, and (if the compilation was successful) you will an object output file (by default `a.out`) or the name of the executable you provided after the `-o` option.
 
 To run/execute your program, simply type `./name_of_your_program` in your terminal:
 
 ```
-./2024-09-09-intro-to-c-programs
+./hello
 
 ```
 
@@ -37,29 +37,15 @@ To run/execute your program, simply type `./name_of_your_program` in your termin
 
 Our first C program: a `Hello, World!` print statement.
 
-```c
-#include <stdio.h> // includes the standard input-output header to be able to use standard IO functions, such as printf() and scanf(), to perform input and output operations.
-
-// a "main" program is required in all C programs
-int main(void)
-{
-     printf("Hello, world!\n"); // this printf statement will print formatted output in the standard output (your terminal screen)
-}
-
+```{literalinclude} ../c_programs/module2-1_intro_to_c/hello.c
+:language: c
+:linenos: false
 ```
 
-Displaying Values of Variables
-```c
-#include <stdio.h>
-
-int main(void)
-{
-    int product; // declaration of an integer variable
-    product = 9*2*3;
-    printf("The product of 9, 2, and 3 is %i \n", product); // this printf statement will print formatted output in the standard output (your terminal screen)
-
-    return 0;
-}
+Displaying Values of Variables:
+```{literalinclude} ../c_programs/module2-1_intro_to_c/product.c
+:language: c
+:linenos: false
 ```
 
 ### Variables
@@ -68,6 +54,9 @@ Note:
 - Variable names begin with letters, `_`, followed by combination of letters, `_`, or digits `0-9`
 - Do not use reserved words
 - C is **case-sensitive**!
+
+### Global variables
+- They have a place in C programming, but are often used to fix badly written code. If multiple parts of your code (like two functions) need to operate on a variable you should use pointers (we'll see more on this later) to share this variable rather than make it available to every function.
 
 ### Basic Data Types
 - `int`, `float`, `double`, `char` (single character), and `_Bool` (or `bool` if you include the header `stdbool.h`)
@@ -106,29 +95,13 @@ printf("Length= %f \n",length);
 - `printf("Boolean variable %i\n", booleanVar);`
 
 
-**Displaying Values of Variables**
+**Displaying Values of Variables:**
 
-```c
-#include <stdio.h>
-
-int main (void)
-{
-    int integerVar = 230;
-    float floatVar = 626.32;
-    double doubleVar = 3.24e+3;
-    char charVar = 'a';
-    _Bool boolVar = 0;
-
-    printf("integer variable= %i \n",integerVar);
-    printf("float variable = %f \n", floatVar);
-    printf("double variable = %e \n", doubleVar);
-    printf("char variable = %c \n", charVar);
-    printf("boolean variable = %i \n", boolVar);
-
-    return 0;
-}
+```{literalinclude} ../c_programs/module2-1_intro_to_c/print_variables.c
+:language: c
+:linenos: false
 ```
-
+Output:
 ```bash
 integer variable= 230
 float variable = 626.320007
@@ -136,3 +109,11 @@ double variable = 3.240000e+03
 char variable = a
 boolean variable = 0
 ```
+
+### Const variables
+- The `const` qualifier is used for variables whose value will not change in the program
+
+```c
+const int base = 10;
+```
+Any attempt to change its value will generate a compiler error message. Useful to avoid bugs: when you define a variable and use it multiple times in your code, it is also easier this way if you want to change its value, to only change it once where it is defined.

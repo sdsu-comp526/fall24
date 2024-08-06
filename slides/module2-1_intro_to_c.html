@@ -62,7 +62,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="5) Intro to C pointers" href="module2-2_c_pointers.html" />
-    <link rel="prev" title="2) The Linux Filesystem and commands" href="module1-2_linux.html" />
+    <link rel="prev" title="3) Functions" href="module1-3_functions_and_fpa.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -184,6 +184,10 @@
 <li class="toctree-l2"><a class="reference internal" href="module1-1_first_class.html">1) First Class</a></li>
 
 <li class="toctree-l2"><a class="reference internal" href="module1-2_linux.html">2) The Linux Filesystem and commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module1-3_functions_and_fpa.html">3) Functions</a></li>
+
+
+
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">4) Intro to C</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module2-2_c_pointers.html">5) Intro to C pointers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module2-3_c_structs_and_functions.html">6) C structs and functions</a></li>
@@ -414,7 +418,9 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compiling-a-c-program">1 Compiling a C program</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-and-basic-data-types">2 Variables and Basic Data Types</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables">Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#global-variables">Global variables</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-data-types">Basic Data Types</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#const-variables">Const variables</a></li>
 </ul>
 </li>
 </ul>
@@ -447,13 +453,13 @@ document.write(`
 <li><p>Windows: <a class="reference external" href="https://visualstudio.microsoft.com/vs/features/cplusplus/"><code class="docutils literal notranslate"><span class="pre">Visual</span> <span class="pre">Studio</span> <span class="pre">C/C++</span></code></a></p></li>
 </ul>
 <p>Example in Linux, using <code class="docutils literal notranslate"><span class="pre">gcc</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcc</span> <span class="n">hellp</span><span class="o">.</span><span class="n">c</span> <span class="o">-</span><span class="n">o</span> <span class="n">hello</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcc</span> <span class="n">hello</span><span class="o">.</span><span class="n">c</span> <span class="o">-</span><span class="n">o</span> <span class="n">hello</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">gcc</span></code> command invokes the compiler, then you pass the source file you want to compile (<code class="docutils literal notranslate"><span class="pre">2024-09-09-intro_to_c_programs.c</span></code> in this case), and then after the <code class="docutils literal notranslate"><span class="pre">-o</span></code> target, you can specify the output file for the compiled program (otherwise, the compiler will automatically create <code class="docutils literal notranslate"><span class="pre">a.out</span></code>) for you.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">gcc</span></code> command invokes the compiler, then you pass the source file you want to compile (<code class="docutils literal notranslate"><span class="pre">hello.c</span></code> in this case), and then after the <code class="docutils literal notranslate"><span class="pre">-o</span></code> target, you can specify the output file for the compiled program (otherwise, the compiler will automatically create <code class="docutils literal notranslate"><span class="pre">a.out</span></code>) for you.</p>
 <p>Inspect the directory after compiling, and (if the compilation was successful) you will an object output file (by default <code class="docutils literal notranslate"><span class="pre">a.out</span></code>) or the name of the executable you provided after the <code class="docutils literal notranslate"><span class="pre">-o</span></code> option.</p>
 <p>To run/execute your program, simply type <code class="docutils literal notranslate"><span class="pre">./name_of_your_program</span></code> in your terminal:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="mi">2024</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="n">intro</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">c</span><span class="o">-</span><span class="n">programs</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">hello</span>
 
 </pre></div>
 </div>
@@ -468,11 +474,10 @@ document.write(`
 <span class="p">{</span>
 <span class="w">     </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello, world!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// this printf statement will print formatted output in the standard output (your terminal screen)</span>
 <span class="p">}</span>
-
 </pre></div>
 </div>
-<p>Displaying Values of Variables</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<p>Displaying Values of Variables:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="c1"> // includes the standard input-output header to be able to use standard IO functions, such as printf() and scanf(), to perform input and output operations.</span>
 
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 <span class="p">{</span>
@@ -492,6 +497,12 @@ document.write(`
 <li><p>Variable names begin with letters, <code class="docutils literal notranslate"><span class="pre">_</span></code>, followed by combination of letters, <code class="docutils literal notranslate"><span class="pre">_</span></code>, or digits <code class="docutils literal notranslate"><span class="pre">0-9</span></code></p></li>
 <li><p>Do not use reserved words</p></li>
 <li><p>C is <strong>case-sensitive</strong>!</p></li>
+</ul>
+</section>
+<section id="global-variables">
+<h3>Global variables<a class="headerlink" href="#global-variables" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>They have a place in C programming, but are often used to fix badly written code. If multiple parts of your code (like two functions) need to operate on a variable you should use pointers (we’ll see more on this later) to share this variable rather than make it available to every function.</p></li>
 </ul>
 </section>
 <section id="basic-data-types">
@@ -534,7 +545,7 @@ significant digits as can a variable type float</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">_Bool</span> <span class="pre">booleanVar</span> <span class="pre">=</span> <span class="pre">9;</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">printf(&quot;Boolean</span> <span class="pre">variable</span> <span class="pre">%i\n&quot;,</span> <span class="pre">booleanVar);</span></code></p></li>
 </ul>
-<p><strong>Displaying Values of Variables</strong></p>
+<p><strong>Displaying Values of Variables:</strong></p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
 
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
@@ -555,6 +566,7 @@ significant digits as can a variable type float</p></li>
 <span class="p">}</span>
 </pre></div>
 </div>
+<p>Output:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>integer<span class="w"> </span><span class="nv">variable</span><span class="o">=</span><span class="w"> </span><span class="m">230</span>
 float<span class="w"> </span><span class="nv">variable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">626</span>.320007
 double<span class="w"> </span><span class="nv">variable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span>.240000e+03
@@ -562,6 +574,16 @@ char<span class="w"> </span><span class="nv">variable</span><span class="w"> </s
 boolean<span class="w"> </span><span class="nv">variable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
 </pre></div>
 </div>
+</section>
+<section id="const-variables">
+<h3>Const variables<a class="headerlink" href="#const-variables" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">const</span></code> qualifier is used for variables whose value will not change in the program</p></li>
+</ul>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Any attempt to change its value will generate a compiler error message. Useful to avoid bugs: when you define a variable and use it multiple times in your code, it is also easier this way if you want to change its value, to only change it once where it is defined.</p>
 </section>
 </section>
 </section>
@@ -597,12 +619,12 @@ boolean<span class="w"> </span><span class="nv">variable</span><span class="w"> 
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="module1-2_linux.html"
+       href="module1-3_functions_and_fpa.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">2) The Linux Filesystem and commands</p>
+        <p class="prev-next-title">3) Functions</p>
       </div>
     </a>
     <a class="right-next"
@@ -634,7 +656,9 @@ boolean<span class="w"> </span><span class="nv">variable</span><span class="w"> 
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compiling-a-c-program">1 Compiling a C program</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-and-basic-data-types">2 Variables and Basic Data Types</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables">Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#global-variables">Global variables</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-data-types">Basic Data Types</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#const-variables">Const variables</a></li>
 </ul>
 </li>
 </ul>
