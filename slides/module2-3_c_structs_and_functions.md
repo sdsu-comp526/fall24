@@ -117,7 +117,7 @@ Along with it's identifier you must give each function a _type_ and a block of c
 
 Example:
 
-```{literalinclude} ../c_programs/module2-3-c-functions/functions.c
+```{literalinclude} ../c_programs/module2-3_c_functions/functions.c
 :language: c
 :linenos: true
 ```

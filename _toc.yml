@@ -7,10 +7,11 @@ chapters:
 - file: syllabus
 - file: slides
   sections:
-  - file: slides/module1-1-first-class.ipynb
-  - file: slides/module1-2-linux.ipynb
-  - file: slides/module1-3-functions-and-fpa.ipynb
-  - file: slides/module2-1-intro-to-c.md
-  - file: slides/module2-2-c-pointers.md
-  - file: slides/module3-1-function-errors.ipynb
-  - file: slides/module3-2-conditioning.ipynb
+  - file: slides/module1-1_first_class.ipynb
+  - file: slides/module1-2_linux.ipynb
+  - file: slides/module1-3_functions_and_fpa.ipynb
+  - file: slides/module2-1_intro_to_c.md
+  - file: slides/module2-2_c_pointers.md
+  - file: slides/module2-3_c_structs_and_functions.md
+  - file: slides/module3-1_function_errors.ipynb
+  - file: slides/module3-2_conditioning.ipynb
