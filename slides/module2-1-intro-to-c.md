@@ -19,7 +19,7 @@ To compile a C program, you need a compiler. This may vary accoriding to the sys
 Example in Linux, using `gcc`:
 
 ```
-gcc 2024-09-09-intro_to_c_programs.c -o 2024-09-09-intro_to_c_programs
+gcc hellp.c -o hello
 ```
 
 The `gcc` command invokes the compiler, then you pass the source file you want to compile (`2024-09-09-intro_to_c_programs.c` in this case), and then after the `-o` target, you can specify the output file for the compiled program (otherwise, the compiler will automatically create `a.out`) for you.
@@ -67,6 +67,7 @@ Note:
 - In C, you need to declare the variable type before the variable is used
 - Variable names begin with letters, `_`, followed by combination of letters, `_`, or digits `0-9`
 - Do not use reserved words
+- C is **case-sensitive**!
 
 ### Basic Data Types
 - `int`, `float`, `double`, `char` (single character), and `_Bool` (or `bool` if you include the header `stdbool.h`)
