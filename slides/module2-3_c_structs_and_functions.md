@@ -123,3 +123,5 @@ Example:
 ```
 
 In the above example we wrote `first_function()`, which does nothing and `goodbye()`, which displays a message. Functions must be declared _before_ they are called. In our case this means they must appear before our definition of `main()`. In practice, function declarations are generally grouped at the top of a file after any `#include` lines and before any function definitions or can be in their own header file included with the `#include` directive.
+
+- Keeping track of function declarations can get messy, for this reason _header files_ are used to house C code that you wish to appear in multiple files. You have actually already used a header file. `stdio.h` is a header file which contains many function declarations, it contains the function declarations for `printf()` and `printf()`. Once you have placed the function declarations you wish to share into a header file you can `#include` your header in each C file that needs the information. The only difference being that you surround your filename in quotes instead of angle brackets (`"my_header.h"` instead of `<system_header.h>`).
