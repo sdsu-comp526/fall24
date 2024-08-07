@@ -17,3 +17,4 @@ chapters:
   - file: slides/module3-1_function_errors.ipynb
   - file: slides/module3-2_conditioning.ipynb
   - file: slides/module3-3_root_finding.ipynb
+  - file: slides/module3-4_convergence_classes.ipynb
