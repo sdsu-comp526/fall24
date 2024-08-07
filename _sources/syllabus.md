@@ -89,6 +89,18 @@ Upon completing this course, students will be able to
 
 ![](img/Henry2019-Table1.png)
 
+## Grading
+This class will have some assignments and projects (midterm and final). The final projects can be individual or group projects (depending on the number of students registered) and will be agreed upon with the instructor. There will be a midterm and a final oral presentation
+for each project. Moreover, a final report must be delivered. Instructions about what is expected for both midterm and final presentations as well as for the final report will be provided.
+
+Grading breakdown:
+- Assignment 1 (10%)
+- Assignment 2 (10%)
+- Assignment 3 (10%)
+
+- Midterm project (%30)
+- Final project (%40)
+
 
 ## GitHub
 
@@ -102,10 +114,15 @@ Most HPC facilities use a Linux operating system and many open source software p
 
 ## Target audience
 
-Students in computational science, applied mathematics, or a quantitative science or engineering field. Prerequisites:
+Students in computational science, applied mathematics, or a quantitative science or engineering field.
 
-* Linear algebra
-* Third semester calculus
+Catalog Prerequisites:
+
+* MATH 252: Calculus III
+* MATH 254: Introduction to Linear Algebra
+
+Good to know:
+
 * Matrix theory
 * Integration
 * Partial differentiation
@@ -141,3 +158,7 @@ Please know that faculty and responsible employees have a responsibility to info
 ## Religious Holidays
 
 According to the University Policy File, students should notify instructors of planned absences for religious observances by the end of the second week of classes. See the campus policy regarding religious observances for full details.
+
+## Land Acknowledgment
+For millennia, the Kumeyaay people have been a part of this land. This land has nourished, healed, protected and embraced them for many generations in a relationship of balance and harmony. As members of the San Diego State University community, we acknowledge this legacy. We promote this balance and harmony. We find inspiration from this land, the land of the Kumeyaay.
+
