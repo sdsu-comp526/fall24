@@ -47,26 +47,21 @@ it to solve it using computers.
 
 ## Organization
 
-We will start by giving an introduction of version control and reproducibility, key apects in modern computational sciences.
-Then we will introduce the Linux filesystem and some basic shell commands.
+We will start by giving an introduction of version control and reproducibility, key apects in modern computational sciences. Then we will introduce the Linux filesystem and some basic shell commands.
 
-We'll procede with evaluation of functions and introduce the concepts of conditioning and stability, which we'll apply to every topic we encounter.
+We'll procede with evaluation of functions and introduce the concepts of conditioning and stability, which are applicable to every topic we encounter.
 
 Then we'll explore rootfinding, our first infinite algorithm, in which we'll learn about convergence classes and the fundamental challenge of writing a function that is correct for all well-typed inputs.
 
-We'll move to linear algebra and explore algorithms for computing QR factorization in depth -- these will offer geometric intuition and provide examples of stability and backward stability as well as performance in practice.
+We'll move to the concepts of stability and backward stability.
 
-Next up will be interpolation and least squares regression using linear models, algorithms that transform data and an important subjective choice into functions, with pathologies that we'll identify and disentangle.
+Next up will be interpolation and then differentiation.
 
-Calculus will show up next where we'll discuss numerical, analytic, and "automatic" differentiation, introduce Jacobian and Hessian matrices, and extend rootfinding to systems of equations.
+We'll move on to integration and finally numerical solution of differential equations.
 
-This will enable us to solve nonlinear regression problems and compare the properties of linear vs nonlinear models.
+Although we'll continue with new content, during the semester we will have two separate short modules on compiled languages programming: C and Fortran.
 
-We'll move on to integration, with a beautiful linear algebra connection, and finally numerical solution of differential equations.
-
-Although we'll continue with new content, the second half of the semester will incorporate more project-based learning.
-You'll then form small teams of like interest and work on an original study (numerical experiments and interpretation, comparisons, etc.) or on contribution to be shared with the community.
-Studies and contributions can take many forms.
+Towards the end of the semester, for your final projects, you can then form small teams of like interest and work on an original study (numerical experiments and interpretation, comparisons, etc.) or on contribution to be shared with the community. Studies and contributions can take many forms.
 
 ## Outcomes
 
@@ -106,9 +101,15 @@ Grading breakdown:
 
 We'll use Git with GitHub Classroom for managing activities and feedback.
 
+:::{tip}
+If you don't have a GitHub account, follow these [instructions](https://sdsu-research-ci.github.io/github/students/creating-account) from the SDSU Research & Cyberinfrastructure [website](https://sdsu-research-ci.github.io/github).
+- Use a personal email account rather than the SDSU one, so that you won't have accessing your GitHub account in the future.
+- Choose your username wisely! Most likely you will use this again in professional settings in your career.
+:::
+
 ## Programming languages and environment
 
-I will primarily use Julia and [Jupyter notebooks](https://jupyter.org/) for slides and activities in class. This environment is convenient to work with, general purpose, and has extensive library support.  It is possible to write fast code in Julia, though performance implications can be mysterious. C, C++, and Fortran are popular languages for writing production numerical software, sometimes called from a higher level programming language like Python.  MATLAB is also popular for numerical computing, though it is a proprietary environment and lacks general-purpose libraries.
+I will primarily use Julia and [Jupyter notebooks](https://jupyter.org/) for slides and activities in class. This environment is convenient to work with, general purpose, and has extensive library support.  It is possible to write fast code in Julia, though performance implications can be mysterious. C, C++, and Fortran are popular languages for writing production numerical software, sometimes called from a higher level programming language like Python. MATLAB is also popular for numerical computing, though it is a proprietary environment and lacks general-purpose libraries.
 
 Most HPC facilities use a Linux operating system and many open source software packages and libraries will have the best documentation and testing on Linux systems. You can use any environment for your local development environment, or use the SDSU's [JupyterHub](https://jupyterhub.sdsu.edu/) to experiment and develop without a local install. If you have never logged-in before, check SDSU's Research & Cyberinfrastructure [resources for students](https://sdsu-research-ci.github.io/instructionalcluster/students).
 
