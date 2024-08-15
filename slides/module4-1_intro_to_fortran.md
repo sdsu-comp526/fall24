@@ -5,7 +5,10 @@ Today:
  2. The simplest Fortran program
  3. Hello, World! and Simple I/O
  4. Arithmetic in Fortran
-
+ 5. Functions
+  5.1 Subroutines
+ 6. Interface Blocks
+ 7. Modules
 
 
 ## 1. How to compile a Fortran program
@@ -133,13 +136,206 @@ Following is a program that illustrates some of the differences between real and
 Examples:
 
 ```fortran
-CHARACTER(len=*), PARAMETER :: Name = 'YourName' ! defines a constant string of characters of unknown length
-INTEGER, PARAMETER :: n = 10
-REAL, PARAMETER :: Dx = 1.0d0
-REAL :: x(n) ! declares an array of n real values called x
+      CHARACTER(len=*), PARAMETER :: Name = 'YourName' ! defines a constant string of characters of unknown length
+      INTEGER, PARAMETER :: n = 10
+      REAL, PARAMETER :: Dx = 1.0d0
+      REAL :: x(n) ! declares an array of n real values called x
 ```
 
+## 5. Functions
+- Similar to other languages, in Fortran a function is a self-contained unit that receives some input from the outside via its arguments, performs a task, and then returns the result.
+- A Fortran function is a procedure whose result is a single number, logical value, character string or array.
+- This result can be be used to form a Fortran expression.
+  * The expression may be on the right side of an assignment statement.
+- There are two types of functions, intrinsic and user-defined.
+  * Intrinsic functions are those functions built into a Fortran language, such as `SIN(x)` or `LOG(x)`.
 
+User-defined functions are functions defined by programmers to meet a specific need not addressed by the standard intrinsic functions.
+
+General form of user-defined functions:
+
+```fortran
+      FUNCTION function_name(argument list)
+	  !! DECLARACTIONS
+
+	  !! EXECUTABLES
+
+	  function_name = expression
+
+      RETURN	! ONLY NEEDED IF WE PLAN TO REACH END FUNCTION ALL OF THE TIME
+      END FUNCTION function_name
+```
+
+- A function is invoked (or called) by naming it in an expression.
+- Function names follow the same rules as variable names.
+- The name of the function must appear on the left side of at least one assignment statement in the function:
+
+```fortran
+      function_name = expression
+```
+
+- The argument list of the function may be blank if the function can perform all calculations with no input arguments.
+
+- The parentheses around the argument list are required even if the list is blank. Since the function returns a value, it is necessary to assign a type to that function.
+
+- The type of the function must be declared both in the function procedure and the calling programs.
+
+- In Fortran, we need to specify the types of function arguments.
+  * All arguments must be declared with a new attribute
+```fortran
+      INTENT(IN)
+```
+
+- The meaning of `INTENT(IN)` indicates that the function will only use this argument as input and must not change its value.
+
+Example:
+
+```{literalinclude} ../fortran_programs/module4-1_intro_to_fortran/larger_root_function.f
+:language: fortran
+:linenos: true
+```
+
+:::{note}
+Remember that to be able to call this function, we need at least a `main` `PROGRAM`.
+:::
+
+- Function subprograms and any other subprograms are placed after the `END` statement of the `main` program (unless they are internal functions - then, they need to appear in `CONTAINS` section).
+
+### Common mistakes
+
+1) Forget the function type
+Example:
+```fortran
+      FUNCTION DoSomething(a,b)
+        IMPLICIT NONE
+
+        INTEGER, INTENT (IN) :: a, b
+
+        DoSomething = SQRT(a*a+b*b)
+      END FUNCTION DoSomething
+```
+If there is no type, you will not be able to determine the returned value type.
+
+2) Forget `INTENT(IN)`
+Example:
+
+```fortran
+      REAL FUNCTION DoSomething(a,b)
+
+        IMPLICIT NONE
+        INTEGER :: a,b
+
+        DoSomething = SQRT(a*a + b*b)
+      END FUNCTION DoSomething
+```
+Actually, this is not an error. But, without `INTENT (IN)`, the compiler will not be able to check many potential errors.
+
+3) Change value of formal argument declared with `INTENT(IN)`
+Example:
+
+```fortran
+      REAL FUNCTION DoSomething(a,b)
+
+        IMPLICIT NONE
+        INTEGER, INTENT (IN) :: a,b
+
+        IF(a>b) THEN
+            a = a - b
+        ELSE
+            a = a + b
+        END IF
+
+        DoSomething = SQRT(a*a+b*b)
+      END FUNCTION DoSomething
+```
+
+Since `a` was declared with `INTENT(IN)`, its value cannot be changed.
+
+4) Forget to store value to function name
+Example:
+
+```fortran
+      REAL FUNCTION DoSomething(a,b)
+
+        IMPLICIT NONE
+
+        INTEGER, INTENT(IN) :: a,b
+        INTEGER :: c
+        c = SQRT( a ∗ a + b ∗ b )
+      END FUNCTION DoSomething
+```
+
+Since there is no value ever stored in `DoSomething`, the returned value could be anything (garbage).
+
+5) Function name used in right hand side of expression
+Example:
+
+```fortran
+      REAL FUNCTION DoSomething (a,b)
+
+        IMPLICIT NONE
+        INTEGER, INTENT(IN) :: a,b
+
+        DoSomething = a*a+b*b
+        DoSomething = SQRT(DoSomething)
+      END FUNCTION DoSomething
+```
+
+Only a special type of functions, _recursive_ functions, could have their names on the right-hand side of expressions (we didn't treat recursion in this class because it is pretty impractical).
+
+6) Most recent value stored in function name is returned
+Example:
+
+```fortran
+      REAL FUNCTION DoSomething(a,b)
+
+        IMPLICIT NONE
+        INTEGER, INTENT(IN) :: a,b
+        DoSomething = a*a+b*b
+        DoSomething = SQRT(a*a-b*b)
+      END FUNCTION DoSomething
+```
+
+The second assignment overwrites the previous value.
+
+Some important rules for Fortran function arguments:
+
+- If an actual argument is an expression, it is evaluated and the result is saved into a temporary location. Then, the value in this temporary location is passed.
+- If an actual argument is a constant, it is considered as an expression. Therefore, its value is saved to a temporary location and then passed.
+- If an actual argument is a variable, its value is taken and passed to the corresponding formal argument.
+- If an actual argument is a variable enclosed in a pair of parenthesis like `(A)`, then this is an expression and its value is evaluated and saved to a temporary location. Then, this value (in the temporary location) is passed.
+- For a formal argument declared with `INTENT(IN)`, any attempt to change its value in the function will cause a compiler error.
+- In a Fortran function, the `INTENT` should always be `IN`. If you plan to use an `INTENT` other than `IN` then consider using a `SUBROUTINE` rather than a `FUNCTION` (see below).
+
+
+### 5.1 Subroutines
+- We saw that Fortran functions have an explicit type and are intended to return one value.
+- Subroutine subprograms, on the other hand, have no explicit type and return multiple or no values through a parameter call list.
+- Unlike functions, calls to subroutines cannot be placed in an expression.
+- In the main program, a subroutine is activated by using a `CALL` statement which include the subroutine name followed by the list of inputs to and outputs from the subroutine surrounded by parenthesis. The inputs and outputs are collectively called the arguments.
+- A subroutine name follows the same rules as for function names and variable names: less than six letters and numbers and beginning with a letter. Because of this, subroutine names should be different than those used for variables or functions.
+- As with functions, there are some rules for using subroutines. Keep these in mind when writing your subroutines:
+  * You do not need to declare the subroutine name in the main program as you do with a function name.
+  * They begin with a line that includes the word `SUBROUTINE`, the name of the subroutine, and the arguments for the subroutine.
+- The `INTENT` of arguments in subroutines can be multiple: `IN` (the value of the dummy argument may be used, but not modified, within the procedure.), `OUT` (the dummy argument may be set and then modified within the procedure, and the values returned to the caller), and `INOUT` (initial values of the dummy argument may be both used and modified within the procedure, and then returned to the caller).
+
+## 6. Interface blocks
+
+- Safety feature which allows main programs and external subprograms to interface appropriately with your user-defined function/subroutine.
+- Ensures that the calling program and the subprogram have the correct number and type of arguments
+- Helps compiler to detect incorrect usage of a subprogram at compile time
+- It consists of:
+  1. Number of arguments
+  2. Type of each argument
+  3. Type of values returned by the subprogram
+
+Example:
+```{literalinclude} ../fortran_programs/module4-1_intro_to_fortran/area_circle.f90
+:language: fortran
+:linenos: true
+```
+
+  ## 7. Modules
 
 
 

@@ -102,7 +102,7 @@ Grading breakdown:
 We'll use Git with GitHub Classroom for managing activities and feedback.
 
 :::{tip}
-If you don't have a GitHub account, follow these [instructions](https://sdsu-research-ci.github.io/github/students/creating-account) from the SDSU Research & Cyberinfrastructure [website](https://sdsu-research-ci.github.io/github).
+If you don't have a GitHub account, follow these [instructions](https://sdsu-research-ci.github.io/github/students/creating-account) from the SDSU Research & Cyberinfrastructure [website](https://sdsu-research-ci.github.io/github) and [link it to your SDSUid](https://sdsu-research-ci.github.io/github/students/creating-account#linking-your-sdsuid).
 - Use a personal email account rather than the SDSU one, so that you won't have accessing your GitHub account in the future.
 - Choose your username wisely! Most likely you will use this again in professional settings in your career.
 :::
