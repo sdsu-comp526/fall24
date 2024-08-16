@@ -8,11 +8,12 @@ Comp-526
 
 
 ### Instructor: [Valeria Barra](https://valeriabarra.org)
+Pronouns: (she/her/hers)
 Email: vbarra @ sdsu . edu
 Office: GMCS 593
 
 
-**Office Hours**: by appointment.
+**Office Hours**: announced on the course [Canvas page](https://sdsu.instructure.com/courses/161092) or by appointment.
 
 :::{tip}
 Office hours are an important time for asking questions, solving problems, discussion of broader academic and career strategy, and to provide feedback so I can make the class serve your needs and those of people with similar experiences and interests.
@@ -22,7 +23,7 @@ Office hours are an important time for asking questions, solving problems, discu
 
 Scientific computing and mathematical modeling (both deterministic and stochastic) are fundamental tools for the solution of problems arising in the study of complex systems, whether originating from the physical, chemical, or biological sciences, or of an economic and social nature.
 
-_Scientific computing_ is a broad term that describe the use of computers for scientific, medical, and engineering applications. This definition is often application-focused or domain-driven.
+_Scientific computing_ is a broad term that describes the use of computers for scientific, medical, and engineering applications. This definition is often application-focused or domain-driven.
 
 On the other hand, _Numerical Analysis_, is used to solve problems in analysis (i.e., with real numbers) by numerical, rather than symbolic means. Some examples:
 
@@ -63,16 +64,18 @@ Although we'll continue with new content, during the semester we will have two s
 
 Towards the end of the semester, for your final projects, you can then form small teams of like interest and work on an original study (numerical experiments and interpretation, comparisons, etc.) or on contribution to be shared with the community. Studies and contributions can take many forms.
 
-## Outcomes
+## Learning Outcomes
 
 Upon completing this course, students will be able to
 
+* ontribute to collaborative software with the use of version control systems, such as `git`
 * formulate problems in science and engineering in terms of computational methods
 * evaluate accuracy and performance of algorithms
 * diagnose ill conditioned problem formulations and unstable algorithms
 * develop effective numerical software, taking into account stability, accuracy, and cost
 * communicate about the above using figures, numerical experiments, writing, and presentation
 * search for and understand relevant literature and documentation
+* write simple programs in Julia, C, and Fortran
 
 ### Expectations
 
@@ -84,7 +87,7 @@ Upon completing this course, students will be able to
 
 ![](img/Henry2019-Table1.png)
 
-## Grading
+## Assessment and grading
 This class will have some assignments and projects (midterm and final). The final projects can be individual or group projects (depending on the number of students registered) and will be agreed upon with the instructor. There will be a midterm and a final oral presentation
 for each project. Moreover, a final report must be delivered. Instructions about what is expected for both midterm and final presentations as well as for the final report will be provided.
 
