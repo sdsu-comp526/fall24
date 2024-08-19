@@ -435,12 +435,14 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-version-control-with-git">Introduction to version control with <code class="docutils literal notranslate"><span class="pre">git</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#github-account">GitHub Account</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#identity">Identity</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#forks-and-branches">Forks and branches</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#some-useful-tips">Some useful tips</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#community-projects">Community projects</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#some-other-useful-tips">Some other useful tips</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing">Contributing</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#forks-and-branches">Forks and branches</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-steps-checking-out-a-remote-repository-and-get-updates">Basic steps: checking out a remote repository and get updates</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#commit-and-contribute-your-own-changes">Commit and contribute your own changes</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-tips">Useful tips</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing-to-remote-repositories">Contributing to remote repositories</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#code-reviews">Code reviews</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#don-t-lose-your-output">Don’t lose your output</a></li>
 </ul>
 </li>
 </ul>
@@ -541,29 +543,6 @@ $ git config --global user.email &quot;your_email_address@example.com&quot;
 </pre></div>
 </div>
 </section>
-<section id="forks-and-branches">
-<h4>Forks and branches<a class="headerlink" href="#forks-and-branches" title="Link to this heading">#</a></h4>
-<p>Create your own fork of the desired repository and check out your copy. For example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/sdsu-comp526/fall24.git
-$ cd fall24
-$ git remote add upstream https://github.com/sdsu-comp526/fall24.git
-</pre></div>
-</div>
-<p>What is the difference between using the <code class="docutils literal notranslate"><span class="pre">https</span></code> or the <code class="docutils literal notranslate"><span class="pre">ssh</span></code> protocol? If you use <code class="docutils literal notranslate"><span class="pre">https</span></code> the primary downside for most people is that you must enter your Git password/token every time you push. While it gets added to a cache, it’s not configured to cache permanently (though this can be changed). With SSH keys, it just uses the key file on disk every time so you don’t have to enter your Git password/token at every push. Check this guide to <a class="reference external" href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">generate SSH keys and add them to the ssh-agent</a>.</p>
-<p>Now you have two remote repositories: <code class="docutils literal notranslate"><span class="pre">origin</span></code>, which is your fork (hosted on your cloud account), and <code class="docutils literal notranslate"><span class="pre">upstream</span></code>, which is the main <code class="docutils literal notranslate"><span class="pre">sdsu-comp526/fall24</span></code> repository.</p>
-<p>When part of an organization, people who contribute to an open-source project do not generally fork the repository, but <code class="docutils literal notranslate"><span class="pre">clone</span></code> it directly on their local machine. If you are not sure about the differences <a class="reference external" href="https://www.toolsqa.com/git/difference-between-git-clone-and-git-fork/#:~:text=When%20you%20fork%20a%20repository,with%20the%20help%20of%20Git.">between forking and cloning</a>, check this helpful article.</p>
-<p>Create a branch for your feature; this will hold your contribution:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git checkout -b &lt;branchname&gt;
-</pre></div>
-</div>
-</section>
-<section id="some-useful-tips">
-<h4>Some useful tips<a class="headerlink" href="#some-useful-tips" title="Link to this heading">#</a></h4>
-<ul class="simple">
-<li><p>When you start working on a new feature branch, make sure you start from <code class="docutils literal notranslate"><span class="pre">main</span></code> by running: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">main</span></code>.</p></li>
-<li><p>When you create a new branch and check it out, as in <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">-b</span> <span class="pre">&lt;branchname&gt;</span></code>, a common convention is to make <code class="docutils literal notranslate"><span class="pre">branchname</span></code> something along the lines of <code class="docutils literal notranslate"><span class="pre">&lt;yourname&gt;/&lt;short-description&gt;</span></code>.</p></li>
-</ul>
-</section>
 <section id="community-projects">
 <h4>Community projects<a class="headerlink" href="#community-projects" title="Link to this heading">#</a></h4>
 <ul class="simple">
@@ -583,18 +562,51 @@ $ git remote add upstream https://github.com/sdsu-comp526/fall24.git
 <li><p>Readability and accessibility are very important aspects to make a codebase inclusive. For instance, <code class="docutils literal notranslate"><span class="pre">snake_case</span></code> or <code class="docutils literal notranslate"><span class="pre">CamelCase</span></code> are more accessible than <code class="docutils literal notranslate"><span class="pre">nocase</span></code> for people who have vision problems.</p></li>
 </ul>
 </section>
-<section id="some-other-useful-tips">
-<h4>Some other useful tips<a class="headerlink" href="#some-other-useful-tips" title="Link to this heading">#</a></h4>
+<section id="forks-and-branches">
+<h4>Forks and branches<a class="headerlink" href="#forks-and-branches" title="Link to this heading">#</a></h4>
+<p>Create your own fork of the desired repository and check out your copy. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/sdsu-comp526/fall24.git
+$ cd fall24
+$ git remote add upstream https://github.com/sdsu-comp526/fall24.git
+</pre></div>
+</div>
+<p>What is the difference between using the <code class="docutils literal notranslate"><span class="pre">https</span></code> or the <code class="docutils literal notranslate"><span class="pre">ssh</span></code> protocol? If you use <code class="docutils literal notranslate"><span class="pre">https</span></code> the primary downside for most people is that you must enter your Git password/token every time you push. While it gets added to a cache, it’s not configured to cache permanently (though this can be changed). With SSH keys, it just uses the key file on disk every time so you don’t have to enter your Git password/token at every push. Check this guide to <a class="reference external" href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">generate SSH keys and add them to the ssh-agent</a>.</p>
+<p>Now you have two remote repositories: <code class="docutils literal notranslate"><span class="pre">origin</span></code>, which is your fork (hosted on your cloud account), and <code class="docutils literal notranslate"><span class="pre">upstream</span></code>, which is the main <code class="docutils literal notranslate"><span class="pre">sdsu-comp526/fall24</span></code> repository.</p>
+<p>When part of an organization, people who contribute to an open-source project do not generally fork the repository, but <code class="docutils literal notranslate"><span class="pre">clone</span></code> it directly on their local machine. If you are not sure about the differences <a class="reference external" href="https://www.toolsqa.com/git/difference-between-git-clone-and-git-fork/#:~:text=When%20you%20fork%20a%20repository,with%20the%20help%20of%20Git.">between forking and cloning</a>, check this helpful article.</p>
+<p>Create a branch for your feature; this will hold your contribution:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git checkout -b &lt;branchname&gt;
+</pre></div>
+</div>
+</section>
+<section id="basic-steps-checking-out-a-remote-repository-and-get-updates">
+<h4>Basic steps: checking out a remote repository and get updates<a class="headerlink" href="#basic-steps-checking-out-a-remote-repository-and-get-updates" title="Link to this heading">#</a></h4>
 <ul class="simple">
-<li><p>Once you have written some code, inspect changes by running <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>.</p></li>
-<li><p>Commit all files changed: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-a</span></code> or</p></li>
-<li><p>Commit selected files: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">&lt;file1&gt;</span> <span class="pre">&lt;file2&gt;</span></code> or</p></li>
-<li><p>Add new files to be committed: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">&lt;file1&gt;</span> <span class="pre">&lt;file2&gt;</span></code> (or more briefly,
-<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">-u</span></code> to stage all updated files at once) followed by <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code>.
-Modified files can be added to a commit in the same way.</p></li>
-<li><p>Push feature branch to the remote for review: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">origin</span> <span class="pre">&lt;branchname&gt;</span></code></p></li>
-<li><p>Use descriptive, useful commit messages</p></li>
+<li><p>When you start working on a new feature branch, make sure you start from <code class="docutils literal notranslate"><span class="pre">main</span></code> by running: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">main</span></code>.</p></li>
+<li><p>When you create a new branch and check it out, as in <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">-b</span> <span class="pre">&lt;branchname&gt;</span></code>, a common convention is to make <code class="docutils literal notranslate"><span class="pre">branchname</span></code> something along the lines of <code class="docutils literal notranslate"><span class="pre">&lt;yourname&gt;/&lt;short-description&gt;</span></code>.</p></li>
+<li><p>Every time you want to get <a class="reference external" href="https://docs.github.com/en/get-started/using-git/getting-changes-from-a-remote-repository">updates from a remote repository</a>, use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span></code>. If you are working in a very large collaborative environment in which a lot of people are pushing their work every day using different branches, you may want to add the <code class="docutils literal notranslate"><span class="pre">--prune</span></code> option so that you don’t download stale branches (e.g., <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span> <span class="pre">--prune</span></code>).</p></li>
+<li><p>To download upstream changes and update the copy of the repo on your local machine use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code> or <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> (which combines <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span></code> and <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code> in one single command).</p>
+<ul>
+<li><p>Be careful: this might trigger a <code class="docutils literal notranslate"><span class="pre">merge</span></code> warning if you have some unsaved or uncommitted changes locally. Always commit (or <a class="reference external" href="https://git-scm.com/docs/git-stash">stash</a>) your work before attempting merges.</p></li>
 </ul>
+</li>
+</ul>
+</section>
+<section id="commit-and-contribute-your-own-changes">
+<h4>Commit and contribute your own changes<a class="headerlink" href="#commit-and-contribute-your-own-changes" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Once you have made any change to any file in the repository (e.g., you might have written some code or documentation, or updated files such as License, Controbuting, etc.) inspect these changes by running <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>.</p></li>
+<li><p>Commit all files changed: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-a</span></code> or first add selected files via</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">&lt;file1&gt;</span> <span class="pre">&lt;file2&gt;</span></code> (or more briefly, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">-u</span></code> to stage all updated files at once) followed by <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code>.</p></li>
+</ul>
+</li>
+<li><p>New or modified files can be added to a commit in the same way.</p></li>
+<li><p>Push feature branch to the remote for review: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">origin</span> <span class="pre">&lt;branchname&gt;</span></code></p></li>
+<li><p>Use descriptive, useful commit messages (you can eaither do this via the text editor or dirctly at command line via <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span></code>).</p></li>
+</ul>
+</section>
+<section id="useful-tips">
+<h4>Useful tips<a class="headerlink" href="#useful-tips" title="Link to this heading">#</a></h4>
 <p>When cleaning up your local branches, some of the following commands might be useful:</p>
 <ul class="simple">
 <li><p>Show local and remote-tracking branches: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">-a</span></code>.</p></li>
@@ -622,16 +634,16 @@ first, and then <code class="docutils literal notranslate"><span class="pre">git
 <li><p>Discard all changes to the current working tree: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">-f</span></code>.</p></li>
 </ul>
 </section>
-<section id="contributing">
-<h4>Contributing<a class="headerlink" href="#contributing" title="Link to this heading">#</a></h4>
-<p>To propose your contribution to any community project you want to create a so-called Pull Request (PR) in GitHub lingo or a Merge Request (MR) in GitLab lingo. The repository maintainers will review your proposed changes, make comments if needed, request further changes and reject or approve your contributions.</p>
+<section id="contributing-to-remote-repositories">
+<h4>Contributing to remote repositories<a class="headerlink" href="#contributing-to-remote-repositories" title="Link to this heading">#</a></h4>
+<p>To propose your contribution to any community project you want to create a so-called <a class="reference external" href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests">Pull Request (PR)</a> in GitHub lingo or a Merge Request (MR) in GitLab lingo. The repository maintainers will review your proposed changes, make comments if needed, request further changes and reject or approve your contributions. See this GitHub documentation page on <a class="reference external" href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request">creating Pull Requests</a>.</p>
 </section>
 <section id="code-reviews">
 <h4>Code reviews<a class="headerlink" href="#code-reviews" title="Link to this heading">#</a></h4>
 <p>Code reviews are possibly the most under-rated service in open-source/community projects. The best way to get familiar with a code base is reviewing other contributors’ code.</p>
 <blockquote>
-<div><h4 class="rubric" id="exercise-2-1">Exercise 2.1</h4>
-<p>Initialize a git repository via <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code></p>
+<div><h4 class="rubric" id="exercise-1-1">Exercise 1.1</h4>
+<p>Initialize a git repository (you may call it <code class="docutils literal notranslate"><span class="pre">test</span></code>) via <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code></p>
 </div></blockquote>
 <p>Often, when we run a numerical experiment/example, there may be output files generated (plots, datasets, etc). We usually don’t want to store the output in the repository, so we can tell git to ignore them. There are a couple of ways we can specify this:</p>
 <ul class="simple">
@@ -659,9 +671,21 @@ first, and then <code class="docutils literal notranslate"><span class="pre">git
 </div>
 <p>See <a class="reference external" href="https://git-scm.com/docs/gitignore">Git manual: gitignore</a> for more information</p>
 <blockquote>
-<div><h4 class="rubric" id="exercise-2-2">Exercise 2.2</h4>
+<div><h4 class="rubric" id="exercise-1-2">Exercise 1.2</h4>
 <p>Set up your <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> file in this <code class="docutils literal notranslate"><span class="pre">test/</span></code> directory</p>
 </div></blockquote>
+</section>
+<section id="don-t-lose-your-output">
+<h4>Don’t lose your output<a class="headerlink" href="#don-t-lose-your-output" title="Link to this heading">#</a></h4>
+<p>If you run many numerical experiments, you don’t want to overwrite your previous results (maybe that previous experiment was actually better than our most recent one!).</p>
+<ul class="simple">
+<li><p>A good practice for managing output of experiments and avoid output being overwirtten is to concatenate parameters as strings in the output folder name so that each experiment will create a unique output folder, and this should facilitate experiments book-keeping.</p>
+<ul>
+<li><p>But what if you want to repeat the same experiment with exactly the same parameters? This will overwite your concatenated parameter string output folder name as well. Some people prefer using a time stamp (so that you are sure it is unique) but it might be obscure to visualize and remember which folder/experiment pair that output belongs to. Some other people use a combination of these two methods (time stamp + concatenated parameters string).</p></li>
+<li><p>There is no <em>right</em> way of doing this, as long as you can find what works best for your own bookkeeping and be able to easily fetch an old result when needed (if you do research, sometimes you may be asked to show results from a couple of years ago!)</p></li>
+</ul>
+</li>
+</ul>
 </section>
 </section>
 </section>
@@ -855,12 +879,14 @@ first, and then <code class="docutils literal notranslate"><span class="pre">git
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-version-control-with-git">Introduction to version control with <code class="docutils literal notranslate"><span class="pre">git</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#github-account">GitHub Account</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#identity">Identity</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#forks-and-branches">Forks and branches</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#some-useful-tips">Some useful tips</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#community-projects">Community projects</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#some-other-useful-tips">Some other useful tips</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing">Contributing</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#forks-and-branches">Forks and branches</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-steps-checking-out-a-remote-repository-and-get-updates">Basic steps: checking out a remote repository and get updates</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#commit-and-contribute-your-own-changes">Commit and contribute your own changes</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-tips">Useful tips</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing-to-remote-repositories">Contributing to remote repositories</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#code-reviews">Code reviews</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#don-t-lose-your-output">Don’t lose your output</a></li>
 </ul>
 </li>
 </ul>

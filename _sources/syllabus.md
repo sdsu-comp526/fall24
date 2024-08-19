@@ -2,15 +2,18 @@
 
 ## Logistics
 
-Comp-526
+*Course name*: Comp-526,
+*Course term*: Fall 2024
 *Class time*: **M-W-F: 9-9:50 am**
+*Mode of delivery*: **in person**
 *Location*: **LH 247**
 
 
 ### Instructor: [Valeria Barra](https://valeriabarra.org)
+
 Pronouns: (she/her/hers)
 Email: vbarra @ sdsu . edu
-Office: GMCS 593
+Office location: announced on the course [Canvas page](https://sdsu.instructure.com/courses/161092)
 
 
 **Office Hours**: announced on the course [Canvas page](https://sdsu.instructure.com/courses/161092) or by appointment.
@@ -46,7 +49,7 @@ we formulate some mathematical problem, and find an algorithm for
 it to solve it using computers.
 
 
-## Organization
+## Organization and course design
 
 We will start by giving an introduction of version control and reproducibility, key apects in modern computational sciences. Then we will introduce the Linux filesystem and some basic shell commands.
 
@@ -64,18 +67,18 @@ Although we'll continue with new content, during the semester we will have two s
 
 Towards the end of the semester, for your final projects, you can then form small teams of like interest and work on an original study (numerical experiments and interpretation, comparisons, etc.) or on contribution to be shared with the community. Studies and contributions can take many forms.
 
-## Learning Outcomes
+## Student Learning Outcomes
 
 Upon completing this course, students will be able to
 
-* ontribute to collaborative software with the use of version control systems, such as `git`
-* formulate problems in science and engineering in terms of computational methods
-* evaluate accuracy and performance of algorithms
-* diagnose ill conditioned problem formulations and unstable algorithms
-* develop effective numerical software, taking into account stability, accuracy, and cost
-* communicate about the above using figures, numerical experiments, writing, and presentation
-* search for and understand relevant literature and documentation
-* write simple programs in Julia, C, and Fortran
+1. contribute to collaborative software with the use of version control systems, such as `git`
+2. formulate problems in science and engineering in terms of computational methods
+3. evaluate accuracy and performance of algorithms
+4. diagnose ill conditioned problem formulations and unstable algorithms
+5. develop effective numerical software, taking into account stability, accuracy, and cost
+6. communicate about the above using figures, numerical experiments, writing, and presentation
+7. search for and understand relevant literature and documentation
+8. write programs in Julia, C, and Fortran
 
 ### Expectations
 
@@ -87,18 +90,21 @@ Upon completing this course, students will be able to
 
 ![](img/Henry2019-Table1.png)
 
-## Assessment and grading
-This class will have some assignments and projects (midterm and final). The final projects can be individual or group projects (depending on the number of students registered) and will be agreed upon with the instructor. There will be a midterm and a final oral presentation
-for each project. Moreover, a final report must be delivered. Instructions about what is expected for both midterm and final presentations as well as for the final report will be provided.
+## Assessment, grading policy and schedule
+
+This class will have some assignments and projects (midterm and final). The final projects can be individual or group projects (depending on the number of students registered) and will be agreed upon with the instructor. There will be a midterm and a final oral presentation for each project. Moreover, a final report must be delivered. Instructions about what is expected for both midterm and final presentations as well as for the final report will be provided.
 
 Grading breakdown:
-- Assignment 1 (10%)
-- Assignment 2 (10%)
-- Assignment 3 (10%)
+- Partipation (can include engagement in class, attendance, use of office hours, etc) (5%)
+- Assignment 1 (10%): due Friday, September 13, by midnight (AOE)
+- Assignment 2 (10%): due Friday, October 4, by midnight (AOE)
+- Assignment 3 (10%): due Friday, October 25, by midnight (AOE)
+- Assignment 4 (10%): due Friday, November 15, by midnight (AOE)
 
-- Midterm project (%30)
-- Final project (%40)
+- Midterm project (%20): due Wednesday October 16, by midnight (AOE)
+- Final project (%35): due Monday, December 16 (exam hours 8-10 a.m.)
 
+The schedule is subject to change (the instructor will announce any changes).
 
 ## GitHub
 
@@ -106,13 +112,13 @@ We'll use Git with GitHub Classroom for managing activities and feedback.
 
 :::{tip}
 If you don't have a GitHub account, follow these [instructions](https://sdsu-research-ci.github.io/github/students/creating-account) from the SDSU Research & Cyberinfrastructure [website](https://sdsu-research-ci.github.io/github) and [link it to your SDSUid](https://sdsu-research-ci.github.io/github/students/creating-account#linking-your-sdsuid).
-- Use a personal email account rather than the SDSU one, so that you won't have accessing your GitHub account in the future.
+- Use a personal email account rather than the SDSU one, so that you won't have problems accessing your GitHub account in the future.
 - Choose your username wisely! Most likely you will use this again in professional settings in your career.
 :::
 
-## Programming languages and environment
+## Course materials, programming languages and environment
 
-I will primarily use Julia and [Jupyter notebooks](https://jupyter.org/) for slides and activities in class. This environment is convenient to work with, general purpose, and has extensive library support.  It is possible to write fast code in Julia, though performance implications can be mysterious. C, C++, and Fortran are popular languages for writing production numerical software, sometimes called from a higher level programming language like Python. MATLAB is also popular for numerical computing, though it is a proprietary environment and lacks general-purpose libraries.
+I will provide all free course materials and suggested readings on the [class website](https://sdsu-comp526.github.io/fall24/). If you prefer to read a print-out version, please talk to me. I will primarily use Julia and [Jupyter notebooks](https://jupyter.org/) for slides and activities in class. This environment is convenient to work with, general purpose, and has extensive library support.  It is possible to write fast code in Julia, though performance implications can be mysterious. C, C++, and Fortran are popular languages for writing production numerical software, sometimes called from a higher level programming language like Python. MATLAB is also popular for numerical computing, though it is a proprietary environment and lacks general-purpose libraries.
 
 Most HPC facilities use a Linux operating system and many open source software packages and libraries will have the best documentation and testing on Linux systems. You can use any environment for your local development environment, or use the SDSU's [JupyterHub](https://jupyterhub.sdsu.edu/) to experiment and develop without a local install. If you have never logged-in before, check SDSU's Research & Cyberinfrastructure [resources for students](https://sdsu-research-ci.github.io/instructionalcluster/students).
 
@@ -135,6 +141,9 @@ Good to know:
 
 Both students and faculty are responsible for maintaining an appropriate learning environment in all instructional settings, whether in person, remote or online. Those who fail to adhere to such behavioral standards may be subject to discipline. Professional courtesy and sensitivity are especially important with respect to individuals and topics dealing with race, color, national origin, sex, pregnancy, age, disability, creed, religion, sexual orientation, gender identity, gender expression, veteran status, political affiliation or political philosophy.
 
+## Resources for students
+Every student is encouraged to read the [SDSU Student Academic Success Handbook](https://docs.google.com/document/d/1rXNpNGs1K7nIxcS73o6R-fxZqPIWQwS9gHD7XpIqjhM/edit#heading=h.apbuhr7p11ak) (includes essential information for students).
+
 ## Accommodation for Disabilities
 
 If you think you may qualify for accommodations because of a disability, please contact [SDSU Student Ability Success Center](https://sds.sdsu.edu/) and make your faculty member aware in a timely manner so that your needs can be addressed. Please allow 10-14 business days for this process.
@@ -149,9 +158,10 @@ We recognize that students' legal information doesn't always align with how they
 SDSU has strict codes of conduct and policies regarding [cheating and plagiarism](https://sacd.sdsu.edu/student-rights/academic-dishonesty/cheating-and-plagiarism). Become familiar with the policy and what constitutes plagiarism. Any cheating or plagiarism will result in failing this class and a disciplinary review by the University. These actions may lead to probation, suspension, or expulsion.
 
 ## Use of AI
+
 In May 2024, the University Senate extended its definition of plagiarism to include the un-cited use of generative AI applications, specifically: "representing work produced by generative Artificial Intelligence as one’s own." Academic freedom ensures that instructors are empowered to determine whether students may use genAI in their classes and to what extent. To minimize confusion, we report here a statement regarding the use of AI in this class.
 
-Students should not use generative AI applications in this course except as approved by the instructor. Any use of generative AI outside of instructor-approved guidelines constitutes misuse. Misuse of generative AI is a violation of the course policy on academic honesty and will be reported to the Center for Student Rights and Responsibilities
+Students should not use generative AI applications in this course except as approved by the instructor and cited. Any use of generative AI outside of instructor-approved guidelines constitutes misuse. Misuse of generative AI is a violation of the course policy on academic honesty and will be reported to the Center for Student Rights and Responsibilities
 
 ## Sexual Misconduct, Discrimination, Harassment and/or Related Retaliation
 
@@ -164,5 +174,6 @@ Please know that faculty and responsible employees have a responsibility to info
 According to the University Policy File, students should notify instructors of planned absences for religious observances by the end of the second week of classes. See the campus policy regarding religious observances for full details.
 
 ## Land Acknowledgment
+
 For millennia, the Kumeyaay people have been a part of this land. This land has nourished, healed, protected and embraced them for many generations in a relationship of balance and harmony. As members of the San Diego State University community, we acknowledge this legacy. We promote this balance and harmony. We find inspiration from this land, the land of the Kumeyaay.
 
