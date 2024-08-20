@@ -61,6 +61,7 @@
     <link rel="icon" href="../_static/SDSU-comp526_logo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="15) Linear Algebra" href="module5-1_linear_algebra.html" />
     <link rel="prev" title="13) Stability" href="module3-6_stability.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -198,6 +199,7 @@
 <li class="toctree-l2"><a class="reference internal" href="module3-5_newton.html">12) Newton methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module3-6_stability.html">13) Stability</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">14) Introduction to Fortran</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module5-1_linear_algebra.html">15) Linear Algebra</a></li>
 </ul><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary>
 </details></li>
 </ul>
@@ -479,7 +481,7 @@ document.write(`
 <li><p>Only one instruction (or statement) may appear on a line.</p></li>
 <li><p>The statement is limited to the first 72 characters of each line. Many modern Fortran 77 compilers will accept longer lines, but this is not standard.</p></li>
 <li><p>The program is written in all uppercase letters. Strictly speaking, uppercase is the standard for Fortran 77 but almost all Fortran compilers will accept lowercase letters. (Such compilers are not “case sensitive”.) We will use uppercase because it helps to set off the program from the surrounding explanation. You can use either upper or lower case, whichever you like.</p></li>
-<li><p>Notice that all of the lines in the example above begin with 6 blank spaces. This is because the Fortran 77 standard requires that the first 6 characters of a line be reserved for statement numbers and continuation characters.</p></li>
+<li><p>Notice that all of the lines in the example above begin with 6 blank spaces. This is because the Fortran 77 standard requires that the first 6 characters of a line be reserved for statement numbers and continuation characters. These 6 spaces originate from the punched card version of Fortran.</p></li>
 </ul>
 <section id="exercise-14-1">
 <h3>Exercise 14.1:<a class="headerlink" href="#exercise-14-1" title="Link to this heading">#</a></h3>
@@ -836,7 +838,7 @@ Example:</p></li>
 <span class="linenos">19</span>
 <span class="linenos">20</span><span class="w">        </span><span class="c">! Write out area of circle using function call</span>
 <span class="linenos">21</span><span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="s2">&quot;Area of circle with radius&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">radius</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; is&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Area_Circle</span><span class="p">(</span><span class="n">radius</span><span class="p">)</span>
-<span class="linenos">22</span><span class="mi">100</span><span class="w"> </span><span class="k">FORMAT</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">F6</span><span class="p">.</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">F11</span><span class="p">.</span><span class="mi">2</span><span class="p">)</span>
+<span class="linenos">22</span><span class="mi">100</span><span class="w"> </span><span class="k">FORMAT</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">F6</span><span class="p">.</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">F11</span><span class="p">.</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="c">! Need Fortran90 specification, i.e., name your file with the .f90 extension</span>
 <span class="linenos">23</span><span class="w">      </span><span class="k">END PROGRAM </span><span class="n">Area</span>
 <span class="linenos">24</span>
 <span class="linenos">25</span><span class="w">      </span><span class="k">FUNCTION </span><span class="n">Area_Circle</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
@@ -855,6 +857,119 @@ Example:</p></li>
 </section>
 <section id="modules">
 <h2>7. Modules<a class="headerlink" href="#modules" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>It is often the case that there are parameters, variables, and subprograms that must be shared by several program units</p></li>
+<li><p>Fortran 90 provides a special program unit known as a MODULE that conveniently packages collections of declarations and subprograms so that they may be imported into other program units</p></li>
+</ul>
+<p>Syntax:</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="w">      </span><span class="k">MODULE </span><span class="n">module_name</span>
+<span class="w">      </span><span class="c">! some specifications</span>
+<span class="w">      </span><span class="k">END MODULE </span><span class="n">module_name</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>A program module is made accessible to the various program units by way of the <code class="docutils literal notranslate"><span class="pre">USE</span></code> statement</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">USE</span></code> statement must appear at the beginning of the declaration part of the program unit making use of the module. It must appear even before the statement <code class="docutils literal notranslate"><span class="pre">IMPLICIT</span> <span class="pre">NONE</span></code>.</p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="w">      </span><span class="k">PROGRAM </span><span class="n">Area</span>
+<span class="linenos"> 2</span><span class="w">        </span><span class="k">IMPLICIT NONE</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="k">        INTERFACE</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="k">            FUNCTION </span><span class="n">Area_Circle</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="w">            </span><span class="kt">REAL</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">Area_Circle</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="w">            </span><span class="kt">REAL</span><span class="p">,</span><span class="w"> </span><span class="k">INTENT</span><span class="p">(</span><span class="n">IN</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">r</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="w">            </span><span class="k">END FUNCTION </span><span class="n">Area_Circle</span>
+<span class="linenos">13</span><span class="w">        </span><span class="k">END INTERFACE</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="k">        </span><span class="kt">REAL</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">radius</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">ADVANCE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;NO&quot;</span><span class="p">)</span><span class="w"> </span><span class="s2">&quot;Enter radius of circle: &quot;</span>
+<span class="linenos">18</span><span class="w">        </span><span class="k">read</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">radius</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span><span class="w">        </span><span class="c">! Write out area of circle using function call</span>
+<span class="linenos">21</span><span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="s2">&quot;Area of circle with radius&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">radius</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; is&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Area_Circle</span><span class="p">(</span><span class="n">radius</span><span class="p">)</span>
+<span class="linenos">22</span><span class="mi">100</span><span class="w"> </span><span class="k">FORMAT</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">F6</span><span class="p">.</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">F11</span><span class="p">.</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="c">! Need Fortran90 specification, i.e., name your file with the .f90 extension</span>
+<span class="linenos">23</span><span class="w">      </span><span class="k">END PROGRAM </span><span class="n">Area</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span><span class="w">      </span><span class="k">FUNCTION </span><span class="n">Area_Circle</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span><span class="w">        </span><span class="k">IMPLICIT NONE</span>
+<span class="linenos">28</span><span class="k">        </span><span class="kt">REAL</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">Area_Circle</span>
+<span class="linenos">29</span><span class="w">        </span><span class="kt">REAL</span><span class="p">,</span><span class="w"> </span><span class="k">INTENT</span><span class="w"> </span><span class="p">(</span><span class="n">IN</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">r</span>
+<span class="linenos">30</span>
+<span class="linenos">31</span><span class="w">        </span><span class="kt">REAL</span><span class="p">,</span><span class="w"> </span><span class="k">PARAMETER</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">Pi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.1415927</span>
+<span class="linenos">32</span>
+<span class="linenos">33</span><span class="w">        </span><span class="n">Area_Circle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Pi</span><span class="o">*</span><span class="n">r</span><span class="o">*</span><span class="n">r</span>
+<span class="linenos">34</span>
+<span class="linenos">35</span><span class="w">      </span><span class="k">END FUNCTION </span><span class="n">Area_Circle</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Each module unit must be compiled independently.</p></li>
+<li><p>To compile a module use:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gfortran<span class="w"> </span>-c<span class="w"> </span>math_consts_module.f
+</pre></div>
+</div>
+<p>which will produce <code class="docutils literal notranslate"><span class="pre">math_consts_module.o</span></code> and <code class="docutils literal notranslate"><span class="pre">math_consts_module.mod</span></code> files</p>
+<ul class="simple">
+<li><p>To compile the main program that uses the module, use:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gfortran<span class="w"> </span>-Wall<span class="w"> </span>using_modules.f<span class="w"> </span>math_consts_module.o<span class="w"> </span>-o<span class="w"> </span>using_modules
+</pre></div>
+</div>
+<p>This will both compile your main program <code class="docutils literal notranslate"><span class="pre">using_modules.f</span></code> <em>and</em> link your compiled module.</p>
+<p>Alternatively, you could have compiled the module and main program together, as in:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w"> </span>gfortran<span class="w"> </span>-ffree-fortran<span class="w"> </span>-c<span class="w"> </span>math_consts_module.f<span class="w"> </span>using_modules.f
+</pre></div>
+</div>
+<p>And then you could have done the linking of the object files:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gfortran<span class="w"> </span>math_consts_module.o<span class="w"> </span>using_modules.o<span class="w"> </span>-o<span class="w"> </span>using_modules
+</pre></div>
+</div>
+<p>Review of Fortran modules:</p>
+<ul class="simple">
+<li><p>Modules provide you a way of splitting your programs between multiple files</p></li>
+<li><p>Modules are used for:</p>
+<ul>
+<li><p>Packaging subprograms, data and interface blocks</p></li>
+<li><p>Defining global data that can be used by more than one routine</p></li>
+<li><p>Declaring variables that can be made available within any routines you choose</p></li>
+<li><p>Importing a module entirely, for use, into another program or subroutine</p></li>
+</ul>
+</li>
+<li><p>Syntax of a module (two parts):</p>
+<ul>
+<li><p>a specification part for statements declaration</p></li>
+<li><p>a contains part for subroutine and function definitions</p></li>
+</ul>
+</li>
+</ul>
+<p>General form:</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="w">      </span><span class="k">MODULE </span><span class="n">module_name</span>
+<span class="w">      </span><span class="c">! [ statement declarations ]</span>
+<span class="w">      </span><span class="c">! [ contains subroutine and function definitions]</span>
+<span class="w">      </span><span class="k">END MODULE </span><span class="n">module_name</span>
+</pre></div>
+</div>
+<p>Using a module:</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="w">      </span><span class="k">USE </span><span class="n">module_name</span>
+</pre></div>
+</div>
+<p>Note:</p>
+<ul class="simple">
+<li><p>Can add as many modules as needed, each will be in separate files and compiled separately</p></li>
+<li><p>A module can be used in various different programs</p></li>
+<li><p>A module can be used many times in the same program</p></li>
+<li><p>The variables declared in a module specification part, are global to the module</p></li>
+<li><p>The variables declared in a module become global variables in any program or routine where the module is used</p></li>
+<li><p>The use statement can appear in the main program, or any other subroutine or module which uses the routines or variables declared in a particular module</p></li>
+</ul>
 </section>
 </section>
 
@@ -896,6 +1011,15 @@ Example:</p></li>
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">13) Stability</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="module5-1_linear_algebra.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">15) Linear Algebra</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>

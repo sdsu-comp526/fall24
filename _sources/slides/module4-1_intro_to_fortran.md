@@ -53,7 +53,7 @@ Although seemingly trivial, writing and executing this program illustrates some 
 - Only one instruction (or statement) may appear on a line.
 - The statement is limited to the first 72 characters of each line. Many modern Fortran 77 compilers will accept longer lines, but this is not standard.
 - The program is written in all uppercase letters. Strictly speaking, uppercase is the standard for Fortran 77 but almost all Fortran compilers will accept lowercase letters. (Such compilers are not "case sensitive".) We will use uppercase because it helps to set off the program from the surrounding explanation. You can use either upper or lower case, whichever you like.
-- Notice that all of the lines in the example above begin with 6 blank spaces. This is because the Fortran 77 standard requires that the first 6 characters of a line be reserved for statement numbers and continuation characters.
+- Notice that all of the lines in the example above begin with 6 blank spaces. This is because the Fortran 77 standard requires that the first 6 characters of a line be reserved for statement numbers and continuation characters. These 6 spaces originate from the punched card version of Fortran.
 
 ### Exercise 14.1:
 Create your first "do nothing" Fortran program.
@@ -335,13 +335,90 @@ Example:
 :linenos: true
 ```
 
-  ## 7. Modules
+## 7. Modules
 
+- It is often the case that there are parameters, variables, and subprograms that must be shared by several program units
+- Fortran 90 provides a special program unit known as a MODULE that conveniently packages collections of declarations and subprograms so that they may be imported into other program units
 
+Syntax:
+```fortran
+      MODULE module_name
+      ! some specifications
+      END MODULE module_name
+```
 
+- A program module is made accessible to the various program units by way of the `USE` statement
 
+- The `USE` statement must appear at the beginning of the declaration part of the program unit making use of the module. It must appear even before the statement `IMPLICIT
+NONE`.
 
+Example:
 
+```{literalinclude} ../fortran_programs/module4-1_intro_to_fortran/area_circle.f90
+:language: fortran
+:linenos: true
+```
 
+- Each module unit must be compiled independently.
+
+- To compile a module use:
+```bash
+gfortran -c math_consts_module.f
+```
+which will produce `math_consts_module.o` and `math_consts_module.mod` files
+
+- To compile the main program that uses the module, use:
+```bash
+gfortran -Wall using_modules.f math_consts_module.o -o using_modules
+```
+This will both compile your main program `using_modules.f` _and_ link your compiled module.
+
+Alternatively, you could have compiled the module and main program together, as in:
+
+```bash
+ gfortran -ffree-fortran -c math_consts_module.f using_modules.f
+```
+
+And then you could have done the linking of the object files:
+
+```bash
+gfortran math_consts_module.o using_modules.o -o using_modules
+```
+
+Review of Fortran modules:
+
+- Modules provide you a way of splitting your programs between multiple files
+- Modules are used for:
+  * Packaging subprograms, data and interface blocks
+  * Defining global data that can be used by more than one routine
+  * Declaring variables that can be made available within any routines you choose
+  * Importing a module entirely, for use, into another program or subroutine
+- Syntax of a module (two parts):
+  * a specification part for statements declaration
+  * a contains part for subroutine and function definitions
+
+General form:
+
+```fortran
+      MODULE module_name
+      ! [ statement declarations ]
+      ! [ contains subroutine and function definitions]
+      END MODULE module_name
+```
+
+Using a module:
+
+```fortran
+      USE module_name
+```
+
+Note:
+
+- Can add as many modules as needed, each will be in separate files and compiled separately
+- A module can be used in various different programs
+- A module can be used many times in the same program
+- The variables declared in a module specification part, are global to the module
+- The variables declared in a module become global variables in any program or routine where the module is used
+- The use statement can appear in the main program, or any other subroutine or module which uses the routines or variables declared in a particular module
 
 
