@@ -59,7 +59,7 @@ Then we'll explore rootfinding, our first infinite algorithm, in which we'll lea
 
 We'll move to the concepts of stability and backward stability.
 
-Next up will be interpolation and then differentiation.
+Next up will be an introduction on linear algebra, interpolation and then differentiation.
 
 We'll move on to integration and finally numerical solution of differential equations.
 

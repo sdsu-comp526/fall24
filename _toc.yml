@@ -21,3 +21,4 @@ chapters:
   - file: slides/module3-5_newton.ipynb
   - file: slides/module3-6_stability.ipynb
   - file: slides/module4-1_intro_to_fortran.md
+  - file: slides/module5-1_linear_algebra.ipynb
