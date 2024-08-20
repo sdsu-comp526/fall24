@@ -440,11 +440,13 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-steps-checking-out-a-remote-repository-and-get-updates">Basic steps: checking out a remote repository and get updates</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#commit-and-contribute-your-own-changes">Commit and contribute your own changes</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-tips">Useful tips</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#push-changes-to-your-own-repository">Push changes to your own repository</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing-to-remote-repositories">Contributing to remote repositories</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#code-reviews">Code reviews</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#don-t-lose-your-output">Don’t lose your output</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suggested-readings-and-resources">Suggested readings and resources</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-environments">3. Specifying environments</a><ul class="nav section-nav flex-column">
@@ -567,7 +569,7 @@ $ git config --global user.email &quot;your_email_address@example.com&quot;
 <p>Create your own fork of the desired repository and check out your copy. For example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/sdsu-comp526/fall24.git
 $ cd fall24
-$ git remote add upstream https://github.com/sdsu-comp526/fall24.git
+$ git remote add your_username https://yourusername@github.com/sdsu-comp526/fall24.git
 </pre></div>
 </div>
 <p>What is the difference between using the <code class="docutils literal notranslate"><span class="pre">https</span></code> or the <code class="docutils literal notranslate"><span class="pre">ssh</span></code> protocol? If you use <code class="docutils literal notranslate"><span class="pre">https</span></code> the primary downside for most people is that you must enter your Git password/token every time you push. While it gets added to a cache, it’s not configured to cache permanently (though this can be changed). With SSH keys, it just uses the key file on disk every time so you don’t have to enter your Git password/token at every push. Check this guide to <a class="reference external" href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">generate SSH keys and add them to the ssh-agent</a>.</p>
@@ -634,6 +636,13 @@ first, and then <code class="docutils literal notranslate"><span class="pre">git
 <li><p>Discard all changes to the current working tree: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">-f</span></code>.</p></li>
 </ul>
 </section>
+<section id="push-changes-to-your-own-repository">
+<h4>Push changes to your own repository<a class="headerlink" href="#push-changes-to-your-own-repository" title="Link to this heading">#</a></h4>
+<p>If you want your changes on your local machine to go onto your online repository do</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span> <span class="n">your_username</span> <span class="n">main</span>
+</pre></div>
+</div>
+</section>
 <section id="contributing-to-remote-repositories">
 <h4>Contributing to remote repositories<a class="headerlink" href="#contributing-to-remote-repositories" title="Link to this heading">#</a></h4>
 <p>To propose your contribution to any community project you want to create a so-called <a class="reference external" href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests">Pull Request (PR)</a> in GitHub lingo or a Merge Request (MR) in GitLab lingo. The repository maintainers will review your proposed changes, make comments if needed, request further changes and reject or approve your contributions. See this GitHub documentation page on <a class="reference external" href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request">creating Pull Requests</a>.</p>
@@ -687,6 +696,16 @@ first, and then <code class="docutils literal notranslate"><span class="pre">git
 </li>
 </ul>
 </section>
+</section>
+<section id="suggested-readings-and-resources">
+<h3>Suggested readings and resources<a class="headerlink" href="#suggested-readings-and-resources" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://git-scm.com/">Git</a> official website</p></li>
+<li><p><a class="reference external" href="https://ndpsoftware.com/git-cheatsheet.html#loc=index;">Git cheatsheet</a></p></li>
+<li><p><a class="reference external" href="https://learngitbranching.js.org/">Learn Git Branching</a> (interactive/game)</p></li>
+<li><p><a class="reference external" href="https://eagain.net/articles/git-for-computer-scientists/">Git for computer scientists</a></p></li>
+<li><p><a class="reference external" href="https://git-scm.com/docs/gitworkflows">Git workflows</a></p></li>
+</ul>
 </section>
 </section>
 <section id="specifying-environments">
@@ -884,11 +903,13 @@ first, and then <code class="docutils literal notranslate"><span class="pre">git
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-steps-checking-out-a-remote-repository-and-get-updates">Basic steps: checking out a remote repository and get updates</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#commit-and-contribute-your-own-changes">Commit and contribute your own changes</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-tips">Useful tips</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#push-changes-to-your-own-repository">Push changes to your own repository</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing-to-remote-repositories">Contributing to remote repositories</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#code-reviews">Code reviews</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#don-t-lose-your-output">Don’t lose your output</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suggested-readings-and-resources">Suggested readings and resources</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-environments">3. Specifying environments</a><ul class="nav section-nav flex-column">
