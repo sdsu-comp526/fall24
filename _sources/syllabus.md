@@ -2,17 +2,23 @@
 
 ## Logistics
 
-*Course name*: Comp-526,
+*Course name*: Comp-526
+
 *Course term*: Fall 2024
+
 *Class time*: **M-W-F: 9-9:50 am**
+
 *Mode of delivery*: **in person**
+
 *Location*: **NE 172**
 
 
 ### Instructor: [Valeria Barra](https://valeriabarra.org)
 
 Pronouns: (she/her/hers)
+
 Email: vbarra @ sdsu . edu
+
 Office location: announced on the course [Canvas page](https://sdsu.instructure.com/courses/161092)
 
 
