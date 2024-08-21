@@ -6,7 +6,7 @@
 *Course term*: Fall 2024
 *Class time*: **M-W-F: 9-9:50 am**
 *Mode of delivery*: **in person**
-*Location*: **LH 247**
+*Location*: **NE 172**
 
 
 ### Instructor: [Valeria Barra](https://valeriabarra.org)
