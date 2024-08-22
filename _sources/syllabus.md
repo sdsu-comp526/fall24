@@ -25,7 +25,7 @@ Office location: announced on the course [Canvas page](https://sdsu.instructure.
 **Office Hours**: announced on the course [Canvas page](https://sdsu.instructure.com/courses/161092) or by appointment.
 
 :::{tip}
-Office hours are an important time for asking questions, solving problems, discussion of broader academic and career strategy, and to provide feedback so I can make the class serve your needs and those of people with similar experiences and interests.
+Office hours are an important time for asking questions, solving problems, discussing broader academic and career strategies, and providing feedback so I can make the class serve your needs and those of people with similar experiences and interests.
 :::
 
 ## Overview
@@ -50,22 +50,21 @@ service of applications. Some examples:
 - The Runge-Kutta method for initial value problems
 
 This is an algorithm-focused description.
-In reality this area encompasses all three: based on an application,
-we formulate some mathematical problem, and find an algorithm for
+In reality, this area encompasses all three: based on an application, we formulate some mathematical problems and find an algorithm for
 it to solve it using computers.
 
 
 ## Organization and course design
 
-We will start by giving an introduction of version control and reproducibility, key apects in modern computational sciences. Then we will introduce the Linux filesystem and some basic shell commands.
+We will start by giving an introduction to version control and reproducibility, which are key aspects of modern computational sciences. Then we will introduce the Linux filesystem and some basic shell commands.
 
-We'll procede with evaluation of functions and introduce the concepts of conditioning and stability, which are applicable to every topic we encounter.
+We'll proceed with the evaluation of functions and introduce the concepts of conditioning and stability, which are applicable to every topic we encounter.
 
 Then we'll explore rootfinding, our first infinite algorithm, in which we'll learn about convergence classes and the fundamental challenge of writing a function that is correct for all well-typed inputs.
 
 We'll move to the concepts of stability and backward stability.
 
-Next up will be an introduction on linear algebra, interpolation and then differentiation.
+Next up will be an introduction to linear algebra, interpolation, and then differentiation.
 
 We'll move on to integration and finally numerical solution of differential equations.
 
@@ -79,8 +78,8 @@ Upon completing this course, students will be able to
 
 1. contribute to collaborative software with the use of version control systems, such as `git`
 2. formulate problems in science and engineering in terms of computational methods
-3. evaluate accuracy and performance of algorithms
-4. diagnose ill conditioned problem formulations and unstable algorithms
+3. evaluate the accuracy and performance of algorithms
+4. diagnose ill-conditioned problem formulations and unstable algorithms
 5. develop effective numerical software, taking into account stability, accuracy, and cost
 6. communicate about the above using figures, numerical experiments, writing, and presentation
 7. search for and understand relevant literature and documentation
@@ -90,7 +89,7 @@ Upon completing this course, students will be able to
 
 1. Enter with a growth mindset, practice adaptive coping, and nurture your intrinsic motivation
 2. Attend class (in-person) and participate in discussions
-3. Make an honest attempt on activities, projects, etc.
+3. Make an honest attempt at activities, projects, etc.
 4. Interact with the class notebooks and read reference material
 5. Individual or group projects
 
@@ -101,16 +100,20 @@ Upon completing this course, students will be able to
 This class will have some assignments and projects (midterm and final). The final projects can be individual or group projects (depending on the number of students registered) and will be agreed upon with the instructor. There will be a midterm and a final oral presentation for each project. Moreover, a final report must be delivered. Instructions about what is expected for both midterm and final presentations as well as for the final report will be provided.
 
 Grading breakdown:
-- Partipation (can include engagement in class, attendance, use of office hours, etc) (5%)
+- Participation (can include engagement in class, attendance, use of office hours, etc) (5%)
 - Assignment 1 (10%): due Friday, September 13, by midnight (AOE)
 - Assignment 2 (10%): due Friday, October 4, by midnight (AOE)
 - Assignment 3 (10%): due Friday, October 25, by midnight (AOE)
 - Assignment 4 (10%): due Friday, November 15, by midnight (AOE)
 
-- Midterm project (%20): due Wednesday October 16, by midnight (AOE)
+- Midterm project (%20): due Wednesday, October 16, by midnight (AOE)
 - Final project (%35): due Monday, December 16 (exam hours 8-10 a.m.)
 
 The schedule is subject to change (the instructor will announce any changes).
+
+**Late submission and absences policy**: if you submit your assignments late, there is an increasing penalty (10% off for up to 24 hours late, 20% off for 24-48 hours late). No assignments will be graded if submitted later than 48 hours late.
+
+Any student who cannot attend class or submit assignments by their due date for serious issues (e.g., medical emergencies) or participation in university activities (e.g., official university travel for conferences or sports) that can be documented, should communicate those to your instructor as soon as possible before the deadline.
 
 ## GitHub
 
@@ -126,7 +129,7 @@ If you don't have a GitHub account, follow these [instructions](https://sdsu-res
 
 I will provide all free course materials and suggested readings on the [class website](https://sdsu-comp526.github.io/fall24/). If you prefer to read a print-out version, please talk to me. I will primarily use Julia and [Jupyter notebooks](https://jupyter.org/) for slides and activities in class. This environment is convenient to work with, general purpose, and has extensive library support.  It is possible to write fast code in Julia, though performance implications can be mysterious. C, C++, and Fortran are popular languages for writing production numerical software, sometimes called from a higher level programming language like Python. MATLAB is also popular for numerical computing, though it is a proprietary environment and lacks general-purpose libraries.
 
-Most HPC facilities use a Linux operating system and many open source software packages and libraries will have the best documentation and testing on Linux systems. You can use any environment for your local development environment, or use the SDSU's [JupyterHub](https://jupyterhub.sdsu.edu/) to experiment and develop without a local install. If you have never logged-in before, check SDSU's Research & Cyberinfrastructure [resources for students](https://sdsu-research-ci.github.io/instructionalcluster/students).
+Most HPC facilities use a Linux operating system and many open source software packages and libraries will have the best documentation and testing on Linux systems. You can use any environment for your local development environment, or use the SDSU's [JupyterHub](https://jupyterhub.sdsu.edu/) to experiment and develop without a local install. If you have never logged in before, check SDSU's Research & Cyberinfrastructure [resources for students](https://sdsu-research-ci.github.io/instructionalcluster/students).
 
 ## Target audience
 
@@ -145,7 +148,7 @@ Good to know:
 
 ## Classroom Behavior
 
-Both students and faculty are responsible for maintaining an appropriate learning environment in all instructional settings, whether in person, remote or online. Those who fail to adhere to such behavioral standards may be subject to discipline. Professional courtesy and sensitivity are especially important with respect to individuals and topics dealing with race, color, national origin, sex, pregnancy, age, disability, creed, religion, sexual orientation, gender identity, gender expression, veteran status, political affiliation or political philosophy.
+Both students and faculty are responsible for maintaining an appropriate learning environment in all instructional settings, whether in person, remote, or online. Those who fail to adhere to such behavioral standards may be subject to discipline. Professional courtesy and sensitivity are especially important with respect to individuals and topics dealing with race, color, national origin, sex, pregnancy, age, disability, creed, religion, sexual orientation, gender identity, gender expression, veteran status, political affiliation, or political philosophy.
 
 ## Resources for students
 Every student is encouraged to read the [SDSU Student Academic Success Handbook](https://docs.google.com/document/d/1rXNpNGs1K7nIxcS73o6R-fxZqPIWQwS9gHD7XpIqjhM/edit#heading=h.apbuhr7p11ak) (includes essential information for students).
@@ -173,7 +176,7 @@ Students should not use generative AI applications in this course except as appr
 
 SDSU is committed to fostering an inclusive and welcoming learning, working, and living environment. SDSU will not tolerate acts of sexual misconduct (harassment, exploitation, and assault), intimate partner violence (dating or domestic violence), stalking, or protected-class discrimination or harassment by or against members of our community. Individuals who believe they have been subject to misconduct or retaliatory actions for reporting a concern should contact the [SDSU Title IX Office](https://titleix.sdsu.edu/report-an-incident-landing).
 
-Please know that faculty and responsible employees have a responsibility to inform the Title IX Office when made aware of incidents of sexual misconduct, dating and domestic violence, stalking, discrimination, harassment and/or related retaliation, to ensure that individuals impacted receive information about their rights, support resources, and reporting options.
+Please know that faculty and responsible employees have a responsibility to inform the Title IX Office when made aware of incidents of sexual misconduct, dating and domestic violence, stalking, discrimination, harassment, and/or related retaliation, to ensure that individuals impacted receive information about their rights, support resources, and reporting options.
 
 ## Religious Holidays
 
