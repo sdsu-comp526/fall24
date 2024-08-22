@@ -3,7 +3,7 @@
 Welcome to **Computational Methods for Scientists**, Comp-526
 
 :::{admonition} Logistics
-* Office hours: by appointment
+* Office hours: announced on the course [Canvas page](https://sdsu.instructure.com/courses/161092) or by appointment.
 :::
 
 :::{note} Who am I?
@@ -37,4 +37,10 @@ Welcome to **Computational Methods for Scientists**, Comp-526
     * linear algebra with attention to performance; free PDF and videos
   * [Eijkhout (2023), **The Art of HPC**](https://theartofhpc.com/)
     * collection of free books on numerical and scientific computing, plus "carpentry"
+:::
+
+:::{admonition} PSA
+Together with some colleagues in the Computational Science Research Center at SDSU we are working on the transition of an open-source software library into an open-source ecosystem.
+
+If you are currently enrolled as a Master student at SDSU and are looking for a job opportunity, we are [hiring](https://careers-sdsurf.icims.com/jobs/17592/graduate-research-assistant/job?mobile=true&width=360&height=649&bga=true&needsRedirect=false&jan1offset=-480&jun1offset=-420).
 :::
