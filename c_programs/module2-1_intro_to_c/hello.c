@@ -3,5 +3,5 @@
 // a "main" program is required in all C programs
 int main(void)
 {
-     printf("Hello, world!\n"); // this printf statement will print formatted output in the standard output (your terminal screen)
+     printf("Hello, math526! - Change made by Aneesh\n"); // this printf statement will print formatted output in the standard output (your terminal screen)
 }
