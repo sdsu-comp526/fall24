@@ -109,6 +109,8 @@ Grading breakdown:
 - Midterm project (%20): due Wednesday, October 16, by midnight (AOE)
 - Final project (%35): due Monday, December 16 (exam hours 8-10 a.m.)
 
+Assignments will be distributed no later than a week prior to the due date.
+
 The schedule is subject to change (the instructor will announce any changes).
 
 **Late submission and absences policy**: if you submit your assignments late, there is an increasing penalty (10% off for up to 24 hours late, 20% off for 24-48 hours late). No assignments will be graded if submitted later than 48 hours late.
