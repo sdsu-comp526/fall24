@@ -791,13 +791,29 @@ first, and then <code class="docutils literal notranslate"><span class="pre">git
 <li><p><code class="docutils literal notranslate"><span class="pre">]add</span> <span class="pre">PackageName</span> <span class="pre">&#64;version</span></code> / <code class="docutils literal notranslate"><span class="pre">Pkg.add(name=&quot;PackageName&quot;,</span> <span class="pre">version=&quot;version&quot;)</span></code>: use a specific version</p></li>
 </ul>
 <p>Other useful Pkg operations:</p>
-<ul class="simple">
+<ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">]resolve</span></code> / <code class="docutils literal notranslate"><span class="pre">Pkg.resolve()</span></code>: creates or updates the Manifest if it isn’t in sync with the Project.toml or its dependencies</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">]up</span></code> / <code class="docutils literal notranslate"><span class="pre">Pkg.update()</span></code>: update dependencies to their latest versions (subject to compatiblity contraints)</p>
-<ul>
+<ul class="simple">
 <li><p>This will modify the <code class="docutils literal notranslate"><span class="pre">Manifest.toml</span></code> file</p></li>
 </ul>
 </li>
+<li><p>To create a new Julia project, create a directory for it and then activate that directory to make it the “active project”, which package operations manipulate:</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="p">]</span><span class="n">activate</span><span class="w"> </span><span class="n">MyProject</span>
+</pre></div>
+</div>
+</li>
+<li><p>To use an existing environment local to a specific path rather than your default system environment, invoke <code class="docutils literal notranslate"><span class="pre">julia</span></code> with the <code class="docutils literal notranslate"><span class="pre">--project</span></code> flag, as in:</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="w"> </span><span class="o">--</span><span class="n">project</span><span class="o">=&lt;</span><span class="n">path</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p>To run a script from the command line using the environment in the current directory you can run</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="w"> </span><span class="o">--</span><span class="n">project</span><span class="o">=.</span><span class="w"> </span><span class="n">myscript</span><span class="o">.</span><span class="n">jl</span>
+</pre></div>
+</div>
+</li>
+<li><p>Note that even if you do not specify the current directory with the period <code class="docutils literal notranslate"><span class="pre">.</span></code>, julia will try to find the environment to launch in the current directory, so <code class="docutils literal notranslate"><span class="pre">julia</span> <span class="pre">--project=.</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">julia</span> <span class="pre">--project</span></code></p></li>
 </ul>
 </section>
 </section>
