@@ -73,12 +73,10 @@ struct Organization
 
 int main(void)
 {
-    ...
-
     struct Organization org;
     // access members of the inner struct by using the dot operator twice
     org.emp.employee_id = 153;
-    org.enp.salary = 60000;
+    org.emp.salary = 60000;
 
     return 0;
 }

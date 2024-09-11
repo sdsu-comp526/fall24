@@ -5,8 +5,7 @@ int first_function(void);
 int goodbye(void);
 
 
-int
-main()            // function definition
+int main()            // function definition
 {
   printf("the program begins...\n");
   first_function();
@@ -16,16 +15,14 @@ main()            // function definition
 }
 
 
-int
-first_function()  // function definition
+int first_function()  // function definition
 {
   /* this function does nothing */
   return 0;
 }
 
 
-int
-goodbye()         // function definition
+int goodbye()         // function definition
 {
   printf("...and the program ends.\n");
 
