@@ -23,7 +23,7 @@ In the call by value method of parameter passing, the values of actual parameter
 
 The following example demonstrates the call-by-value method of parameter passing
 
-```{literalinclude} ../c_programs/module2-2_c_pointers/pass_by_value.c
+```{literalinclude} ../c_programs/module2-4_c_memory/pass_by_value.c
 :language: c
 :linenos: true
 ```
@@ -49,7 +49,7 @@ In the call by reference method of parameter passing, the _address_ of the actua
 
 The following C program is an example of a call-by-reference method.
 
-```{literalinclude} ../c_programs/module2-2_c_pointers/pass_by_reference.c
+```{literalinclude} ../c_programs/module2-4_c_memory/pass_by_reference.c
 :language: c
 :linenos: true
 ```
