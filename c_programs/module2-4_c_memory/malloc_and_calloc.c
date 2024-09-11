@@ -13,8 +13,8 @@ int main()
     // zero-initialized, but the memory allocated with
     // malloc will be uninitialized so reading it would be
     // undefined behavior.
-    int* allocated_with_malloc = malloc(5 * sizeof(int));
-    int* allocated_with_calloc = calloc(5, sizeof(int));
+    int *allocated_with_malloc = malloc(5 * sizeof(int));
+    int *allocated_with_calloc = calloc(5, sizeof(int));
 
     // As you can see, all of the values are initialized to
     // zero.
@@ -27,7 +27,7 @@ int main()
     // This malloc requests 1 terabyte of dynamic memory,
     // which is unavailable in this case, and so the
     // allocation fails and returns NULL.
-    int* failed_malloc = malloc(1000000000000);
+    int *failed_malloc = malloc(1000000000000);
     if (failed_malloc == NULL) {
         printf("The allocation failed, the value of "
                "failed_malloc is: %p \n",
