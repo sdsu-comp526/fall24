@@ -181,7 +181,8 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../syllabus.html">Syllabus</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../slides.html">Slides</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="module1-1_first_class.html">1) First Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module1-1_first_class.html">1) First Class: Reproducibility and Git</a></li>
+
 
 <li class="toctree-l2"><a class="reference internal" href="module1-2_linux.html">2) The Linux Filesystem and commands</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module1-3_functions_and_fpa.html">3) Functions</a></li>
@@ -198,6 +199,8 @@
 <li class="toctree-l2"><a class="reference internal" href="module3-4_convergence_classes.html">11) Convergence classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module3-5_newton.html">12) Newton methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module3-6_stability.html">13) Stability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-1_intro_to_fortran.html">14) Introduction to Fortran</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module5-1_linear_algebra.html">15) Linear Algebra</a></li>
 </ul><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary>
 </details></li>
 </ul>
@@ -395,14 +398,26 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-pools-of-memory">1. C pools of memory</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pass-by-value-vs-pass-by-reference">1. Pass by value Vs Pass by reference</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#call-by-value-in-c">1.1 Call by Value in C</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-call-by-value-in-c">Example of Call by Value in C</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#call-by-reference-in-c">1.2 Call by Reference in C</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-call-by-reference-in-c">Example of Call by Reference in C</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#difference-between-the-call-by-value-and-call-by-reference-in-c">Difference between the Call by Value and Call by Reference in C</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-pools-of-memory">2. C pools of memory</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#static-memory">Static memory</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stack-memory">Stack memory</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heap-memory">Heap memory</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-exercise">Reading exercise</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#malloc-and-calloc">2. <code class="docutils literal notranslate"><span class="pre">malloc</span></code> and <code class="docutils literal notranslate"><span class="pre">calloc</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#malloc-and-calloc">3. <code class="docutils literal notranslate"><span class="pre">malloc</span></code> and <code class="docutils literal notranslate"><span class="pre">calloc</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-a-program-that-shows-both-malloc-and-calloc">Example of a program that shows both <code class="docutils literal notranslate"><span class="pre">malloc</span></code> and <code class="docutils literal notranslate"><span class="pre">calloc</span></code></a></li>
 </ul>
 </li>
@@ -421,11 +436,155 @@ document.write(`
 <h1>7) C memory<a class="headerlink" href="#c-memory" title="Link to this heading">#</a></h1>
 <p>Today:</p>
 <ol class="arabic simple">
+<li><p>Pass by value Vs Pass by reference</p></li>
 <li><p>C pools of memory</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">malloc</span></code> and <code class="docutils literal notranslate"><span class="pre">calloc</span></code></p></li>
 </ol>
+<section id="pass-by-value-vs-pass-by-reference">
+<h2>1. Pass by value Vs Pass by reference<a class="headerlink" href="#pass-by-value-vs-pass-by-reference" title="Link to this heading">#</a></h2>
+<p>Functions can be invoked in two ways: <strong>Call by Value</strong> or <strong>Call by Reference</strong>. These two ways are generally differentiated by the type of values <em>passed</em> to them as parameters.</p>
+<p>The parameters passed to the function are called <strong>actual parameters</strong> whereas the parameters received by the function are called <strong>formal parameters</strong>.</p>
+<section id="call-by-value-in-c">
+<h3>1.1 Call by Value in C<a class="headerlink" href="#call-by-value-in-c" title="Link to this heading">#</a></h3>
+<p>In the call by value method of parameter passing, the values of actual parameters are copied to the function’s formal parameters.</p>
+<ul class="simple">
+<li><p>There are two copies of parameters stored in different memory locations.</p></li>
+<li><p>One is the original copy and the other is the function copy.</p></li>
+<li><p>Any changes made inside functions are <em>not</em> reflected in the actual parameters of the caller.</p></li>
+</ul>
+<section id="example-of-call-by-value-in-c">
+<h4>Example of Call by Value in C<a class="headerlink" href="#example-of-call-by-value-in-c" title="Link to this heading">#</a></h4>
+<p>The following example demonstrates the call-by-value method of parameter passing</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">// C program to illustrate call by value</span>
+<span class="linenos"> 2</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="c1">// Function Prototype</span>
+<span class="linenos"> 5</span><span class="kt">void</span><span class="w"> </span><span class="nf">swapx</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="c1">// Main function</span>
+<span class="linenos"> 8</span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="linenos"> 9</span><span class="p">{</span>
+<span class="linenos">10</span><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="w">    </span><span class="c1">// Pass by Values</span>
+<span class="linenos">13</span><span class="w">    </span><span class="n">swapx</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w"> </span><span class="c1">// Actual Parameters</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;In the caller:</span><span class="se">\n</span><span class="s"> a = %d b = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="linenos">18</span><span class="p">}</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span><span class="c1">// Swap functions that swaps two values</span>
+<span class="linenos">21</span><span class="kt">void</span><span class="w"> </span><span class="nf">swapx</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="c1">// Formal Parameters</span>
+<span class="linenos">22</span><span class="p">{</span>
+<span class="linenos">23</span><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">t</span><span class="p">;</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span><span class="w">    </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="linenos">26</span><span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+<span class="linenos">27</span><span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t</span><span class="p">;</span>
+<span class="linenos">28</span>
+<span class="linenos">29</span><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Inside the (callee) function:</span><span class="se">\n</span><span class="s"> x = %d y = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+<span class="linenos">30</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Inside<span class="w"> </span>the<span class="w"> </span><span class="o">(</span>callee<span class="o">)</span><span class="w"> </span><span class="k">function</span>:
+<span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="nv">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span>
+In<span class="w"> </span>the<span class="w"> </span>caller:
+<span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span>
+</pre></div>
+</div>
+<p>Thus the actual values of <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> remain unchanged even after swapping the values of <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> in the called function.</p>
+</section>
+</section>
+<section id="call-by-reference-in-c">
+<h3>1.2 Call by Reference in C<a class="headerlink" href="#call-by-reference-in-c" title="Link to this heading">#</a></h3>
+<p>In the call by reference method of parameter passing, the <em>address</em> of the actual parameters is passed to the function as the formal parameters. In C, we use pointers to achieve call-by-reference.</p>
+<ul class="simple">
+<li><p>Both the actual and formal parameters refer to the same locations.</p></li>
+<li><p>Any changes made inside the function are reflected in the actual parameters of the caller function, too.</p></li>
+</ul>
+<section id="example-of-call-by-reference-in-c">
+<h4>Example of Call by Reference in C<a class="headerlink" href="#example-of-call-by-reference-in-c" title="Link to this heading">#</a></h4>
+<p>The following C program is an example of a call-by-reference method.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">// C program to illustrate Call by Reference</span>
+<span class="linenos"> 2</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="c1">// Function declaration (or prototype/signature)</span>
+<span class="linenos"> 5</span><span class="kt">void</span><span class="w"> </span><span class="nf">swapx</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">*</span><span class="p">);</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="c1">// Main function</span>
+<span class="linenos"> 8</span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="linenos"> 9</span><span class="p">{</span>
+<span class="linenos">10</span><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="w">    </span><span class="c1">// Pass by reference</span>
+<span class="linenos">13</span><span class="w">    </span><span class="n">swapx</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">b</span><span class="p">);</span><span class="w"> </span><span class="c1">// Actual Parameters. Note that we pass directly the addresses of these two variables</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;In the caller:</span><span class="se">\n</span><span class="s"> a = %d b = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="linenos">18</span><span class="p">}</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span><span class="c1">// Function to swap two variables by reference</span>
+<span class="linenos">21</span><span class="kt">void</span><span class="w"> </span><span class="nf">swapx</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="c1">// Formal Parameters</span>
+<span class="linenos">22</span><span class="p">{</span>
+<span class="linenos">23</span><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">t</span><span class="p">;</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span><span class="w">    </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="p">;</span>
+<span class="linenos">26</span><span class="w">    </span><span class="o">*</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="p">;</span>
+<span class="linenos">27</span><span class="w">    </span><span class="o">*</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t</span><span class="p">;</span>
+<span class="linenos">28</span>
+<span class="linenos">29</span><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Inside the (callee) function:</span><span class="se">\n</span><span class="s"> x = %d y = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="p">);</span>
+<span class="linenos">30</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Inside<span class="w"> </span>the<span class="w"> </span><span class="o">(</span>callee<span class="o">)</span><span class="w"> </span><span class="k">function</span>:
+<span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="nv">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span>
+In<span class="w"> </span>the<span class="w"> </span>caller:
+<span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span>
+</pre></div>
+</div>
+<p>Thus, the values of <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> get changed also in the caller function after swapping the values of <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> inside the callee.</p>
+</section>
+<section id="difference-between-the-call-by-value-and-call-by-reference-in-c">
+<h4>Difference between the Call by Value and Call by Reference in C<a class="headerlink" href="#difference-between-the-call-by-value-and-call-by-reference-in-c" title="Link to this heading">#</a></h4>
+<p>The following table lists the differences between the call-by-value and call-by-reference methods of parameter passing.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Call/Pass By Value</p></th>
+<th class="head text-center"><p>Call/Pass By Reference</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>While calling a function, we pass directly the values of variables to it. Such functions are known as “Call By Value”</p></td>
+<td class="text-center"><p>While calling a function, instead of passing the actual values of the variables, we pass the <em>address of</em> the variables (location of variables) to the function. This is known as “Call By Reference”</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>In this method, the value of each variable in the calling function is <em>copied</em> into corresponding dummy variables in the called function</p></td>
+<td class="text-center"><p>In this method, the <em>address of</em> the actual variables in the calling function is copied into the dummy variables in the called function.</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>With this method, changes made to the dummy variables in the called function have <em>no effect</em> on the values of the actual variables in the calling function</p></td>
+<td class="text-center"><p>With this method, using addresses (and pointers associated with them), we have access to the actual variables and hence we can <em>manipulate</em> them</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>In call-by-value, we cannot alter the values of the original variables through function calls</p></td>
+<td class="text-center"><p>In call by reference, we can alter the values of variables through function calls</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>Values of variables are directly passed to functions</p></td>
+<td class="text-center"><p>Pointer variables are necessary in the function declaration/definition to access the addresses of the passed variables</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>This method is preferred when we have to pass some small values that should not change</p></td>
+<td class="text-center"><p>This method is preferred when we have to pass a large amount of data to the function or when data need to be manipulated</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>In conclusion, “Call/Pass by Value” means passing values as copies to the function, so that the original data is preserved and any changes made inside the function are <em>not</em> reflected in the original data, whereas “Call/Pass by Reference” means passing references to the memory locations of variables (in C, we use pointers to achieve the call by reference behavior), hence changes made inside the called function are reflected in the original caller values.</p>
+</section>
+</section>
+</section>
 <section id="c-pools-of-memory">
-<h2>1. C pools of memory<a class="headerlink" href="#c-pools-of-memory" title="Link to this heading">#</a></h2>
+<h2>2. C pools of memory<a class="headerlink" href="#c-pools-of-memory" title="Link to this heading">#</a></h2>
 <p>C has three different pools of memory.</p>
 <ul class="simple">
 <li><p><strong>static</strong>: global variable storage, permanent for the entire run of the program.</p></li>
@@ -453,14 +612,14 @@ document.write(`
 <h3>Stack memory<a class="headerlink" href="#stack-memory" title="Link to this heading">#</a></h3>
 <p>The stack is used to store variables used on the inside of a function (including the <code class="docutils literal notranslate"><span class="pre">main()</span></code> function). It’s a <strong>LIFO</strong>, “<strong>L</strong>ast-<strong>I</strong>n,-<strong>F</strong>irst-<strong>O</strong>ut”, structure. Every time a function declares a new variable it is “pushed” onto the stack. Then when a function finishes running, all the variables associated with that function on the stack are automatically deleted, and the memory they use is freed up. This leads to the <em>local</em> scope of function variables. The stack is a special region of memory, and automatically managed by the CPU – so you don’t have to allocate or deallocate memory. Stack memory is divided into successive frames where each time a function is called, it allocates itself a fresh stack frame.</p>
 <ul class="simple">
-<li><p>Note that there is generally a limit on the size of the stack – which can vary with the operating system (it can be 8MB). If a program tries to put too much information on the stack, <strong>stack overflow</strong> will occur. Stack overflow happens when all the memory in the stack has been allocated, and further allocations begin overflowing into other sections of memory.</p></li>
+<li><p>Note that there is generally a limit on the size of the stack – which can vary with the operating system (it can be, say, 8MB). If a program tries to put too much information on the stack, <strong>stack overflow</strong> will occur. Stack overflow happens when all the memory in the stack has been allocated, and further allocations begin overflowing into other sections of memory.</p></li>
 </ul>
 <p>A summary of the stack:</p>
 <ul class="simple">
 <li><p>The stack is managed by the CPU, there is no ability to modify it</p></li>
 <li><p>Variables are allocated and freed automatically</p></li>
 <li><p>The stack it not limitless – most have an upper bound</p></li>
-<li><p>The stack grows and shrinks as variables are created and destroyed</p></li>
+<li><p>The stack grows and shrinks as variables are created and destroyed, within the limit imposed by the OS</p></li>
 <li><p>Stack variables only exist whilst the function that created them exists</p></li>
 </ul>
 </section>
@@ -513,7 +672,7 @@ heap<span class="w"> </span>memory:<span class="w"> </span>m
 </section>
 </section>
 <section id="malloc-and-calloc">
-<h2>2. <code class="docutils literal notranslate"><span class="pre">malloc</span></code> and <code class="docutils literal notranslate"><span class="pre">calloc</span></code><a class="headerlink" href="#malloc-and-calloc" title="Link to this heading">#</a></h2>
+<h2>3. <code class="docutils literal notranslate"><span class="pre">malloc</span></code> and <code class="docutils literal notranslate"><span class="pre">calloc</span></code><a class="headerlink" href="#malloc-and-calloc" title="Link to this heading">#</a></h2>
 <p>In the previous example, we have seen an example of usage of the function <code class="docutils literal notranslate"><span class="pre">malloc()</span></code>.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">malloc()</span></code> allocates a memory block of given size (in bytes).</p></li>
@@ -551,8 +710,8 @@ heap<span class="w"> </span>memory:<span class="w"> </span>m
 <span class="linenos">13</span><span class="w">    </span><span class="c1">// zero-initialized, but the memory allocated with</span>
 <span class="linenos">14</span><span class="w">    </span><span class="c1">// malloc will be uninitialized so reading it would be</span>
 <span class="linenos">15</span><span class="w">    </span><span class="c1">// undefined behavior.</span>
-<span class="linenos">16</span><span class="w">    </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">allocated_with_malloc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="mi">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
-<span class="linenos">17</span><span class="w">    </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">allocated_with_calloc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calloc</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+<span class="linenos">16</span><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">allocated_with_malloc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="mi">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+<span class="linenos">17</span><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">allocated_with_calloc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calloc</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
 <span class="linenos">18</span>
 <span class="linenos">19</span><span class="w">    </span><span class="c1">// As you can see, all of the values are initialized to</span>
 <span class="linenos">20</span><span class="w">    </span><span class="c1">// zero.</span>
@@ -565,7 +724,7 @@ heap<span class="w"> </span>memory:<span class="w"> </span>m
 <span class="linenos">27</span><span class="w">    </span><span class="c1">// This malloc requests 1 terabyte of dynamic memory,</span>
 <span class="linenos">28</span><span class="w">    </span><span class="c1">// which is unavailable in this case, and so the</span>
 <span class="linenos">29</span><span class="w">    </span><span class="c1">// allocation fails and returns NULL.</span>
-<span class="linenos">30</span><span class="w">    </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">failed_malloc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="mi">1000000000000</span><span class="p">);</span>
+<span class="linenos">30</span><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">failed_malloc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="mi">1000000000000</span><span class="p">);</span>
 <span class="linenos">31</span><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">failed_malloc</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="linenos">32</span><span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;The allocation failed, the value of &quot;</span>
 <span class="linenos">33</span><span class="w">               </span><span class="s">&quot;failed_malloc is: %p </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
@@ -651,14 +810,26 @@ The<span class="w"> </span>allocation<span class="w"> </span>failed,<span class=
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-pools-of-memory">1. C pools of memory</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pass-by-value-vs-pass-by-reference">1. Pass by value Vs Pass by reference</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#call-by-value-in-c">1.1 Call by Value in C</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-call-by-value-in-c">Example of Call by Value in C</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#call-by-reference-in-c">1.2 Call by Reference in C</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-call-by-reference-in-c">Example of Call by Reference in C</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#difference-between-the-call-by-value-and-call-by-reference-in-c">Difference between the Call by Value and Call by Reference in C</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-pools-of-memory">2. C pools of memory</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#static-memory">Static memory</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stack-memory">Stack memory</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heap-memory">Heap memory</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-exercise">Reading exercise</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#malloc-and-calloc">2. <code class="docutils literal notranslate"><span class="pre">malloc</span></code> and <code class="docutils literal notranslate"><span class="pre">calloc</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#malloc-and-calloc">3. <code class="docutils literal notranslate"><span class="pre">malloc</span></code> and <code class="docutils literal notranslate"><span class="pre">calloc</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-a-program-that-shows-both-malloc-and-calloc">Example of a program that shows both <code class="docutils literal notranslate"><span class="pre">malloc</span></code> and <code class="docutils literal notranslate"><span class="pre">calloc</span></code></a></li>
 </ul>
 </li>
