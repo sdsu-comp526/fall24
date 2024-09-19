@@ -8,3 +8,10 @@
  7. Find appropriate intervals and use your bisection code to find ALL the root(s) of $|x|e^{x}= 0.25$.
  8. Use your bisection code to find the root of $27 x^3 - 27 x^2 + 9x = 1$  on $[0, 1]$ to within $10^{-6}$.
  9. Use your bisection code to find the root of $64 x^3 - 48x^2 + 12x = 1$  on $[0, 1]$ to within $10^{-6}$.
+
+ From module3-5_newton.ipynb:
+
+ ### Exercise 12.2:
+ 1. Solve the fixed point iteration $g(x_n) = (2+{(x_n - 2)}^2)$, up to a tolerance $10^{-6}$ or maximum number of iterations $N=50$, with (a) $x_0 = 2.8$,  (b) $x_0 = 3.1$. Which execution is better? And why?
+ 2. Solve the fixed point iteration $g(x_n) = (2+{(x_n - 2)}^3)$, up to a tolerance $10^{-6}$ or maximum number of iterations $N=50$, with (a) $x_0 = 2.8$, (b) $x_0 = 3.1$. Which execution is better? And why?
+ 3. Use Newton's method to solve Exercise 10.3 points 1 and 3 from the Bisection method class. Which method performs better on these functions and why?
