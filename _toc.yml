@@ -20,6 +20,6 @@ chapters:
   - file: slides/module3-4_convergence_classes.ipynb
   - file: slides/module3-5_newton.ipynb
   - file: slides/module3-6_stability.ipynb
-  - file: slides/module4-1_intro_to_fortran.md
-  - file: slides/module5-1_linear_algebra.ipynb
-  - file: slides/module5-2_gram_schmidt.ipynb
+  - file: slides/module4-1_linear_algebra.ipynb
+  - file: slides/module4-2_gram_schmidt.ipynb
+  - file: slides/module5-1_intro_to_fortran.md
