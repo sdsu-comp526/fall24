@@ -22,4 +22,5 @@ chapters:
   - file: slides/module3-6_stability.ipynb
   - file: slides/module4-1_linear_algebra.ipynb
   - file: slides/module4-2_gram_schmidt.ipynb
+  - file: slides/module4-3_householder.ipynb
   - file: slides/module5-1_intro_to_fortran.md
