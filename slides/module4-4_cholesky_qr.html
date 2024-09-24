@@ -1,0 +1,1103 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>18) Cholesky QR &#8212; Computational Methods for Scientists</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'slides/module4-4_cholesky_qr';</script>
+    <link rel="icon" href="../_static/SDSU-comp526_logo.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="14) Introduction to Fortran" href="module5-1_intro_to_fortran.html" />
+    <link rel="prev" title="17) Householder QR" href="module4-3_householder.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/SDSU-comp526_logo.svg" class="logo__image only-light" alt="Computational Methods for Scientists - Home"/>
+    <script>document.write(`<img src="../_static/SDSU-comp526_logo.svg" class="logo__image only-dark" alt="Computational Methods for Scientists - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../syllabus.html">Syllabus</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../slides.html">Slides</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="module1-1_first_class.html">1) First Class: Reproducibility and Git</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="module1-2_linux.html">2) The Linux Filesystem and commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module1-3_functions_and_fpa.html">3) Functions</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="module2-1_intro_to_c.html">4) Intro to C</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module2-2_c_pointers.html">5) Intro to C pointers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module2-3_c_structs_and_functions.html">6) C structs and functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module2-4_c_memory.html">7) C memory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module3-1_function_errors.html">8) Function errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module3-2_conditioning.html">9) Conditioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module3-3_root_finding.html">10) Rootfinding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module3-4_convergence_classes.html">11) Convergence classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module3-5_newton.html">12) Newton methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module3-6_stability.html">13) Stability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-1_linear_algebra.html">15) Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-2_gram_schmidt.html">16) Gram-Schmidt and QR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-3_householder.html">17) Householder QR</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">18) Cholesky QR</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="module5-1_intro_to_fortran.html">14) Introduction to Fortran</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/sdsu-comp526/fall24" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/sdsu-comp526/fall24/issues/new?title=Issue%20on%20page%20%2Fslides/module4-4_cholesky_qr.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/slides/module4-4_cholesky_qr.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>18) Cholesky QR</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">18) Cholesky QR</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#last-time">Last time</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#today">Today</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap-on-householder-qr">1. Recap on Householder QR</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#householder-an-improved-algorithm">Householder: An improved algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#householder-is-backward-stable">Householder is backward stable</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orthogonality-is-preserved">Orthogonality is preserved</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#composition-of-reflectors">2. Composition of reflectors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#this-works-even-for-very-nonsquare-matrices">This works even for very nonsquare matrices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-to-python-s-numpy-linalg-qr">Compare to Python’s <code class="docutils literal notranslate"><span class="pre">numpy.linalg.qr</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cholesky-decomposition">3. Cholesky decomposition</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#can-we-fix-this">Can we fix this?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-fast-are-these-methods">How fast are these methods?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#profiling">Profiling</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="cholesky-qr">
+<h1>18) Cholesky QR<a class="headerlink" href="#cholesky-qr" title="Link to this heading">#</a></h1>
+<section id="last-time">
+<h2>Last time<a class="headerlink" href="#last-time" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Householder QR</p></li>
+</ul>
+</section>
+<section id="today">
+<h2>Today<a class="headerlink" href="#today" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Recap on Householder QR</p></li>
+<li><p>Composition of reflectors</p></li>
+<li><p>Cholesky Decomposition</p></li>
+<li><p>Profiling</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">LinearAlgebra</span>
+<span class="k">using</span><span class="w"> </span><span class="n">Plots</span>
+<span class="n">default</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">legendfontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+
+<span class="k">function</span><span class="w"> </span><span class="n">vander</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="o">=</span><span class="nb">nothing</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">isnothing</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+<span class="w">        </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="n">V</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ones</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">2</span><span class="o">:</span><span class="n">k</span>
+<span class="w">        </span><span class="n">V</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">V</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">x</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">V</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span><span class="n">gram_schmidt_classical</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="w">    </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">size</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="w">    </span><span class="n">Q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+<span class="w">        </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
+<span class="w">        </span><span class="n">R</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">1</span><span class="o">:</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">v</span>
+<span class="w">        </span><span class="n">v</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">1</span><span class="o">:</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">R</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
+<span class="w">        </span><span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">norm</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="w">        </span><span class="n">Q</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">Q</span><span class="p">,</span><span class="w"> </span><span class="n">R</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>gram_schmidt_classical (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">reflectors_mult</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">copy</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">reverse</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+<span class="w">        </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="n">y</span><span class="p">[</span><span class="k">end</span><span class="o">-</span><span class="n">n</span><span class="o">:</span><span class="n">end</span><span class="p">]</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">v</span><span class="o">&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="k">end</span><span class="o">-</span><span class="n">n</span><span class="o">:</span><span class="n">end</span><span class="p">])</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">y</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span><span class="n">reflectors_to_dense</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+<span class="w">    </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="w">    </span><span class="n">Q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">diagm</span><span class="p">(</span><span class="n">ones</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">m</span>
+<span class="w">        </span><span class="n">Q</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reflectors_mult</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">j</span><span class="p">])</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">Q</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>reflectors_to_dense (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<p><img alt="Choosing the better of two Householder reflectors (Trefethen and Bau, 1999)." src="img/TB-Householder2.png" /></p>
+</section>
+<section id="recap-on-householder-qr">
+<h2>1. Recap on Householder QR<a class="headerlink" href="#recap-on-householder-qr" title="Link to this heading">#</a></h2>
+<section id="householder-an-improved-algorithm">
+<h3>Householder: An improved algorithm<a class="headerlink" href="#householder-an-improved-algorithm" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">qr_householder</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="w">    </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">size</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="w">    </span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">copy</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="w">    </span><span class="n">V</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="c"># list of reflectors</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+<span class="w">        </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">copy</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="o">:</span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">])</span>
+<span class="w">        </span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">sign</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">norm</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="c"># &lt;---</span>
+<span class="w">        </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">normalize</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="w">        </span><span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="o">:</span><span class="n">end</span><span class="p">,</span><span class="n">j</span><span class="o">:</span><span class="n">end</span><span class="p">]</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">v</span><span class="o">&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="o">:</span><span class="n">end</span><span class="p">,</span><span class="n">j</span><span class="o">:</span><span class="n">end</span><span class="p">]</span>
+<span class="w">        </span><span class="n">push!</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">V</span><span class="p">,</span><span class="w"> </span><span class="n">R</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>qr_householder (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span>
+<span class="n">V</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">qr_householder</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">tau</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">V</span><span class="p">]</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">tau</span>
+<span class="n">V1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">v</span><span class="w"> </span><span class="o">./</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">V</span><span class="p">]</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">V1</span>
+<span class="n">R</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tau = [2.0, 2.0]
+V1 = 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1.0, 0.0], [1.0]]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2×2 Matrix{Int64}:
+ -1   0
+  0  -1
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="householder-is-backward-stable">
+<h3>Householder is backward stable<a class="headerlink" href="#householder-is-backward-stable" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span>
+<span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">)</span>
+<span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vander</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">)</span>
+<span class="n">V</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">qr_householder</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">Q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reflectors_to_dense</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">norm</span><span class="p">(</span><span class="n">Q</span><span class="o">&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Q</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">I</span><span class="p">)</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">norm</span><span class="p">(</span><span class="n">Q</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">A</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>norm(Q&#39; * Q - I) = 5.949301496893686e-15
+norm(Q * R - A) = 1.2090264267288813e-14
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">1.</span><span class="p">]</span>
+<span class="n">V</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">qr_householder</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="w">  </span><span class="c"># we don&#39;t get NaNs anymore</span>
+<span class="n">qr</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="w"> </span><span class="c"># Julia built-in</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LinearAlgebra.QRCompactWY{Float64, Matrix{Float64}, Matrix{Float64}}
+Q factor: 2×2 LinearAlgebra.QRCompactWYQ{Float64, Matrix{Float64}, Matrix{Float64}}
+R factor:
+2×2 Matrix{Float64}:
+ 1.0  0.0
+ 0.0  1.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="orthogonality-is-preserved">
+<h3>Orthogonality is preserved<a class="headerlink" href="#orthogonality-is-preserved" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">)</span>
+<span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vander</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="c"># [1 | x | x^2 | ... x^19]</span>
+<span class="n">Q</span><span class="p">,</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gram_schmidt_classical</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">norm</span><span class="p">(</span><span class="n">Q</span><span class="o">&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Q</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">I</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>norm(Q&#39; * Q - I) = 1.4985231287367549
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.4985231287367549
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reflectors_to_dense</span><span class="p">(</span><span class="n">qr_householder</span><span class="p">(</span><span class="n">A</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">norm</span><span class="p">(</span><span class="n">Q</span><span class="o">&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Q</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">I</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>norm(Q&#39; * Q - I) = 3.840520021608235e-15
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.840520021608235e-15
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="summary">
+<h3>Summary:<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Classic Gram-Schmidt: Usually very poor orthogonality.</p></li>
+<li><p>Modified Gram-Schmidt: Depends upon condition of <span class="math notranslate nohighlight">\(A\)</span>. Fails completely when <span class="math notranslate nohighlight">\(A\)</span> is singular.</p></li>
+<li><p>Householder triangularization: Always good orthogonality and backward stable.</p></li>
+</ul>
+</section>
+</section>
+<section id="composition-of-reflectors">
+<h2>2. Composition of reflectors<a class="headerlink" href="#composition-of-reflectors" title="Link to this heading">#</a></h2>
+<div class="amsmath math notranslate nohighlight" id="equation-d622e5d3-0840-4284-a0cc-c76b87b23e34">
+<span class="eqno">(4)<a class="headerlink" href="#equation-d622e5d3-0840-4284-a0cc-c76b87b23e34" title="Permalink to this equation">#</a></span>\[\begin{align}
+(I - 2 v v^T) (I - 2 w w^T) &amp;= I - 2 v v^T - 2 w w^T + 4 v (v^T w) w^T \\
+&amp;= I - \Bigg[v \Bigg| w \Bigg] \begin{bmatrix} 2 &amp; -4 v^T w \\ 0 &amp; 2 \end{bmatrix} \begin{bmatrix} v^T \\ w^T \end{bmatrix}
+\end{align}\]</div>
+<p>This turns applying reflectors from a sequence of vector operations to a sequence of (smallish) matrix operations. It’s the key to high performance and the native format (<code class="docutils literal notranslate"><span class="pre">QRCompactWY</span></code>) returned by Julia <code class="docutils literal notranslate"><span class="pre">qr()</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Q</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">qr</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="w"> </span><span class="c"># Julia built-in</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LinearAlgebra.QRCompactWY{Float64, Matrix{Float64}, Matrix{Float64}}
+Q factor: 20×20 LinearAlgebra.QRCompactWYQ{Float64, Matrix{Float64}, Matrix{Float64}}
+R factor:
+20×20 Matrix{Float64}:
+ -4.47214  0.0      -1.64763       0.0          …  -0.514468      2.22045e-16
+  0.0      2.71448   1.11022e-16   1.79412         -2.498e-16     0.823354
+  0.0      0.0      -1.46813       5.55112e-17     -0.944961     -2.23779e-16
+  0.0      0.0       0.0          -0.774796         3.83808e-17  -0.913056
+  0.0      0.0       0.0           0.0              0.797217     -4.06264e-16
+  0.0      0.0       0.0           0.0          …  -3.59496e-16   0.637796
+  0.0      0.0       0.0           0.0             -0.455484     -1.3936e-15
+  0.0      0.0       0.0           0.0              4.40958e-16  -0.313652
+  0.0      0.0       0.0           0.0             -0.183132      1.64685e-15
+  0.0      0.0       0.0           0.0              4.82253e-16   0.109523
+  0.0      0.0       0.0           0.0          …   0.0510878     5.9848e-16
+  0.0      0.0       0.0           0.0             -2.68709e-15   0.0264553
+  0.0      0.0       0.0           0.0             -0.0094344    -2.94383e-15
+  0.0      0.0       0.0           0.0              2.08514e-15   0.00417208
+  0.0      0.0       0.0           0.0              0.0010525    -2.24994e-15
+  0.0      0.0       0.0           0.0          …  -1.64363e-15  -0.000385264
+  0.0      0.0       0.0           0.0             -5.9057e-5     7.69025e-16
+  0.0      0.0       0.0           0.0              1.76642e-16  -1.66202e-5
+  0.0      0.0       0.0           0.0             -1.04299e-6   -1.68771e-16
+  0.0      0.0       0.0           0.0              0.0           1.71467e-7
+</pre></div>
+</div>
+</div>
+</div>
+<section id="this-works-even-for-very-nonsquare-matrices">
+<h3>This works even for very nonsquare matrices<a class="headerlink" href="#this-works-even-for-very-nonsquare-matrices" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">1000000</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
+<span class="n">Q</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">qr</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">size</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">norm</span><span class="p">(</span><span class="n">Q</span><span class="o">*</span><span class="n">R</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">A</span><span class="p">)</span>
+<span class="n">R</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>size(Q) = (1000000, 1000000)
+norm(Q * R - A) = 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.269652008965089e-12
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5×5 Matrix{Float64}:
+ -577.389  -433.204  -433.422  -433.082  -433.149
+    0.0    -381.961  -163.717  -164.017  -163.428
+    0.0       0.0     344.98    103.853   103.162
+    0.0       0.0       0.0    -329.559   -76.2751
+    0.0       0.0       0.0       0.0     320.342
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is known as a “full” (or “complete”) QR factorization, in contrast to a reduced QR factorization in which <span class="math notranslate nohighlight">\(Q\)</span> has the same shape as <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<ul class="simple">
+<li><p>How much memory does <span class="math notranslate nohighlight">\(Q\)</span> use?</p></li>
+</ul>
+</section>
+<section id="compare-to-python-s-numpy-linalg-qr">
+<h3>Compare to Python’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.qr.html"><code class="docutils literal notranslate"><span class="pre">numpy.linalg.qr</span></code></a><a class="headerlink" href="#compare-to-python-s-numpy-linalg-qr" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Need to decide up-front whether you want full or reduced QR.</p></li>
+<li><p>Full QR is expensive to represent.</p></li>
+</ul>
+</section>
+</section>
+<section id="cholesky-decomposition">
+<h2>3. Cholesky decomposition<a class="headerlink" href="#cholesky-decomposition" title="Link to this heading">#</a></h2>
+<p>First some definitions:</p>
+<p>A matrix <span class="math notranslate nohighlight">\(A \in \R^{n \times n}\)</span> is <em>symmetric</em> if <span class="math notranslate nohighlight">\(A = A^{T}\)</span> and <em>positive definite</em> if <span class="math notranslate nohighlight">\(x^{T}Ax &gt; 0\)</span> for all nonzero <span class="math notranslate nohighlight">\(x \in \R^n\)</span>. Symmetric <em>and</em> positive definite matrices, i.e., <em>symmetric positive definite (SPD)</em> matrices, are the most important class of specially structured matrices that arise in applications.</p>
+<p>Intuitively, the largest entry in an SPD matrix is on the diagonal and, more qualitatively, SPD matrices have more “mass” on the diagonal than off the diagonal.</p>
+<p>If <span class="math notranslate nohighlight">\(A\)</span> can be factored in a QR-factorization, i.e., <span class="math notranslate nohighlight">\(A = QR\)</span>, then we can write:</p>
+<div class="math notranslate nohighlight">
+\[(QR)^T QR = A^T A\]</div>
+<p>By applying the transpose of a product, we get:</p>
+<div class="math notranslate nohighlight">
+\[R^T Q^T  QR = A^T A\]</div>
+<p>And since Q is orthogonal (remember: <span class="math notranslate nohighlight">\(QQ^T = Q^TQ =I\)</span>), we get:</p>
+<div class="math notranslate nohighlight">
+\[R^T( Q^T  Q)R = A^T A\]</div>
+<div class="math notranslate nohighlight">
+\[R^T R = A^T A\]</div>
+<p>If, A is SPD, then it is possible to find a <em>lower triangular</em> matrix <span class="math notranslate nohighlight">\(L\)</span> such that:</p>
+<div class="math notranslate nohighlight">
+\[L L^T = A^T A\]</div>
+<p>and then we can write <span class="math notranslate nohighlight">\(Q = A L^{-T}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">qr_chol</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="w">    </span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cholesky</span><span class="p">(</span><span class="n">A</span><span class="o">&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">A</span><span class="p">)</span><span class="o">.</span><span class="n">U</span>
+<span class="w">    </span><span class="n">Q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">R</span>
+<span class="w">    </span><span class="n">Q</span><span class="p">,</span><span class="w"> </span><span class="n">R</span>
+<span class="k">end</span>
+
+<span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">Q</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">qr_chol</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">norm</span><span class="p">(</span><span class="n">Q</span><span class="o">&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Q</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">I</span><span class="p">)</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">norm</span><span class="p">(</span><span class="n">Q</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>norm(Q&#39; * Q - I) = 1.3836158185112691e-15
+norm(Q * R - A) = 3.15548059928785e-16
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.15548059928785e-16
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">)</span>
+<span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vander</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">Q</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">qr_chol</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">norm</span><span class="p">(</span><span class="n">Q</span><span class="o">&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Q</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">I</span><span class="p">)</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">norm</span><span class="p">(</span><span class="n">Q</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">A</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>norm(Q&#39; * Q - I) = 4.3924133095508784e-5
+norm(Q * R - A) = 7.092119431498881e-16
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="can-we-fix-this">
+<h1>Can we fix this?<a class="headerlink" href="#can-we-fix-this" title="Link to this heading">#</a></h1>
+<p>Note that the product of two triangular matrices is triangular.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">triu</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">R</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">R</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5×5 Matrix{Float64}:
+ 0.22731  0.0143672  0.723273  0.70743   0.697537
+ 0.0      0.0772152  0.784469  0.919392  1.14909
+ 0.0      0.0        0.570009  1.49669   0.994504
+ 0.0      0.0        0.0       0.834919  0.361733
+ 0.0      0.0        0.0       0.0       0.107244
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">qr_chol2</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="w">    </span><span class="n">Q</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">qr_chol</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="w">    </span><span class="n">Q</span><span class="p">,</span><span class="w"> </span><span class="n">R1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">qr_chol</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span>
+<span class="w">    </span><span class="n">Q</span><span class="p">,</span><span class="w"> </span><span class="n">R1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">R</span>
+<span class="k">end</span>
+
+<span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">)</span>
+<span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vander</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">Q</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">qr_chol2</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">norm</span><span class="p">(</span><span class="n">Q</span><span class="o">&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Q</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">I</span><span class="p">)</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">norm</span><span class="p">(</span><span class="n">Q</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">A</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>norm(Q&#39; * Q - I) = 9.892569635797733e-16
+norm(Q * R - A) = 7.622613303296868e-16
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="how-fast-are-these-methods">
+<h1>How fast are these methods?<a class="headerlink" href="#how-fast-are-these-methods" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5000</span><span class="p">,</span><span class="w"> </span><span class="mi">2000</span>
+<span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">randn</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+
+<span class="nd">@time</span><span class="w"> </span><span class="n">qr</span><span class="p">(</span><span class="n">A</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.778856 seconds (7 allocations: 77.393 MiB, 0.46% gc time)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">randn</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="nd">@time</span><span class="w"> </span><span class="n">qr_chol</span><span class="p">(</span><span class="n">A</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.860848 seconds (8 allocations: 137.329 MiB, 16.95% gc time)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="profiling">
+<h1>Profiling<a class="headerlink" href="#profiling" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">ProfileSVG</span>
+
+<span class="nd">@profview</span><span class="w"> </span><span class="n">qr</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">ArgumentError</span>: Package ProfileSVG not found in current path.
+<span class="o">-</span> <span class="n">Run</span> <span class="err">`</span><span class="kn">import</span> <span class="nn">Pkg</span><span class="p">;</span> <span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;ProfileSVG&quot;</span><span class="p">)</span><span class="err">`</span> <span class="n">to</span> <span class="n">install</span> <span class="n">the</span> <span class="n">ProfileSVG</span> <span class="n">package</span><span class="o">.</span>
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">macro</span> <span class="n">expansion</span>
+   <span class="o">@</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1772</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">macro</span> <span class="n">expansion</span>
+   <span class="o">@</span> <span class="o">./</span><span class="n">lock</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">267</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">__require</span><span class="p">(</span><span class="n">into</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">mod</span><span class="p">::</span><span class="n">Symbol</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1753</span>
+ <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="c1">#invoke_in_world#3</span>
+   <span class="o">@</span> <span class="o">./</span><span class="n">essentials</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">926</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">invoke_in_world</span>
+   <span class="o">@</span> <span class="o">./</span><span class="n">essentials</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">923</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="n">require</span><span class="p">(</span><span class="n">into</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">mod</span><span class="p">::</span><span class="n">Symbol</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1746</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "sdsu-comp526/fall24",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "julia-1.10"
+        },
+        kernelOptions: {
+            name: "julia-1.10",
+            path: "./slides"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'julia-1.10'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="module4-3_householder.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">17) Householder QR</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="module5-1_intro_to_fortran.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">14) Introduction to Fortran</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">18) Cholesky QR</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#last-time">Last time</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#today">Today</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap-on-householder-qr">1. Recap on Householder QR</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#householder-an-improved-algorithm">Householder: An improved algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#householder-is-backward-stable">Householder is backward stable</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orthogonality-is-preserved">Orthogonality is preserved</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#composition-of-reflectors">2. Composition of reflectors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#this-works-even-for-very-nonsquare-matrices">This works even for very nonsquare matrices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-to-python-s-numpy-linalg-qr">Compare to Python’s <code class="docutils literal notranslate"><span class="pre">numpy.linalg.qr</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cholesky-decomposition">3. Cholesky decomposition</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#can-we-fix-this">Can we fix this?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-fast-are-these-methods">How fast are these methods?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#profiling">Profiling</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Valeria Barra
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
