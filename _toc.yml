@@ -25,4 +25,5 @@ chapters:
   - file: slides/module4-3_householder.ipynb
   - file: slides/module4-4_cholesky_qr.ipynb
   - file: slides/module4-5_matrix_conditioning_and_svd.ipynb
+  - file: slides/module4-6_svd_and_conditioning.ipynb
   - file: slides/module5-1_intro_to_fortran.md
