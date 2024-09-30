@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>21) Low Rank &#8212; Computational Methods for Scientists</title>
+    <title>20) Low Rank &#8212; Computational Methods for Scientists</title>
   
   
   
@@ -203,13 +203,13 @@
 <li class="toctree-l2"><a class="reference internal" href="module3-4_convergence_classes.html">11) Convergence classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module3-5_newton.html">12) Newton methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module3-6_stability.html">13) Stability</a></li>
-<li class="toctree-l2"><a class="reference internal" href="module4-1_linear_algebra.html">15) Linear Algebra</a></li>
-<li class="toctree-l2"><a class="reference internal" href="module4-2_gram_schmidt.html">16) Gram-Schmidt and QR</a></li>
-<li class="toctree-l2"><a class="reference internal" href="module4-3_householder.html">17) Householder QR</a></li>
-<li class="toctree-l2"><a class="reference internal" href="module4-4_cholesky_qr.html">18) Cholesky QR</a></li>
-<li class="toctree-l2"><a class="reference internal" href="module4-5_matrix_conditioning_and_svd.html">19) Matrix condition number and SVD</a></li>
-<li class="toctree-l2"><a class="reference internal" href="module4-6_svd_and_conditioning.html">20) SVD Geometry</a></li>
-<li class="toctree-l2"><a class="reference internal" href="module5-1_intro_to_fortran.html">14) Introduction to Fortran</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-1_linear_algebra.html">14) Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-2_gram_schmidt.html">15) Gram-Schmidt and QR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-3_householder.html">16) Householder QR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-4_cholesky_qr.html">17) Cholesky QR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-5_matrix_conditioning_and_svd.html">18) Matrix condition number and SVD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-6_svd_and_conditioning.html">19) SVD Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module5-1_intro_to_fortran.html">21) Introduction to Fortran</a></li>
 </ul>
 </details></li>
 </ul>
@@ -428,7 +428,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>21) Low Rank</h1>
+    <h1>20) Low Rank</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -438,7 +438,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">21) Low Rank</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">20) Low Rank</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#last-time">Last time</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#today">Today</a></li>
 </ul>
@@ -477,7 +477,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="low-rank">
-<h1>21) Low Rank<a class="headerlink" href="#low-rank" title="Link to this heading">#</a></h1>
+<h1>20) Low Rank<a class="headerlink" href="#low-rank" title="Link to this heading">#</a></h1>
 <section id="last-time">
 <h2>Last time<a class="headerlink" href="#last-time" title="Link to this heading">#</a></h2>
 <ul class="simple">
@@ -588,8 +588,8 @@ document.write(`
 <h1>Condition number via SVD<a class="headerlink" href="#condition-number-via-svd" title="Link to this heading">#</a></h1>
 <div class="math notranslate nohighlight">
 \[\begin{split} U \overbrace{\begin{bmatrix} \sigma_{\max} &amp;&amp; \\ &amp; \ddots &amp; \\ &amp;&amp; \sigma_{\min} \end{bmatrix}}^{\Sigma} V^T = A \end{split}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-297582fb-ef70-4d93-8c73-b6d89bf6072a">
-<span class="eqno">()<a class="headerlink" href="#equation-297582fb-ef70-4d93-8c73-b6d89bf6072a" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-d723be59-ca7c-45d3-957f-4ab5708e4e32">
+<span class="eqno">()<a class="headerlink" href="#equation-d723be59-ca7c-45d3-957f-4ab5708e4e32" title="Permalink to this equation">#</a></span>\[\begin{align}
 \lVert A \rVert &amp;= \sigma_{\max} &amp;
 \kappa(A) &amp;= \frac{\sigma_{\max}}{\sigma_{\min}} = \texttt{cond}(A)
 \end{align}\]</div>
@@ -965,7 +965,7 @@ norm(F - Fhat) = 31.382227066596844
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">21) Low Rank</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">20) Low Rank</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#last-time">Last time</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#today">Today</a></li>
 </ul>

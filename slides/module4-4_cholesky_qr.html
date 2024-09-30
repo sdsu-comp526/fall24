@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>18) Cholesky QR &#8212; Computational Methods for Scientists</title>
+    <title>17) Cholesky QR &#8212; Computational Methods for Scientists</title>
   
   
   
@@ -63,8 +63,8 @@
     <link rel="icon" href="../_static/SDSU-comp526_logo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="19) Matrix condition number and SVD" href="module4-5_matrix_conditioning_and_svd.html" />
-    <link rel="prev" title="17) Householder QR" href="module4-3_householder.html" />
+    <link rel="next" title="18) Matrix condition number and SVD" href="module4-5_matrix_conditioning_and_svd.html" />
+    <link rel="prev" title="16) Householder QR" href="module4-3_householder.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -203,13 +203,13 @@
 <li class="toctree-l2"><a class="reference internal" href="module3-4_convergence_classes.html">11) Convergence classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module3-5_newton.html">12) Newton methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module3-6_stability.html">13) Stability</a></li>
-<li class="toctree-l2"><a class="reference internal" href="module4-1_linear_algebra.html">15) Linear Algebra</a></li>
-<li class="toctree-l2"><a class="reference internal" href="module4-2_gram_schmidt.html">16) Gram-Schmidt and QR</a></li>
-<li class="toctree-l2"><a class="reference internal" href="module4-3_householder.html">17) Householder QR</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">18) Cholesky QR</a></li>
-<li class="toctree-l2"><a class="reference internal" href="module4-5_matrix_conditioning_and_svd.html">19) Matrix condition number and SVD</a></li>
-<li class="toctree-l2"><a class="reference internal" href="module4-6_svd_and_conditioning.html">20) SVD Geometry</a></li>
-<li class="toctree-l2"><a class="reference internal" href="module5-1_intro_to_fortran.html">14) Introduction to Fortran</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-1_linear_algebra.html">14) Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-2_gram_schmidt.html">15) Gram-Schmidt and QR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-3_householder.html">16) Householder QR</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">17) Cholesky QR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-5_matrix_conditioning_and_svd.html">18) Matrix condition number and SVD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-6_svd_and_conditioning.html">19) SVD Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module5-1_intro_to_fortran.html">21) Introduction to Fortran</a></li>
 </ul>
 </details></li>
 </ul>
@@ -428,7 +428,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>18) Cholesky QR</h1>
+    <h1>17) Cholesky QR</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -470,7 +470,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="cholesky-qr">
-<h1>18) Cholesky QR<a class="headerlink" href="#cholesky-qr" title="Link to this heading">#</a></h1>
+<h1>17) Cholesky QR<a class="headerlink" href="#cholesky-qr" title="Link to this heading">#</a></h1>
 <section id="last-time">
 <h2>Last time<a class="headerlink" href="#last-time" title="Link to this heading">#</a></h2>
 <ul class="simple">
@@ -820,8 +820,8 @@ norm(v) = 1.4245900685395503
 </section>
 <section id="composition-of-reflectors">
 <h2>2. Composition of reflectors<a class="headerlink" href="#composition-of-reflectors" title="Link to this heading">#</a></h2>
-<div class="amsmath math notranslate nohighlight" id="equation-ca40169d-248d-4fdb-9d82-7b336a3c57da">
-<span class="eqno">(7)<a class="headerlink" href="#equation-ca40169d-248d-4fdb-9d82-7b336a3c57da" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-1aecc310-39ae-4d16-a2e9-3a3c4ff504f9">
+<span class="eqno">(7)<a class="headerlink" href="#equation-1aecc310-39ae-4d16-a2e9-3a3c4ff504f9" title="Permalink to this equation">#</a></span>\[\begin{align}
 (I - 2 v v^T) (I - 2 w w^T) &amp;= I - 2 v v^T - 2 w w^T + 4 v (v^T w) w^T \\
 &amp;= I - \Bigg[v \Bigg| w \Bigg] \begin{bmatrix} 2 &amp; -4 v^T w \\ 0 &amp; 2 \end{bmatrix} \begin{bmatrix} v^T \\ w^T \end{bmatrix}
 \end{align}\]</div>
@@ -1623,7 +1623,7 @@ if (typeof require === 'function' && define.amd) {
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">17) Householder QR</p>
+        <p class="prev-next-title">16) Householder QR</p>
       </div>
     </a>
     <a class="right-next"
@@ -1631,7 +1631,7 @@ if (typeof require === 'function' && define.amd) {
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">19) Matrix condition number and SVD</p>
+        <p class="prev-next-title">18) Matrix condition number and SVD</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
