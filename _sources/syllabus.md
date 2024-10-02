@@ -103,11 +103,11 @@ Grading breakdown:
 - Participation (can include engagement in class, attendance, use of office hours, etc) (5%)
 - Assignment 1 (10%): due Friday, September 13, by midnight (AOE)
 - Assignment 2 (10%): due Friday, October 4, by midnight (AOE)
-- Assignment 3 (10%): due Friday, October 25, by midnight (AOE)
-- Assignment 4 (10%): due Friday, November 15, by midnight (AOE)
+- Assignment 3 (10%): due Friday, November 08, by midnight (AOE)
+- Assignment 4 (10%): due Friday, November 22, by midnight (AOE)
 
-- Midterm project (%20): due Wednesday, October 16, by midnight (AOE)
-- Final project (%35): due Monday, December 16 (exam hours 8-10 a.m.)
+- **Midterm project** (%20): due Friday, October 25, by midnight (AOE)
+- **Final project** (%35): due Monday, December 16 (exam hours 9-11:30 a.m.), but **Final project Proposal** is due six weeks prior, on Monday, November 04, by midnight (AOE). The Final project Proposal will need to be discussed with your teacher, before its submission by Monday, November 04. Please make sure to make plenty of use of Office Hours to discuss your Final project Proposal before submitting it.
 
 Assignments will be distributed no later than a week prior to the due date.
 
