@@ -1,17 +1,15 @@
 - Participation: 5%
 - Assignment 1: Git repo (10%)
 - Assignment 2: C assignment (10%)
-- Assignment 3: Fortran assignment (10%)
-- Assignment 4: Julia (10%)
+- Assignment 3: Julia (10%) ; some linear algebra? Use autograder!
+- Assignment 4: Fortran assignment (10%)
 
-- Midterm project: open-source contribution (%20)
-- Final project: (%35)
+- Midterm project: a choice of iterative linear system solver or least square (from Miguel) (%20)
+- Final project: open-source contribution(%35)
 
 TODO:
 
-- Add Exercises for the Bisection Method from MATH340 Lab2 - DONE
-- Add Exercises for the Fixed Point Method from MATH340 Lab3 DONE
-- Add Exercises for the Newton's Method from MATH340 Lab3 DONE
+After the module4-4_cholesky_qr.ipynb notebook, add a lecture on direct Vs iterative solvers for linear systems (my PhD linear algebra lecture notes from Tuesday 12/04/12)
 
 - Lagrange Interpolation & Chebyshev Nodes
 - Differentiation
@@ -19,3 +17,5 @@ TODO:
   - First and Second order derivatives
 - Numerical Integration
   - Gauss rule
+
+- Finite Elements?

@@ -2,13 +2,13 @@
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="./" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>&lt;no title&gt; &#8212; Computational Methods for Scientists</title>
+    <title>18) Solving Systems &#8212; Computational Methods for Scientists</title>
   
   
   
@@ -18,49 +18,51 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=87e54e7c" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="_static/doctools.js?v=9a2dae69"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="_static/copybutton.js?v=f281be69"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'assignment_notes';</script>
-    <link rel="icon" href="_static/SDSU-comp526_logo.svg"/>
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
+    <script>DOCUMENTATION_OPTIONS.pagename = 'slides/module4-5_solving_systems';</script>
+    <link rel="icon" href="../_static/SDSU-comp526_logo.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="19) Matrix condition number and SVD" href="module4-6_matrix_conditioning_and_svd.html" />
+    <link rel="prev" title="17) Cholesky QR" href="module4-4_cholesky_qr.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -92,7 +94,7 @@
     <div class="search-button__overlay"></div>
     <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
-      action="search.html"
+      action="../search.html"
       method="get">
   <i class="fa-solid fa-magnifying-glass"></i>
   <input type="search"
@@ -123,8 +125,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -143,7 +143,7 @@
     
   
 
-<a class="navbar-brand logo" href="index.html">
+<a class="navbar-brand logo" href="../index.html">
   
   
   
@@ -154,8 +154,8 @@
       
     
     
-    <img src="_static/SDSU-comp526_logo.svg" class="logo__image only-light" alt="Computational Methods for Scientists - Home"/>
-    <script>document.write(`<img src="_static/SDSU-comp526_logo.svg" class="logo__image only-dark" alt="Computational Methods for Scientists - Home"/>`);</script>
+    <img src="../_static/SDSU-comp526_logo.svg" class="logo__image only-light" alt="Computational Methods for Scientists - Home"/>
+    <script>document.write(`<img src="../_static/SDSU-comp526_logo.svg" class="logo__image only-dark" alt="Computational Methods for Scientists - Home"/>`);</script>
   
   
 </a></div>
@@ -175,41 +175,41 @@
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="index.html">
+                <a class="reference internal" href="../index.html">
                     Welcome
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="syllabus.html">Syllabus</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="slides.html">Slides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="slides/module1-1_first_class.html">1) First Class: Reproducibility and Git</a></li>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../syllabus.html">Syllabus</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../slides.html">Slides</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="module1-1_first_class.html">1) First Class: Reproducibility and Git</a></li>
 
 
-<li class="toctree-l2"><a class="reference internal" href="slides/module1-2_linux.html">2) The Linux Filesystem and commands</a></li>
-<li class="toctree-l2"><a class="reference internal" href="slides/module1-3_functions_and_fpa.html">3) Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module1-2_linux.html">2) The Linux Filesystem and commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module1-3_functions_and_fpa.html">3) Functions</a></li>
 
 
 
-<li class="toctree-l2"><a class="reference internal" href="slides/module2-1_intro_to_c.html">4) Intro to C</a></li>
-<li class="toctree-l2"><a class="reference internal" href="slides/module2-2_c_pointers.html">5) Intro to C pointers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="slides/module2-3_c_structs_and_functions.html">6) C structs and functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="slides/module2-4_c_memory.html">7) C memory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="slides/module3-1_function_errors.html">8) Function errors</a></li>
-<li class="toctree-l2"><a class="reference internal" href="slides/module3-2_conditioning.html">9) Conditioning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="slides/module3-3_root_finding.html">10) Rootfinding</a></li>
-<li class="toctree-l2"><a class="reference internal" href="slides/module3-4_convergence_classes.html">11) Convergence classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="slides/module3-5_newton.html">12) Newton methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="slides/module3-6_stability.html">13) Stability</a></li>
-<li class="toctree-l2"><a class="reference internal" href="slides/module4-1_linear_algebra.html">14) Linear Algebra</a></li>
-<li class="toctree-l2"><a class="reference internal" href="slides/module4-2_gram_schmidt.html">15) Gram-Schmidt and QR</a></li>
-<li class="toctree-l2"><a class="reference internal" href="slides/module4-3_householder.html">16) Householder QR</a></li>
-<li class="toctree-l2"><a class="reference internal" href="slides/module4-4_cholesky_qr.html">17) Cholesky QR</a></li>
-<li class="toctree-l2"><a class="reference internal" href="slides/module4-5_solving_systems.html">18) Solving Systems</a></li>
-<li class="toctree-l2"><a class="reference internal" href="slides/module4-6_matrix_conditioning_and_svd.html">19) Matrix condition number and SVD</a></li>
-<li class="toctree-l2"><a class="reference internal" href="slides/module4-7_svd_and_conditioning.html">20) SVD Geometry</a></li>
-<li class="toctree-l2"><a class="reference internal" href="slides/module4-8_low-rank.html">21) Low Rank</a></li>
-<li class="toctree-l2"><a class="reference internal" href="slides/module5-1_intro_to_fortran.html">25) Introduction to Fortran</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module2-1_intro_to_c.html">4) Intro to C</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module2-2_c_pointers.html">5) Intro to C pointers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module2-3_c_structs_and_functions.html">6) C structs and functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module2-4_c_memory.html">7) C memory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module3-1_function_errors.html">8) Function errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module3-2_conditioning.html">9) Conditioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module3-3_root_finding.html">10) Rootfinding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module3-4_convergence_classes.html">11) Convergence classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module3-5_newton.html">12) Newton methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module3-6_stability.html">13) Stability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-1_linear_algebra.html">14) Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-2_gram_schmidt.html">15) Gram-Schmidt and QR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-3_householder.html">16) Householder QR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-4_cholesky_qr.html">17) Cholesky QR</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">18) Solving Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-6_matrix_conditioning_and_svd.html">19) Matrix condition number and SVD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-7_svd_and_conditioning.html">20) SVD Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-8_low-rank.html">21) Low Rank</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module5-1_intro_to_fortran.html">25) Introduction to Fortran</a></li>
 </ul>
 </details></li>
 </ul>
@@ -258,6 +258,37 @@
 
 
 
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
 <div class="dropdown dropdown-source-buttons">
   <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
     <i class="fab fa-github"></i>
@@ -283,7 +314,7 @@
       
       
       
-      <li><a href="https://github.com/sdsu-comp526/fall24/issues/new?title=Issue%20on%20page%20%2Fassignment_notes.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/sdsu-comp526/fall24/issues/new?title=Issue%20on%20page%20%2Fslides/module4-5_solving_systems.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -313,7 +344,7 @@
       
       
       
-      <li><a href="_sources/assignment_notes.md" target="_blank"
+      <li><a href="../_sources/slides/module4-5_solving_systems.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -323,7 +354,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -384,9 +415,7 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
+
 </div></div>
       
     </div>
@@ -397,19 +426,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>18) Solving Systems</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -419,32 +440,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <ul class="simple">
-<li><p>Participation: 5%</p></li>
-<li><p>Assignment 1: Git repo (10%)</p></li>
-<li><p>Assignment 2: C assignment (10%)</p></li>
-<li><p>Assignment 3: Julia (10%) ; some linear algebra? Use autograder!</p></li>
-<li><p>Assignment 4: Fortran assignment (10%)</p></li>
-<li><p>Midterm project: a choice of iterative linear system solver or least square (from Miguel) (%20)</p></li>
-<li><p>Final project: open-source contribution(%35)</p></li>
-</ul>
-<p>TODO:</p>
-<p>After the module4-4_cholesky_qr.ipynb notebook, add a lecture on direct Vs iterative solvers for linear systems (my PhD linear algebra lecture notes from Tuesday 12/04/12)</p>
-<ul class="simple">
-<li><p>Lagrange Interpolation &amp; Chebyshev Nodes</p></li>
-<li><p>Differentiation</p>
-<ul>
-<li><p>Forward/Backward and Centered Differences</p></li>
-<li><p>First and Second order derivatives</p></li>
-</ul>
-</li>
-<li><p>Numerical Integration</p>
-<ul>
-<li><p>Gauss rule</p></li>
-</ul>
-</li>
-<li><p>Finite Elements?</p></li>
-</ul>
+  <section class="tex2jax_ignore mathjax_ignore" id="solving-systems">
+<h1>18) Solving Systems<a class="headerlink" href="#solving-systems" title="Link to this heading">#</a></h1>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -459,7 +457,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./."
+            path: "./slides"
         },
         predefinedOutput: true
     }
@@ -476,27 +474,30 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="module4-4_cholesky_qr.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">17) Cholesky QR</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="module4-6_matrix_conditioning_and_svd.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">19) Matrix condition number and SVD</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-  </nav></div>
-
-</div></div>
               
             
           </div>
@@ -541,8 +542,8 @@ By Valeria Barra
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

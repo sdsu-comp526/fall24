@@ -63,7 +63,7 @@
     <link rel="icon" href="../_static/SDSU-comp526_logo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="18) Matrix condition number and SVD" href="module4-5_matrix_conditioning_and_svd.html" />
+    <link rel="next" title="18) Solving Systems" href="module4-5_solving_systems.html" />
     <link rel="prev" title="16) Householder QR" href="module4-3_householder.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -207,9 +207,11 @@
 <li class="toctree-l2"><a class="reference internal" href="module4-2_gram_schmidt.html">15) Gram-Schmidt and QR</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module4-3_householder.html">16) Householder QR</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">17) Cholesky QR</a></li>
-<li class="toctree-l2"><a class="reference internal" href="module4-5_matrix_conditioning_and_svd.html">18) Matrix condition number and SVD</a></li>
-<li class="toctree-l2"><a class="reference internal" href="module4-6_svd_and_conditioning.html">19) SVD Geometry</a></li>
-<li class="toctree-l2"><a class="reference internal" href="module5-1_intro_to_fortran.html">21) Introduction to Fortran</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-5_solving_systems.html">18) Solving Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-6_matrix_conditioning_and_svd.html">19) Matrix condition number and SVD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-7_svd_and_conditioning.html">20) SVD Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-8_low-rank.html">21) Low Rank</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module5-1_intro_to_fortran.html">25) Introduction to Fortran</a></li>
 </ul>
 </details></li>
 </ul>
@@ -820,8 +822,8 @@ norm(v) = 1.4245900685395503
 </section>
 <section id="composition-of-reflectors">
 <h2>2. Composition of reflectors<a class="headerlink" href="#composition-of-reflectors" title="Link to this heading">#</a></h2>
-<div class="amsmath math notranslate nohighlight" id="equation-1aecc310-39ae-4d16-a2e9-3a3c4ff504f9">
-<span class="eqno">(7)<a class="headerlink" href="#equation-1aecc310-39ae-4d16-a2e9-3a3c4ff504f9" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-f8129af0-9869-408e-bdd6-0287114af502">
+<span class="eqno">(7)<a class="headerlink" href="#equation-f8129af0-9869-408e-bdd6-0287114af502" title="Permalink to this equation">#</a></span>\[\begin{align}
 (I - 2 v v^T) (I - 2 w w^T) &amp;= I - 2 v v^T - 2 w w^T + 4 v (v^T w) w^T \\
 &amp;= I - \Bigg[v \Bigg| w \Bigg] \begin{bmatrix} 2 &amp; -4 v^T w \\ 0 &amp; 2 \end{bmatrix} \begin{bmatrix} v^T \\ w^T \end{bmatrix}
 \end{align}\]</div>
@@ -1627,11 +1629,11 @@ if (typeof require === 'function' && define.amd) {
       </div>
     </a>
     <a class="right-next"
-       href="module4-5_matrix_conditioning_and_svd.html"
+       href="module4-5_solving_systems.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">18) Matrix condition number and SVD</p>
+        <p class="prev-next-title">18) Solving Systems</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
