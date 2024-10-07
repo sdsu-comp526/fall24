@@ -57,6 +57,8 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'slides/module4-5_solving_systems';</script>
     <link rel="icon" href="../_static/SDSU-comp526_logo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -415,7 +417,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -431,6 +435,25 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#last-time">Last time</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#today">Today</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1. Solving systems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#direct-methods">2. Direct Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-elimination-and-lu-decomposition">Gaussian elimination and LU decomposition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-decompositions-seen-so-far-to-solve-systems-exactly">Other decompositions seen so far to solve systems exactly:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterative-methods">2. Iterative Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#krylov-subspace-methods">Krylov subspace methods:</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -442,6 +465,63 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="solving-systems">
 <h1>18) Solving Systems<a class="headerlink" href="#solving-systems" title="Link to this heading">#</a></h1>
+<section id="last-time">
+<h2>Last time<a class="headerlink" href="#last-time" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Cholesky Decomposition</p></li>
+<li><p>Profiling</p></li>
+</ul>
+</section>
+<section id="today">
+<h2>Today<a class="headerlink" href="#today" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Solving Systenms</p></li>
+<li><p>Direct methods</p></li>
+<li><p>Iterative methods</p></li>
+</ol>
+</section>
+<section id="id1">
+<h2>1. Solving systems<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>Suppose we wish to solve a problem <span class="math notranslate nohighlight">\(Ax=b\)</span>, where <span class="math notranslate nohighlight">\(A, b\)</span> are known. Each row of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(b\)</span> represents a linear equation, so the problem represents a system of linear equations.</p>
+<p>The problem <span class="math notranslate nohighlight">\(Ax=b\)</span> is easy in two particular cases:</p>
+<ul class="simple">
+<li><p>When <span class="math notranslate nohighlight">\(A\)</span> is diagonal. In this case, <span class="math notranslate nohighlight">\(x_j = b_j a_{j,j}^{-1}\)</span>.</p></li>
+<li><p>When <span class="math notranslate nohighlight">\(A\)</span> is triangular (can solve by back substitution).</p></li>
+</ul>
+<p>Techniques to solve linear systems fall under two main categories: <strong>direct methods</strong> and <strong>iterative methods</strong>.</p>
+</section>
+<section id="direct-methods">
+<h2>2. Direct Methods<a class="headerlink" href="#direct-methods" title="Link to this heading">#</a></h2>
+<p>These methods are designed to solve the system <em>exactly</em>.</p>
+<section id="gaussian-elimination-and-lu-decomposition">
+<h3>Gaussian elimination and LU decomposition<a class="headerlink" href="#gaussian-elimination-and-lu-decomposition" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Gaussian_elimination"><strong>Gaussian elimination</strong></a>, also known as <strong>row reduction</strong> is probably the most popular algorithm for solving systems of linear equations by hand. But nowadays, we rarely solve systems of linear equations by hand (especially if they exceed, say, three or four equations).</p></li>
+<li><p>Row reduction produces a matrix decomposition of the original matrix. The elementary row operations may be viewed as the multiplication on the left of the original matrix by elementary matrices. Then the first part of the algorithm computes an <strong><a class="reference external" href="https://en.wikipedia.org/wiki/LU_decomposition">LU decomposition</a></strong>, while the second part writes the original matrix as the product of a uniquely determined invertible matrix and a uniquely determined reduced row echelon matrix.</p></li>
+<li><p>Efficiency: The number of arithmetic operations required to perform row reduction is one way of measuring the algorithm’s computational efficiency. For example, to solve a system of <span class="math notranslate nohighlight">\(n\)</span> equations for <span class="math notranslate nohighlight">\(n\)</span> unknowns by performing row operations on the matrix until it is in reduced row echelon form, and then solving for each unknown in reverse order, requires <span class="math notranslate nohighlight">\(n(n + 1)/2\)</span> divisions, <span class="math notranslate nohighlight">\((2n3 + 3n2 − 5n)/6\)</span> multiplications, and <span class="math notranslate nohighlight">\((2n3 + 3n2 − 5n)/6\)</span> subtractions, for a total of approximately <span class="math notranslate nohighlight">\(2n^3/3\)</span> operations. Thus it has a arithmetic complexity of <span class="math notranslate nohighlight">\(O(n^3)\)</span>.  The cost becomes prohibitive for systems with millions of equations (which are very common nowadays).</p></li>
+</ul>
+</section>
+<section id="other-decompositions-seen-so-far-to-solve-systems-exactly">
+<h3>Other decompositions seen so far to solve systems exactly:<a class="headerlink" href="#other-decompositions-seen-so-far-to-solve-systems-exactly" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>QR factorization</p></li>
+<li><p>Cholesky decomposition</p></li>
+</ul>
+</section>
+</section>
+<section id="iterative-methods">
+<h2>2. Iterative Methods<a class="headerlink" href="#iterative-methods" title="Link to this heading">#</a></h2>
+<p>Because costs become prohibitive for direct solvers for systems with millions of equations (which are very common nowadays), large systems are generally solved using iterative methods. In iterative methods, a solution is approximated via repeated iterations, rather than exactly calculated. These methods need an initial value to generate a sequence of improving approximate solutions.</p>
+<p>Among iterative methods, <em>stationary iterative methods</em> solve a linear system with an operator approximating the original one; and based on a measurement of the error in the result (the <strong>residual</strong>), form a “correction equation” for which this process is repeated until predefined termination criteria are met.</p>
+<section id="krylov-subspace-methods">
+<h3><a class="reference external" href="https://en.wikipedia.org/wiki/Krylov_subspace">Krylov subspace</a> methods:<a class="headerlink" href="#krylov-subspace-methods" title="Link to this heading">#</a></h3>
+<p>This class of methods are designed to solve a system with a suitable basis, comprised of the order-<span class="math notranslate nohighlight">\(r\)</span> Krylov subspace, generated by an n-by-n matrix <span class="math notranslate nohighlight">\(A\)</span> and a vector <span class="math notranslate nohighlight">\(b\)</span> of dimension <span class="math notranslate nohighlight">\(n\)</span>. This is defined as the linear subspace spanned by the images of <span class="math notranslate nohighlight">\(b\)</span> under the first <span class="math notranslate nohighlight">\(r\)</span> powers of A (starting from <span class="math notranslate nohighlight">\(A^0 = I\)</span>), that is</p>
+<div class="math notranslate nohighlight">
+\[
+\textrm{span} \left \{b, Ab, Ab^2, \dots, A^{r-1}b \right \}
+\]</div>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -498,6 +578,32 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#last-time">Last time</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#today">Today</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1. Solving systems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#direct-methods">2. Direct Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-elimination-and-lu-decomposition">Gaussian elimination and LU decomposition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-decompositions-seen-so-far-to-solve-systems-exactly">Other decompositions seen so far to solve systems exactly:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterative-methods">2. Iterative Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#krylov-subspace-methods">Krylov subspace methods:</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

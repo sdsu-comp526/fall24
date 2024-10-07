@@ -822,8 +822,8 @@ norm(v) = 1.4245900685395503
 </section>
 <section id="composition-of-reflectors">
 <h2>2. Composition of reflectors<a class="headerlink" href="#composition-of-reflectors" title="Link to this heading">#</a></h2>
-<div class="amsmath math notranslate nohighlight" id="equation-f8129af0-9869-408e-bdd6-0287114af502">
-<span class="eqno">(7)<a class="headerlink" href="#equation-f8129af0-9869-408e-bdd6-0287114af502" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-980cf66b-2895-43c1-a6a9-b46ac64a7b4c">
+<span class="eqno">(7)<a class="headerlink" href="#equation-980cf66b-2895-43c1-a6a9-b46ac64a7b4c" title="Permalink to this equation">#</a></span>\[\begin{align}
 (I - 2 v v^T) (I - 2 w w^T) &amp;= I - 2 v v^T - 2 w w^T + 4 v (v^T w) w^T \\
 &amp;= I - \Bigg[v \Bigg| w \Bigg] \begin{bmatrix} 2 &amp; -4 v^T w \\ 0 &amp; 2 \end{bmatrix} \begin{bmatrix} v^T \\ w^T \end{bmatrix}
 \end{align}\]</div>
@@ -927,6 +927,9 @@ norm(Q * R - A) = 2.465762200045769e-12
 </p>
 <p>Hence, the lower triangular matrix <span class="math notranslate nohighlight">\(L\)</span> is such that <span class="math notranslate nohighlight">\(L = R^T\)</span> and can be identified as the Cholesky factor of <span class="math notranslate nohighlight">\(A^TA\)</span>.</p>
 <p>It follows (you can prove it yourself for exercise) that <span class="math notranslate nohighlight">\(Q = A L^{-T}\)</span>.</p>
+<ul class="simple">
+<li><p>Note: Cholesky decomposition is a special type of a <a class="reference external" href="https://en.wikipedia.org/wiki/LU_decomposition">LU decomposition</a>.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">qr_chol</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
