@@ -445,13 +445,15 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1. Solving systems</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#direct-methods">2. Direct Methods</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-elimination-and-lu-decomposition">Gaussian elimination and LU decomposition</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-decompositions-seen-so-far-to-solve-systems-exactly">Other decompositions seen so far to solve systems exactly:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-decompositions-seen-so-far">Other decompositions seen so far:</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterative-methods">2. Iterative Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterative-methods">3. Iterative Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-splittings">Common splittings:</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#krylov-subspace-methods">Krylov subspace methods:</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-to-solve-a-partial-differential-equation">4. Example to solve a Partial Differential Equation</a></li>
 </ul>
             </nav>
         </div>
@@ -478,6 +480,7 @@ document.write(`
 <li><p>Solving Systenms</p></li>
 <li><p>Direct methods</p></li>
 <li><p>Iterative methods</p></li>
+<li><p>Example to solve a Partial Differential Equation (PDEs)</p></li>
 </ol>
 </section>
 <section id="id1">
@@ -486,7 +489,7 @@ document.write(`
 <p>The problem <span class="math notranslate nohighlight">\(Ax=b\)</span> is easy in two particular cases:</p>
 <ul class="simple">
 <li><p>When <span class="math notranslate nohighlight">\(A\)</span> is diagonal. In this case, <span class="math notranslate nohighlight">\(x_j = b_j a_{j,j}^{-1}\)</span>.</p></li>
-<li><p>When <span class="math notranslate nohighlight">\(A\)</span> is triangular (can solve by back substitution).</p></li>
+<li><p>When <span class="math notranslate nohighlight">\(A\)</span> is triangular (can solve by back-substitution).</p></li>
 </ul>
 <p>Techniques to solve linear systems fall under two main categories: <strong>direct methods</strong> and <strong>iterative methods</strong>.</p>
 </section>
@@ -501,8 +504,8 @@ document.write(`
 <li><p>Efficiency: The number of arithmetic operations required to perform row reduction is one way of measuring the algorithm’s computational efficiency. For example, to solve a system of <span class="math notranslate nohighlight">\(n\)</span> equations for <span class="math notranslate nohighlight">\(n\)</span> unknowns by performing row operations on the matrix until it is in reduced row echelon form, and then solving for each unknown in reverse order, requires <span class="math notranslate nohighlight">\(n(n + 1)/2\)</span> divisions, <span class="math notranslate nohighlight">\((2n3 + 3n2 − 5n)/6\)</span> multiplications, and <span class="math notranslate nohighlight">\((2n3 + 3n2 − 5n)/6\)</span> subtractions, for a total of approximately <span class="math notranslate nohighlight">\(2n^3/3\)</span> operations. Thus it has a arithmetic complexity of <span class="math notranslate nohighlight">\(O(n^3)\)</span>.  The cost becomes prohibitive for systems with millions of equations (which are very common nowadays).</p></li>
 </ul>
 </section>
-<section id="other-decompositions-seen-so-far-to-solve-systems-exactly">
-<h3>Other decompositions seen so far to solve systems exactly:<a class="headerlink" href="#other-decompositions-seen-so-far-to-solve-systems-exactly" title="Link to this heading">#</a></h3>
+<section id="other-decompositions-seen-so-far">
+<h3>Other decompositions seen so far:<a class="headerlink" href="#other-decompositions-seen-so-far" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>QR factorization</p></li>
 <li><p>Cholesky decomposition</p></li>
@@ -510,17 +513,167 @@ document.write(`
 </section>
 </section>
 <section id="iterative-methods">
-<h2>2. Iterative Methods<a class="headerlink" href="#iterative-methods" title="Link to this heading">#</a></h2>
+<h2>3. Iterative Methods<a class="headerlink" href="#iterative-methods" title="Link to this heading">#</a></h2>
 <p>Because costs become prohibitive for direct solvers for systems with millions of equations (which are very common nowadays), large systems are generally solved using iterative methods. In iterative methods, a solution is approximated via repeated iterations, rather than exactly calculated. These methods need an initial value to generate a sequence of improving approximate solutions.</p>
 <p>Among iterative methods, <em>stationary iterative methods</em> solve a linear system with an operator approximating the original one; and based on a measurement of the error in the result (the <strong>residual</strong>), form a “correction equation” for which this process is repeated until predefined termination criteria are met.</p>
+<p>The basic iterative methods work by splitting the matrix <span class="math notranslate nohighlight">\(A\)</span> into</p>
+<div class="math notranslate nohighlight">
+\[
+A = M -N
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(M\)</span> is some “nice” matrix (easily invertible) related to <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<p>To solve a linear system <span class="math notranslate nohighlight">\(Ax=b\)</span>, once you have the decomposition <span class="math notranslate nohighlight">\(A = M-N\)</span>, then you can solve:</p>
+<div class="math notranslate nohighlight">
+\[
+(M-N) x = b \, ,
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+M x = Nx + b
+\]</div>
+<p>And the iterations are defined so that the new approximate solution, <span class="math notranslate nohighlight">\(x^{k+1}\)</span>, is written in terms of the old approximate solution, <span class="math notranslate nohighlight">\(x^k\)</span>, as:</p>
+<div class="math notranslate nohighlight">
+\[
+M x^{k+1} = Nx^k + b \, , \quad k \ge 0
+\]</div>
+<p>For a linear system  linear system <span class="math notranslate nohighlight">\(A x = b\)</span> with exact solution <span class="math notranslate nohighlight">\(x^{*}\)</span>, we define the error by</p>
+<div class="math notranslate nohighlight">
+\[
+e^{k}:=  x^{*} - x^k \, , \quad k \ge 0
+\]</div>
+<p><strong>Definition:</strong> An iterative method is called <em>linear</em> if there exists a matrix <span class="math notranslate nohighlight">\(C \in \R^{n \times n}\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+e^{k+1} = C e^k \, , \quad \forall k \ge 0
+\]</div>
+<p>And this matrix is called the <em>iteration matrix</em>.</p>
+<p><strong>Definition:</strong> An iterative method with a given iteration matrix <span class="math notranslate nohighlight">\(C\)</span> is called <em>convergent</em> if the following holds</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{k\rightarrow \infty} C^k = 0
+\]</div>
+<p><strong>Theorem:</strong></p>
+<p>An iterative method with an iteration matrix <span class="math notranslate nohighlight">\(C\)</span> is convergent if and only if its spectral radius, <span class="math notranslate nohighlight">\(\rho (C)\)</span> is smaller than unity, that is:</p>
+<div class="math notranslate nohighlight">
+\[
+\rho(C) &lt; 1
+\]</div>
+<p>where the spectral radius is defined as the maximum of the absolute values of the eigenvalues of a given matrix.</p>
+<p>By splitting a matrix <span class="math notranslate nohighlight">\(A\)</span> into a “nice” (easily invertible) part <span class="math notranslate nohighlight">\(M\)</span> and the difference, <span class="math notranslate nohighlight">\(N\)</span>, (i.e., <span class="math notranslate nohighlight">\(A = M -N\)</span>) we can see that for the iterates</p>
+<div class="math notranslate nohighlight">
+\[
+M x^{k+1} = Nx^k + b \, , \quad k \ge 0
+\]</div>
+<p>the iteration matrix is given by</p>
+<div class="math notranslate nohighlight">
+\[
+C = I - M^{-1} A = M^{-1} N
+\]</div>
+<p>In fact, from the iterates we have:</p>
+<div class="math notranslate nohighlight">
+\[
+M x^{k+1} = Nx^k + b 
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(e^k = x - x^k\)</span>, we then have</p>
+<div class="math notranslate nohighlight">
+\[
+M(x - x^{k+1}) = N (x - x^k) + b
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+M e^{k+1} = N e^k +b
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+e^{k+1} = \underbrace{M^{-1} N}_{C} e^k
+\]</div>
+<section id="common-splittings">
+<h3>Common splittings:<a class="headerlink" href="#common-splittings" title="Link to this heading">#</a></h3>
+<p>Basic examples of stationary iterative methods use a splitting of <span class="math notranslate nohighlight">\(A\)</span> such as:</p>
+<div class="math notranslate nohighlight">
+\[
+A = D + L + U
+\]</div>
+<p>with</p>
+<div class="math notranslate nohighlight">
+\[
+D = \textrm{diag}(A)
+\]</div>
+<p>i.e., where <span class="math notranslate nohighlight">\(D\)</span> is only the diagonal part of <span class="math notranslate nohighlight">\(A\)</span>, and <span class="math notranslate nohighlight">\(L\)</span> is the strict lower triangular part of <span class="math notranslate nohighlight">\(A\)</span>. Respectively, <span class="math notranslate nohighlight">\(U\)</span> is the strict upper triangular part of <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<p>Examples of splittings:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Jacobi_method"><strong>Jacobi method</strong></a></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+M \equiv D = \textrm{diag}(A)
+\]</div>
+<p>For this method, the iterative solution is then found as</p>
+<div class="math notranslate nohighlight">
+\[
+x^{k+1} = D^{-1} \left\{ b - (L+U) x^k \right\} \, , \quad k \ge 0
+\]</div>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Jacobi_method#Weighted_Jacobi_method"><strong>Damped (or weighted) Jacobi method</strong></a></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+M = \omega^{-1}  D =\omega^{-1} \textrm{diag}(A)
+\]</div>
+<p>with a weight (<span class="math notranslate nohighlight">\(\omega \ne 0\)</span>)</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Modified_Richardson_iteration"><strong>Richardson method</strong></a></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+M = \omega^{-1} I 
+\]</div>
+<p>with a weight <span class="math notranslate nohighlight">\((\omega \ne 0)\)</span></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Gauss%E2%80%93Seidel_method"><strong>Gauss-Seidel method</strong></a></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+M = D + L
+\]</div>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Successive_over-relaxation">Successive over-relaxation (SOR) method</a></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+M = \omega^{-1} D + L
+\]</div>
+<p>for some weight, a.k.a., over-relaxation factor <span class="math notranslate nohighlight">\((\omega \ne 0)\)</span></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Symmetric_successive_over-relaxation">Symmetric Successive over-relaxation (SOR) method</a></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+M = \frac{1}{\omega (2-\omega)}( D+\omega L  ) D^{-1} \left( D+\omega U  \right)
+\]</div>
+<p>for some weight, a.k.a., over-relaxation factor (<span class="math notranslate nohighlight">\(\omega \notin \{0,2 \}\)</span>)</p>
+<p>Linear stationary iterative methods are also called relaxation methods.</p>
+</section>
 <section id="krylov-subspace-methods">
 <h3><a class="reference external" href="https://en.wikipedia.org/wiki/Krylov_subspace">Krylov subspace</a> methods:<a class="headerlink" href="#krylov-subspace-methods" title="Link to this heading">#</a></h3>
 <p>This class of methods are designed to solve a system with a suitable basis, comprised of the order-<span class="math notranslate nohighlight">\(r\)</span> Krylov subspace, generated by an n-by-n matrix <span class="math notranslate nohighlight">\(A\)</span> and a vector <span class="math notranslate nohighlight">\(b\)</span> of dimension <span class="math notranslate nohighlight">\(n\)</span>. This is defined as the linear subspace spanned by the images of <span class="math notranslate nohighlight">\(b\)</span> under the first <span class="math notranslate nohighlight">\(r\)</span> powers of A (starting from <span class="math notranslate nohighlight">\(A^0 = I\)</span>), that is</p>
 <div class="math notranslate nohighlight">
 \[
-\textrm{span} \left \{b, Ab, Ab^2, \dots, A^{r-1}b \right \}
+\textrm{span} \left \{b, Ab, A^2b, \dots, A^{r-1}b \right \}
 \]</div>
+<p>Krylov subspace methods try to avoid matrix-matrix operations, but rather multiply vectors by the matrix and work with the resulting vectors. Starting with a vector <span class="math notranslate nohighlight">\(b\)</span>, one computes <span class="math notranslate nohighlight">\(Ab\)</span>, then one multiplies that vector by <span class="math notranslate nohighlight">\(A\)</span> again to find <span class="math notranslate nohighlight">\(A^2 b\)</span> and so on. All algorithms that work this way are referred to as Krylov subspace methods; they are among the most successful methods currently available in numerical linear algebra.</p>
+<p>These methods can be used in situations where there is an algorithm to compute the matrix-vector multiplication without there being an explicit representation of <span class="math notranslate nohighlight">\(A\)</span>, giving rise to <a class="reference external" href="https://en.wikipedia.org/wiki/Matrix-free_methods"><strong>matrix-free methods</strong></a>.</p>
 </section>
+</section>
+<section id="example-to-solve-a-partial-differential-equation">
+<h2>4. Example to solve a Partial Differential Equation<a class="headerlink" href="#example-to-solve-a-partial-differential-equation" title="Link to this heading">#</a></h2>
+<p>A LOT of physical processes and engineering problems can be described via Partial Differential Equations (PDEs). PDEs model phenomenon in many fields with great societal impact such as medicine, geophysics, climate change, electrodynamics, finance, economics, weather forecasting, etc.</p>
+<p>Approximate solutions for large systems of PDEs can only be found using numerical techniques.</p>
+<p>Here we introduce an example of a very simple diffusion problem in Physics (heat diffusion), the <a class="reference external" href="https://en.wikipedia.org/wiki/Heat_equation"><strong>heat (diffusion) equation</strong></a> in <span class="math notranslate nohighlight">\(1\)</span> dimension:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial u}{\partial t} = \frac{\partial^2 u}{\partial x^2}
+\]</div>
 </section>
 </section>
 
@@ -593,13 +746,15 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1. Solving systems</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#direct-methods">2. Direct Methods</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-elimination-and-lu-decomposition">Gaussian elimination and LU decomposition</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-decompositions-seen-so-far-to-solve-systems-exactly">Other decompositions seen so far to solve systems exactly:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-decompositions-seen-so-far">Other decompositions seen so far:</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterative-methods">2. Iterative Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterative-methods">3. Iterative Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-splittings">Common splittings:</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#krylov-subspace-methods">Krylov subspace methods:</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-to-solve-a-partial-differential-equation">4. Example to solve a Partial Differential Equation</a></li>
 </ul>
   </nav></div>
 
