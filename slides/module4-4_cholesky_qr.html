@@ -822,12 +822,12 @@ norm(v) = 1.4245900685395503
 </section>
 <section id="composition-of-reflectors">
 <h2>2. Composition of reflectors<a class="headerlink" href="#composition-of-reflectors" title="Link to this heading">#</a></h2>
-<div class="amsmath math notranslate nohighlight" id="equation-05e23b29-62dc-4447-a51c-55bcef846e20">
-<span class="eqno">(7)<a class="headerlink" href="#equation-05e23b29-62dc-4447-a51c-55bcef846e20" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-10e40c31-4a3d-464e-93f9-26b124b1fa07">
+<span class="eqno">(7)<a class="headerlink" href="#equation-10e40c31-4a3d-464e-93f9-26b124b1fa07" title="Permalink to this equation">#</a></span>\[\begin{align}
 (I - 2 v v^T) (I - 2 w w^T) &amp;= I - 2 v v^T - 2 w w^T + 4 v (v^T w) w^T \\
 &amp;= I - \Bigg[v \Bigg| w \Bigg] \begin{bmatrix} 2 &amp; -4 v^T w \\ 0 &amp; 2 \end{bmatrix} \begin{bmatrix} v^T \\ w^T \end{bmatrix}
 \end{align}\]</div>
-<p>This turns applying reflectors from a sequence of vector operations to a sequence of (smallish) matrix operations. It’s the key to high performance and the native format (<code class="docutils literal notranslate"><span class="pre">QRCompactWY</span></code>) returned by Julia <code class="docutils literal notranslate"><span class="pre">qr()</span></code>.</p>
+<p>This turns applying reflectors from a sequence of vector operations to a sequence of (smallish) matrix operations. It’s the key to high performance and the native format (<a class="reference external" href="https://docs.julialang.org/en/v1/stdlib/LinearAlgebra/#LinearAlgebra.QRCompactWY"><code class="docutils literal notranslate"><span class="pre">QRCompactWY</span></code></a>) returned by Julia <code class="docutils literal notranslate"><span class="pre">qr()</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Q</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">qr</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="w"> </span><span class="c"># Julia built-in</span>
@@ -869,7 +869,8 @@ R factor:
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">1000000</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
 <span class="n">Q</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">qr</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-<span class="nd">@show</span><span class="w"> </span><span class="n">size</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">size</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span><span class="w"> </span><span class="c"># this would show you the QRCompactWY format</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">size</span><span class="p">(</span><span class="kt">Matrix</span><span class="p">(</span><span class="n">Q</span><span class="p">))</span><span class="w"> </span><span class="c"># this shows you the actual size of Q, in standard matrix format</span>
 <span class="nd">@show</span><span class="w"> </span><span class="n">norm</span><span class="p">(</span><span class="n">Q</span><span class="o">*</span><span class="n">R</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">A</span><span class="p">)</span>
 <span class="n">R</span>
 </pre></div>
@@ -877,15 +878,16 @@ R factor:
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>size(Q) = (1000000, 1000000)
-norm(Q * R - A) = 2.465762200045769e-12
+size(Matrix(Q)) = (1000000, 5)
+norm(Q * R - A) = 4.181859677183379e-12
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5×5 Matrix{Float64}:
- -577.496  -433.091  -432.904  -432.963  -432.737
-    0.0     381.743   163.896   163.632   163.202
-    0.0       0.0    -345.445  -102.959  -103.506
-    0.0       0.0       0.0    -329.062   -75.0942
-    0.0       0.0       0.0       0.0    -320.445
+ -577.612  -433.412  -433.43   -433.238  -432.724
+    0.0    -381.792  -163.313  -163.553  -163.387
+    0.0       0.0     344.701   103.409   103.222
+    0.0       0.0       0.0     329.253    76.5859
+    0.0       0.0       0.0       0.0    -320.209
 </pre></div>
 </div>
 </div>
