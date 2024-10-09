@@ -781,12 +781,12 @@ first, and then <code class="docutils literal notranslate"><span class="pre">git
 </li>
 </ul>
 <p><strong>To be able to reproduce your code, you need to check in both files to git</strong></p>
-<p>To initiate a new environment, start <code class="docutils literal notranslate"><span class="pre">julia</span></code> in a directory of your choice with the <code class="docutils literal notranslate"><span class="pre">--project</span></code> option. If you don’t have a <code class="docutils literal notranslate"><span class="pre">Project.toml</span></code> file already in the current directory, this will automatically create an environment in your current working directory:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>julia<span class="w"> </span>--project
+<p>To initiate a new environment, start <code class="docutils literal notranslate"><span class="pre">julia</span></code> from a directory of your choice with the <code class="docutils literal notranslate"><span class="pre">--project=.</span></code> option. If you don’t have a <code class="docutils literal notranslate"><span class="pre">Project.toml</span></code> file already in the current directory, this will automatically create an environment in your current working directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>julia<span class="w"> </span>--project<span class="o">=</span>.
 </pre></div>
 </div>
 <p>If instead, you want to use a different path from your current working directory in which a <code class="docutils literal notranslate"><span class="pre">Project.toml</span></code> already exists, use</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>julia<span class="w"> </span>--project<span class="w"> </span>&lt;path/to/Project.toml&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>julia<span class="w"> </span>--project<span class="o">=</span>&lt;relative/path/to/Project.toml&gt;
 </pre></div>
 </div>
 <p>You can then recreate this environment on another machine by doing:</p>
