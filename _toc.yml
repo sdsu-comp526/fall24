@@ -25,7 +25,8 @@ chapters:
   - file: slides/module4-3_householder.ipynb
   - file: slides/module4-4_cholesky_qr.ipynb
   - file: slides/module4-5_solving_systems.ipynb
-  - file: slides/module4-6_matrix_conditioning_and_svd.ipynb
-  - file: slides/module4-7_svd_and_conditioning.ipynb
-  - file: slides/module4-8_low-rank.ipynb
+  - file: slides/module4-6_review.md
+  - file: slides/module4-7_matrix_conditioning_and_svd.ipynb
+  - file: slides/module4-8_svd_and_conditioning.ipynb
+  - file: slides/module4-9_low_rank.ipynb
   - file: slides/module5-1_intro_to_fortran.md
