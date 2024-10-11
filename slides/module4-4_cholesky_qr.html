@@ -208,10 +208,8 @@
 <li class="toctree-l2"><a class="reference internal" href="module4-3_householder.html">16) Householder QR</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">17) Cholesky QR</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module4-5_solving_systems.html">18) Solving Systems</a></li>
-<li class="toctree-l2"><a class="reference internal" href="module4-6_matrix_conditioning_and_svd.html">19) Matrix condition number and SVD</a></li>
-<li class="toctree-l2"><a class="reference internal" href="module4-7_svd_and_conditioning.html">20) SVD Geometry</a></li>
-<li class="toctree-l2"><a class="reference internal" href="module4-8_low-rank.html">21) Low Rank</a></li>
-<li class="toctree-l2"><a class="reference internal" href="module5-1_intro_to_fortran.html">25) Introduction to Fortran</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-6_review.html">21) Review</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module5-1_intro_to_fortran.html">26) Introduction to Fortran</a></li>
 </ul>
 </details></li>
 </ul>
@@ -822,8 +820,8 @@ norm(v) = 1.4245900685395503
 </section>
 <section id="composition-of-reflectors">
 <h2>2. Composition of reflectors<a class="headerlink" href="#composition-of-reflectors" title="Link to this heading">#</a></h2>
-<div class="amsmath math notranslate nohighlight" id="equation-10e40c31-4a3d-464e-93f9-26b124b1fa07">
-<span class="eqno">(7)<a class="headerlink" href="#equation-10e40c31-4a3d-464e-93f9-26b124b1fa07" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-089aa681-f0ed-423b-9568-d205092a24f8">
+<span class="eqno">(7)<a class="headerlink" href="#equation-089aa681-f0ed-423b-9568-d205092a24f8" title="Permalink to this equation">#</a></span>\[\begin{align}
 (I - 2 v v^T) (I - 2 w w^T) &amp;= I - 2 v v^T - 2 w w^T + 4 v (v^T w) w^T \\
 &amp;= I - \Bigg[v \Bigg| w \Bigg] \begin{bmatrix} 2 &amp; -4 v^T w \\ 0 &amp; 2 \end{bmatrix} \begin{bmatrix} v^T \\ w^T \end{bmatrix}
 \end{align}\]</div>
