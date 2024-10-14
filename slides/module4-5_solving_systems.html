@@ -63,7 +63,7 @@
     <link rel="icon" href="../_static/SDSU-comp526_logo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="19) Review" href="module4-6_review.html" />
+    <link rel="next" title="19) HW2 Review" href="module4-6_review.html" />
     <link rel="prev" title="17) Cholesky QR" href="module4-4_cholesky_qr.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -208,7 +208,7 @@
 <li class="toctree-l2"><a class="reference internal" href="module4-3_householder.html">16) Householder QR</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module4-4_cholesky_qr.html">17) Cholesky QR</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">18) Solving Systems</a></li>
-<li class="toctree-l2"><a class="reference internal" href="module4-6_review.html">19) Review</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-6_review.html">19) HW2 Review</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module4-7_matrix_conditioning_and_svd.html">20) Matrix condition number and SVD</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module4-8_svd_and_conditioning.html">21) SVD Geometry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module4-9_low_rank.html">22) Low Rank</a></li>
@@ -650,7 +650,7 @@ M = \omega^{-1} D + L
 \]</div>
 <p>for some weight, a.k.a., over-relaxation factor <span class="math notranslate nohighlight">\((\omega \ne 0)\)</span></p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Symmetric_successive_over-relaxation">Symmetric Successive over-relaxation (SOR) method</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Symmetric_successive_over-relaxation">Symmetric Successive over-relaxation (SSOR) method</a></p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
@@ -726,6 +726,15 @@ u_{i-1} = u(x_i - \Delta x) \approx u(x_i) - \Delta x \partial_x u \bigg\rvert_i
 A = \frac{1}{\Delta x^2} \begin{bmatrix} -2 &amp; 1 &amp; 0 &amp; &amp; 0  \\ 1 &amp; -2 &amp; 1 &amp; &amp; \vdots  \\ 0 &amp; 1 &amp; -2 &amp;  \\ &amp; &amp; &amp;  \ddots &amp; 1 \\ 0 &amp; \ldots &amp; &amp; 1 &amp; -2\end{bmatrix}
 \end{split}\]</div>
 <p>(We can factor out the <span class="math notranslate nohighlight">\(\frac{1}{\Delta x^2}\)</span> term in front and from now on we’ll consider the matrix of coefficients only)</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In Physics, it is customary to write the problem with a negative sign:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial u}{\partial t} = -\frac{\partial^2 u}{\partial x^2}
+\]</div>
+<p>This way, your matrix A is SPD.</p>
+</div>
 <ul class="simple">
 <li><p>To solve this with <strong>Jacobi</strong>’s method:</p></li>
 </ul>
@@ -818,7 +827,7 @@ N = \begin{bmatrix} (\omega-1) &amp; -\omega &amp; 0 &amp; &amp; 0  \\ 0 &amp; (
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">19) Review</p>
+        <p class="prev-next-title">19) HW2 Review</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>19) Review &#8212; Computational Methods for Scientists</title>
+    <title>19) HW2 Review &#8212; Computational Methods for Scientists</title>
   
   
   
@@ -57,6 +57,8 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'slides/module4-6_review';</script>
     <link rel="icon" href="../_static/SDSU-comp526_logo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -206,7 +208,7 @@
 <li class="toctree-l2"><a class="reference internal" href="module4-3_householder.html">16) Householder QR</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module4-4_cholesky_qr.html">17) Cholesky QR</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module4-5_solving_systems.html">18) Solving Systems</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">19) Review</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">19) HW2 Review</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module4-7_matrix_conditioning_and_svd.html">20) Matrix condition number and SVD</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module4-8_svd_and_conditioning.html">21) SVD Geometry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module4-9_low_rank.html">22) Low Rank</a></li>
@@ -398,7 +400,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>19) Review</h1>
+    <h1>19) HW2 Review</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -410,7 +412,10 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#last-time">Last time</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#today">Today</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review-of-assignment-2">Review of Assignment 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review-of-assignment-2">Review of Assignment 2</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-mistakes">Common mistakes</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submission-expectations">Submission expectations</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assignments-in-julia">2.1 Assignments in Julia</a></li>
 </ul>
@@ -426,8 +431,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="review">
-<h1>19) Review<a class="headerlink" href="#review" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="hw2-review">
+<h1>19) HW2 Review<a class="headerlink" href="#hw2-review" title="Link to this heading">#</a></h1>
 <section id="last-time">
 <h2>Last time<a class="headerlink" href="#last-time" title="Link to this heading">#</a></h2>
 <ul class="simple">
@@ -534,6 +539,17 @@ document.write(`
 <span class="p">}</span>
 </pre></div>
 </div>
+<section id="common-mistakes">
+<h3>Common mistakes<a class="headerlink" href="#common-mistakes" title="Link to this heading">#</a></h3>
+<p>Here is a list of common mistakes that a few people made and you should not make:</p>
+<ul class="simple">
+<li><p>Not using the absolute value to compute the length of the interval <span class="math notranslate nohighlight">\([a,b]\)</span>. What if the values were complex? Distances (or lengths) are non-negative numbers by definition.</p></li>
+<li><p>Using <code class="docutils literal notranslate"><span class="pre">while</span> <span class="pre">((b</span> <span class="pre">-</span> <span class="pre">a)</span> <span class="pre">/</span> <span class="pre">2.0</span> <span class="pre">&gt;</span> <span class="pre">tol)</span></code> as a stopping criterion, effectively doubling the tolerance</p></li>
+<li><p>Using the midpoint of the interval <code class="docutils literal notranslate"><span class="pre">fabs(f(mid_point))</span> <span class="pre">&gt;</span> <span class="pre">tol</span></code> to check for the stopping criterion</p></li>
+<li><p>Not checking the necessary condition for the function to have a root in the interval. That is, not checking that it has opposite signs at the endpoints <code class="docutils literal notranslate"><span class="pre">f(a)*f(b)&lt;0</span></code></p></li>
+<li><p>Using <code class="docutils literal notranslate"><span class="pre">==</span></code> to check if a floating point number is equal to zero, as in <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">(f(mid_point)</span> <span class="pre">==</span> <span class="pre">0.0)</span></code>. You should <em>never</em> use <code class="docutils literal notranslate"><span class="pre">==</span></code> to check if any floating point number is equal to zero, because of floating point aritmetic and rounding errors. Always check if it is within a desired tolerance. Alternatively, if you are not given a specific tolerance, check against machine <span class="math notranslate nohighlight">\(\varepsilon\)</span>, but do not check <code class="docutils literal notranslate"><span class="pre">==</span> <span class="pre">0</span></code>.</p></li>
+</ul>
+</section>
 </section>
 <section id="submission-expectations">
 <h2>Submission expectations<a class="headerlink" href="#submission-expectations" title="Link to this heading">#</a></h2>
@@ -669,7 +685,10 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#last-time">Last time</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#today">Today</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review-of-assignment-2">Review of Assignment 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review-of-assignment-2">Review of Assignment 2</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-mistakes">Common mistakes</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submission-expectations">Submission expectations</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assignments-in-julia">2.1 Assignments in Julia</a></li>
 </ul>

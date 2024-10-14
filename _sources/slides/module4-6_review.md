@@ -1,4 +1,4 @@
-# 19) Review
+# 19) HW2 Review
 
 ## Last time
 - Solving Systems
@@ -19,6 +19,20 @@ Here is my solution for the `bisection.c` code:
 :language: c
 :linenos: false
 ```
+
+### Common mistakes
+
+Here is a list of common mistakes that a few people made and you should not make:
+
+- Not using the absolute value to compute the length of the interval $[a,b]$. What if the values were complex? Distances (or lengths) are non-negative numbers by definition.
+
+- Using `while ((b - a) / 2.0 > tol)` as a stopping criterion, effectively doubling the tolerance
+
+- Using the midpoint of the interval `fabs(f(mid_point)) > tol` to check for the stopping criterion
+
+- Not checking the necessary condition for the function to have a root in the interval. That is, not checking that it has opposite signs at the endpoints `f(a)*f(b)<0`
+
+- Using `==` to check if a floating point number is equal to zero, as in `if (f(mid_point) == 0.0)`. You should _never_ use `==` to check if any floating point number is equal to zero, because of floating point aritmetic and rounding errors. Always check if it is within a desired tolerance. Alternatively, if you are not given a specific tolerance, check against machine $\varepsilon$, but do not check `== 0`.
 
 ## Submission expectations
 
