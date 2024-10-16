@@ -32,7 +32,7 @@ Here is a list of common mistakes that a few people made and you should not make
 
 - Not checking the necessary condition for the function to have a root in the interval. That is, not checking that it has opposite signs at the endpoints `f(a)*f(b)<0`
 
-- Using `==` to check if a floating point number is equal to zero, as in `if (f(mid_point) == 0.0)`. You should _never_ use `==` to check if any floating point number is equal to zero, because of floating point aritmetic and rounding errors. Always check if it is within a desired tolerance. Alternatively, if you are not given a specific tolerance, check against machine $\varepsilon$, but do not check `== 0`.
+- Using `==` to check if a floating point number is equal to zero, as in `if (f(mid_point) == 0.0)`. You should _never_ use `==` to check if any floating point number is equal to zero, because of floating point arithmetic and rounding errors. Always check if it is within a desired tolerance. Alternatively, if you are not given a specific tolerance, check against machine $\varepsilon$, but do not check `== 0`.
 
 ## Submission expectations
 

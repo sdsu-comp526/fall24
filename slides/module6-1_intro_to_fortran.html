@@ -1,0 +1,1118 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>24) Introduction to Fortran &#8212; Computational Methods for Scientists</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'slides/module6-1_intro_to_fortran';</script>
+    <link rel="icon" href="../_static/SDSU-comp526_logo.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="23) Community Projects" href="module5-1_community_projects.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/SDSU-comp526_logo.svg" class="logo__image only-light" alt="Computational Methods for Scientists - Home"/>
+    <script>document.write(`<img src="../_static/SDSU-comp526_logo.svg" class="logo__image only-dark" alt="Computational Methods for Scientists - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../syllabus.html">Syllabus</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../slides.html">Slides</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="module1-1_first_class.html">1) First Class: Reproducibility and Git</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="module1-2_linux.html">2) The Linux Filesystem and commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module1-3_functions_and_fpa.html">3) Functions</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="module2-1_intro_to_c.html">4) Intro to C</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module2-2_c_pointers.html">5) Intro to C pointers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module2-3_c_structs_and_functions.html">6) C structs and functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module2-4_c_memory.html">7) C memory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module3-1_function_errors.html">8) Function errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module3-2_conditioning.html">9) Conditioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module3-3_root_finding.html">10) Rootfinding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module3-4_convergence_classes.html">11) Convergence classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module3-5_newton.html">12) Newton methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module3-6_stability.html">13) Stability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-1_linear_algebra.html">14) Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-2_gram_schmidt.html">15) Gram-Schmidt and QR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-3_householder.html">16) Householder QR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-4_cholesky_qr.html">17) Cholesky QR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-5_solving_systems.html">18) Solving Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-6_review.html">19) HW2 Review</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-7_matrix_conditioning_and_svd.html">20) Matrix condition number and SVD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-8_svd_and_conditioning.html">21) SVD Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module4-9_low_rank.html">22) Low Rank</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module5-1_community_projects.html">23) Community Projects</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">24) Introduction to Fortran</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/sdsu-comp526/fall24" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/sdsu-comp526/fall24/issues/new?title=Issue%20on%20page%20%2Fslides/module6-1_intro_to_fortran.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/slides/module6-1_intro_to_fortran.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>24) Introduction to Fortran</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-compile-a-fortran-program">1. How to compile a Fortran program</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-simplest-fortran-program">2. The simplest Fortran program</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-14-1">Exercise 14.1:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hello-world-and-simple-i-o">3. Hello, World! and Simple I/O</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-14-2">Exercise 14.2:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-i-o">Simple I/O</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arithmetic-in-fortran-real-and-integer-variables">4. Arithmetic in Fortran: Real and Integer Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-14-3">Exercise 14.3:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-variable-types">Other variable types</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">5. Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-mistakes">Common mistakes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subroutines">5.1 Subroutines</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interface-blocks">6. Interface blocks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modules">7. Modules</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-fortran">
+<h1>24) Introduction to Fortran<a class="headerlink" href="#introduction-to-fortran" title="Link to this heading">#</a></h1>
+<p>Today:</p>
+<ol class="arabic simple">
+<li><p>How to compile a Fortran program</p></li>
+<li><p>The simplest Fortran program</p></li>
+<li><p>Hello, World! and Simple I/O</p></li>
+<li><p>Arithmetic in Fortran</p></li>
+<li><p>Functions
+5.1 Subroutines</p></li>
+<li><p>Interface Blocks</p></li>
+<li><p>Modules</p></li>
+</ol>
+<section id="how-to-compile-a-fortran-program">
+<h2>1. How to compile a Fortran program<a class="headerlink" href="#how-to-compile-a-fortran-program" title="Link to this heading">#</a></h2>
+<p>Historically, Fortran 77, is an older version of the language that still is often used. It is a little simpler in some ways than later versions such as Fortran 90 and Fortran 95.</p>
+<ul class="simple">
+<li><p>Similar to C, Fortran is a <em>compiled</em> language. Hence, before your program can be executed, it must be <em>compiled</em>. This converts the English-like text of a Fortran program into a binary form that the processor understands.</p></li>
+</ul>
+<p>You compile a program by typing a line similar to the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gfortran<span class="w"> </span>do_nothing.f<span class="w"> </span>-o<span class="w"> </span>do_nothing
+</pre></div>
+</div>
+<p>It is important that you understand what is happening here:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">gfortran</span></code> here is the name of the Fortran compiler. This is a free compiler that often is included in Linux distributions. Your compiler may have a different name such as <code class="docutils literal notranslate"><span class="pre">ifort</span></code> (from Intel) or <code class="docutils literal notranslate"><span class="pre">pgf77</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">myprogram.f</span></code> is the name of the file that contains the source code of your program. The source code is the file of instructions that you actually edit and type. Your source file could be named something other than <code class="docutils literal notranslate"><span class="pre">myprogram.f</span></code>, such as <code class="docutils literal notranslate"><span class="pre">homework1.f</span></code> or some other descriptive name.</p></li>
+<li><p>On many systems the name of the source file must end with the suffix <code class="docutils literal notranslate"><span class="pre">.f</span></code> or the compiler will not recognize it as Fortran code.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">-o</span></code> option tells the compiler that the next word (here, <code class="docutils literal notranslate"><span class="pre">myprogram</span></code>) will be the name of the binary version of the program (or executable for the program). If you omit this option, most systems will use the default name <code class="docutils literal notranslate"><span class="pre">a.out</span></code> for the binary version regardless of the name of your program. It’s OK to use this default, though it’s usually helpful to use a more meaningful name.</p></li>
+<li><p>The binary file is often called the executable file because the computer can run (execute) it.</p></li>
+<li><p>On Unix systems (or Linux, or other Unix variants), to run the program, you may need to explicitly state that the program resides in your current directory. The shorthand for the current directory is <code class="docutils literal notranslate"><span class="pre">.</span></code> (a period, or “dot”). Then the program would be run as:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./myprogram
+</pre></div>
+</div>
+</section>
+<section id="the-simplest-fortran-program">
+<h2>2. The simplest Fortran program<a class="headerlink" href="#the-simplest-fortran-program" title="Link to this heading">#</a></h2>
+<p>The simplest Fortran program is what might be called a “do-nothing” program. It contains all of the required parts of a Fortran program. The program is as follows:</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="w">      </span><span class="k">PROGRAM </span><span class="n">MAIN</span>
+<span class="linenos">2</span><span class="w">      </span><span class="k">STOP</span>
+<span class="linenos">3</span><span class="k">      END</span>
+</pre></div>
+</div>
+<p>The program simply starts and stops. It has a beginning (the <code class="docutils literal notranslate"><span class="pre">PROGRAM</span></code> instruction), and then tells the system to halt execution (<code class="docutils literal notranslate"><span class="pre">STOP</span></code>). Notice that there is both <code class="docutils literal notranslate"><span class="pre">STOP</span></code> and <code class="docutils literal notranslate"><span class="pre">END</span></code>. The difference is that <code class="docutils literal notranslate"><span class="pre">STOP</span></code> tells the system to halt the execution of the program, while <code class="docutils literal notranslate"><span class="pre">END</span></code> identifies the end of your instructions - that is, <code class="docutils literal notranslate"><span class="pre">END</span></code> will always appear as the last line of a program.</p>
+<p>Complex programs may have more than one <code class="docutils literal notranslate"><span class="pre">STOP</span></code> instruction; for example, execution may be halted if an error occurs or a limit is reached. A single instruction in Fortran is usually called a <em>statement</em>.</p>
+<p>Although seemingly trivial, writing and executing this program illustrates some of the basic rules of writing Fortran programs:</p>
+<ul class="simple">
+<li><p>Only one instruction (or statement) may appear on a line.</p></li>
+<li><p>The statement is limited to the first 72 characters of each line. Many modern Fortran 77 compilers will accept longer lines, but this is not standard.</p></li>
+<li><p>The program is written in all uppercase letters. Strictly speaking, uppercase is the standard for Fortran 77 but almost all Fortran compilers will accept lowercase letters. (Such compilers are not “case sensitive”.) We will use uppercase because it helps to set off the program from the surrounding explanation. You can use either upper or lower case, whichever you like.</p></li>
+<li><p>Notice that all of the lines in the example above begin with 6 blank spaces. This is because the Fortran 77 standard requires that the first 6 characters of a line be reserved for statement numbers and continuation characters. These 6 spaces originate from the punched card version of Fortran.</p></li>
+</ul>
+<section id="exercise-14-1">
+<h3>Exercise 14.1:<a class="headerlink" href="#exercise-14-1" title="Link to this heading">#</a></h3>
+<p>Create your first “do nothing” Fortran program.</p>
+</section>
+</section>
+<section id="hello-world-and-simple-i-o">
+<h2>3. Hello, World! and Simple I/O<a class="headerlink" href="#hello-world-and-simple-i-o" title="Link to this heading">#</a></h2>
+<p>The next simplest Fortran program is something programmers call the “Hello World” program. This is the simplest program that actually produces some output. An example of the “Hello World!” program in Fortran is:</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="w">      </span><span class="k">PROGRAM </span><span class="n">HelloWorld</span>
+<span class="linenos">2</span><span class="w">      </span><span class="k">IMPLICIT NONE</span><span class="w"> </span><span class="c">! requires you to explicitly define the type for every variable that you use in your program, so to avoid undefined variables</span>
+<span class="linenos">3</span><span class="w">      </span><span class="k">WRITE</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39;Hello, world!&#39;</span><span class="w"> </span><span class="c">! this prints out on the screen</span>
+<span class="linenos">4</span><span class="w">      </span><span class="k">END PROGRAM </span><span class="n">HelloWorld</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Notice that we used the <code class="docutils literal notranslate"><span class="pre">WRITE</span></code> statement rather than the <code class="docutils literal notranslate"><span class="pre">PRINT</span></code> statement from the one in the previous exercise.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">WRITE</span></code> statement writes output to the screen when the program is run interactively. In fact it writes to something called “standard output,” which defaults to the screen.</p></li>
+<li><p>The asterisk in the <code class="docutils literal notranslate"><span class="pre">PRINT</span></code> or <code class="docutils literal notranslate"><span class="pre">WRITE</span></code> statment specifies “free format” output. This essentially means that we aren’t interested in the exact format in which the system prints the result.</p></li>
+<li><p>The text you want to print out is inside single quotes.</p></li>
+</ul>
+<section id="exercise-14-2">
+<h3>Exercise 14.2:<a class="headerlink" href="#exercise-14-2" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Type the “Hello World” program yourself. Compile it and run it.</p></li>
+<li><p>Change the “Hello World” program to print out something else, such as your name.</p></li>
+</ol>
+</section>
+<section id="simple-i-o">
+<h3>Simple I/O<a class="headerlink" href="#simple-i-o" title="Link to this heading">#</a></h3>
+<p>To print out on a file use the following statements in your program:</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="k">OPEN</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="k">file</span><span class="o">=</span><span class="s1">&#39;MyFile.dat&#39;</span><span class="p">)</span><span class="w"> </span><span class="c">! this assigns an ID number to the file</span>
+<span class="k">WRITE</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">99</span><span class="p">)</span><span class="n">Hello</span><span class="w"> </span><span class="n">world</span><span class="c">! ! this prints out to the file with the format specifier 99</span>
+<span class="k">CLOSE</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">CALL </span><span class="nb">flush</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="mi">99</span><span class="w"> </span><span class="k">FORMAT</span><span class="p">(</span><span class="n">ES15</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="c">! format specifier for your data: one column of 15 digits width, with exponential format and 5 decimals.</span>
+</pre></div>
+</div>
+<p>To read from a file:</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="k">OPEN</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="k">file</span><span class="o">=</span><span class="s1">&#39;MyFile2.dat&#39;</span><span class="p">)</span>
+<span class="k">READ</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">99</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="c">! we read the data from file 2 and put it into x</span>
+<span class="k">CALL </span><span class="nb">flush</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">CLOSE</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="arithmetic-in-fortran-real-and-integer-variables">
+<h2>4. Arithmetic in Fortran: Real and Integer Variables<a class="headerlink" href="#arithmetic-in-fortran-real-and-integer-variables" title="Link to this heading">#</a></h2>
+<p>Fortran has several different types of variables. The two most commonly used types for computations are <em>integer</em> variables and <em>real</em> variables.</p>
+<ul class="simple">
+<li><p><em>Integer variables</em> do not have a fractional part. The value of an integer variable is a whole number, like <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">2</span></code>, <code class="docutils literal notranslate"><span class="pre">5</span></code>, <code class="docutils literal notranslate"><span class="pre">-76</span></code>, and so on.</p></li>
+<li><p><em>Real variables</em> have a fractional part, which may be zero. These variables have values like <code class="docutils literal notranslate"><span class="pre">2.0</span></code> or <code class="docutils literal notranslate"><span class="pre">3.1416</span></code>. Real variables are sometimes called floating-point variables.</p></li>
+</ul>
+<p>Important! For an integer variable, the fractional part is not merely zero. The fractional part does not exist:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">2</span></code> is an integer value</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2.0</span></code> is a real value</p></li>
+</ul>
+<p>The type of each variable should be declared at the beginning of the program, right after the program is named.</p>
+<ul class="simple">
+<li><p>The type declarations have to appear before the first executable statement.</p></li>
+</ul>
+<p>Additionally, your variable names should adhere to the following conventions:</p>
+<ul class="simple">
+<li><p>The variable name may include both letters and digits, but the first character of the variable name has to be a letter. For example, <code class="docutils literal notranslate"><span class="pre">A2</span></code> is an allowable name, but <code class="docutils literal notranslate"><span class="pre">2A</span></code> is not.</p></li>
+<li><p>In standard Fortran 77 each variable name has to be six characters or less, but almost all modern systems will accept longer variable names.</p></li>
+</ul>
+<p>Following is a program that illustrates some of the differences between real and integer variables:</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="w">      </span><span class="k">PROGRAM </span><span class="n">MAIN</span>
+<span class="linenos"> 2</span><span class="w">      </span><span class="kt">INTEGER </span><span class="n">I</span><span class="p">,</span><span class="w"> </span><span class="n">INTPI</span><span class="p">,</span><span class="w"> </span><span class="n">INTE</span>
+<span class="linenos"> 3</span><span class="w">      </span><span class="kt">REAL </span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">REALPI</span><span class="p">,</span><span class="w"> </span><span class="n">REALE</span>
+<span class="linenos"> 4</span><span class="w">      </span><span class="n">I</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="linenos"> 5</span><span class="w">      </span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="linenos"> 6</span><span class="w">      </span><span class="k">PRINT</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;THE VALUE OF 1 AS A REAL IS&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">X</span>
+<span class="linenos"> 7</span><span class="w">      </span><span class="k">PRINT</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;THE VALUE OF 1 AS AN INTEGER IS&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">I</span>
+<span class="linenos"> 8</span><span class="w">      </span><span class="n">REALPI</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.1416</span>
+<span class="linenos"> 9</span><span class="w">      </span><span class="n">INTPI</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">REALPI</span>
+<span class="linenos">10</span><span class="w">      </span><span class="k">PRINT</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;THE VALUE OF PI AS A REAL IS&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">REALPI</span>
+<span class="linenos">11</span><span class="w">      </span><span class="k">PRINT</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;THE VALUE OF PI AS AN INTEGER IS&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">INTPI</span>
+<span class="linenos">12</span><span class="w">      </span><span class="n">REALE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.71828</span>
+<span class="linenos">13</span><span class="w">      </span><span class="n">INTE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">REALE</span>
+<span class="linenos">14</span><span class="w">      </span><span class="k">PRINT</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;THE VALUE OF E AS A REAL IS&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">REALE</span>
+<span class="linenos">15</span><span class="w">      </span><span class="k">PRINT</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;THE VALUE OF E AS AN INTEGER IS&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">INTE</span>
+<span class="linenos">16</span><span class="w">      </span><span class="k">STOP</span>
+<span class="linenos">17</span><span class="k">      END</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Any text that you want to print out is inside single quotes, but when printing the value of a variable you don’t put it in quotes.</p></li>
+<li><p>If you want to print multiple things (whether text or values) separate them with a comma.</p></li>
+</ul>
+<section id="exercise-14-3">
+<h3>Exercise 14.3:<a class="headerlink" href="#exercise-14-3" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Type the program as listed above, compile it and run it.</p></li>
+<li><p>What happens to the value of <em>pi</em> when it gets converted to an integer?</p></li>
+<li><p>What happens to the value of <em>e</em> when it gets converted to an integer? Look closely: Is the result rounded to the nearest integer?</p></li>
+<li><p>Change the values of <em>pi</em> and <em>e</em> to negative numbers (that is, -3.1416 and -2.71828), then re-compile and re-run the program. What happens when the negative values are converted to integers?</p></li>
+</ol>
+</section>
+<section id="other-variable-types">
+<h3>Other variable types<a class="headerlink" href="#other-variable-types" title="Link to this heading">#</a></h3>
+<p>Examples:</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="w">      </span><span class="kt">CHARACTER</span><span class="p">(</span><span class="nb">len</span><span class="o">=*</span><span class="p">),</span><span class="w"> </span><span class="k">PARAMETER</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;YourName&#39;</span><span class="w"> </span><span class="c">! defines a constant string of characters of unknown length</span>
+<span class="w">      </span><span class="kt">INTEGER</span><span class="p">,</span><span class="w"> </span><span class="k">PARAMETER</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span>
+<span class="w">      </span><span class="kt">REAL</span><span class="p">,</span><span class="w"> </span><span class="k">PARAMETER</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">Dx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0d0</span>
+<span class="w">      </span><span class="kt">REAL</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">x</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="c">! declares an array of n real values called x</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="functions">
+<h2>5. Functions<a class="headerlink" href="#functions" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Similar to other languages, in Fortran a function is a self-contained unit that receives some input from the outside via its arguments, performs a task, and then returns the result.</p></li>
+<li><p>A Fortran function is a procedure whose result is a single number, logical value, character string or array.</p></li>
+<li><p>This result can be be used to form a Fortran expression.</p>
+<ul>
+<li><p>The expression may be on the right side of an assignment statement.</p></li>
+</ul>
+</li>
+<li><p>There are two types of functions, intrinsic and user-defined.</p>
+<ul>
+<li><p>Intrinsic functions are those functions built into a Fortran language, such as <code class="docutils literal notranslate"><span class="pre">SIN(x)</span></code> or <code class="docutils literal notranslate"><span class="pre">LOG(x)</span></code>.</p></li>
+</ul>
+</li>
+</ul>
+<p>User-defined functions are functions defined by programmers to meet a specific need not addressed by the standard intrinsic functions.</p>
+<p>General form of user-defined functions:</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="w">      </span><span class="k">FUNCTION </span><span class="n">function_name</span><span class="p">(</span><span class="n">argument</span><span class="w"> </span><span class="n">list</span><span class="p">)</span>
+<span class="w">	  </span><span class="c">!! DECLARACTIONS</span>
+
+<span class="w">	  </span><span class="c">!! EXECUTABLES</span>
+
+<span class="w">	  </span><span class="n">function_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">expression</span>
+
+<span class="w">      </span><span class="k">RETURN</span><span class="w">	</span><span class="c">! ONLY NEEDED IF WE PLAN TO REACH END FUNCTION ALL OF THE TIME</span>
+<span class="w">      </span><span class="k">END FUNCTION </span><span class="n">function_name</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>A function is invoked (or called) by naming it in an expression.</p></li>
+<li><p>Function names follow the same rules as variable names.</p></li>
+<li><p>The name of the function must appear on the left side of at least one assignment statement in the function:</p></li>
+</ul>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="w">      </span><span class="n">function_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">expression</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The argument list of the function may be blank if the function can perform all calculations with no input arguments.</p></li>
+<li><p>The parentheses around the argument list are required even if the list is blank. Since the function returns a value, it is necessary to assign a type to that function.</p></li>
+<li><p>The type of the function must be declared both in the function procedure and the calling programs.</p></li>
+<li><p>In Fortran, we need to specify the types of function arguments.</p>
+<ul>
+<li><p>All arguments must be declared with a new attribute</p></li>
+</ul>
+</li>
+</ul>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="w">      </span><span class="k">INTENT</span><span class="p">(</span><span class="n">IN</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The meaning of <code class="docutils literal notranslate"><span class="pre">INTENT(IN)</span></code> indicates that the function will only use this argument as input and must not change its value.</p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="w">      </span><span class="kt">REAL </span><span class="k">FUNCTION </span><span class="n">LargerRoot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="w">        </span><span class="k">IMPLICIT NONE</span><span class="w"> </span><span class="c">! Remember that this tells the compiler that we will define all variables we will use</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="w">        </span><span class="kt">REAL</span><span class="p">,</span><span class="w"> </span><span class="k">INTENT</span><span class="p">(</span><span class="n">IN</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">a</span>
+<span class="linenos"> 6</span><span class="w">        </span><span class="kt">REAL</span><span class="p">,</span><span class="w"> </span><span class="k">INTENT</span><span class="p">(</span><span class="n">IN</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">b</span>
+<span class="linenos"> 7</span><span class="w">        </span><span class="kt">REAL</span><span class="p">,</span><span class="w"> </span><span class="k">INTENT</span><span class="p">(</span><span class="n">IN</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">c</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="w">        </span><span class="kt">REAL</span><span class="w">             </span><span class="kd">::</span><span class="w"> </span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="n">r1</span><span class="p">,</span><span class="n">r2</span><span class="w"> </span><span class="c">! Some temporary auxiliary variables needed that will live only inside this function</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="w">        </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">SQRT</span><span class="p">(</span><span class="n">b</span><span class="o">*</span><span class="n">b</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">4.0</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">c</span><span class="p">)</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="w">        </span><span class="n">r1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="o">-</span><span class="n">b</span><span class="o">+</span><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mf">2.0</span><span class="o">*</span><span class="n">a</span><span class="p">)</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="w">        </span><span class="n">r2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="o">-</span><span class="n">b</span><span class="o">-</span><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mf">2.0</span><span class="o">*</span><span class="n">a</span><span class="p">)</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="w">        </span><span class="k">IF</span><span class="p">(</span><span class="n">r1</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">r2</span><span class="p">)</span><span class="w"> </span><span class="k">THEN</span>
+<span class="linenos">18</span><span class="k">          </span><span class="n">LargerRoot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r1</span>
+<span class="linenos">19</span><span class="w">        </span><span class="k">ELSE</span>
+<span class="linenos">20</span><span class="k">          </span><span class="n">LargerRoot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r2</span>
+<span class="linenos">21</span><span class="w">        </span><span class="k">END IF</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="k">      END FUNCTION </span><span class="n">LargerRoot</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Remember that to be able to call this function, we need at least a <code class="docutils literal notranslate"><span class="pre">main</span></code> <code class="docutils literal notranslate"><span class="pre">PROGRAM</span></code>.</p>
+</div>
+<ul class="simple">
+<li><p>Function subprograms and any other subprograms are placed after the <code class="docutils literal notranslate"><span class="pre">END</span></code> statement of the <code class="docutils literal notranslate"><span class="pre">main</span></code> program (unless they are internal functions - then, they need to appear in <code class="docutils literal notranslate"><span class="pre">CONTAINS</span></code> section).</p></li>
+</ul>
+<section id="common-mistakes">
+<h3>Common mistakes<a class="headerlink" href="#common-mistakes" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Forget the function type
+Example:</p></li>
+</ol>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="w">      </span><span class="k">FUNCTION </span><span class="n">DoSomething</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="w">        </span><span class="k">IMPLICIT NONE</span>
+
+<span class="k">        </span><span class="kt">INTEGER</span><span class="p">,</span><span class="w"> </span><span class="k">INTENT</span><span class="w"> </span><span class="p">(</span><span class="n">IN</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span>
+
+<span class="w">        </span><span class="n">DoSomething</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">SQRT</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="o">*</span><span class="n">b</span><span class="p">)</span>
+<span class="w">      </span><span class="k">END FUNCTION </span><span class="n">DoSomething</span>
+</pre></div>
+</div>
+<p>If there is no type, you will not be able to determine the returned value type.</p>
+<ol class="arabic simple" start="2">
+<li><p>Forget <code class="docutils literal notranslate"><span class="pre">INTENT(IN)</span></code>
+Example:</p></li>
+</ol>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="w">      </span><span class="kt">REAL </span><span class="k">FUNCTION </span><span class="n">DoSomething</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">IMPLICIT NONE</span>
+<span class="k">        </span><span class="kt">INTEGER</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="n">b</span>
+
+<span class="w">        </span><span class="n">DoSomething</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">SQRT</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="o">*</span><span class="n">b</span><span class="p">)</span>
+<span class="w">      </span><span class="k">END FUNCTION </span><span class="n">DoSomething</span>
+</pre></div>
+</div>
+<p>Actually, this is not an error. But, without <code class="docutils literal notranslate"><span class="pre">INTENT</span> <span class="pre">(IN)</span></code>, the compiler will not be able to check many potential errors.</p>
+<ol class="arabic simple" start="3">
+<li><p>Change value of formal argument declared with <code class="docutils literal notranslate"><span class="pre">INTENT(IN)</span></code>
+Example:</p></li>
+</ol>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="w">      </span><span class="kt">REAL </span><span class="k">FUNCTION </span><span class="n">DoSomething</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">IMPLICIT NONE</span>
+<span class="k">        </span><span class="kt">INTEGER</span><span class="p">,</span><span class="w"> </span><span class="k">INTENT</span><span class="w"> </span><span class="p">(</span><span class="n">IN</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="n">b</span>
+
+<span class="w">        </span><span class="k">IF</span><span class="p">(</span><span class="n">a</span><span class="o">&gt;</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="k">THEN</span>
+<span class="k">            </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">b</span>
+<span class="w">        </span><span class="k">ELSE</span>
+<span class="k">            </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span>
+<span class="w">        </span><span class="k">END IF</span>
+
+<span class="k">        </span><span class="n">DoSomething</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">SQRT</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="o">*</span><span class="n">b</span><span class="p">)</span>
+<span class="w">      </span><span class="k">END FUNCTION </span><span class="n">DoSomething</span>
+</pre></div>
+</div>
+<p>Since <code class="docutils literal notranslate"><span class="pre">a</span></code> was declared with <code class="docutils literal notranslate"><span class="pre">INTENT(IN)</span></code>, its value cannot be changed.</p>
+<ol class="arabic simple" start="4">
+<li><p>Forget to store value to function name
+Example:</p></li>
+</ol>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="w">      </span><span class="kt">REAL </span><span class="k">FUNCTION </span><span class="n">DoSomething</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">IMPLICIT NONE</span>
+
+<span class="k">        </span><span class="kt">INTEGER</span><span class="p">,</span><span class="w"> </span><span class="k">INTENT</span><span class="p">(</span><span class="n">IN</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="n">b</span>
+<span class="w">        </span><span class="kt">INTEGER</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">c</span>
+<span class="w">        </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">SQRT</span><span class="p">(</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="err">∗</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="err">∗</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="p">)</span>
+<span class="w">      </span><span class="k">END FUNCTION </span><span class="n">DoSomething</span>
+</pre></div>
+</div>
+<p>Since there is no value ever stored in <code class="docutils literal notranslate"><span class="pre">DoSomething</span></code>, the returned value could be anything (garbage).</p>
+<ol class="arabic simple" start="5">
+<li><p>Function name used in right hand side of expression
+Example:</p></li>
+</ol>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="w">      </span><span class="kt">REAL </span><span class="k">FUNCTION </span><span class="n">DoSomething</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">IMPLICIT NONE</span>
+<span class="k">        </span><span class="kt">INTEGER</span><span class="p">,</span><span class="w"> </span><span class="k">INTENT</span><span class="p">(</span><span class="n">IN</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="n">b</span>
+
+<span class="w">        </span><span class="n">DoSomething</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="o">*</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="o">*</span><span class="n">b</span>
+<span class="w">        </span><span class="n">DoSomething</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">SQRT</span><span class="p">(</span><span class="n">DoSomething</span><span class="p">)</span>
+<span class="w">      </span><span class="k">END FUNCTION </span><span class="n">DoSomething</span>
+</pre></div>
+</div>
+<p>Only a special type of functions, <em>recursive</em> functions, could have their names on the right-hand side of expressions (we didn’t treat recursion in this class because it is pretty impractical).</p>
+<ol class="arabic simple" start="6">
+<li><p>Most recent value stored in function name is returned
+Example:</p></li>
+</ol>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="w">      </span><span class="kt">REAL </span><span class="k">FUNCTION </span><span class="n">DoSomething</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">IMPLICIT NONE</span>
+<span class="k">        </span><span class="kt">INTEGER</span><span class="p">,</span><span class="w"> </span><span class="k">INTENT</span><span class="p">(</span><span class="n">IN</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="n">b</span>
+<span class="w">        </span><span class="n">DoSomething</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="o">*</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="o">*</span><span class="n">b</span>
+<span class="w">        </span><span class="n">DoSomething</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">SQRT</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="o">*</span><span class="n">b</span><span class="p">)</span>
+<span class="w">      </span><span class="k">END FUNCTION </span><span class="n">DoSomething</span>
+</pre></div>
+</div>
+<p>The second assignment overwrites the previous value.</p>
+<p>Some important rules for Fortran function arguments:</p>
+<ul class="simple">
+<li><p>If an actual argument is an expression, it is evaluated and the result is saved into a temporary location. Then, the value in this temporary location is passed.</p></li>
+<li><p>If an actual argument is a constant, it is considered as an expression. Therefore, its value is saved to a temporary location and then passed.</p></li>
+<li><p>If an actual argument is a variable, its value is taken and passed to the corresponding formal argument.</p></li>
+<li><p>If an actual argument is a variable enclosed in a pair of parenthesis like <code class="docutils literal notranslate"><span class="pre">(A)</span></code>, then this is an expression and its value is evaluated and saved to a temporary location. Then, this value (in the temporary location) is passed.</p></li>
+<li><p>For a formal argument declared with <code class="docutils literal notranslate"><span class="pre">INTENT(IN)</span></code>, any attempt to change its value in the function will cause a compiler error.</p></li>
+<li><p>In a Fortran function, the <code class="docutils literal notranslate"><span class="pre">INTENT</span></code> should always be <code class="docutils literal notranslate"><span class="pre">IN</span></code>. If you plan to use an <code class="docutils literal notranslate"><span class="pre">INTENT</span></code> other than <code class="docutils literal notranslate"><span class="pre">IN</span></code> then consider using a <code class="docutils literal notranslate"><span class="pre">SUBROUTINE</span></code> rather than a <code class="docutils literal notranslate"><span class="pre">FUNCTION</span></code> (see below).</p></li>
+</ul>
+</section>
+<section id="subroutines">
+<h3>5.1 Subroutines<a class="headerlink" href="#subroutines" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>We saw that Fortran functions have an explicit type and are intended to return one value.</p></li>
+<li><p>Subroutine subprograms, on the other hand, have no explicit type and return multiple or no values through a parameter call list.</p></li>
+<li><p>Unlike functions, calls to subroutines cannot be placed in an expression.</p></li>
+<li><p>In the main program, a subroutine is activated by using a <code class="docutils literal notranslate"><span class="pre">CALL</span></code> statement which include the subroutine name followed by the list of inputs to and outputs from the subroutine surrounded by parenthesis. The inputs and outputs are collectively called the arguments.</p></li>
+<li><p>A subroutine name follows the same rules as for function names and variable names: less than six letters and numbers and beginning with a letter. Because of this, subroutine names should be different than those used for variables or functions.</p></li>
+<li><p>As with functions, there are some rules for using subroutines. Keep these in mind when writing your subroutines:</p>
+<ul>
+<li><p>You do not need to declare the subroutine name in the main program as you do with a function name.</p></li>
+<li><p>They begin with a line that includes the word <code class="docutils literal notranslate"><span class="pre">SUBROUTINE</span></code>, the name of the subroutine, and the arguments for the subroutine.</p></li>
+</ul>
+</li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">INTENT</span></code> of arguments in subroutines can be multiple: <code class="docutils literal notranslate"><span class="pre">IN</span></code> (the value of the dummy argument may be used, but not modified, within the procedure.), <code class="docutils literal notranslate"><span class="pre">OUT</span></code> (the dummy argument may be set and then modified within the procedure, and the values returned to the caller), and <code class="docutils literal notranslate"><span class="pre">INOUT</span></code> (initial values of the dummy argument may be both used and modified within the procedure, and then returned to the caller).</p></li>
+</ul>
+</section>
+</section>
+<section id="interface-blocks">
+<h2>6. Interface blocks<a class="headerlink" href="#interface-blocks" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Safety feature which allows main programs and external subprograms to interface appropriately with your user-defined function/subroutine.</p></li>
+<li><p>Ensures that the calling program and the subprogram have the correct number and type of arguments</p></li>
+<li><p>Helps compiler to detect incorrect usage of a subprogram at compile time</p></li>
+<li><p>It consists of:</p>
+<ol class="arabic simple">
+<li><p>Number of arguments</p></li>
+<li><p>Type of each argument</p></li>
+<li><p>Type of values returned by the subprogram</p></li>
+</ol>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="w">      </span><span class="k">PROGRAM </span><span class="n">Area</span>
+<span class="linenos"> 2</span><span class="w">        </span><span class="k">IMPLICIT NONE</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="k">        INTERFACE</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="k">            FUNCTION </span><span class="n">Area_Circle</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="w">            </span><span class="kt">REAL</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">Area_Circle</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="w">            </span><span class="kt">REAL</span><span class="p">,</span><span class="w"> </span><span class="k">INTENT</span><span class="p">(</span><span class="n">IN</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">r</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="w">            </span><span class="k">END FUNCTION </span><span class="n">Area_Circle</span>
+<span class="linenos">13</span><span class="w">        </span><span class="k">END INTERFACE</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="k">        </span><span class="kt">REAL</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">radius</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">ADVANCE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;NO&quot;</span><span class="p">)</span><span class="w"> </span><span class="s2">&quot;Enter radius of circle: &quot;</span>
+<span class="linenos">18</span><span class="w">        </span><span class="k">read</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">radius</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span><span class="w">        </span><span class="c">! Write out area of circle using function call</span>
+<span class="linenos">21</span><span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="s2">&quot;Area of circle with radius&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">radius</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; is&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Area_Circle</span><span class="p">(</span><span class="n">radius</span><span class="p">)</span>
+<span class="linenos">22</span><span class="mi">100</span><span class="w"> </span><span class="k">FORMAT</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">F6</span><span class="p">.</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">F11</span><span class="p">.</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="c">! Need Fortran90 specification, i.e., name your file with the .f90 extension</span>
+<span class="linenos">23</span><span class="w">      </span><span class="k">END PROGRAM </span><span class="n">Area</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span><span class="w">      </span><span class="k">FUNCTION </span><span class="n">Area_Circle</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span><span class="w">        </span><span class="k">IMPLICIT NONE</span>
+<span class="linenos">28</span><span class="k">        </span><span class="kt">REAL</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">Area_Circle</span>
+<span class="linenos">29</span><span class="w">        </span><span class="kt">REAL</span><span class="p">,</span><span class="w"> </span><span class="k">INTENT</span><span class="w"> </span><span class="p">(</span><span class="n">IN</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">r</span>
+<span class="linenos">30</span>
+<span class="linenos">31</span><span class="w">        </span><span class="kt">REAL</span><span class="p">,</span><span class="w"> </span><span class="k">PARAMETER</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">Pi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.1415927</span>
+<span class="linenos">32</span>
+<span class="linenos">33</span><span class="w">        </span><span class="n">Area_Circle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Pi</span><span class="o">*</span><span class="n">r</span><span class="o">*</span><span class="n">r</span>
+<span class="linenos">34</span>
+<span class="linenos">35</span><span class="w">      </span><span class="k">END FUNCTION </span><span class="n">Area_Circle</span>
+</pre></div>
+</div>
+</section>
+<section id="modules">
+<h2>7. Modules<a class="headerlink" href="#modules" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>It is often the case that there are parameters, variables, and subprograms that must be shared by several program units</p></li>
+<li><p>Fortran 90 provides a special program unit known as a MODULE that conveniently packages collections of declarations and subprograms so that they may be imported into other program units</p></li>
+</ul>
+<p>Syntax:</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="w">      </span><span class="k">MODULE </span><span class="n">module_name</span>
+<span class="w">      </span><span class="c">! some specifications</span>
+<span class="w">      </span><span class="k">END MODULE </span><span class="n">module_name</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>A program module is made accessible to the various program units by way of the <code class="docutils literal notranslate"><span class="pre">USE</span></code> statement</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">USE</span></code> statement must appear at the beginning of the declaration part of the program unit making use of the module. It must appear even before the statement <code class="docutils literal notranslate"><span class="pre">IMPLICIT</span> <span class="pre">NONE</span></code>.</p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="w">      </span><span class="k">PROGRAM </span><span class="n">Area</span>
+<span class="linenos"> 2</span><span class="w">        </span><span class="k">IMPLICIT NONE</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="k">        INTERFACE</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="k">            FUNCTION </span><span class="n">Area_Circle</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="w">            </span><span class="kt">REAL</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">Area_Circle</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="w">            </span><span class="kt">REAL</span><span class="p">,</span><span class="w"> </span><span class="k">INTENT</span><span class="p">(</span><span class="n">IN</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">r</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="w">            </span><span class="k">END FUNCTION </span><span class="n">Area_Circle</span>
+<span class="linenos">13</span><span class="w">        </span><span class="k">END INTERFACE</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="k">        </span><span class="kt">REAL</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">radius</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">ADVANCE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;NO&quot;</span><span class="p">)</span><span class="w"> </span><span class="s2">&quot;Enter radius of circle: &quot;</span>
+<span class="linenos">18</span><span class="w">        </span><span class="k">read</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">radius</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span><span class="w">        </span><span class="c">! Write out area of circle using function call</span>
+<span class="linenos">21</span><span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="s2">&quot;Area of circle with radius&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">radius</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; is&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Area_Circle</span><span class="p">(</span><span class="n">radius</span><span class="p">)</span>
+<span class="linenos">22</span><span class="mi">100</span><span class="w"> </span><span class="k">FORMAT</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">F6</span><span class="p">.</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">F11</span><span class="p">.</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="c">! Need Fortran90 specification, i.e., name your file with the .f90 extension</span>
+<span class="linenos">23</span><span class="w">      </span><span class="k">END PROGRAM </span><span class="n">Area</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span><span class="w">      </span><span class="k">FUNCTION </span><span class="n">Area_Circle</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span><span class="w">        </span><span class="k">IMPLICIT NONE</span>
+<span class="linenos">28</span><span class="k">        </span><span class="kt">REAL</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">Area_Circle</span>
+<span class="linenos">29</span><span class="w">        </span><span class="kt">REAL</span><span class="p">,</span><span class="w"> </span><span class="k">INTENT</span><span class="w"> </span><span class="p">(</span><span class="n">IN</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">r</span>
+<span class="linenos">30</span>
+<span class="linenos">31</span><span class="w">        </span><span class="kt">REAL</span><span class="p">,</span><span class="w"> </span><span class="k">PARAMETER</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">Pi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.1415927</span>
+<span class="linenos">32</span>
+<span class="linenos">33</span><span class="w">        </span><span class="n">Area_Circle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Pi</span><span class="o">*</span><span class="n">r</span><span class="o">*</span><span class="n">r</span>
+<span class="linenos">34</span>
+<span class="linenos">35</span><span class="w">      </span><span class="k">END FUNCTION </span><span class="n">Area_Circle</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Each module unit must be compiled independently.</p></li>
+<li><p>To compile a module use:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gfortran<span class="w"> </span>-c<span class="w"> </span>math_consts_module.f
+</pre></div>
+</div>
+<p>which will produce <code class="docutils literal notranslate"><span class="pre">math_consts_module.o</span></code> and <code class="docutils literal notranslate"><span class="pre">math_consts_module.mod</span></code> files</p>
+<ul class="simple">
+<li><p>To compile the main program that uses the module, use:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gfortran<span class="w"> </span>-Wall<span class="w"> </span>using_modules.f<span class="w"> </span>math_consts_module.o<span class="w"> </span>-o<span class="w"> </span>using_modules
+</pre></div>
+</div>
+<p>This will both compile your main program <code class="docutils literal notranslate"><span class="pre">using_modules.f</span></code> <em>and</em> link your compiled module.</p>
+<p>Alternatively, you could have compiled the module and main program together, as in:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w"> </span>gfortran<span class="w"> </span>-ffree-fortran<span class="w"> </span>-c<span class="w"> </span>math_consts_module.f<span class="w"> </span>using_modules.f
+</pre></div>
+</div>
+<p>And then you could have done the linking of the object files:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gfortran<span class="w"> </span>math_consts_module.o<span class="w"> </span>using_modules.o<span class="w"> </span>-o<span class="w"> </span>using_modules
+</pre></div>
+</div>
+<p>Review of Fortran modules:</p>
+<ul class="simple">
+<li><p>Modules provide you a way of splitting your programs between multiple files</p></li>
+<li><p>Modules are used for:</p>
+<ul>
+<li><p>Packaging subprograms, data and interface blocks</p></li>
+<li><p>Defining global data that can be used by more than one routine</p></li>
+<li><p>Declaring variables that can be made available within any routines you choose</p></li>
+<li><p>Importing a module entirely, for use, into another program or subroutine</p></li>
+</ul>
+</li>
+<li><p>Syntax of a module (two parts):</p>
+<ul>
+<li><p>a specification part for statements declaration</p></li>
+<li><p>a contains part for subroutine and function definitions</p></li>
+</ul>
+</li>
+</ul>
+<p>General form:</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="w">      </span><span class="k">MODULE </span><span class="n">module_name</span>
+<span class="w">      </span><span class="c">! [ statement declarations ]</span>
+<span class="w">      </span><span class="c">! [ contains subroutine and function definitions]</span>
+<span class="w">      </span><span class="k">END MODULE </span><span class="n">module_name</span>
+</pre></div>
+</div>
+<p>Using a module:</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="w">      </span><span class="k">USE </span><span class="n">module_name</span>
+</pre></div>
+</div>
+<p>Note:</p>
+<ul class="simple">
+<li><p>Can add as many modules as needed, each will be in separate files and compiled separately</p></li>
+<li><p>A module can be used in various different programs</p></li>
+<li><p>A module can be used many times in the same program</p></li>
+<li><p>The variables declared in a module specification part, are global to the module</p></li>
+<li><p>The variables declared in a module become global variables in any program or routine where the module is used</p></li>
+<li><p>The use statement can appear in the main program, or any other subroutine or module which uses the routines or variables declared in a particular module</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "sdsu-comp526/fall24",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./slides"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="module5-1_community_projects.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">23) Community Projects</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-compile-a-fortran-program">1. How to compile a Fortran program</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-simplest-fortran-program">2. The simplest Fortran program</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-14-1">Exercise 14.1:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hello-world-and-simple-i-o">3. Hello, World! and Simple I/O</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-14-2">Exercise 14.2:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-i-o">Simple I/O</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arithmetic-in-fortran-real-and-integer-variables">4. Arithmetic in Fortran: Real and Integer Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-14-3">Exercise 14.3:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-variable-types">Other variable types</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">5. Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-mistakes">Common mistakes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subroutines">5.1 Subroutines</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interface-blocks">6. Interface blocks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modules">7. Modules</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Valeria Barra
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

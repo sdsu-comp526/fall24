@@ -212,7 +212,8 @@
 <li class="toctree-l2"><a class="reference internal" href="module4-7_matrix_conditioning_and_svd.html">20) Matrix condition number and SVD</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module4-8_svd_and_conditioning.html">21) SVD Geometry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module4-9_low_rank.html">22) Low Rank</a></li>
-<li class="toctree-l2"><a class="reference internal" href="module5-1_intro_to_fortran.html">26) Introduction to Fortran</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module5-1_community_projects.html">23) Community Projects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module6-1_intro_to_fortran.html">24) Introduction to Fortran</a></li>
 </ul>
 </details></li>
 </ul>
@@ -547,7 +548,7 @@ document.write(`
 <li><p>Using <code class="docutils literal notranslate"><span class="pre">while</span> <span class="pre">((b</span> <span class="pre">-</span> <span class="pre">a)</span> <span class="pre">/</span> <span class="pre">2.0</span> <span class="pre">&gt;</span> <span class="pre">tol)</span></code> as a stopping criterion, effectively doubling the tolerance</p></li>
 <li><p>Using the midpoint of the interval <code class="docutils literal notranslate"><span class="pre">fabs(f(mid_point))</span> <span class="pre">&gt;</span> <span class="pre">tol</span></code> to check for the stopping criterion</p></li>
 <li><p>Not checking the necessary condition for the function to have a root in the interval. That is, not checking that it has opposite signs at the endpoints <code class="docutils literal notranslate"><span class="pre">f(a)*f(b)&lt;0</span></code></p></li>
-<li><p>Using <code class="docutils literal notranslate"><span class="pre">==</span></code> to check if a floating point number is equal to zero, as in <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">(f(mid_point)</span> <span class="pre">==</span> <span class="pre">0.0)</span></code>. You should <em>never</em> use <code class="docutils literal notranslate"><span class="pre">==</span></code> to check if any floating point number is equal to zero, because of floating point aritmetic and rounding errors. Always check if it is within a desired tolerance. Alternatively, if you are not given a specific tolerance, check against machine <span class="math notranslate nohighlight">\(\varepsilon\)</span>, but do not check <code class="docutils literal notranslate"><span class="pre">==</span> <span class="pre">0</span></code>.</p></li>
+<li><p>Using <code class="docutils literal notranslate"><span class="pre">==</span></code> to check if a floating point number is equal to zero, as in <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">(f(mid_point)</span> <span class="pre">==</span> <span class="pre">0.0)</span></code>. You should <em>never</em> use <code class="docutils literal notranslate"><span class="pre">==</span></code> to check if any floating point number is equal to zero, because of floating point arithmetic and rounding errors. Always check if it is within a desired tolerance. Alternatively, if you are not given a specific tolerance, check against machine <span class="math notranslate nohighlight">\(\varepsilon\)</span>, but do not check <code class="docutils literal notranslate"><span class="pre">==</span> <span class="pre">0</span></code>.</p></li>
 </ul>
 </section>
 </section>
