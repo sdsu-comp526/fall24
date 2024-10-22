@@ -66,7 +66,7 @@ The next simplest Fortran program is something programmers call the "Hello World
 :linenos: true
 ```
 
-- Notice that we used the `WRITE` statement rather than the `PRINT` statement from the one in the previous exercise.
+- Notice that we used the `WRITE` statement rather than the `PRINT` statement.
 - The `WRITE` statement writes output to the screen when the program is run interactively. In fact it writes to something called "standard output," which defaults to the screen.
 - The asterisk in the `PRINT` or `WRITE` statment specifies "free format" output. This essentially means that we aren't interested in the exact format in which the system prints the result.
 - The text you want to print out is inside single quotes.
@@ -203,7 +203,8 @@ Remember that to be able to call this function, we need at least a `main` `PROGR
 
 ### Common mistakes
 
-1) Forget the function type
+1) Forget the function type.
+
 Example:
 ```fortran
       FUNCTION DoSomething(a,b)
@@ -216,7 +217,8 @@ Example:
 ```
 If there is no type, you will not be able to determine the returned value type.
 
-2) Forget `INTENT(IN)`
+2) Forget `INTENT(IN)`.
+
 Example:
 
 ```fortran
@@ -230,7 +232,8 @@ Example:
 ```
 Actually, this is not an error. But, without `INTENT (IN)`, the compiler will not be able to check many potential errors.
 
-3) Change value of formal argument declared with `INTENT(IN)`
+3) Change value of formal argument declared with `INTENT(IN)`.
+
 Example:
 
 ```fortran
@@ -251,7 +254,8 @@ Example:
 
 Since `a` was declared with `INTENT(IN)`, its value cannot be changed.
 
-4) Forget to store value to function name
+4) Forget to store value to function name.
+
 Example:
 
 ```fortran
@@ -267,7 +271,8 @@ Example:
 
 Since there is no value ever stored in `DoSomething`, the returned value could be anything (garbage).
 
-5) Function name used in right hand side of expression
+5) Function name used in right hand side of expression.
+
 Example:
 
 ```fortran
@@ -283,7 +288,8 @@ Example:
 
 Only a special type of functions, _recursive_ functions, could have their names on the right-hand side of expressions (we didn't treat recursion in this class because it is pretty impractical).
 
-6) Most recent value stored in function name is returned
+6) Most recent value stored in function name is returned.
+
 Example:
 
 ```fortran
@@ -362,12 +368,14 @@ Example:
 - Each module unit must be compiled independently.
 
 - To compile a module use:
+
 ```bash
 gfortran -c math_consts_module.f
 ```
 which will produce `math_consts_module.o` and `math_consts_module.mod` files
 
 - To compile the main program that uses the module, use:
+
 ```bash
 gfortran -Wall using_modules.f math_consts_module.o -o using_modules
 ```

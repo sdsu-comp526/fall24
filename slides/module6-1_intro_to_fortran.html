@@ -509,7 +509,7 @@ document.write(`
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>Notice that we used the <code class="docutils literal notranslate"><span class="pre">WRITE</span></code> statement rather than the <code class="docutils literal notranslate"><span class="pre">PRINT</span></code> statement from the one in the previous exercise.</p></li>
+<li><p>Notice that we used the <code class="docutils literal notranslate"><span class="pre">WRITE</span></code> statement rather than the <code class="docutils literal notranslate"><span class="pre">PRINT</span></code> statement.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">WRITE</span></code> statement writes output to the screen when the program is run interactively. In fact it writes to something called “standard output,” which defaults to the screen.</p></li>
 <li><p>The asterisk in the <code class="docutils literal notranslate"><span class="pre">PRINT</span></code> or <code class="docutils literal notranslate"><span class="pre">WRITE</span></code> statment specifies “free format” output. This essentially means that we aren’t interested in the exact format in which the system prints the result.</p></li>
 <li><p>The text you want to print out is inside single quotes.</p></li>
@@ -694,9 +694,9 @@ document.write(`
 <section id="common-mistakes">
 <h3>Common mistakes<a class="headerlink" href="#common-mistakes" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
-<li><p>Forget the function type
-Example:</p></li>
+<li><p>Forget the function type.</p></li>
 </ol>
+<p>Example:</p>
 <div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="w">      </span><span class="k">FUNCTION </span><span class="n">DoSomething</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
 <span class="w">        </span><span class="k">IMPLICIT NONE</span>
 
@@ -708,9 +708,9 @@ Example:</p></li>
 </div>
 <p>If there is no type, you will not be able to determine the returned value type.</p>
 <ol class="arabic simple" start="2">
-<li><p>Forget <code class="docutils literal notranslate"><span class="pre">INTENT(IN)</span></code>
-Example:</p></li>
+<li><p>Forget <code class="docutils literal notranslate"><span class="pre">INTENT(IN)</span></code>.</p></li>
 </ol>
+<p>Example:</p>
 <div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="w">      </span><span class="kt">REAL </span><span class="k">FUNCTION </span><span class="n">DoSomething</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
 
 <span class="w">        </span><span class="k">IMPLICIT NONE</span>
@@ -722,9 +722,9 @@ Example:</p></li>
 </div>
 <p>Actually, this is not an error. But, without <code class="docutils literal notranslate"><span class="pre">INTENT</span> <span class="pre">(IN)</span></code>, the compiler will not be able to check many potential errors.</p>
 <ol class="arabic simple" start="3">
-<li><p>Change value of formal argument declared with <code class="docutils literal notranslate"><span class="pre">INTENT(IN)</span></code>
-Example:</p></li>
+<li><p>Change value of formal argument declared with <code class="docutils literal notranslate"><span class="pre">INTENT(IN)</span></code>.</p></li>
 </ol>
+<p>Example:</p>
 <div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="w">      </span><span class="kt">REAL </span><span class="k">FUNCTION </span><span class="n">DoSomething</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
 
 <span class="w">        </span><span class="k">IMPLICIT NONE</span>
@@ -742,9 +742,9 @@ Example:</p></li>
 </div>
 <p>Since <code class="docutils literal notranslate"><span class="pre">a</span></code> was declared with <code class="docutils literal notranslate"><span class="pre">INTENT(IN)</span></code>, its value cannot be changed.</p>
 <ol class="arabic simple" start="4">
-<li><p>Forget to store value to function name
-Example:</p></li>
+<li><p>Forget to store value to function name.</p></li>
 </ol>
+<p>Example:</p>
 <div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="w">      </span><span class="kt">REAL </span><span class="k">FUNCTION </span><span class="n">DoSomething</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
 
 <span class="w">        </span><span class="k">IMPLICIT NONE</span>
@@ -757,9 +757,9 @@ Example:</p></li>
 </div>
 <p>Since there is no value ever stored in <code class="docutils literal notranslate"><span class="pre">DoSomething</span></code>, the returned value could be anything (garbage).</p>
 <ol class="arabic simple" start="5">
-<li><p>Function name used in right hand side of expression
-Example:</p></li>
+<li><p>Function name used in right hand side of expression.</p></li>
 </ol>
+<p>Example:</p>
 <div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="w">      </span><span class="kt">REAL </span><span class="k">FUNCTION </span><span class="n">DoSomething</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
 
 <span class="w">        </span><span class="k">IMPLICIT NONE</span>
@@ -772,9 +772,9 @@ Example:</p></li>
 </div>
 <p>Only a special type of functions, <em>recursive</em> functions, could have their names on the right-hand side of expressions (we didn’t treat recursion in this class because it is pretty impractical).</p>
 <ol class="arabic simple" start="6">
-<li><p>Most recent value stored in function name is returned
-Example:</p></li>
+<li><p>Most recent value stored in function name is returned.</p></li>
 </ol>
+<p>Example:</p>
 <div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="w">      </span><span class="kt">REAL </span><span class="k">FUNCTION </span><span class="n">DoSomething</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
 
 <span class="w">        </span><span class="k">IMPLICIT NONE</span>
