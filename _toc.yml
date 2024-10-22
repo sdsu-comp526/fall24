@@ -31,3 +31,4 @@ chapters:
   - file: slides/module4-9_low_rank.ipynb
   - file: slides/module5-1_community_projects.md
   - file: slides/module6-1_intro_to_fortran.md
+  - file: slides/module7-1_interpolation.ipynb

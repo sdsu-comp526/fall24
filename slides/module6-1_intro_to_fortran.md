@@ -1,6 +1,10 @@
 # 24) Introduction to Fortran
 
-Today:
+## Last time:
+- Community Projects
+- Final Project overview
+
+## Today:
  1. How to compile a Fortran program
  2. The simplest Fortran program
  3. Hello, World! and Simple I/O
