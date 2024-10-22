@@ -59,7 +59,7 @@ Although seemingly trivial, writing and executing this program illustrates some 
 - The program is written in all uppercase letters. Strictly speaking, uppercase is the standard for Fortran 77 but almost all Fortran compilers will accept lowercase letters. (Such compilers are not "case sensitive".) We will use uppercase because it helps to set off the program from the surrounding explanation. You can use either upper or lower case, whichever you like.
 - Notice that all of the lines in the example above begin with 6 blank spaces. This is because the Fortran 77 standard requires that the first 6 characters of a line be reserved for statement numbers and continuation characters. These 6 spaces originate from the punched card version of Fortran.
 
-### Exercise 14.1:
+### Exercise 24.1:
 Create your first "do nothing" Fortran program.
 
 ## 3. Hello, World! and Simple I/O
@@ -75,7 +75,7 @@ The next simplest Fortran program is something programmers call the "Hello World
 - The asterisk in the `PRINT` or `WRITE` statment specifies "free format" output. This essentially means that we aren't interested in the exact format in which the system prints the result.
 - The text you want to print out is inside single quotes.
 
-### Exercise 14.2:
+### Exercise 24.2:
  1. Type the "Hello World" program yourself. Compile it and run it.
  2. Change the "Hello World" program to print out something else, such as your name.
 
@@ -129,7 +129,7 @@ Following is a program that illustrates some of the differences between real and
 - Any text that you want to print out is inside single quotes, but when printing the value of a variable you don't put it in quotes.
 - If you want to print multiple things (whether text or values) separate them with a comma.
 
-### Exercise 14.3:
+### Exercise 24.3:
 
  1. Type the program as listed above, compile it and run it.
  2. What happens to the value of _pi_ when it gets converted to an integer?
