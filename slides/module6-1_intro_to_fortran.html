@@ -61,6 +61,7 @@
     <link rel="icon" href="../_static/SDSU-comp526_logo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="25) Interpolation" href="module7-1_interpolation.html" />
     <link rel="prev" title="23) Community Projects" href="module5-1_community_projects.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -211,6 +212,7 @@
 <li class="toctree-l2"><a class="reference internal" href="module4-9_low_rank.html">22) Low Rank</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module5-1_community_projects.html">23) Community Projects</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">24) Introduction to Fortran</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module7-1_interpolation.html">25) Interpolation</a></li>
 </ul>
 </details></li>
 </ul>
@@ -412,16 +414,16 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#today">Today:</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-compile-a-fortran-program">1. How to compile a Fortran program</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-simplest-fortran-program">2. The simplest Fortran program</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-14-1">Exercise 14.1:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-24-1">Exercise 24.1:</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hello-world-and-simple-i-o">3. Hello, World! and Simple I/O</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-14-2">Exercise 14.2:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-24-2">Exercise 24.2:</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-i-o">Simple I/O</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arithmetic-in-fortran-real-and-integer-variables">4. Arithmetic in Fortran: Real and Integer Variables</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-14-3">Exercise 14.3:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-24-3">Exercise 24.3:</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-variable-types">Other variable types</a></li>
 </ul>
 </li>
@@ -505,8 +507,8 @@ document.write(`
 <li><p>The program is written in all uppercase letters. Strictly speaking, uppercase is the standard for Fortran 77 but almost all Fortran compilers will accept lowercase letters. (Such compilers are not “case sensitive”.) We will use uppercase because it helps to set off the program from the surrounding explanation. You can use either upper or lower case, whichever you like.</p></li>
 <li><p>Notice that all of the lines in the example above begin with 6 blank spaces. This is because the Fortran 77 standard requires that the first 6 characters of a line be reserved for statement numbers and continuation characters. These 6 spaces originate from the punched card version of Fortran.</p></li>
 </ul>
-<section id="exercise-14-1">
-<h3>Exercise 14.1:<a class="headerlink" href="#exercise-14-1" title="Link to this heading">#</a></h3>
+<section id="exercise-24-1">
+<h3>Exercise 24.1:<a class="headerlink" href="#exercise-24-1" title="Link to this heading">#</a></h3>
 <p>Create your first “do nothing” Fortran program.</p>
 </section>
 </section>
@@ -525,8 +527,8 @@ document.write(`
 <li><p>The asterisk in the <code class="docutils literal notranslate"><span class="pre">PRINT</span></code> or <code class="docutils literal notranslate"><span class="pre">WRITE</span></code> statment specifies “free format” output. This essentially means that we aren’t interested in the exact format in which the system prints the result.</p></li>
 <li><p>The text you want to print out is inside single quotes.</p></li>
 </ul>
-<section id="exercise-14-2">
-<h3>Exercise 14.2:<a class="headerlink" href="#exercise-14-2" title="Link to this heading">#</a></h3>
+<section id="exercise-24-2">
+<h3>Exercise 24.2:<a class="headerlink" href="#exercise-24-2" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p>Type the “Hello World” program yourself. Compile it and run it.</p></li>
 <li><p>Change the “Hello World” program to print out something else, such as your name.</p></li>
@@ -596,8 +598,8 @@ document.write(`
 <li><p>Any text that you want to print out is inside single quotes, but when printing the value of a variable you don’t put it in quotes.</p></li>
 <li><p>If you want to print multiple things (whether text or values) separate them with a comma.</p></li>
 </ul>
-<section id="exercise-14-3">
-<h3>Exercise 14.3:<a class="headerlink" href="#exercise-14-3" title="Link to this heading">#</a></h3>
+<section id="exercise-24-3">
+<h3>Exercise 24.3:<a class="headerlink" href="#exercise-24-3" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p>Type the program as listed above, compile it and run it.</p></li>
 <li><p>What happens to the value of <em>pi</em> when it gets converted to an integer?</p></li>
@@ -1011,6 +1013,15 @@ document.write(`
         <p class="prev-next-title">23) Community Projects</p>
       </div>
     </a>
+    <a class="right-next"
+       href="module7-1_interpolation.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">25) Interpolation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -1031,16 +1042,16 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#today">Today:</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-compile-a-fortran-program">1. How to compile a Fortran program</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-simplest-fortran-program">2. The simplest Fortran program</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-14-1">Exercise 14.1:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-24-1">Exercise 24.1:</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hello-world-and-simple-i-o">3. Hello, World! and Simple I/O</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-14-2">Exercise 14.2:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-24-2">Exercise 24.2:</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-i-o">Simple I/O</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arithmetic-in-fortran-real-and-integer-variables">4. Arithmetic in Fortran: Real and Integer Variables</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-14-3">Exercise 14.3:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-24-3">Exercise 24.3:</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-variable-types">Other variable types</a></li>
 </ul>
 </li>
