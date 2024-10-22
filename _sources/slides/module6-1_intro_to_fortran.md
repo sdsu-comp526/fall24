@@ -344,7 +344,7 @@ Example:
 ## 7. Modules
 
 - It is often the case that there are parameters, variables, and subprograms that must be shared by several program units
-- Fortran 90 provides a special program unit known as a MODULE that conveniently packages collections of declarations and subprograms so that they may be imported into other program units
+- Fortran 90 provides a special program unit known as a `MODULE` that conveniently packages collections of declarations and subprograms so that they may be imported into other program units
 
 Syntax:
 ```fortran
@@ -360,7 +360,7 @@ NONE`.
 
 Example:
 
-```{literalinclude} ../fortran_programs/module6-1_intro_to_fortran/area_circle.f90
+```{literalinclude} ../fortran_programs/module6-1_intro_to_fortran/using_modules.f
 :language: fortran
 :linenos: true
 ```
