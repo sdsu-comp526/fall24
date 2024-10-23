@@ -17,7 +17,7 @@
 
 ## 1. How to compile a Fortran program
 
-Historically, Fortran 77, is an older version of the language that still is often used. It is a little simpler in some ways than later versions such as Fortran 90 and Fortran 95.
+Historically, Fortran 77, is an older version of the language that still is often used. It is a little simpler in some ways than later versions such as Fortran 90 and Fortran 95. You can see the list of all versions on the [Fortran wiki page](https://en.wikipedia.org/wiki/Fortran).
 
 - Similar to C, Fortran is a _compiled_ language. Hence, before your program can be executed, it must be _compiled_. This converts the English-like text of a Fortran program into a binary form that the processor understands.
 
@@ -83,20 +83,28 @@ The next simplest Fortran program is something programmers call the "Hello World
 To print out on a file use the following statements in your program:
 
 ```fortran
+WRITE(*,*) 'Hello, world!' ! this prints out on the screen
 OPEN(1,file='MyFile.dat') ! this assigns an ID number to the file
-WRITE(1,99)Hello world! ! this prints out to the file with the format specifier 99
+WRITE(1,99)'Hello world!' ! this prints out to the file with the format specifier 99
 CLOSE(1)
 CALL flush(1)
-99 FORMAT(ES15.5) ! format specifier for your data: one column of 15 digits width, with exponential format and 5 decimals.
+99 FORMAT(A25) ! format specifier for your data. You need the file extension .f90 for this
 ```
 
 To read from a file:
 
 ```fortran
-OPEN(2,file='MyFile2.dat')
-READ(2,99) x ! we read the data from file 2 and put it into x
+CHARACTER(len = 25) :: x
+OPEN(1,file='MyFile.dat')
+READ(1,99) x ! we read the data from file and put it into x
+OPEN(2,file='MyFile2.dat',STATUS='REPLACE',ACTION='WRITE') ! this assigns an ID number to the file MyFile2
+WRITE(2,99)'Hello world, again!' ! this prints out to the file with the format specifier 99
 CALL flush(1)
+CALL flush(2)
+CLOSE(1)
 CLOSE(2)
+
+99 FORMAT(A25)
 ```
 
 ## 4. Arithmetic in Fortran: Real and Integer Variables
