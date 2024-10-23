@@ -424,7 +424,10 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arithmetic-in-fortran-real-and-integer-variables">4. Arithmetic in Fortran: Real and Integer Variables</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-24-3">Exercise 24.3:</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-variable-types">Other variable types</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-variable-types">Other variable types</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#restrictions">Restrictions</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">5. Functions</a><ul class="nav section-nav flex-column">
@@ -624,6 +627,23 @@ document.write(`
 <span class="w">      </span><span class="kt">REAL</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">x</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="c">! declares an array of n real values called x</span>
 </pre></div>
 </div>
+<ul class="simple">
+<li><p>Note that in the example above we have used the <code class="docutils literal notranslate"><span class="pre">PARAMETER</span></code> keyword, which is used to assign a symbolic name to a constant. In many places, one just wants to assign a name to a particular value. For example, keep typing 3.1415926 is tedious. In this case, one could assign a name, say <code class="docutils literal notranslate"><span class="pre">PI</span></code>, to 3.1415926 so that one could use <code class="docutils literal notranslate"><span class="pre">PI</span></code> rather than 3.1415926.</p></li>
+<li><p>To declare a <code class="docutils literal notranslate"><span class="pre">PARAMETER</span></code>, add <code class="docutils literal notranslate"><span class="pre">PARAMETER</span></code> in front of the double colon (<code class="docutils literal notranslate"><span class="pre">::</span></code>) and use a comma to separate the type name (i.e., <code class="docutils literal notranslate"><span class="pre">REAL</span></code>) and the word <code class="docutils literal notranslate"><span class="pre">PARAMETER</span></code>.</p></li>
+<li><p>Following each name, one should add an equal sign (<code class="docutils literal notranslate"><span class="pre">=</span></code>) followed by an expression. The value of this expression is then assigned the indicated name.</p></li>
+<li><p>After assigning a name to a value, one can use the name, rather than its value throughout the program. The compiler would convert that name to its corresponding value.</p></li>
+<li><p>It is important to note that the name assigned to a value is simply an <em>alias</em> of the value. Therefore, that name is not a variable.</p></li>
+<li><p>After assigning a name to a value, that name can be used in a program, even in subsequent type statements.</p></li>
+</ul>
+<section id="restrictions">
+<h4>Restrictions<a class="headerlink" href="#restrictions" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>A symbolic constant must not be defined more than once in a program unit.</p></li>
+<li><p>If a symbolic name appears in a <code class="docutils literal notranslate"><span class="pre">PARAMETER</span></code> statement, then it cannot represent anything else in that program unit.</p></li>
+<li><p>A symbolic name cannot be used in a constant format specification, but it can be used in a variable format specification.</p></li>
+<li><p>If you pass a parameter as an argument, and the subprogram tries to change it, you may get a runtime error.</p></li>
+</ul>
+</section>
 </section>
 </section>
 <section id="functions">
@@ -658,14 +678,15 @@ document.write(`
 <ul class="simple">
 <li><p>A function is invoked (or called) by naming it in an expression.</p></li>
 <li><p>Function names follow the same rules as variable names.</p></li>
-<li><p>The name of the function must appear on the left side of at least one assignment statement in the function:</p></li>
+<li><p>The name of the function <em>must</em> appear on the left side of at least one assignment statement in the function:</p></li>
 </ul>
 <div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="w">      </span><span class="n">function_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">expression</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>The argument list of the function may be blank if the function can perform all calculations with no input arguments.</p></li>
-<li><p>The parentheses around the argument list are required even if the list is blank. Since the function returns a value, it is necessary to assign a type to that function.</p></li>
+<li><p>The parentheses around the argument list are required even if the list is blank.</p></li>
+<li><p>Since the function returns a value, it is necessary to assign a type to that function.</p></li>
 <li><p>The type of the function must be declared both in the function procedure and the calling programs.</p></li>
 <li><p>In Fortran, we need to specify the types of function arguments.</p>
 <ul>
@@ -715,7 +736,7 @@ document.write(`
 <section id="common-mistakes">
 <h3>Common mistakes<a class="headerlink" href="#common-mistakes" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
-<li><p>Forget the function type.</p></li>
+<li><p>Forgetting the function type (i.e., the type of the return argument).</p></li>
 </ol>
 <p>Example:</p>
 <div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="w">      </span><span class="k">FUNCTION </span><span class="n">DoSomething</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
@@ -729,7 +750,7 @@ document.write(`
 </div>
 <p>If there is no type, you will not be able to determine the returned value type.</p>
 <ol class="arabic simple" start="2">
-<li><p>Forget <code class="docutils literal notranslate"><span class="pre">INTENT(IN)</span></code>.</p></li>
+<li><p>Forgetting <code class="docutils literal notranslate"><span class="pre">INTENT(IN)</span></code> for input variables.</p></li>
 </ol>
 <p>Example:</p>
 <div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="w">      </span><span class="kt">REAL </span><span class="k">FUNCTION </span><span class="n">DoSomething</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
@@ -741,9 +762,9 @@ document.write(`
 <span class="w">      </span><span class="k">END FUNCTION </span><span class="n">DoSomething</span>
 </pre></div>
 </div>
-<p>Actually, this is not an error. But, without <code class="docutils literal notranslate"><span class="pre">INTENT</span> <span class="pre">(IN)</span></code>, the compiler will not be able to check many potential errors.</p>
+<p>Actually, this is <em>not</em> an error. But, without <code class="docutils literal notranslate"><span class="pre">INTENT</span> <span class="pre">(IN)</span></code>, the compiler will not be able to check many potential errors.</p>
 <ol class="arabic simple" start="3">
-<li><p>Change value of formal argument declared with <code class="docutils literal notranslate"><span class="pre">INTENT(IN)</span></code>.</p></li>
+<li><p>Changing value of formal argument declared with <code class="docutils literal notranslate"><span class="pre">INTENT(IN)</span></code>.</p></li>
 </ol>
 <p>Example:</p>
 <div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="w">      </span><span class="kt">REAL </span><span class="k">FUNCTION </span><span class="n">DoSomething</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
@@ -763,7 +784,7 @@ document.write(`
 </div>
 <p>Since <code class="docutils literal notranslate"><span class="pre">a</span></code> was declared with <code class="docutils literal notranslate"><span class="pre">INTENT(IN)</span></code>, its value cannot be changed.</p>
 <ol class="arabic simple" start="4">
-<li><p>Forget to store value to function name.</p></li>
+<li><p>Forgetting to store value to function name.</p></li>
 </ol>
 <p>Example:</p>
 <div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="w">      </span><span class="kt">REAL </span><span class="k">FUNCTION </span><span class="n">DoSomething</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
@@ -791,9 +812,9 @@ document.write(`
 <span class="w">      </span><span class="k">END FUNCTION </span><span class="n">DoSomething</span>
 </pre></div>
 </div>
-<p>Only a special type of functions, <em>recursive</em> functions, could have their names on the right-hand side of expressions (we didn’t treat recursion in this class because it is pretty impractical).</p>
+<p>Only a special type of functions, <em>recursive</em> functions, could have their names on the right-hand side of expressions (we don’t cover recursion in this lecture, because as we’ve seen before it is pretty impractical).</p>
 <ol class="arabic simple" start="6">
-<li><p>Most recent value stored in function name is returned.</p></li>
+<li><p>The most recent value stored in function name is returned.</p></li>
 </ol>
 <p>Example:</p>
 <div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="w">      </span><span class="kt">REAL </span><span class="k">FUNCTION </span><span class="n">DoSomething</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
@@ -819,11 +840,11 @@ document.write(`
 <section id="subroutines">
 <h3>5.1 Subroutines<a class="headerlink" href="#subroutines" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>We saw that Fortran functions have an explicit type and are intended to return one value.</p></li>
-<li><p>Subroutine subprograms, on the other hand, have no explicit type and return multiple or no values through a parameter call list.</p></li>
+<li><p>We saw that Fortran functions have an explicit return type and are intended to return only one value.</p></li>
+<li><p><em>Subroutine</em> subprograms, on the other hand, have no explicit type and return multiple or no values through a parameter call list.</p></li>
 <li><p>Unlike functions, calls to subroutines cannot be placed in an expression.</p></li>
-<li><p>In the main program, a subroutine is activated by using a <code class="docutils literal notranslate"><span class="pre">CALL</span></code> statement which include the subroutine name followed by the list of inputs to and outputs from the subroutine surrounded by parenthesis. The inputs and outputs are collectively called the arguments.</p></li>
-<li><p>A subroutine name follows the same rules as for function names and variable names: less than six letters and numbers and beginning with a letter. Because of this, subroutine names should be different than those used for variables or functions.</p></li>
+<li><p>In the main program, a subroutine is activated by using a <code class="docutils literal notranslate"><span class="pre">CALL</span></code> statement which include the subroutine name followed by the list of inputs and outputs surrounded by parenthesis. The inputs and outputs are collectively called the <em>arguments</em></p></li>
+<li><p>A subroutine name follows the same rules as for function names and variable names: historically, less than six letters and numbers, and must begin with a letter. Because of this, subroutine names should be different than those used for variables or functions.</p></li>
 <li><p>As with functions, there are some rules for using subroutines. Keep these in mind when writing your subroutines:</p>
 <ul>
 <li><p>You do not need to declare the subroutine name in the main program as you do with a function name.</p></li>
@@ -838,8 +859,8 @@ document.write(`
 <h2>6. Interface blocks<a class="headerlink" href="#interface-blocks" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Safety feature which allows main programs and external subprograms to interface appropriately with your user-defined function/subroutine.</p></li>
-<li><p>Ensures that the calling program and the subprogram have the correct number and type of arguments</p></li>
-<li><p>Helps compiler to detect incorrect usage of a subprogram at compile time</p></li>
+<li><p>Ensures that the calling program and the subprogram have the correct number and type of arguments.</p></li>
+<li><p>Helps compiler to detect incorrect usage of a subprogram at compile time.</p></li>
 <li><p>It consists of:</p>
 <ol class="arabic simple">
 <li><p>Number of arguments</p></li>
@@ -890,8 +911,8 @@ document.write(`
 <section id="modules">
 <h2>7. Modules<a class="headerlink" href="#modules" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>It is often the case that there are parameters, variables, and subprograms that must be shared by several program units</p></li>
-<li><p>Fortran 90 provides a special program unit known as a <code class="docutils literal notranslate"><span class="pre">MODULE</span></code> that conveniently packages collections of declarations and subprograms so that they may be imported into other program units</p></li>
+<li><p>It is often the case that there are parameters, variables, and subprograms that must be shared by several program units.</p></li>
+<li><p>Fortran 90 provides a special program unit known as a <code class="docutils literal notranslate"><span class="pre">MODULE</span></code> that conveniently packages collections of declarations and subprograms so that they may be imported into other program units.</p></li>
 </ul>
 <p>Syntax:</p>
 <div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="w">      </span><span class="k">MODULE </span><span class="n">module_name</span>
@@ -900,8 +921,8 @@ document.write(`
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>A program module is made accessible to the various program units by way of the <code class="docutils literal notranslate"><span class="pre">USE</span></code> statement</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">USE</span></code> statement must appear at the beginning of the declaration part of the program unit making use of the module. It must appear even before the statement <code class="docutils literal notranslate"><span class="pre">IMPLICIT</span> <span class="pre">NONE</span></code>.</p></li>
+<li><p>A program module is made accessible to the various program units by way of the <code class="docutils literal notranslate"><span class="pre">USE</span></code> statement.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">USE</span></code> statement must appear at the beginning of the declaration part of the program unit making use of the module. It must appear even <em>before</em> the statement <code class="docutils literal notranslate"><span class="pre">IMPLICIT</span> <span class="pre">NONE</span></code>.</p></li>
 </ul>
 <p>Example:</p>
 <div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="w">      </span><span class="k">PROGRAM </span><span class="n">program_using_module</span>
@@ -943,13 +964,13 @@ document.write(`
 </div>
 <p>Review of Fortran modules:</p>
 <ul class="simple">
-<li><p>Modules provide you a way of splitting your programs between multiple files</p></li>
+<li><p>Modules provide you a way of splitting your programs between multiple files.</p></li>
 <li><p>Modules are used for:</p>
 <ul>
 <li><p>Packaging subprograms, data and interface blocks</p></li>
 <li><p>Defining global data that can be used by more than one routine</p></li>
 <li><p>Declaring variables that can be made available within any routines you choose</p></li>
-<li><p>Importing a module entirely, for use, into another program or subroutine</p></li>
+<li><p>Importing a module entirely, for use, into another program or subroutine.</p></li>
 </ul>
 </li>
 <li><p>Syntax of a module (two parts):</p>
@@ -972,9 +993,9 @@ document.write(`
 </div>
 <p>Note:</p>
 <ul class="simple">
-<li><p>Can add as many modules as needed, each will be in separate files and compiled separately</p></li>
-<li><p>A module can be used in various different programs</p></li>
-<li><p>A module can be used many times in the same program</p></li>
+<li><p>Can add as many modules as needed, each will be in separate files and compiled separately.</p></li>
+<li><p>A module can be used in various different programs.</p></li>
+<li><p>A module can be used many times in the same program.</p></li>
 <li><p>The variables declared in a module specification part, are global to the module</p></li>
 <li><p>The variables declared in a module become global variables in any program or routine where the module is used</p></li>
 <li><p>The use statement can appear in the main program, or any other subroutine or module which uses the routines or variables declared in a particular module</p></li>
@@ -1060,7 +1081,10 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arithmetic-in-fortran-real-and-integer-variables">4. Arithmetic in Fortran: Real and Integer Variables</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-24-3">Exercise 24.3:</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-variable-types">Other variable types</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-variable-types">Other variable types</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#restrictions">Restrictions</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">5. Functions</a><ul class="nav section-nav flex-column">

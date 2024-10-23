@@ -41,6 +41,7 @@ It is important that you understand what is happening here:
 ```
 
 ## 2. The simplest Fortran program
+
 The simplest Fortran program is what might be called a "do-nothing" program. It contains all of the required parts of a Fortran program. The program is as follows:
 
 ```{literalinclude} ../fortran_programs/module6-1_intro_to_fortran/do_nothing.f
@@ -60,9 +61,11 @@ Although seemingly trivial, writing and executing this program illustrates some 
 - Notice that all of the lines in the example above begin with 6 blank spaces. This is because the Fortran 77 standard requires that the first 6 characters of a line be reserved for statement numbers and continuation characters. These 6 spaces originate from the punched card version of Fortran.
 
 ### Exercise 24.1:
+
 Create your first "do nothing" Fortran program.
 
 ## 3. Hello, World! and Simple I/O
+
 The next simplest Fortran program is something programmers call the "Hello World" program. This is the simplest program that actually produces some output. An example of the "Hello World!" program in Fortran is:
 
 ```{literalinclude} ../fortran_programs/module6-1_intro_to_fortran/hello_world.f
@@ -76,10 +79,12 @@ The next simplest Fortran program is something programmers call the "Hello World
 - The text you want to print out is inside single quotes.
 
 ### Exercise 24.2:
+
  1. Type the "Hello World" program yourself. Compile it and run it.
  2. Change the "Hello World" program to print out something else, such as your name.
 
 ### Simple I/O
+
 To print out on a file use the following statements in your program:
 
 ```fortran
@@ -108,6 +113,7 @@ CLOSE(2)
 ```
 
 ## 4. Arithmetic in Fortran: Real and Integer Variables
+
 Fortran has several different types of variables. The two most commonly used types for computations are _integer_ variables and _real_ variables.
 
 - _Integer variables_ do not have a fractional part. The value of an integer variable is a whole number, like `0`, `2`, `5`, `-76`, and so on.
@@ -145,6 +151,7 @@ Following is a program that illustrates some of the differences between real and
  4. Change the values of _pi_ and _e_ to negative numbers (that is, -3.1416 and -2.71828), then re-compile and re-run the program. What happens when the negative values are converted to integers?
 
 ### Other variable types
+
 Examples:
 
 ```fortran
@@ -154,7 +161,22 @@ Examples:
       REAL :: x(n) ! declares an array of n real values called x
 ```
 
+- Note that in the example above we have used the `PARAMETER` keyword, which is used to assign a symbolic name to a constant. In many places, one just wants to assign a name to a particular value. For example, keep typing 3.1415926 is tedious. In this case, one could assign a name, say `PI`, to 3.1415926 so that one could use `PI` rather than 3.1415926.
+- To declare a `PARAMETER`, add `PARAMETER` in front of the double colon (`::`) and use a comma to separate the type name (i.e., `REAL`) and the word `PARAMETER`.
+- Following each name, one should add an equal sign (`=`) followed by an expression. The value of this expression is then assigned the indicated name.
+- After assigning a name to a value, one can use the name, rather than its value throughout the program. The compiler would convert that name to its corresponding value.
+- It is important to note that the name assigned to a value is simply an _alias_ of the value. Therefore, that name is not a variable.
+- After assigning a name to a value, that name can be used in a program, even in subsequent type statements.
+
+#### Restrictions
+
+- A symbolic constant must not be defined more than once in a program unit.
+- If a symbolic name appears in a `PARAMETER` statement, then it cannot represent anything else in that program unit.
+- A symbolic name cannot be used in a constant format specification, but it can be used in a variable format specification.
+- If you pass a parameter as an argument, and the subprogram tries to change it, you may get a runtime error.
+
 ## 5. Functions
+
 - Similar to other languages, in Fortran a function is a self-contained unit that receives some input from the outside via its arguments, performs a task, and then returns the result.
 - A Fortran function is a procedure whose result is a single number, logical value, character string or array.
 - This result can be be used to form a Fortran expression.
@@ -180,18 +202,16 @@ General form of user-defined functions:
 
 - A function is invoked (or called) by naming it in an expression.
 - Function names follow the same rules as variable names.
-- The name of the function must appear on the left side of at least one assignment statement in the function:
+- The name of the function _must_ appear on the left side of at least one assignment statement in the function:
 
 ```fortran
       function_name = expression
 ```
 
 - The argument list of the function may be blank if the function can perform all calculations with no input arguments.
-
-- The parentheses around the argument list are required even if the list is blank. Since the function returns a value, it is necessary to assign a type to that function.
-
+- The parentheses around the argument list are required even if the list is blank.
+- Since the function returns a value, it is necessary to assign a type to that function.
 - The type of the function must be declared both in the function procedure and the calling programs.
-
 - In Fortran, we need to specify the types of function arguments.
   * All arguments must be declared with a new attribute
 ```fortran
@@ -215,7 +235,7 @@ Remember that to be able to call this function, we need at least a `main` `PROGR
 
 ### Common mistakes
 
-1) Forget the function type.
+1) Forgetting the function type (i.e., the type of the return argument).
 
 Example:
 ```fortran
@@ -229,7 +249,7 @@ Example:
 ```
 If there is no type, you will not be able to determine the returned value type.
 
-2) Forget `INTENT(IN)`.
+2) Forgetting `INTENT(IN)` for input variables.
 
 Example:
 
@@ -242,9 +262,9 @@ Example:
         DoSomething = SQRT(a*a + b*b)
       END FUNCTION DoSomething
 ```
-Actually, this is not an error. But, without `INTENT (IN)`, the compiler will not be able to check many potential errors.
+Actually, this is _not_ an error. But, without `INTENT (IN)`, the compiler will not be able to check many potential errors.
 
-3) Change value of formal argument declared with `INTENT(IN)`.
+3) Changing value of formal argument declared with `INTENT(IN)`.
 
 Example:
 
@@ -266,7 +286,7 @@ Example:
 
 Since `a` was declared with `INTENT(IN)`, its value cannot be changed.
 
-4) Forget to store value to function name.
+4) Forgetting to store value to function name.
 
 Example:
 
@@ -298,9 +318,9 @@ Example:
       END FUNCTION DoSomething
 ```
 
-Only a special type of functions, _recursive_ functions, could have their names on the right-hand side of expressions (we didn't treat recursion in this class because it is pretty impractical).
+Only a special type of functions, _recursive_ functions, could have their names on the right-hand side of expressions (we don't cover recursion in this lecture, because as we've seen before it is pretty impractical).
 
-6) Most recent value stored in function name is returned.
+6) The most recent value stored in function name is returned.
 
 Example:
 
@@ -327,11 +347,12 @@ Some important rules for Fortran function arguments:
 
 
 ### 5.1 Subroutines
-- We saw that Fortran functions have an explicit type and are intended to return one value.
-- Subroutine subprograms, on the other hand, have no explicit type and return multiple or no values through a parameter call list.
+
+- We saw that Fortran functions have an explicit return type and are intended to return only one value.
+- _Subroutine_ subprograms, on the other hand, have no explicit type and return multiple or no values through a parameter call list.
 - Unlike functions, calls to subroutines cannot be placed in an expression.
-- In the main program, a subroutine is activated by using a `CALL` statement which include the subroutine name followed by the list of inputs to and outputs from the subroutine surrounded by parenthesis. The inputs and outputs are collectively called the arguments.
-- A subroutine name follows the same rules as for function names and variable names: less than six letters and numbers and beginning with a letter. Because of this, subroutine names should be different than those used for variables or functions.
+- In the main program, a subroutine is activated by using a `CALL` statement which include the subroutine name followed by the list of inputs and outputs surrounded by parenthesis. The inputs and outputs are collectively called the _arguments_
+- A subroutine name follows the same rules as for function names and variable names: historically, less than six letters and numbers, and must begin with a letter. Because of this, subroutine names should be different than those used for variables or functions.
 - As with functions, there are some rules for using subroutines. Keep these in mind when writing your subroutines:
   * You do not need to declare the subroutine name in the main program as you do with a function name.
   * They begin with a line that includes the word `SUBROUTINE`, the name of the subroutine, and the arguments for the subroutine.
@@ -340,8 +361,11 @@ Some important rules for Fortran function arguments:
 ## 6. Interface blocks
 
 - Safety feature which allows main programs and external subprograms to interface appropriately with your user-defined function/subroutine.
-- Ensures that the calling program and the subprogram have the correct number and type of arguments
-- Helps compiler to detect incorrect usage of a subprogram at compile time
+
+- Ensures that the calling program and the subprogram have the correct number and type of arguments.
+
+- Helps compiler to detect incorrect usage of a subprogram at compile time.
+
 - It consists of:
   1. Number of arguments
   2. Type of each argument
@@ -355,8 +379,9 @@ Example:
 
 ## 7. Modules
 
-- It is often the case that there are parameters, variables, and subprograms that must be shared by several program units
-- Fortran 90 provides a special program unit known as a `MODULE` that conveniently packages collections of declarations and subprograms so that they may be imported into other program units
+- It is often the case that there are parameters, variables, and subprograms that must be shared by several program units.
+
+- Fortran 90 provides a special program unit known as a `MODULE` that conveniently packages collections of declarations and subprograms so that they may be imported into other program units.
 
 Syntax:
 ```fortran
@@ -365,10 +390,9 @@ Syntax:
       END MODULE module_name
 ```
 
-- A program module is made accessible to the various program units by way of the `USE` statement
+- A program module is made accessible to the various program units by way of the `USE` statement.
 
-- The `USE` statement must appear at the beginning of the declaration part of the program unit making use of the module. It must appear even before the statement `IMPLICIT
-NONE`.
+- The `USE` statement must appear at the beginning of the declaration part of the program unit making use of the module. It must appear even _before_ the statement `IMPLICIT NONE`.
 
 Example:
 
@@ -407,12 +431,12 @@ gfortran math_consts_module.o using_modules.o -o using_modules
 
 Review of Fortran modules:
 
-- Modules provide you a way of splitting your programs between multiple files
+- Modules provide you a way of splitting your programs between multiple files.
 - Modules are used for:
   * Packaging subprograms, data and interface blocks
   * Defining global data that can be used by more than one routine
   * Declaring variables that can be made available within any routines you choose
-  * Importing a module entirely, for use, into another program or subroutine
+  * Importing a module entirely, for use, into another program or subroutine.
 - Syntax of a module (two parts):
   * a specification part for statements declaration
   * a contains part for subroutine and function definitions
@@ -434,9 +458,9 @@ Using a module:
 
 Note:
 
-- Can add as many modules as needed, each will be in separate files and compiled separately
-- A module can be used in various different programs
-- A module can be used many times in the same program
+- Can add as many modules as needed, each will be in separate files and compiled separately.
+- A module can be used in various different programs.
+- A module can be used many times in the same program.
 - The variables declared in a module specification part, are global to the module
 - The variables declared in a module become global variables in any program or routine where the module is used
 - The use statement can appear in the main program, or any other subroutine or module which uses the routines or variables declared in a particular module
