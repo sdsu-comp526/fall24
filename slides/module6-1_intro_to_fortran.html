@@ -469,7 +469,7 @@ document.write(`
 </section>
 <section id="how-to-compile-a-fortran-program">
 <h2>1. How to compile a Fortran program<a class="headerlink" href="#how-to-compile-a-fortran-program" title="Link to this heading">#</a></h2>
-<p>Historically, Fortran 77, is an older version of the language that still is often used. It is a little simpler in some ways than later versions such as Fortran 90 and Fortran 95.</p>
+<p>Historically, Fortran 77, is an older version of the language that still is often used. It is a little simpler in some ways than later versions such as Fortran 90 and Fortran 95. You can see the list of all versions on the <a class="reference external" href="https://en.wikipedia.org/wiki/Fortran">Fortran wiki page</a>.</p>
 <ul class="simple">
 <li><p>Similar to C, Fortran is a <em>compiled</em> language. Hence, before your program can be executed, it must be <em>compiled</em>. This converts the English-like text of a Fortran program into a binary form that the processor understands.</p></li>
 </ul>
@@ -537,18 +537,26 @@ document.write(`
 <section id="simple-i-o">
 <h3>Simple I/O<a class="headerlink" href="#simple-i-o" title="Link to this heading">#</a></h3>
 <p>To print out on a file use the following statements in your program:</p>
-<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="k">OPEN</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="k">file</span><span class="o">=</span><span class="s1">&#39;MyFile.dat&#39;</span><span class="p">)</span><span class="w"> </span><span class="c">! this assigns an ID number to the file</span>
-<span class="k">WRITE</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">99</span><span class="p">)</span><span class="n">Hello</span><span class="w"> </span><span class="n">world</span><span class="c">! ! this prints out to the file with the format specifier 99</span>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="k">WRITE</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39;Hello, world!&#39;</span><span class="w"> </span><span class="c">! this prints out on the screen</span>
+<span class="k">OPEN</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="k">file</span><span class="o">=</span><span class="s1">&#39;MyFile.dat&#39;</span><span class="p">)</span><span class="w"> </span><span class="c">! this assigns an ID number to the file</span>
+<span class="k">WRITE</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">99</span><span class="p">)</span><span class="s1">&#39;Hello world!&#39;</span><span class="w"> </span><span class="c">! this prints out to the file with the format specifier 99</span>
 <span class="k">CLOSE</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="k">CALL </span><span class="nb">flush</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="mi">99</span><span class="w"> </span><span class="k">FORMAT</span><span class="p">(</span><span class="n">ES15</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="c">! format specifier for your data: one column of 15 digits width, with exponential format and 5 decimals.</span>
+<span class="mi">99</span><span class="w"> </span><span class="k">FORMAT</span><span class="p">(</span><span class="n">A25</span><span class="p">)</span><span class="w"> </span><span class="c">! format specifier for your data. You need the file extension .f90 for this</span>
 </pre></div>
 </div>
 <p>To read from a file:</p>
-<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="k">OPEN</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="k">file</span><span class="o">=</span><span class="s1">&#39;MyFile2.dat&#39;</span><span class="p">)</span>
-<span class="k">READ</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">99</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="c">! we read the data from file 2 and put it into x</span>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="kt">CHARACTER</span><span class="p">(</span><span class="nb">len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">25</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">x</span>
+<span class="k">OPEN</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="k">file</span><span class="o">=</span><span class="s1">&#39;MyFile.dat&#39;</span><span class="p">)</span>
+<span class="k">READ</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">99</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="c">! we read the data from file and put it into x</span>
+<span class="k">OPEN</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="k">file</span><span class="o">=</span><span class="s1">&#39;MyFile2.dat&#39;</span><span class="p">,</span><span class="n">STATUS</span><span class="o">=</span><span class="s1">&#39;REPLACE&#39;</span><span class="p">,</span><span class="n">ACTION</span><span class="o">=</span><span class="s1">&#39;WRITE&#39;</span><span class="p">)</span><span class="w"> </span><span class="c">! this assigns an ID number to the file MyFile2</span>
+<span class="k">WRITE</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">99</span><span class="p">)</span><span class="s1">&#39;Hello world, again!&#39;</span><span class="w"> </span><span class="c">! this prints out to the file with the format specifier 99</span>
 <span class="k">CALL </span><span class="nb">flush</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">CALL </span><span class="nb">flush</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">CLOSE</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="k">CLOSE</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="mi">99</span><span class="w"> </span><span class="k">FORMAT</span><span class="p">(</span><span class="n">A25</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
