@@ -214,6 +214,7 @@
 <li class="toctree-l2"><a class="reference internal" href="module4-9_low_rank.html">22) Low Rank</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module5-1_community_projects.html">23) Community Projects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module6-1_intro_to_fortran.html">24) Introduction to Fortran</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module7-1_interpolation.html">25) Interpolation</a></li>
 </ul>
 </details></li>
 </ul>
@@ -720,7 +721,7 @@ u_{i-1} = u(x_i - \Delta x) \approx u(x_i) - \Delta x \partial_x u \bigg\rvert_i
 <p>We can now define a second-order derivative, at the point <span class="math notranslate nohighlight">\(x_i\)</span> using a centered difference formula:</p>
 <div class="math notranslate nohighlight">
 \[
-\frac{\partial^2 u^C_i}{\partial x^2} = \frac{\frac{\partial u_{i}^F}{\partial x} -\frac{ \partial u_{i}^B}{\partial x} }{\Delta x} \approx  \frac{u_{i-1} -2 u_i + u_{i+1}}{\Delta x^2} + O(\Delta x^2)\]</div>
+\frac{\partial^2 u^C_i}{\partial x^2} = \frac{\frac{\partial u_{\frac{i}{2}}^F}{\partial x} -\frac{ \partial u_{\frac{i}{2}}^B}{\partial x} }{\Delta x} \approx  \frac{u_{i-1} -2 u_i + u_{i+1}}{\Delta x^2} + O(\Delta x^2)\]</div>
 <p>If we do this for all points <span class="math notranslate nohighlight">\(x_i \in [0,L]\)</span>, we obtain a matrix representation of the second-order finite difference centered operator:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
