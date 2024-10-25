@@ -420,7 +420,7 @@ This will both compile your main program `using_modules.f` _and_ link your compi
 Alternatively, you could have compiled the module and main program together, as in:
 
 ```bash
- gfortran -ffree-fortran -c math_consts_module.f using_modules.f
+gfortran -ffree-form -c math_consts_module.f using_modules.f
 ```
 
 And then you could have done the linking of the object files:
