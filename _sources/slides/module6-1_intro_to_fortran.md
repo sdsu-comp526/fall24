@@ -10,9 +10,10 @@
  3. Hello, World! and Simple I/O
  4. Arithmetic in Fortran
  5. Functions
-  5.1 Subroutines
+   5.1 Scope Rules
  6. Interface Blocks
- 7. Modules
+ 7. Subroutines
+ 8. Modules
 
 
 ## 1. How to compile a Fortran program
@@ -189,7 +190,7 @@ User-defined functions are functions defined by programmers to meet a specific n
 General form of user-defined functions:
 
 ```fortran
-      FUNCTION function_name(argument list)
+    RETURN_TYPE  FUNCTION function_name(argument list)
 	  !! DECLARACTIONS
 
 	  !! EXECUTABLES
@@ -197,7 +198,7 @@ General form of user-defined functions:
 	  function_name = expression
 
       RETURN	! ONLY NEEDED IF WE PLAN TO REACH END FUNCTION ALL OF THE TIME
-      END FUNCTION function_name
+    END FUNCTION function_name
 ```
 
 - A function is invoked (or called) by naming it in an expression.
@@ -297,7 +298,7 @@ Example:
 
         INTEGER, INTENT(IN) :: a,b
         INTEGER :: c
-        c = SQRT( a ∗ a + b ∗ b )
+        c = SQRT(a*a + b*b)
       END FUNCTION DoSomething
 ```
 
@@ -345,18 +346,20 @@ Some important rules for Fortran function arguments:
 - For a formal argument declared with `INTENT(IN)`, any attempt to change its value in the function will cause a compiler error.
 - In a Fortran function, the `INTENT` should always be `IN`. If you plan to use an `INTENT` other than `IN` then consider using a `SUBROUTINE` rather than a `FUNCTION` (see below).
 
+### 5.1 Scope rules
 
-### 5.1 Subroutines
+- Local entities: entities declared in a function or in the main program are said local to that function or the main program.
+- Global: entities declared in all containing functions or the main program are said global.
 
-- We saw that Fortran functions have an explicit return type and are intended to return only one value.
-- _Subroutine_ subprograms, on the other hand, have no explicit type and return multiple or no values through a parameter call list.
-- Unlike functions, calls to subroutines cannot be placed in an expression.
-- In the main program, a subroutine is activated by using a `CALL` statement which include the subroutine name followed by the list of inputs and outputs surrounded by parenthesis. The inputs and outputs are collectively called the _arguments_
-- A subroutine name follows the same rules as for function names and variable names: historically, less than six letters and numbers, and must begin with a letter. Because of this, subroutine names should be different than those used for variables or functions.
-- As with functions, there are some rules for using subroutines. Keep these in mind when writing your subroutines:
-  * You do not need to declare the subroutine name in the main program as you do with a function name.
-  * They begin with a line that includes the word `SUBROUTINE`, the name of the subroutine, and the arguments for the subroutine.
-- The `INTENT` of arguments in subroutines can be multiple: `IN` (the value of the dummy argument may be used, but not modified, within the procedure.), `OUT` (the dummy argument may be set and then modified within the procedure, and the values returned to the caller), and `INOUT` (initial values of the dummy argument may be both used and modified within the procedure, and then returned to the caller).
+- Scope Rule: A global entity is visible to all contained functions, including the function in which that entity is declared.
+
+Example:
+
+```{literalinclude} ../fortran_programs/module6-1_intro_to_fortran/scope.f90
+:language: fortran
+:linenos: true
+```
+
 
 ## 6. Interface blocks
 
@@ -372,12 +375,32 @@ Some important rules for Fortran function arguments:
   3. Type of values returned by the subprogram
 
 Example:
-```{literalinclude} ../fortran_programs/module6-1_intro_to_fortran/area_circle.f90
+```{literalinclude} ../fortran_programs/module6-1_intro_to_fortran/area_circle_function_interface.f90
 :language: fortran
 :linenos: true
 ```
 
-## 7. Modules
+### 7. Subroutines
+
+- We saw that Fortran functions have an explicit return type and are intended to return only one value.
+- _Subroutine_ subprograms, on the other hand, have no explicit type and return multiple or no values through a parameter call list.
+- Unlike functions, calls to subroutines cannot be placed in an expression.
+- In the main program, a subroutine is activated by using a `CALL` statement which include the subroutine name followed by the list of inputs and outputs surrounded by parenthesis. The inputs and outputs are collectively called the _arguments_
+- A subroutine name follows the same rules as for function names and variable names: historically, less than six letters and numbers, and must begin with a letter. Because of this, subroutine names should be different than those used for variables or functions.
+- As with functions, there are some rules for using subroutines. Keep these in mind when writing your subroutines:
+  * You do not need to declare the subroutine name in the main program as you do with a function name.
+  * They begin with a line that includes the word `SUBROUTINE`, the name of the subroutine, and the arguments for the subroutine.
+- The `INTENT` of arguments in subroutines can be multiple: `IN` (the value of the dummy argument may be used, but not modified, within the procedure.), `OUT` (the dummy argument may be set and then modified within the procedure, and the values returned to the caller), and `INOUT` (initial values of the dummy argument may be both used and modified within the procedure, and then returned to the caller).
+
+Example:
+
+Example:
+```{literalinclude} ../fortran_programs/module6-1_intro_to_fortran/area_circle_subroutine_interface.f90
+:language: fortran
+:linenos: true
+```
+
+## 8. Modules
 
 - It is often the case that there are parameters, variables, and subprograms that must be shared by several program units.
 
@@ -420,7 +443,7 @@ This will both compile your main program `using_modules.f` _and_ link your compi
 Alternatively, you could have compiled the module and main program together, as in:
 
 ```bash
- gfortran -ffree-fortran -c math_consts_module.f using_modules.f
+gfortran -ffree-form -c math_consts_module.f using_modules.f
 ```
 
 And then you could have done the linking of the object files:

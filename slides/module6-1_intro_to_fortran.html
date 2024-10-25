@@ -432,11 +432,14 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">5. Functions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-mistakes">Common mistakes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subroutines">5.1 Subroutines</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scope-rules">5.1 Scope rules</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interface-blocks">6. Interface blocks</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modules">7. Modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interface-blocks">6. Interface blocks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subroutines">7. Subroutines</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modules">8. Modules</a></li>
 </ul>
             </nav>
         </div>
@@ -465,8 +468,9 @@ document.write(`
 <li><p>Hello, World! and Simple I/O</p></li>
 <li><p>Arithmetic in Fortran</p></li>
 <li><p>Functions
-5.1 Subroutines</p></li>
+5.1 Scope Rules</p></li>
 <li><p>Interface Blocks</p></li>
+<li><p>Subroutines</p></li>
 <li><p>Modules</p></li>
 </ol>
 </section>
@@ -664,7 +668,7 @@ document.write(`
 </ul>
 <p>User-defined functions are functions defined by programmers to meet a specific need not addressed by the standard intrinsic functions.</p>
 <p>General form of user-defined functions:</p>
-<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="w">      </span><span class="k">FUNCTION </span><span class="n">function_name</span><span class="p">(</span><span class="n">argument</span><span class="w"> </span><span class="n">list</span><span class="p">)</span>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">RETURN_TYPE</span><span class="w">  </span><span class="k">FUNCTION </span><span class="n">function_name</span><span class="p">(</span><span class="n">argument</span><span class="w"> </span><span class="n">list</span><span class="p">)</span>
 <span class="w">	  </span><span class="c">!! DECLARACTIONS</span>
 
 <span class="w">	  </span><span class="c">!! EXECUTABLES</span>
@@ -672,7 +676,7 @@ document.write(`
 <span class="w">	  </span><span class="n">function_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">expression</span>
 
 <span class="w">      </span><span class="k">RETURN</span><span class="w">	</span><span class="c">! ONLY NEEDED IF WE PLAN TO REACH END FUNCTION ALL OF THE TIME</span>
-<span class="w">      </span><span class="k">END FUNCTION </span><span class="n">function_name</span>
+<span class="w">    </span><span class="k">END FUNCTION </span><span class="n">function_name</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -793,7 +797,7 @@ document.write(`
 
 <span class="k">        </span><span class="kt">INTEGER</span><span class="p">,</span><span class="w"> </span><span class="k">INTENT</span><span class="p">(</span><span class="n">IN</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="n">b</span>
 <span class="w">        </span><span class="kt">INTEGER</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">c</span>
-<span class="w">        </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">SQRT</span><span class="p">(</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="err">∗</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="err">∗</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="p">)</span>
+<span class="w">        </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">SQRT</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="o">*</span><span class="n">b</span><span class="p">)</span>
 <span class="w">      </span><span class="k">END FUNCTION </span><span class="n">DoSomething</span>
 </pre></div>
 </div>
@@ -837,22 +841,41 @@ document.write(`
 <li><p>In a Fortran function, the <code class="docutils literal notranslate"><span class="pre">INTENT</span></code> should always be <code class="docutils literal notranslate"><span class="pre">IN</span></code>. If you plan to use an <code class="docutils literal notranslate"><span class="pre">INTENT</span></code> other than <code class="docutils literal notranslate"><span class="pre">IN</span></code> then consider using a <code class="docutils literal notranslate"><span class="pre">SUBROUTINE</span></code> rather than a <code class="docutils literal notranslate"><span class="pre">FUNCTION</span></code> (see below).</p></li>
 </ul>
 </section>
-<section id="subroutines">
-<h3>5.1 Subroutines<a class="headerlink" href="#subroutines" title="Link to this heading">#</a></h3>
+<section id="scope-rules">
+<h3>5.1 Scope rules<a class="headerlink" href="#scope-rules" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>We saw that Fortran functions have an explicit return type and are intended to return only one value.</p></li>
-<li><p><em>Subroutine</em> subprograms, on the other hand, have no explicit type and return multiple or no values through a parameter call list.</p></li>
-<li><p>Unlike functions, calls to subroutines cannot be placed in an expression.</p></li>
-<li><p>In the main program, a subroutine is activated by using a <code class="docutils literal notranslate"><span class="pre">CALL</span></code> statement which include the subroutine name followed by the list of inputs and outputs surrounded by parenthesis. The inputs and outputs are collectively called the <em>arguments</em></p></li>
-<li><p>A subroutine name follows the same rules as for function names and variable names: historically, less than six letters and numbers, and must begin with a letter. Because of this, subroutine names should be different than those used for variables or functions.</p></li>
-<li><p>As with functions, there are some rules for using subroutines. Keep these in mind when writing your subroutines:</p>
-<ul>
-<li><p>You do not need to declare the subroutine name in the main program as you do with a function name.</p></li>
-<li><p>They begin with a line that includes the word <code class="docutils literal notranslate"><span class="pre">SUBROUTINE</span></code>, the name of the subroutine, and the arguments for the subroutine.</p></li>
+<li><p>Local entities: entities declared in a function or in the main program are said local to that function or the main program.</p></li>
+<li><p>Global: entities declared in all containing functions or the main program are said global.</p></li>
+<li><p>Scope Rule: A global entity is visible to all contained functions, including the function in which that entity is declared.</p></li>
 </ul>
-</li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">INTENT</span></code> of arguments in subroutines can be multiple: <code class="docutils literal notranslate"><span class="pre">IN</span></code> (the value of the dummy argument may be used, but not modified, within the procedure.), <code class="docutils literal notranslate"><span class="pre">OUT</span></code> (the dummy argument may be set and then modified within the procedure, and the values returned to the caller), and <code class="docutils literal notranslate"><span class="pre">INOUT</span></code> (initial values of the dummy argument may be both used and modified within the procedure, and then returned to the caller).</p></li>
-</ul>
+<p>Example:</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="w">    </span><span class="k">PROGRAM </span><span class="n">Scope</span>
+<span class="linenos"> 2</span><span class="w">        </span><span class="k">IMPLICIT NONE</span>
+<span class="linenos"> 3</span><span class="k">        </span><span class="kt">INTEGER</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="c">! a,b,c are global</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="w">        </span><span class="k">WRITE</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">Add</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="c">! a = 4</span>
+<span class="linenos"> 6</span><span class="w">        </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span>
+<span class="linenos"> 7</span><span class="w">        </span><span class="k">WRITE</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">Add</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="c">! a = 5</span>
+<span class="linenos"> 8</span><span class="w">        </span><span class="k">WRITE</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">Mul</span><span class="w"> </span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="w">    </span><span class="k">CONTAINS</span>
+<span class="linenos">11</span><span class="k">        </span><span class="kt">INTEGER </span><span class="k">FUNCTION </span><span class="n">Add</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<span class="linenos">12</span><span class="w">            </span><span class="k">IMPLICIT NONE</span>
+<span class="linenos">13</span><span class="k">            </span><span class="kt">INTEGER</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="k">INTENT</span><span class="w"> </span><span class="p">(</span><span class="n">IN</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">q</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="w">            </span><span class="n">Add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="c">! c is used here, from global scope</span>
+<span class="linenos">16</span><span class="w">        </span><span class="k">END FUNCTION </span><span class="n">Add</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span><span class="w">        </span><span class="kt">INTEGER </span><span class="k">FUNCTION </span><span class="n">Mul</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="linenos">19</span><span class="w">            </span><span class="k">IMPLICIT NONE</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span><span class="k">            </span><span class="kt">INTEGER</span><span class="p">,</span><span class="w"> </span><span class="k">INTENT</span><span class="w"> </span><span class="p">(</span><span class="n">IN</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="n">y</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="w">            </span><span class="n">Mul</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span>
+<span class="linenos">24</span><span class="w">        </span><span class="k">END FUNCTION </span><span class="n">Mul</span>
+<span class="linenos">25</span><span class="w">    </span><span class="k">END PROGRAM </span><span class="n">Scope</span>
+</pre></div>
+</div>
 </section>
 </section>
 <section id="interface-blocks">
@@ -874,42 +897,93 @@ document.write(`
 <span class="linenos"> 2</span><span class="w">        </span><span class="k">IMPLICIT NONE</span>
 <span class="linenos"> 3</span>
 <span class="linenos"> 4</span><span class="k">        INTERFACE</span>
-<span class="linenos"> 5</span>
-<span class="linenos"> 6</span><span class="k">            FUNCTION </span><span class="n">Area_Circle</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
-<span class="linenos"> 7</span>
-<span class="linenos"> 8</span><span class="w">            </span><span class="kt">REAL</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">Area_Circle</span>
-<span class="linenos"> 9</span>
-<span class="linenos">10</span><span class="w">            </span><span class="kt">REAL</span><span class="p">,</span><span class="w"> </span><span class="k">INTENT</span><span class="p">(</span><span class="n">IN</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">r</span>
+<span class="linenos"> 5</span><span class="k">            </span><span class="kt">REAL </span><span class="k">FUNCTION </span><span class="n">Area_Circle</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="w">              </span><span class="kt">REAL</span><span class="p">,</span><span class="w"> </span><span class="k">INTENT</span><span class="p">(</span><span class="n">IN</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">r</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="w">            </span><span class="k">END FUNCTION </span><span class="n">Area_Circle</span>
+<span class="linenos">10</span><span class="w">        </span><span class="k">END INTERFACE</span>
 <span class="linenos">11</span>
-<span class="linenos">12</span><span class="w">            </span><span class="k">END FUNCTION </span><span class="n">Area_Circle</span>
-<span class="linenos">13</span><span class="w">        </span><span class="k">END INTERFACE</span>
-<span class="linenos">14</span>
-<span class="linenos">15</span><span class="k">        </span><span class="kt">REAL</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">radius</span>
+<span class="linenos">12</span><span class="k">        </span><span class="kt">REAL</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">radius</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span><span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">ADVANCE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;NO&quot;</span><span class="p">)</span><span class="w"> </span><span class="s2">&quot;Enter radius of circle: &quot;</span>
+<span class="linenos">15</span><span class="w">        </span><span class="k">read</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">radius</span>
 <span class="linenos">16</span>
-<span class="linenos">17</span><span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">ADVANCE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;NO&quot;</span><span class="p">)</span><span class="w"> </span><span class="s2">&quot;Enter radius of circle: &quot;</span>
-<span class="linenos">18</span><span class="w">        </span><span class="k">read</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">radius</span>
-<span class="linenos">19</span>
-<span class="linenos">20</span><span class="w">        </span><span class="c">! Write out area of circle using function call</span>
-<span class="linenos">21</span><span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="s2">&quot;Area of circle with radius&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">radius</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; is&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Area_Circle</span><span class="p">(</span><span class="n">radius</span><span class="p">)</span>
-<span class="linenos">22</span><span class="mi">100</span><span class="w"> </span><span class="k">FORMAT</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">F6</span><span class="p">.</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">F11</span><span class="p">.</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="c">! Need Fortran90 specification, i.e., name your file with the .f90 extension</span>
-<span class="linenos">23</span><span class="w">      </span><span class="k">END PROGRAM </span><span class="n">Area</span>
-<span class="linenos">24</span>
-<span class="linenos">25</span><span class="w">      </span><span class="k">FUNCTION </span><span class="n">Area_Circle</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="linenos">17</span><span class="w">        </span><span class="c">! Write out area of circle using function call</span>
+<span class="linenos">18</span><span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="s2">&quot;Area of circle with radius&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">radius</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; is&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Area_Circle</span><span class="p">(</span><span class="n">radius</span><span class="p">)</span>
+<span class="linenos">19</span><span class="mi">100</span><span class="w"> </span><span class="k">FORMAT</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">F6</span><span class="p">.</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">F11</span><span class="p">.</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="c">! Need Fortran90 specification, i.e., name your file with the .f90 extension</span>
+<span class="linenos">20</span><span class="w">      </span><span class="k">END PROGRAM </span><span class="n">Area</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span><span class="w">      </span><span class="kt">REAL </span><span class="k">FUNCTION </span><span class="n">Area_Circle</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="linenos">23</span>
+<span class="linenos">24</span><span class="w">        </span><span class="k">IMPLICIT NONE</span>
+<span class="linenos">25</span><span class="k">        </span><span class="kt">REAL</span><span class="p">,</span><span class="w"> </span><span class="k">INTENT</span><span class="w"> </span><span class="p">(</span><span class="n">IN</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">r</span>
 <span class="linenos">26</span>
-<span class="linenos">27</span><span class="w">        </span><span class="k">IMPLICIT NONE</span>
-<span class="linenos">28</span><span class="k">        </span><span class="kt">REAL</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">Area_Circle</span>
-<span class="linenos">29</span><span class="w">        </span><span class="kt">REAL</span><span class="p">,</span><span class="w"> </span><span class="k">INTENT</span><span class="w"> </span><span class="p">(</span><span class="n">IN</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">r</span>
+<span class="linenos">27</span><span class="w">        </span><span class="kt">REAL</span><span class="p">,</span><span class="w"> </span><span class="k">PARAMETER</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">Pi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.1415927</span>
+<span class="linenos">28</span>
+<span class="linenos">29</span><span class="w">        </span><span class="n">Area_Circle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Pi</span><span class="o">*</span><span class="n">r</span><span class="o">*</span><span class="n">r</span>
 <span class="linenos">30</span>
-<span class="linenos">31</span><span class="w">        </span><span class="kt">REAL</span><span class="p">,</span><span class="w"> </span><span class="k">PARAMETER</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">Pi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.1415927</span>
-<span class="linenos">32</span>
-<span class="linenos">33</span><span class="w">        </span><span class="n">Area_Circle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Pi</span><span class="o">*</span><span class="n">r</span><span class="o">*</span><span class="n">r</span>
-<span class="linenos">34</span>
-<span class="linenos">35</span><span class="w">      </span><span class="k">END FUNCTION </span><span class="n">Area_Circle</span>
+<span class="linenos">31</span><span class="w">      </span><span class="k">END FUNCTION </span><span class="n">Area_Circle</span>
+</pre></div>
+</div>
+<section id="subroutines">
+<h3>7. Subroutines<a class="headerlink" href="#subroutines" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>We saw that Fortran functions have an explicit return type and are intended to return only one value.</p></li>
+<li><p><em>Subroutine</em> subprograms, on the other hand, have no explicit type and return multiple or no values through a parameter call list.</p></li>
+<li><p>Unlike functions, calls to subroutines cannot be placed in an expression.</p></li>
+<li><p>In the main program, a subroutine is activated by using a <code class="docutils literal notranslate"><span class="pre">CALL</span></code> statement which include the subroutine name followed by the list of inputs and outputs surrounded by parenthesis. The inputs and outputs are collectively called the <em>arguments</em></p></li>
+<li><p>A subroutine name follows the same rules as for function names and variable names: historically, less than six letters and numbers, and must begin with a letter. Because of this, subroutine names should be different than those used for variables or functions.</p></li>
+<li><p>As with functions, there are some rules for using subroutines. Keep these in mind when writing your subroutines:</p>
+<ul>
+<li><p>You do not need to declare the subroutine name in the main program as you do with a function name.</p></li>
+<li><p>They begin with a line that includes the word <code class="docutils literal notranslate"><span class="pre">SUBROUTINE</span></code>, the name of the subroutine, and the arguments for the subroutine.</p></li>
+</ul>
+</li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">INTENT</span></code> of arguments in subroutines can be multiple: <code class="docutils literal notranslate"><span class="pre">IN</span></code> (the value of the dummy argument may be used, but not modified, within the procedure.), <code class="docutils literal notranslate"><span class="pre">OUT</span></code> (the dummy argument may be set and then modified within the procedure, and the values returned to the caller), and <code class="docutils literal notranslate"><span class="pre">INOUT</span></code> (initial values of the dummy argument may be both used and modified within the procedure, and then returned to the caller).</p></li>
+</ul>
+<p>Example:</p>
+<p>Example:</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">PROGRAM </span><span class="n">Area</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="k">IMPLICIT NONE</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="k">    INTERFACE</span>
+<span class="linenos"> 5</span><span class="k">        SUBROUTINE </span><span class="n">Compute_Area</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="n">Area</span><span class="p">)</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="w">            </span><span class="kt">REAL</span><span class="p">,</span><span class="w"> </span><span class="k">INTENT</span><span class="p">(</span><span class="n">IN</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">r</span>
+<span class="linenos"> 8</span><span class="w">            </span><span class="kt">REAL</span><span class="p">,</span><span class="w"> </span><span class="k">INTENT</span><span class="p">(</span><span class="n">OUT</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">Area</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="w">        </span><span class="k">END SUBROUTINE </span><span class="n">Compute_Area</span>
+<span class="linenos">11</span><span class="w">    </span><span class="k">END INTERFACE</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="k">    </span><span class="kt">REAL</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">radius</span><span class="p">,</span><span class="w"> </span><span class="n">Area_Circle</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="w">    </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;(A)&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">ADVANCE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;NO&quot;</span><span class="p">)</span><span class="w"> </span><span class="s2">&quot;Enter radius of circle: &quot;</span>
+<span class="linenos">16</span><span class="w">    </span><span class="k">read</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">radius</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span><span class="w">    </span><span class="k">CALL </span><span class="n">Compute_Area</span><span class="p">(</span><span class="n">radius</span><span class="p">,</span><span class="w"> </span><span class="n">Area_Circle</span><span class="p">)</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span><span class="w">    </span><span class="c">! Write out area of circle using function call</span>
+<span class="linenos">21</span><span class="w">    </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="s2">&quot;Area of circle with radius&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">radius</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; is&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Area_Circle</span>
+<span class="linenos">22</span><span class="mi">100</span><span class="w"> </span><span class="k">FORMAT</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">F6</span><span class="p">.</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">F11</span><span class="p">.</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="c">! Need Fortran90 specification, i.e., name your file with the .f90 extension</span>
+<span class="linenos">23</span><span class="w">  </span><span class="k">END PROGRAM </span><span class="n">Area</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span><span class="w">  </span><span class="k">SUBROUTINE </span><span class="n">Compute_Area</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="n">Area</span><span class="p">)</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span><span class="w">    </span><span class="k">IMPLICIT NONE</span>
+<span class="linenos">28</span><span class="k">    </span><span class="kt">REAL</span><span class="p">,</span><span class="w"> </span><span class="k">INTENT</span><span class="p">(</span><span class="n">IN</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">r</span>
+<span class="linenos">29</span><span class="w">    </span><span class="kt">REAL</span><span class="p">,</span><span class="w"> </span><span class="k">INTENT</span><span class="p">(</span><span class="n">OUT</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">Area</span>
+<span class="linenos">30</span><span class="w">    </span><span class="kt">REAL</span><span class="p">,</span><span class="w"> </span><span class="k">PARAMETER</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">Pi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.1415927</span>
+<span class="linenos">31</span>
+<span class="linenos">32</span><span class="w">    </span><span class="n">Area</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Pi</span><span class="o">*</span><span class="n">r</span><span class="o">*</span><span class="n">r</span>
+<span class="linenos">33</span>
+<span class="linenos">34</span><span class="w">  </span><span class="k">END SUBROUTINE </span><span class="n">Compute_Area</span>
 </pre></div>
 </div>
 </section>
+</section>
 <section id="modules">
-<h2>7. Modules<a class="headerlink" href="#modules" title="Link to this heading">#</a></h2>
+<h2>8. Modules<a class="headerlink" href="#modules" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>It is often the case that there are parameters, variables, and subprograms that must be shared by several program units.</p></li>
 <li><p>Fortran 90 provides a special program unit known as a <code class="docutils literal notranslate"><span class="pre">MODULE</span></code> that conveniently packages collections of declarations and subprograms so that they may be imported into other program units.</p></li>
@@ -955,7 +1029,7 @@ document.write(`
 </div>
 <p>This will both compile your main program <code class="docutils literal notranslate"><span class="pre">using_modules.f</span></code> <em>and</em> link your compiled module.</p>
 <p>Alternatively, you could have compiled the module and main program together, as in:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w"> </span>gfortran<span class="w"> </span>-ffree-fortran<span class="w"> </span>-c<span class="w"> </span>math_consts_module.f<span class="w"> </span>using_modules.f
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gfortran<span class="w"> </span>-ffree-form<span class="w"> </span>-c<span class="w"> </span>math_consts_module.f<span class="w"> </span>using_modules.f
 </pre></div>
 </div>
 <p>And then you could have done the linking of the object files:</p>
@@ -1089,11 +1163,14 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">5. Functions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-mistakes">Common mistakes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subroutines">5.1 Subroutines</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scope-rules">5.1 Scope rules</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interface-blocks">6. Interface blocks</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modules">7. Modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interface-blocks">6. Interface blocks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subroutines">7. Subroutines</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modules">8. Modules</a></li>
 </ul>
   </nav></div>
 
