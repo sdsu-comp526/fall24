@@ -2,12 +2,9 @@
         IMPLICIT NONE
 
         INTERFACE
+            REAL FUNCTION Area_Circle(r)
 
-            FUNCTION Area_Circle(r)
-
-            REAL :: Area_Circle
-
-            REAL, INTENT(IN) :: r
+              REAL, INTENT(IN) :: r
 
             END FUNCTION Area_Circle
         END INTERFACE
@@ -22,10 +19,9 @@
 100 FORMAT(A, 2x, F6.2, A, 2x, F11.2) ! Need Fortran90 specification, i.e., name your file with the .f90 extension
       END PROGRAM Area
 
-      FUNCTION Area_Circle(r)
+      REAL FUNCTION Area_Circle(r)
 
         IMPLICIT NONE
-        REAL :: Area_Circle
         REAL, INTENT (IN) :: r
 
         REAL, PARAMETER :: Pi = 3.1415927
