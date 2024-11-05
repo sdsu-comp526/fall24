@@ -33,3 +33,4 @@ chapters:
   - file: slides/module6-1_intro_to_fortran.md
   - file: slides/module7-1_interpolation.ipynb
   - file: slides/module7-2_chebyshev_poly.ipynb
+  - file: slides/module7-3_splines.ipynb
