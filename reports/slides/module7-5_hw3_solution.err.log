@@ -1,0 +1,75 @@
+Traceback (most recent call last):
+  File "/home/valeria/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/valeria/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/nbclient/client.py", line 1314, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valeria/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/valeria/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/home/valeria/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/valeria/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+using Plots
+using LaTeXStrings
+default(linewidth=4, legendfontsize=12)
+
+s = 50
+x_domain = LinRange(0,2,s)
+p = zeros(length(x_domain))
+
+f(x) = exp.(-3 .* x)
+
+x_data = LinRange(0,2,5)
+y_data = f.(x_data)
+
+# open output.txt data and store values in the array called p
+open("./fortran_programs/midterm/output.txt","r") do f
+    line = 1
+    while ! eof(f)
+        l = readline(f)
+        p[line] = parse.(Float64,l)
+        line += 1
+    end
+end
+
+# Plots
+scatter(x_data,y_data, markersize = 6, label = L"(x_i, y_i)")
+
+plot!(x_domain, [f.(x_domain) p ], linestyle = [:solid :dash], label = [" exp(-3x)" "p(x)"], title="Lagrange interpolation")
+
+# to save in pngcfile format, uncomment and use the following line (commented for Jupyter Book execution)
+# png(plot!(x_domain, [f.(x_domain) p ], linestyle = [:solid :dash], label = [" exp(-3x)" "p(x)"], title="Lagrange interpolation"), "lagrange_plot.png")
+------------------
+
+
+SystemError: opening file "./fortran_programs/midterm/output.txt": No such file or directory
+
+Stacktrace:
+ [1] systemerror(p::String, errno::Int32; extrainfo::Nothing)
+   @ Base ./error.jl:176
+ [2] systemerror
+   @ ./error.jl:175 [inlined]
+ [3] open(fname::String; lock::Bool, read::Bool, write::Nothing, create::Nothing, truncate::Nothing, append::Nothing)
+   @ Base ./iostream.jl:293
+ [4] open
+   @ ./iostream.jl:275 [inlined]
+ [5] open(fname::String, mode::String; lock::Bool)
+   @ Base ./iostream.jl:356
+ [6] open(fname::String, mode::String)
+   @ Base ./iostream.jl:355
+ [7] open(::var"#1#2", ::String, ::Vararg{String}; kwargs::@Kwargs{})
+   @ Base ./io.jl:394
+ [8] open(::Function, ::String, ::String)
+   @ Base ./io.jl:393
+ [9] top-level scope
+   @ In[1]:15
+
