@@ -35,6 +35,7 @@ chapters:
   - file: slides/module7-2_chebyshev_poly.ipynb
   - file: slides/module7-3_splines.ipynb
   - file: slides/module7-4_midterm_sol.md
-  - file: slides/module7-5_higher_dimensions.ipynb
+  - file: slides/module7-5_hw3_sol.md
+  - file: slides/module7-6_higher_dimensions.ipynb
   # - file: slides/module8-1_integration.ipynb
 
