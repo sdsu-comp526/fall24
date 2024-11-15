@@ -37,5 +37,6 @@ chapters:
   - file: slides/module7-4_midterm_sol.md
   - file: slides/module7-5_hw3_solution.ipynb
   - file: slides/module7-6_higher_dimensions.ipynb
+  - file: slides/module7-7_noisy-data.ipynb
   - file: slides/module8-1_integration.ipynb
 
