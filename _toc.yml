@@ -40,4 +40,5 @@ chapters:
   - file: slides/module7-7_noisy-data.ipynb
   - file: slides/module8-1_integration.ipynb
   - file: slides/module8-2_quadrature.ipynb
+  - file: slides/module8-3_quadrature_transforms.ipynb
 
