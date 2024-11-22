@@ -42,5 +42,5 @@ chapters:
   - file: slides/module8-2_quadrature.ipynb
   - file: slides/module8-3_quadrature_transforms.ipynb
   - file: slides/module8-4_beyond_linear_models.ipynb
-  - file: slides/module9-1_symbolic_differentiation.ipynb
+  - file: slides/module9-1_computing_derivatives.ipynb
 
