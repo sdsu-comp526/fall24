@@ -607,66 +607,11 @@ This error becomes large (relative to <span class="math notranslate nohighlight"
 <span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `~/.julia/environments/v1.10/Manifest.toml`
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">Precompiling</span> 
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>project...
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Distributions → DistributionsChainRulesCoreExt
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>StructArrays → StructArraysGPUArraysCoreExt
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>KernelAbstractions → SparseArraysExt
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>StructArrays → StructArraysSparseArraysExt
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>KernelAbstractions → LinearAlgebraExt
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>GPUArrays
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ChainRules
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ArrayInterface → ArrayInterfaceChainRulesExt
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ArrayInterface → ArrayInterfaceChainRulesCoreExt
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ArrayInterface → ArrayInterfaceStaticArraysCoreExt
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>SciMLStructures
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>SymbolicIndexingInterface
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>SciMLOperators
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>SciMLOperators → SciMLOperatorsSparseArraysExt
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>SciMLOperators → SciMLOperatorsStaticArraysCoreExt
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>RecursiveArrayTools
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>RecursiveArrayTools → RecursiveArrayToolsStructArraysExt
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>RecursiveArrayTools → RecursiveArrayToolsForwardDiffExt
-</pre></div>
-</div>
+<div class="output text_latex math notranslate nohighlight">
+\[ \begin{equation}
+\frac{\mathrm{d} \sin\left( x \right)}{\mathrm{d}x}
+\end{equation}
+ \]</div>
 </div>
 </div>
 <div class="cell docutils container">
@@ -674,6 +619,13 @@ This error becomes large (relative to <span class="math notranslate nohighlight"
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">expand_derivatives</span><span class="p">(</span><span class="n">Dx</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[ \begin{equation}
+\cos\left( x \right)
+\end{equation}
+ \]</div>
 </div>
 </div>
 <p>Awesome, what about products?</p>
@@ -686,6 +638,13 @@ This error becomes large (relative to <span class="math notranslate nohighlight"
 <span class="n">expand_derivatives</span><span class="p">(</span><span class="n">Dx</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[ \begin{equation}
+\frac{\left( \frac{\cos\left( x^{\pi} \right)}{x} - 3.1416 x^{2.1416} \log\left( x \right) \sin\left( x^{\pi} \right) \right) \cos\left( \cos^{3.1416}\left( x^{\pi} \right) \left( \log\left( x \right) \right)^{3.1416} \right)}{\log\left( x \right) \cos\left( x^{\pi} \right)} - \left( \frac{3.1416 \cos^{3.1416}\left( x^{\pi} \right) \left( \log\left( x \right) \right)^{2.1416}}{x} - 9.8696 \cos^{2.1416}\left( x^{\pi} \right) \left( \log\left( x \right) \right)^{3.1416} x^{2.1416} \sin\left( x^{\pi} \right) \right) \log\left( \log\left( x \right) \cos\left( x^{\pi} \right) \right) \sin\left( \cos^{3.1416}\left( x^{\pi} \right) \left( \log\left( x \right) \right)^{3.1416} \right)
+\end{equation}
+ \]</div>
 </div>
 </div>
 <ul class="simple">
@@ -713,6 +672,11 @@ This error becomes large (relative to <span class="math notranslate nohighlight"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-1.5346823414986814, -34.032439961925064)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -736,12 +700,17 @@ This error becomes large (relative to <span class="math notranslate nohighlight"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-1.5346823414986814, -34.032419599140475)
+</pre></div>
+</div>
+</div>
 </div>
 <section id="we-can-go-the-other-way">
 <h3>We can go the other way<a class="headerlink" href="#we-can-go-the-other-way" title="Link to this heading">#</a></h3>
 <p>We can differentiate a composition <span class="math notranslate nohighlight">\(h(g(f(x)))\)</span> as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0d4f2437-23c8-4947-a67d-00cdacd8a389">
-<span class="eqno">(17)<a class="headerlink" href="#equation-0d4f2437-23c8-4947-a67d-00cdacd8a389" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-660f59ea-b64b-4105-8f6f-c879e971adf2">
+<span class="eqno">(17)<a class="headerlink" href="#equation-660f59ea-b64b-4105-8f6f-c879e971adf2" title="Permalink to this equation">#</a></span>\[\begin{align}
   \operatorname{d} h &amp;= h' \operatorname{d} g \\
   \operatorname{d} g &amp;= g' \operatorname{d} f \\
   \operatorname{d} f &amp;= f' \operatorname{d} x.
@@ -765,10 +734,26 @@ This error becomes large (relative to <span class="math notranslate nohighlight"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Resolving</span> package versions...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `~/.julia/environments/v1.10/Project.toml`
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `~/.julia/environments/v1.10/Manifest.toml`
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Zygote</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="mf">1.9</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-34.03241959914049,)
 </pre></div>
 </div>
 </div>
@@ -777,6 +762,41 @@ This error becomes large (relative to <span class="math notranslate nohighlight"
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="o">^</span><span class="mi">2</span>
 <span class="nd">@code_llvm</span><span class="w"> </span><span class="n">Zygote</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="w"> </span><span class="mf">1.9</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ /home/valeria/.julia/packages/Zygote/nyzjS/src/compiler/interface.jl:146 within `gradient`
+define 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">[1</span> x <span class=" -Color -Color-Cyan">double</span><span class=" -Color -Color-Yellow">]</span> @julia_gradient_4650<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">double</span> %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
+top:
+;  @ /home/valeria/.julia/packages/Zygote/nyzjS/src/compiler/interface.jl:147 within `gradient`
+; ┌ @ /home/valeria/.julia/packages/Zygote/nyzjS/src/compiler/interface.jl:88 within `pullback` @ /home/valeria/.julia/packages/Zygote/nyzjS/src/compiler/interface.jl:90
+; │┌ @ In[9]:1 within `g`
+; ││┌ @ /home/valeria/.julia/packages/Zygote/nyzjS/src/compiler/interface2.jl:87 within `_pullback`
+; │││┌ @ /home/valeria/.julia/packages/Zygote/nyzjS/src/compiler/interface2.jl within `macro expansion`
+; ││││┌ @ /home/valeria/.julia/packages/Zygote/nyzjS/src/compiler/chainrules.jl:224 within `chain_rrule`
+; │││││┌ @ /home/valeria/.julia/packages/ChainRulesCore/6Pucz/src/rules.jl:138 within `rrule` @ /home/valeria/.julia/packages/ChainRules/DbWAz/src/rulesets/Base/fastmath_able.jl:56
+        %1 = <span class=" -Color -Color-Bold">call</span> <span class=" -Color -Color-Cyan">double</span> @j_exp_4652<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">double</span> %0<span class=" -Color -Color-Yellow">)</span>
+; └└└└└└
+;  @ /home/valeria/.julia/packages/Zygote/nyzjS/src/compiler/interface.jl:148 within `gradient`
+; ┌ @ /home/valeria/.julia/packages/Zygote/nyzjS/src/compiler/interface.jl:91 within `#78`
+; │┌ @ In[9]:1 within `g`
+; ││┌ @ /home/valeria/.julia/packages/Zygote/nyzjS/src/compiler/chainrules.jl:212 within `ZBack`
+; │││┌ @ /home/valeria/.julia/packages/Zygote/nyzjS/src/lib/number.jl:12 within `literal_pow_pullback`
+; ││││┌ @ promotion.jl:423 within `*` @ float.jl:411
+       %2 = <span class=" -Color -Color-Bold">fmul</span> <span class=" -Color -Color-Cyan">double</span> %0, <span class=" -Color -Color-Yellow">2.000000e+00</span>
+; │└└└└
+; │┌ @ /home/valeria/.julia/packages/Zygote/nyzjS/src/lib/lib.jl:17 within `accum`
+; ││┌ @ float.jl:409 within `+`
+     %3 = <span class=" -Color -Color-Bold">fadd</span> <span class=" -Color -Color-Cyan">double</span> %2, %1
+; └└└
+;  @ /home/valeria/.julia/packages/Zygote/nyzjS/src/compiler/interface.jl:149 within `gradient`
+  %unbox3.fca.0.insert = <span class=" -Color -Color-Bold">insertvalue</span> <span class=" -Color -Color-Yellow">[1</span> x <span class=" -Color -Color-Cyan">double</span><span class=" -Color -Color-Yellow">]</span> zeroinitializer, <span class=" -Color -Color-Cyan">double</span> %3, <span class=" -Color -Color-Yellow">0</span>
+  <span class=" -Color -Color-Bold">ret</span> <span class=" -Color -Color-Yellow">[1</span> x <span class=" -Color -Color-Cyan">double</span><span class=" -Color -Color-Yellow">]</span> %unbox3.fca.0.insert
+<span class=" -Color -Color-Yellow">}</span>
 </pre></div>
 </div>
 </div>
