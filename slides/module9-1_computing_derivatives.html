@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>36) Computing Derivatives &#8212; Computational Methods for Scientists</title>
+    <title>37) Computing Derivatives &#8212; Computational Methods for Scientists</title>
   
   
   
@@ -63,7 +63,7 @@
     <link rel="icon" href="../_static/SDSU-comp526_logo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="35) Beyond Linear Models" href="module8-4_beyond_linear_models.html" />
+    <link rel="prev" title="36) Gradient Descent" href="module8-5_gradient_descent.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -224,7 +224,8 @@
 <li class="toctree-l2"><a class="reference internal" href="module8-2_quadrature.html">33) Quadrature</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module8-3_quadrature_transforms.html">34) Transformed Quadrature</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module8-4_beyond_linear_models.html">35) Beyond Linear Models</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">36) Computing Derivatives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module8-5_gradient_descent.html">36) Gradient Descent</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">37) Computing Derivatives</a></li>
 </ul>
 </details></li>
 </ul>
@@ -443,7 +444,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>36) Computing Derivatives</h1>
+    <h1>37) Computing Derivatives</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -464,10 +465,17 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#symbolic-differentiation">1.1 Symbolic differentiation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hand-coding-analytic-derivatives">1.2 Hand-coding (analytic) derivatives</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#we-can-go-the-other-way">We can go the other way</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#we-can-go-the-other-way">We can go the other way</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-reverse-mode-example">A reverse mode example</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automatic-differentiation">1.3 Automatic differentiation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automatic-differentiation-zygote-jl">1.3 Automatic differentiation: Zygote.jl</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-zygote-work">How does Zygote work?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kinds-of-algorithmic-differentation">Kinds of algorithmic differentation</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -480,13 +488,12 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="computing-derivatives">
-<h1>36) Computing Derivatives<a class="headerlink" href="#computing-derivatives" title="Link to this heading">#</a></h1>
+<h1>37) Computing Derivatives<a class="headerlink" href="#computing-derivatives" title="Link to this heading">#</a></h1>
 <section id="last-time">
 <h2>Last time<a class="headerlink" href="#last-time" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Linear Models</p></li>
-<li><p>Optimization</p></li>
-<li><p>Partial Derivatives</p></li>
+<li><p>Gradient descent</p></li>
+<li><p>Nonlinear models</p></li>
 </ul>
 </section>
 <section id="today">
@@ -554,7 +561,7 @@ This error becomes large (relative to <span class="math notranslate nohighlight"
 </section>
 <section id="automatic-step-size-selection">
 <h3>Automatic step size selection<a class="headerlink" href="#automatic-step-size-selection" title="Link to this heading">#</a></h3>
-<p>Reference <a class="reference external" href="https://www.math.uci.edu/~qnie/Publications/NumericalOptimization.pdf">Numerical Optimization</a></p>
+<p>Reference: <a class="reference external" href="https://www.math.uci.edu/~qnie/Publications/NumericalOptimization.pdf">Numerical Optimization</a>.</p>
 <ul class="simple">
 <li><p>Walker and Pernice</p></li>
 <li><p>Dennis and Schnabel</p></li>
@@ -604,7 +611,10 @@ This error becomes large (relative to <span class="math notranslate nohighlight"
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `~/.julia/environments/v1.10/Project.toml`
-<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `~/.julia/environments/v1.10/Manifest.toml`
+<span class=" -Color -Color-Bold -Color-Bold-Green">    Updating</span> `~/.julia/environments/v1.10/Manifest.toml`
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  [8e850b90] ↓ libblastrampoline_jll v5.11.0+0 ⇒ v5.8.0+1
 </pre></div>
 </div>
 <div class="output text_latex math notranslate nohighlight">
@@ -709,8 +719,8 @@ This error becomes large (relative to <span class="math notranslate nohighlight"
 <section id="we-can-go-the-other-way">
 <h3>We can go the other way<a class="headerlink" href="#we-can-go-the-other-way" title="Link to this heading">#</a></h3>
 <p>We can differentiate a composition <span class="math notranslate nohighlight">\(h(g(f(x)))\)</span> as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-660f59ea-b64b-4105-8f6f-c879e971adf2">
-<span class="eqno">(17)<a class="headerlink" href="#equation-660f59ea-b64b-4105-8f6f-c879e971adf2" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-47917889-065d-480a-858c-7a4c1e5bfb55">
+<span class="eqno">(19)<a class="headerlink" href="#equation-47917889-065d-480a-858c-7a4c1e5bfb55" title="Permalink to this equation">#</a></span>\[\begin{align}
   \operatorname{d} h &amp;= h' \operatorname{d} g \\
   \operatorname{d} g &amp;= g' \operatorname{d} f \\
   \operatorname{d} f &amp;= f' \operatorname{d} x.
@@ -720,11 +730,62 @@ This error becomes large (relative to <span class="math notranslate nohighlight"
 \[ \operatorname d h = \frac{dh}{dg} \left(\frac{dg}{df} \left(\frac{df}{dx} \operatorname d x \right) \right) .\]</div>
 <p>The expression means the same thing if we rearrange the parentheses,</p>
 <div class="math notranslate nohighlight">
-\[ \operatorname d h = \left( \left( \left( \frac{dh}{dg} \right) \frac{dg}{df} \right) \frac{df}{dx} \right) \operatorname d x .\]</div>
+\[ \operatorname d h = \left( \left( \left( \frac{dh}{dg} \right) \frac{dg}{df} \right) \frac{df}{dx} \right) \operatorname d x \]</div>
+<p>which we can compute with in reverse order via</p>
+<div class="math notranslate nohighlight">
+\[ \underbrace{\bar x}_{\frac{dh}{dx}} = \underbrace{\bar g \frac{dg}{df}}_{\bar f} \frac{df}{dx} .\]</div>
+<section id="a-reverse-mode-example">
+<h4>A reverse mode example<a class="headerlink" href="#a-reverse-mode-example" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[ \underbrace{\bar x}_{\frac{dh}{dx}} = \underbrace{\bar g \frac{dg}{df}}_{\bar f} \frac{df}{dx} .\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="o">^</span><span class="nb">pi</span>
+<span class="w">    </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cos</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="w">    </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">c</span>
+<span class="w">    </span><span class="n">y</span>
+<span class="k">end</span>
+<span class="p">(</span><span class="n">g</span><span class="p">(</span><span class="mf">1.4</span><span class="p">),</span><span class="w"> </span><span class="n">diff_wp</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="w"> </span><span class="mf">1.4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-0.32484122107701546, -1.2559760384500684)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">gback</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y_</span><span class="p">)</span>
+<span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="o">^</span><span class="nb">pi</span>
+<span class="w">    </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cos</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="w">    </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">c</span>
+<span class="w">    </span><span class="c"># backward pass</span>
+<span class="w">    </span><span class="n">c_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y_</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span>
+<span class="w">    </span><span class="n">b_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y_</span>
+<span class="w">    </span><span class="n">a_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">sin</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b_</span>
+<span class="w">    </span><span class="n">x_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">c_</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">pi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="o">^</span><span class="p">(</span><span class="nb">pi</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">a_</span>
+<span class="w">    </span><span class="n">x_</span>
+<span class="k">end</span>
+<span class="n">gback</span><span class="p">(</span><span class="mf">1.4</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-1.2559761698835525
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
-<section id="automatic-differentiation">
-<h2>1.3 Automatic differentiation<a class="headerlink" href="#automatic-differentiation" title="Link to this heading">#</a></h2>
+</section>
+<section id="automatic-differentiation-zygote-jl">
+<h2>1.3 Automatic differentiation: <a class="reference external" href="https://github.com/FluxML/Zygote.jl">Zygote.jl</a><a class="headerlink" href="#automatic-differentiation-zygote-jl" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Pkg</span>
@@ -739,9 +800,7 @@ This error becomes large (relative to <span class="math notranslate nohighlight"
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `~/.julia/environments/v1.10/Project.toml`
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `~/.julia/environments/v1.10/Manifest.toml`
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `~/.julia/environments/v1.10/Manifest.toml`
 </pre></div>
 </div>
 </div>
@@ -767,23 +826,23 @@ This error becomes large (relative to <span class="math notranslate nohighlight"
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ /home/valeria/.julia/packages/Zygote/nyzjS/src/compiler/interface.jl:146 within `gradient`
-define 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">[1</span> x <span class=" -Color -Color-Cyan">double</span><span class=" -Color -Color-Yellow">]</span> @julia_gradient_4650<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">double</span> %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
+define <span class=" -Color -Color-Yellow">[1</span> x <span class=" -Color -Color-Cyan">double</span><span class=" -Color -Color-Yellow">]</span> @julia_gradient_4706<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">double</span> %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
 top:
 ;  @ /home/valeria/.julia/packages/Zygote/nyzjS/src/compiler/interface.jl:147 within `gradient`
 ; ┌ @ /home/valeria/.julia/packages/Zygote/nyzjS/src/compiler/interface.jl:88 within `pullback` @ /home/valeria/.julia/packages/Zygote/nyzjS/src/compiler/interface.jl:90
-; │┌ @ In[9]:1 within `g`
+; │┌ @ In[11]:1 within `g`
 ; ││┌ @ /home/valeria/.julia/packages/Zygote/nyzjS/src/compiler/interface2.jl:87 within `_pullback`
 ; │││┌ @ /home/valeria/.julia/packages/Zygote/nyzjS/src/compiler/interface2.jl within `macro expansion`
 ; ││││┌ @ /home/valeria/.julia/packages/Zygote/nyzjS/src/compiler/chainrules.jl:224 within `chain_rrule`
 ; │││││┌ @ /home/valeria/.julia/packages/ChainRulesCore/6Pucz/src/rules.jl:138 within `rrule` @ /home/valeria/.julia/packages/ChainRules/DbWAz/src/rulesets/Base/fastmath_able.jl:56
-        %1 = <span class=" -Color -Color-Bold">call</span> <span class=" -Color -Color-Cyan">double</span> @j_exp_4652<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">double</span> %0<span class=" -Color -Color-Yellow">)</span>
+        %1 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>= <span class=" -Color -Color-Bold">call</span> <span class=" -Color -Color-Cyan">double</span> @j_exp_4708<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">double</span> %0<span class=" -Color -Color-Yellow">)</span>
 ; └└└└└└
 ;  @ /home/valeria/.julia/packages/Zygote/nyzjS/src/compiler/interface.jl:148 within `gradient`
 ; ┌ @ /home/valeria/.julia/packages/Zygote/nyzjS/src/compiler/interface.jl:91 within `#78`
-; │┌ @ In[9]:1 within `g`
+; │┌ @ In[11]:1 within `g`
 ; ││┌ @ /home/valeria/.julia/packages/Zygote/nyzjS/src/compiler/chainrules.jl:212 within `ZBack`
 ; │││┌ @ /home/valeria/.julia/packages/Zygote/nyzjS/src/lib/number.jl:12 within `literal_pow_pullback`
 ; ││││┌ @ promotion.jl:423 within `*` @ float.jl:411
@@ -801,6 +860,80 @@ top:
 </div>
 </div>
 </div>
+<section id="how-does-zygote-work">
+<h3>How does Zygote work?<a class="headerlink" href="#how-does-zygote-work" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">square</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="o">^</span><span class="mi">2</span>
+<span class="nd">@code_llvm</span><span class="w"> </span><span class="n">square</span><span class="p">(</span><span class="mf">1.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ In[12]:1 within `square`
+define <span class=" -Color -Color-Cyan">double</span> @julia_square_4730<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">double</span> %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
+top:
+; ┌ @ intfuncs.jl:332 within `literal_pow`
+; │┌ @ float.jl:411 within `*`
+    %1 = <span class=" -Color -Color-Bold">fmul</span> <span class=" -Color -Color-Cyan">double</span> %0, %0
+    <span class=" -Color -Color-Bold">ret</span> <span class=" -Color -Color-Cyan">double</span> %1
+; └└
+<span class=" -Color -Color-Yellow">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_llvm</span><span class="w"> </span><span class="n">Zygote</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">square</span><span class="p">,</span><span class="w"> </span><span class="mf">1.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ /home/valeria/.julia/packages/Zygote/nyzjS/src/compiler/interface.jl:146 within `gradient`
+define <span class=" -Color -Color-Yellow">[1</span> x <span class=" -Color -Color-Cyan">double</span><span class=" -Color -Color-Yellow">]</span> @julia_gradient_4734<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">double</span> %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
+top:
+;  @ /home/valeria/.julia/packages/Zygote/nyzjS/src/compiler/interface.jl:148 within `gradient`
+; ┌ @ /home/valeria/.julia/packages/Zygote/nyzjS/src/compiler/interface.jl:91 within `#78`
+; │┌ @ In[12]:1 within `square`
+; ││┌ @ /home/valeria/.julia/packages/Zygote/nyzjS/src/compiler/chainrules.jl:212 within `ZBack`
+; │││┌ @ /home/valeria/.julia/packages/Zygote/nyzjS/src/lib/number.jl:12 within `literal_pow_pullback`
+; ││││┌ @ promotion.jl:423 within `*` @ float.jl:411
+       %1 = <span class=" -Color -Color-Bold">fmul</span> <span class=" -Color -Color-Cyan">double</span> %0, <span class=" -Color -Color-Yellow">2.000000e+00</span>
+; └└└└└
+;  @ /home/valeria/.julia/packages/Zygote/nyzjS/src/compiler/interface.jl:149 within `gradient`
+  %unbox2.fca.0.insert = <span class=" -Color -Color-Bold">insertvalue</span> <span class=" -Color -Color-Yellow">[1</span> x <span class=" -Color -Color-Cyan">double</span><span class=" -Color -Color-Yellow">]</span> zeroinitializer, <span class=" -Color -Color-Cyan">double</span> %1, <span class=" -Color -Color-Yellow">0</span>
+  <span class=" -Color -Color-Bold">ret</span> <span class=" -Color -Color-Yellow">[1</span> x <span class=" -Color -Color-Cyan">double</span><span class=" -Color -Color-Yellow">]</span> %unbox2.fca.0.insert
+<span class=" -Color -Color-Yellow">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="kinds-of-algorithmic-differentation">
+<h3>Kinds of algorithmic differentation<a class="headerlink" href="#kinds-of-algorithmic-differentation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Source transformation: Fortran code in, Fortran code out</p>
+<ul>
+<li><p>Duplicates compiler features, usually incomplete language coverage</p></li>
+<li><p>Produces efficient code</p></li>
+</ul>
+</li>
+<li><p>Operator overloading: C++ types</p>
+<ul>
+<li><p>Hard to vectorize</p></li>
+<li><p>Loops are effectively unrolled/inefficient</p></li>
+</ul>
+</li>
+<li><p>Just-in-time compilation: tightly coupled with compiler</p>
+<ul>
+<li><p>JIT lag</p></li>
+<li><p>Needs dynamic language features (JAX) or tight integration with compiler (Zygote, Enzyme)</p></li>
+<li><p>Some <a class="reference external" href="https://jax.readthedocs.io/en/latest/notebooks/Common_Gotchas_in_JAX.html#control-flow">sharp bits</a> in Python’s JAX</p></li>
+</ul>
+</li>
+</ul>
+</section>
 </section>
 </section>
 
@@ -835,12 +968,12 @@ top:
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="module8-4_beyond_linear_models.html"
+       href="module8-5_gradient_descent.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">35) Beyond Linear Models</p>
+        <p class="prev-next-title">36) Gradient Descent</p>
       </div>
     </a>
 </div>
@@ -870,10 +1003,17 @@ top:
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#symbolic-differentiation">1.1 Symbolic differentiation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hand-coding-analytic-derivatives">1.2 Hand-coding (analytic) derivatives</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#we-can-go-the-other-way">We can go the other way</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#we-can-go-the-other-way">We can go the other way</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-reverse-mode-example">A reverse mode example</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automatic-differentiation">1.3 Automatic differentiation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automatic-differentiation-zygote-jl">1.3 Automatic differentiation: Zygote.jl</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-zygote-work">How does Zygote work?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kinds-of-algorithmic-differentation">Kinds of algorithmic differentation</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
