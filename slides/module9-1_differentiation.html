@@ -63,6 +63,7 @@
     <link rel="icon" href="../_static/SDSU-comp526_logo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="38) Differential Equations" href="module10-1_diffeq.html" />
     <link rel="prev" title="36) Gradient Descent" href="module8-5_gradient_descent.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -226,6 +227,7 @@
 <li class="toctree-l2"><a class="reference internal" href="module8-4_beyond_linear_models.html">35) Beyond Linear Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module8-5_gradient_descent.html">36) Gradient Descent</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">37) Differentiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module10-1_diffeq.html">38) Differential Equations</a></li>
 </ul>
 </details></li>
 </ul>
@@ -475,9 +477,14 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-zygote-work">How does Zygote work?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kinds-of-algorithmic-differentation">Kinds of algorithmic differentation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-or-reverse">Forward or reverse?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#can-you-differentiate-an-algorithm">Can you differentiate an algorithm?</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ill-conditioned-optimization">2. Ill-conditioned optimization</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap-on-finite-differences">2. Recap on Finite Differences</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finite-differences">Finite Differences</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ill-conditioned-optimization">3. Ill-conditioned optimization</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#newton-like-methods-for-optimization">Newton-like methods for optimization</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#outlook-on-optimization">Outlook on optimization</a></li>
 </ul>
@@ -511,6 +518,7 @@ document.write(`
 1.1 Numeric<br />
 1.2 Analytic by hand<br />
 1.3 Algorithmic (automatic) differentiation</p></li>
+<li><p>Recap on Finite Differences</p></li>
 <li><p>Ill-conditioned optimization</p></li>
 </ol>
 </section>
@@ -725,8 +733,8 @@ This error becomes large (relative to <span class="math notranslate nohighlight"
 <section id="we-can-go-the-other-way">
 <h3>We can go the other way<a class="headerlink" href="#we-can-go-the-other-way" title="Link to this heading">#</a></h3>
 <p>We can differentiate a composition <span class="math notranslate nohighlight">\(h(g(f(x)))\)</span> as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a10597c5-5a9c-47ba-8f75-96110348e6f2">
-<span class="eqno">(19)<a class="headerlink" href="#equation-a10597c5-5a9c-47ba-8f75-96110348e6f2" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-ede6476a-d4cf-4bb1-b24d-9e4b4164b1a7">
+<span class="eqno">(19)<a class="headerlink" href="#equation-ede6476a-d4cf-4bb1-b24d-9e4b4164b1a7" title="Permalink to this equation">#</a></span>\[\begin{align}
   \operatorname{d} h &amp;= h' \operatorname{d} g \\
   \operatorname{d} g &amp;= g' \operatorname{d} f \\
   \operatorname{d} f &amp;= f' \operatorname{d} x.
@@ -958,9 +966,58 @@ top:
 <li><p>What about square cases (same number of input/output)? Forward is usually a bit more efficient.</p></li>
 </ul>
 </section>
+<section id="can-you-differentiate-an-algorithm">
+<h3>Can you differentiate an algorithm?<a class="headerlink" href="#can-you-differentiate-an-algorithm" title="Link to this heading">#</a></h3>
+<p>Examples:</p>
+<ul class="simple">
+<li><p>Optimization: Input <span class="math notranslate nohighlight">\(c\)</span>, output <span class="math notranslate nohighlight">\(x\)</span> such that <span class="math notranslate nohighlight">\(f(x,c)=0\)</span></p></li>
+<li><p>Finding eigenvalues/eigenvectors: Input <span class="math notranslate nohighlight">\(A\)</span>, output <span class="math notranslate nohighlight">\(\lambda\)</span> such that <span class="math notranslate nohighlight">\(Ax = \lambda x\)</span> for some nonzero vector</p></li>
+</ul>
+</section>
+</section>
+<section id="recap-on-finite-differences">
+<h2>2. Recap on Finite Differences<a class="headerlink" href="#recap-on-finite-differences" title="Link to this heading">#</a></h2>
+<section id="finite-differences">
+<h3>Finite Differences<a class="headerlink" href="#finite-differences" title="Link to this heading">#</a></h3>
+<p>To define derivatives, we use Taylor’s expansion:</p>
+<div class="math notranslate nohighlight">
+\[
+u_{i+1} = u(x_i + \Delta x) \approx u(x_i) + \Delta x \partial_x u \bigg\rvert_i + \frac{1}{2} \Delta x^2 \partial^2_x u \bigg\rvert_i + \frac{1}{6} \Delta x^3 \partial^3_x u \bigg\rvert_i + O(\Delta x^4)
+\]</div>
+<p>Similarly,</p>
+<div class="math notranslate nohighlight">
+\[
+u_{i-1} = u(x_i - \Delta x) \approx u(x_i) - \Delta x \partial_x u \bigg\rvert_i + \frac{1}{2} \Delta x^2 \partial^2_x u \bigg\rvert_i - \frac{1}{6} \Delta x^3 \partial^3_x u \bigg\rvert_i + O(\Delta x^4)
+\]</div>
+<p>Consider a uniformly discretized domain (with uniform <span class="math notranslate nohighlight">\(h \equiv \Delta x\)</span> subintervals)</p>
+<p><img alt="1D uniformily discretized domain." src="../_images/1D_domain.png" /></p>
+<p>We can define the first-order derivative at the point <span class="math notranslate nohighlight">\(x_i\)</span> using the <strong>forward difference</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial u_i^F}{\partial x} \approx \frac{ u_{i+1} - u_{i}}{\Delta x} + O(\Delta x)
+\]</div>
+<p>this is a <em>first-order</em> approximation.</p>
+<p>Similarly, we can define the first-order derivative at the point <span class="math notranslate nohighlight">\(x_i\)</span> using the <strong>backward difference</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial u_{i}^B}{\partial x} \approx \frac{ u_{i} - u_{i-1}}{\Delta x} + O(\Delta x)
+\]</div>
+<p>this is a <em>first-order</em> approximation.</p>
+<p>If we use one point to the right of <span class="math notranslate nohighlight">\(x_i\)</span> and one point to the left of <span class="math notranslate nohighlight">\(x_i\)</span> we have a centered difference approximation for the first-order derivative at the point <span class="math notranslate nohighlight">\(x_i\)</span> using the <strong>centered difference</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial u_{i}^C}{\partial x} \approx \frac{ u_{i+1} - u_{i-1}}{2 \Delta x} + O(\Delta x^2)
+\]</div>
+<p>this is a <em>second-order</em> approximation.</p>
+<p>Thus we note that the <strong>centered difference</strong> approximates the first derivative with respect to <span class="math notranslate nohighlight">\(x\)</span> more accurately than either of the <em>one-sided differences</em>, <span class="math notranslate nohighlight">\(O( \Delta x^2 )\)</span> versus <span class="math notranslate nohighlight">\(\Delta x\)</span>.</p>
+<p>We can now define a second-order derivative, at the point <span class="math notranslate nohighlight">\(x_i\)</span> using a centered difference formula:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial^2 u^C_i}{\partial x^2} = \frac{\frac{\partial u_{\frac{i}{2}}^F}{\partial x} -\frac{ \partial u_{\frac{i}{2}}^B}{\partial x} }{\Delta x} \approx  \frac{u_{i-1} -2 u_i + u_{i+1}}{\Delta x^2} + O(\Delta x^2)\]</div>
+</section>
 </section>
 <section id="ill-conditioned-optimization">
-<h2>2. Ill-conditioned optimization<a class="headerlink" href="#ill-conditioned-optimization" title="Link to this heading">#</a></h2>
+<h2>3. Ill-conditioned optimization<a class="headerlink" href="#ill-conditioned-optimization" title="Link to this heading">#</a></h2>
 <div class="math notranslate nohighlight">
 \[ L(c; x, y) = \frac 1 2 \lVert \underbrace{f(x, c) - y}_{r(c)} \rVert^2 \]</div>
 <p>Recall that the computation of the gradient of the loss function <span class="math notranslate nohighlight">\(L\)</span> requires the Jacobian, denoted by <span class="math notranslate nohighlight">\(J\)</span>, of the model <span class="math notranslate nohighlight">\(f\)</span> differentiated w. r. t. the constants <span class="math notranslate nohighlight">\(c\)</span>.</p>
@@ -982,6 +1039,10 @@ top:
 \[c \gets c + \gamma \delta c\]</div>
 
 using a line search or trust region.</p>
+<ul class="simple">
+<li><p>Gauss-Newton: <span class="math notranslate nohighlight">\(H = J^T J\)</span></p></li>
+<li><p>Levenberg-Marquardt: <span class="math notranslate nohighlight">\(H = J^T J + \alpha J\)</span></p></li>
+</ul>
 <section id="outlook-on-optimization">
 <h4>Outlook on optimization<a class="headerlink" href="#outlook-on-optimization" title="Link to this heading">#</a></h4>
 <ul class="simple">
@@ -1043,6 +1104,15 @@ using a line search or trust region.</p>
         <p class="prev-next-title">36) Gradient Descent</p>
       </div>
     </a>
+    <a class="right-next"
+       href="module10-1_diffeq.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">38) Differential Equations</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -1080,9 +1150,14 @@ using a line search or trust region.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-zygote-work">How does Zygote work?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kinds-of-algorithmic-differentation">Kinds of algorithmic differentation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-or-reverse">Forward or reverse?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#can-you-differentiate-an-algorithm">Can you differentiate an algorithm?</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ill-conditioned-optimization">2. Ill-conditioned optimization</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap-on-finite-differences">2. Recap on Finite Differences</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finite-differences">Finite Differences</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ill-conditioned-optimization">3. Ill-conditioned optimization</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#newton-like-methods-for-optimization">Newton-like methods for optimization</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#outlook-on-optimization">Outlook on optimization</a></li>
 </ul>
