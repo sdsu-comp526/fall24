@@ -44,4 +44,5 @@ chapters:
   - file: slides/module8-4_beyond_linear_models.ipynb
   - file: slides/module8-5_gradient_descent.ipynb
   - file: slides/module9-1_differentiation.ipynb
+  - file: slides/module10-1_diffeq.ipynb
 
