@@ -624,6 +624,9 @@ This error becomes large (relative to <span class="math notranslate nohighlight"
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">    Updating</span> registry at `~/.julia/registries/General.toml`
+</pre></div>
+</div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Resolving</span> package versions...
 </pre></div>
 </div>
@@ -733,8 +736,8 @@ This error becomes large (relative to <span class="math notranslate nohighlight"
 <section id="we-can-go-the-other-way">
 <h3>We can go the other way<a class="headerlink" href="#we-can-go-the-other-way" title="Link to this heading">#</a></h3>
 <p>We can differentiate a composition <span class="math notranslate nohighlight">\(h(g(f(x)))\)</span> as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ede6476a-d4cf-4bb1-b24d-9e4b4164b1a7">
-<span class="eqno">(19)<a class="headerlink" href="#equation-ede6476a-d4cf-4bb1-b24d-9e4b4164b1a7" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-7e3de404-45d1-49f2-8881-391ac449b98f">
+<span class="eqno">(19)<a class="headerlink" href="#equation-7e3de404-45d1-49f2-8881-391ac449b98f" title="Permalink to this equation">#</a></span>\[\begin{align}
   \operatorname{d} h &amp;= h' \operatorname{d} g \\
   \operatorname{d} g &amp;= g' \operatorname{d} f \\
   \operatorname{d} f &amp;= f' \operatorname{d} x.
@@ -843,7 +846,7 @@ This error becomes large (relative to <span class="math notranslate nohighlight"
 define 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">[1</span> x <span class=" -Color -Color-Cyan">double</span><span class=" -Color -Color-Yellow">]</span> @julia_gradient_4658<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">double</span> %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">[1</span> x <span class=" -Color -Color-Cyan">double</span><span class=" -Color -Color-Yellow">]</span> @julia_gradient_4752<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">double</span> %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
 top:
 ;  @ /home/valeria/.julia/packages/Zygote/nyzjS/src/compiler/interface.jl:147 within `gradient`
 ; ┌ @ /home/valeria/.julia/packages/Zygote/nyzjS/src/compiler/interface.jl:88 within `pullback` @ /home/valeria/.julia/packages/Zygote/nyzjS/src/compiler/interface.jl:90
@@ -852,7 +855,7 @@ top:
 ; │││┌ @ /home/valeria/.julia/packages/Zygote/nyzjS/src/compiler/interface2.jl within `macro expansion`
 ; ││││┌ @ /home/valeria/.julia/packages/Zygote/nyzjS/src/compiler/chainrules.jl:224 within `chain_rrule`
 ; │││││┌ @ /home/valeria/.julia/packages/ChainRulesCore/6Pucz/src/rules.jl:138 within `rrule` @ /home/valeria/.julia/packages/ChainRules/DbWAz/src/rulesets/Base/fastmath_able.jl:56
-        %1 = <span class=" -Color -Color-Bold">call</span> <span class=" -Color -Color-Cyan">double</span> @j_exp_4660<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">double</span> %0<span class=" -Color -Color-Yellow">)</span>
+        %1 = <span class=" -Color -Color-Bold">call</span> <span class=" -Color -Color-Cyan">double</span> @j_exp_4754<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">double</span> %0<span class=" -Color -Color-Yellow">)</span>
 ; └└└└└└
 ;  @ /home/valeria/.julia/packages/Zygote/nyzjS/src/compiler/interface.jl:148 within `gradient`
 ; ┌ @ /home/valeria/.julia/packages/Zygote/nyzjS/src/compiler/interface.jl:91 within `#78`
@@ -885,7 +888,7 @@ top:
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ In[12]:1 within `square`
-define <span class=" -Color -Color-Cyan">double</span> @julia_square_4682<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">double</span> %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
+define <span class=" -Color -Color-Cyan">double</span> @julia_square_4776<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">double</span> %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
 top:
 ; ┌ @ intfuncs.jl:332 within `literal_pow`
 ; │┌ @ float.jl:411 within `*`
@@ -905,7 +908,7 @@ top:
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ /home/valeria/.julia/packages/Zygote/nyzjS/src/compiler/interface.jl:146 within `gradient`
-define <span class=" -Color -Color-Yellow">[1</span> x <span class=" -Color -Color-Cyan">double</span><span class=" -Color -Color-Yellow">]</span> @julia_gradient_4686<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">double</span> %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
+define <span class=" -Color -Color-Yellow">[1</span> x <span class=" -Color -Color-Cyan">double</span><span class=" -Color -Color-Yellow">]</span> @julia_gradient_4780<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">double</span> %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
 top:
 ;  @ /home/valeria/.julia/packages/Zygote/nyzjS/src/compiler/interface.jl:148 within `gradient`
 ; ┌ @ /home/valeria/.julia/packages/Zygote/nyzjS/src/compiler/interface.jl:91 within `#78`
@@ -1013,7 +1016,7 @@ u_{i-1} = u(x_i - \Delta x) \approx u(x_i) - \Delta x \partial_x u \bigg\rvert_i
 <p>We can now define a second-order derivative, at the point <span class="math notranslate nohighlight">\(x_i\)</span> using a centered difference formula:</p>
 <div class="math notranslate nohighlight">
 \[
-\frac{\partial^2 u^C_i}{\partial x^2} = \frac{\frac{\partial u_{\frac{i}{2}}^F}{\partial x} -\frac{ \partial u_{\frac{i}{2}}^B}{\partial x} }{\Delta x} \approx  \frac{u_{i-1} -2 u_i + u_{i+1}}{\Delta x^2} + O(\Delta x^2)\]</div>
+\frac{\partial^2 u^C_i}{\partial x^2} = \frac{\frac{\partial u_{i+\frac{i}{2}}^F}{\partial x} -\frac{ \partial u_{i-\frac{i}{2}}^B}{\partial x} }{\Delta x} \approx  \frac{u_{i-1} -2 u_i + u_{i+1}}{\Delta x^2} + O(\Delta x^2)\]</div>
 </section>
 </section>
 <section id="ill-conditioned-optimization">
