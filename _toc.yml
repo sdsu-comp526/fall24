@@ -46,3 +46,4 @@ chapters:
   - file: slides/module9-1_differentiation.ipynb
   - file: slides/module10-1_diffeq.ipynb
   - file: slides/module10-2_stiff_equations.ipynb
+  - file: slides/module10-3_cfd.ipynb
