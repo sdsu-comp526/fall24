@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>&lt;no title&gt; &#8212; Computational Methods for Scientists</title>
+    <title>41) FEM/SEM &#8212; Computational Methods for Scientists</title>
   
   
   
@@ -182,9 +182,9 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../syllabus.html">Syllabus</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../slides.html">Slides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../slides.html">Slides</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="module1-1_first_class.html">1) First Class: Reproducibility and Git</a></li>
 
 
@@ -231,6 +231,7 @@
 <li class="toctree-l2"><a class="reference internal" href="module10-2_stiff_equations.html">39) Stiff Equations</a></li>
 
 <li class="toctree-l2"><a class="reference internal" href="module10-3_cfd.html">40) CFD examples</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">41) FEM/SEM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module10-5_careers.html">42) Careers in computational science and scientific computing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module10-6_extra_sparse_la.html">43) Extra: Sparse Linear Algebra</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module10-7_extra-fast_transforms.html">44) Fast transforms</a></li>
@@ -277,6 +278,37 @@
         <div class="header-article-item">
 
 <div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
 
 
 
@@ -337,7 +369,7 @@
       
       
       
-      <li><a href="../_sources/slides/module10-4_fem.md" target="_blank"
+      <li><a href="../_sources/slides/module10-4_fem.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -347,7 +379,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -421,7 +453,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>41) FEM/SEM</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -430,9 +462,13 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-the-finite-spectral-element-method">1. Introduction to the Finite/Spectral Element Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-free-methods">2. Matrix-free methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">2.1 Motivation</a></li>
 </ul>
-
+</li>
+</ul>
             </nav>
         </div>
     </div>
@@ -443,100 +479,58 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <p>{
-“cells”: [
-{
-“cell_type”: “markdown”,
-“metadata”: {},
-“source”: [
-“# 41) FEM/SEM\n”,
-“\n”,
-“1. Introduction to the Finite/Spectral Element Method\n”,
-“2. Matrix-free methods  \n”,
-“  2.1 Motivation\n”,
-“\n”,
-“## 1. Introduction to the Finite/Spectral Element Method\n”,
-“\n”,
-“- In Finite Element Methods (FEM) formulations, the weak form of a Partial Differential Equation (PDE)-which involves integrating all terms in the PDE over the domain-is evaluated on a subdomain <span class="math notranslate nohighlight">\(\\Omega_e\)</span> (element) and the local results are composed into a larger system of equations that models the entire problem on the global domain <span class="math notranslate nohighlight">\(\\Omega\)</span>.\n”,
-“\n”,
-“- A finite element space is a function space in which each function is approximated with a finite-dimensional polynomial interpolation in each element. A Spectral Element Method (SEM) is a high-order (“exponential/spectral”) FEM, in which the nodes are non-equispaced.\n”,
-“\n”,
-“- Hence, most FEM/SEM packages polynomials as <em>basis functions</em> to approximate a given function (e.g., solution state). There are different ways of defininig basis functions: <em>nodal</em> basis functions and <em>modal</em> basis functions. Most FEM/SEM packages use <em>nodal</em> basis functions (e.g. by using Lagrange interpolation), which are defined via the values of the polynomials at particular nodal points in each element (termed Finite Element <em>nodes</em>). \n”,
-“\n”,
-“- Even though the basis functions can interpolate globally, it’s better to limit each function to interpolate locally within each element, so to avoid a dense matrix system of equations when adding up the element contributions on the\n”,
-“global domain <span class="math notranslate nohighlight">\(\\Omega\)</span>.\n”,
-“\n”,
-“- The Finite Element nodes can be chosen to coincide with those of a particular <em>quadrature rule</em>, (this is referred to as using <em>collocated</em> nodes) which allows us to integrate functions over the domain without having the souble cost of defining the interpolating polynomial nodes and the quadrature rule nodes.\n”,
-“\n”,
-“Let us give a concrete example of strong and weak form of a PDE.\n”,
-“\n”,
-“A Poisson’s problem (in strong form) is given by\n”,
-“\n”,
-“<div class="math notranslate nohighlight">
-\[\begin{split}\n&quot;,
-    &quot;   \\nabla \\cdot \\nabla u = f, \\textrm{ for  } \\mathbf{x} \\in \\Omega .\n&quot;,
-    &quot;\end{split}\]</div>
-\n”,
-“\n”,
-“To obtain the <strong>weak form</strong>, let us multiply all terms by a test function <span class="math notranslate nohighlight">\(v\)</span> and integrate by parts (i.e., apply Gauss’ divergence theorem in multiple dimensions):\n”,
-“\n”,
-“<div class="math notranslate nohighlight">
-\[\begin{split}\n&quot;,
-    &quot;   \\int_\\Omega \\nabla v \\cdot \\nabla u \\, dV - \\int_{\\partial \\Omega} v \\nabla u \\cdot \\hat{\\mathbf n}\\, dS = \\int_\\Omega  v f \\, dV .\n&quot;,
-    &quot;\end{split}\]</div>
-\n”,
-“\n”,
-“Often, we choose to represent a field (say, the velocity field) such that <span class="math notranslate nohighlight">\(\\nabla u \\cdot \\hat{\\mathbf n} = 0\)</span>, so that we’re only left with the volumetric parts of the equation above.\n”,
-“\n”,
-“Most SEM packages use the _Legendre-Gauss-Lobatto (LGL) quadrature nodes that we have seen earlier in the course amd take advantage of <strong>tensor-product</strong> basis functions on quadrilateral or hexaedral elements.\n”
-]
-},
-{
-“cell_type”: “markdown”,
-“metadata”: {},
-“source”: [
-“## 2. Matrix-free methods\n”,
-“\n”,
-“### 2.1 Motivation\n”,
-“\n”,
-“Historically, conventional high-order finite element methods were rarely used for industrial problems because the Jacobian rapidly loses sparsity as the order is increased, leading to unaffordable solve times and memory requirements.\n”,
-“\n”,
-“&gt; <a class="reference external" href="https://link.springer.com/article/10.1007/s10915-010-9396-8">Recommended Reading</a>\n”,
-“\n”,
-“\n”,
-“This effect typically limited the order of accuracy to at most quadratic, especially because quadratic finite element formulations are computationally advantageous in terms of floating point operations (FLOPS) per degree of freedom (DOF) despite the fast convergence and favorable stability properties offered by higher order discretizations (see below).\n”,
-“\n”,
-“<img alt="Matrix-free cost" src="../_images/MatrixFreePerfPlot.PNG" />\n”,
-“\n”,
-“\n”,
-“In the figure above, we analyze and compare the theoretical costs, of different configurations: assembling the sparse matrix representing the action of the operator (labeled as <em>assembled</em>), non assembling the matrix and storing only the metric terms needed as an operator setup-phase (labeled as <em>tensor-qstore</em>) and non assembling  the matrix and computing the metric terms on the fly and storing a compact representation of the linearization at quadrature points (labeled as <em>tensor</em>). In the right panel, we show the cost in terms of FLOPS/DOF.\n”,
-“\n”,
-“- This metric for computational efficiency made sense historically, when the performance was mostly limited by processors’ clockspeed.\n”,
-“\n”,
-“- A more relevant performance plot for current state-of-the-art high-performance machines (for which the bottleneck of performance is mostly in the memory bandwith) is shown in the left panel of the figure, where the memory bandwith is measured in terms of bytes/DOF.\n”,
-“\n”,
-“- We can see that high-order methods, implemented properly with only partial assembly, require optimal amount of memory transfers (with respect to the polynomial order) and near-optimal FLOPs for operator evaluation.\n”,
-“\n”,
-“- Thus, high-order methods in matrix-free representation not only possess favorable properties, such as higher accuracy and faster convergence to solution, but also manifest an efficiency gain compared to their corresponding assembled representations.\n”,
-“\n”,
-“- Nowadays, high-order numerical methods, such as the spectral element method (SEM)-a special case of nodal p-Finite Element Method (FEM) which can reuse the interpolation nodes for quadrature-are employed, especially with (nearly) affine elements, because linear constant coefficient problems can be very efficiently solved using the fast diagonalization method combined with a multilevel coarse solve.\n”,
-“\n”
-]
-},
-{
-“cell_type”: “markdown”,
-“metadata”: {},
-“source”: []
-}
-],
-“metadata”: {
-“language_info”: {
-“name”: “python”
-}
-},
-“nbformat”: 4,
-“nbformat_minor”: 2
-}</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="fem-sem">
+<h1>41) FEM/SEM<a class="headerlink" href="#fem-sem" title="Link to this heading">#</a></h1>
+<ol class="arabic simple">
+<li><p>Introduction to the Finite/Spectral Element Method</p></li>
+<li><p>Matrix-free methods<br />
+2.1 Motivation</p></li>
+</ol>
+<section id="introduction-to-the-finite-spectral-element-method">
+<h2>1. Introduction to the Finite/Spectral Element Method<a class="headerlink" href="#introduction-to-the-finite-spectral-element-method" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>In Finite Element Methods (FEM) formulations, the weak form of a Partial Differential Equation (PDE)-which involves integrating all terms in the PDE over the domain-is evaluated on a subdomain <span class="math notranslate nohighlight">\(\Omega_e\)</span> (element) and the local results are composed into a larger system of equations that models the entire problem on the global domain <span class="math notranslate nohighlight">\(\Omega\)</span>.</p></li>
+<li><p>A finite element space is a function space in which each function is approximated with a finite-dimensional polynomial interpolation in each element. A Spectral Element Method (SEM) is a high-order (“exponential/spectral”) FEM, in which the nodes are non-equispaced.</p></li>
+<li><p>Hence, most FEM/SEM packages polynomials as <em>basis functions</em> to approximate a given function (e.g., solution state). There are different ways of defininig basis functions: <em>nodal</em> basis functions and <em>modal</em> basis functions. Most FEM/SEM packages use <em>nodal</em> basis functions (e.g. by using Lagrange interpolation), which are defined via the values of the polynomials at particular nodal points in each element (termed Finite Element <em>nodes</em>).</p></li>
+<li><p>Even though the basis functions can interpolate globally, it’s better to limit each function to interpolate locally within each element, so to avoid a dense matrix system of equations when adding up the element contributions on the
+global domain <span class="math notranslate nohighlight">\(\Omega\)</span>.</p></li>
+<li><p>The Finite Element nodes can be chosen to coincide with those of a particular <em>quadrature rule</em>, (this is referred to as using <em>collocated</em> nodes) which allows us to integrate functions over the domain without having the souble cost of defining the interpolating polynomial nodes and the quadrature rule nodes.</p></li>
+</ul>
+<p>Let us give a concrete example of strong and weak form of a PDE.</p>
+<p>A Poisson’s problem (in strong form) is given by</p>
+<div class="math notranslate nohighlight">
+\[
+   \nabla \cdot \nabla u = f, \textrm{ for  } \mathbf{x} \in \Omega .
+\]</div>
+<p>To obtain the <strong>weak form</strong>, let us multiply all terms by a test function <span class="math notranslate nohighlight">\(v\)</span> and integrate by parts (i.e., apply Gauss’ divergence theorem in multiple dimensions):</p>
+<div class="math notranslate nohighlight">
+\[
+   \int_\Omega \nabla v \cdot \nabla u \, dV - \int_{\partial \Omega} v \nabla u \cdot \hat{\mathbf n}\, dS = \int_\Omega  v f \, dV .
+\]</div>
+<p>Often, we choose to represent a field (say, the velocity field) such that <span class="math notranslate nohighlight">\(\nabla u \cdot \hat{\mathbf n} = 0\)</span>, so that we’re only left with the volumetric parts of the equation above.</p>
+<p>Most SEM packages use the _Legendre-Gauss-Lobatto (LGL) quadrature nodes that we have seen earlier in the course amd take advantage of <strong>tensor-product</strong> basis functions on quadrilateral or hexaedral elements.</p>
+</section>
+<section id="matrix-free-methods">
+<h2>2. Matrix-free methods<a class="headerlink" href="#matrix-free-methods" title="Link to this heading">#</a></h2>
+<section id="motivation">
+<h3>2.1 Motivation<a class="headerlink" href="#motivation" title="Link to this heading">#</a></h3>
+<p>Historically, conventional high-order finite element methods were rarely used for industrial problems because the Jacobian rapidly loses sparsity as the order is increased, leading to unaffordable solve times and memory requirements.</p>
+<blockquote>
+<div><p><a class="reference external" href="https://link.springer.com/article/10.1007/s10915-010-9396-8">Recommended Reading</a></p>
+</div></blockquote>
+<p>This effect typically limited the order of accuracy to at most quadratic, especially because quadratic finite element formulations are computationally advantageous in terms of floating point operations (FLOPS) per degree of freedom (DOF) despite the fast convergence and favorable stability properties offered by higher order discretizations (see below).</p>
+<p><img alt="Matrix-free cost" src="../_images/MatrixFreePerfPlot.PNG" /></p>
+<p>In the figure above, we analyze and compare the theoretical costs, of different configurations: assembling the sparse matrix representing the action of the operator (labeled as <em>assembled</em>), non assembling the matrix and storing only the metric terms needed as an operator setup-phase (labeled as <em>tensor-qstore</em>) and non assembling  the matrix and computing the metric terms on the fly and storing a compact representation of the linearization at quadrature points (labeled as <em>tensor</em>). In the right panel, we show the cost in terms of FLOPS/DOF.</p>
+<ul class="simple">
+<li><p>This metric for computational efficiency made sense historically, when the performance was mostly limited by processors’ clockspeed.</p></li>
+<li><p>A more relevant performance plot for current state-of-the-art high-performance machines (for which the bottleneck of performance is mostly in the memory bandwith) is shown in the left panel of the figure, where the memory bandwith is measured in terms of bytes/DOF.</p></li>
+<li><p>We can see that high-order methods, implemented properly with only partial assembly, require optimal amount of memory transfers (with respect to the polynomial order) and near-optimal FLOPs for operator evaluation.</p></li>
+<li><p>Thus, high-order methods in matrix-free representation not only possess favorable properties, such as higher accuracy and faster convergence to solution, but also manifest an efficiency gain compared to their corresponding assembled representations.</p></li>
+<li><p>Nowadays, high-order numerical methods, such as the spectral element method (SEM)-a special case of nodal p-Finite Element Method (FEM) which can reuse the interpolation nodes for quadrature-are employed, especially with (nearly) affine elements, because linear constant coefficient problems can be very efficiently solved using the fast diagonalization method combined with a multilevel coarse solve.</p></li>
+</ul>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -601,9 +595,13 @@ document.write(`
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-the-finite-spectral-element-method">1. Introduction to the Finite/Spectral Element Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-free-methods">2. Matrix-free methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">2.1 Motivation</a></li>
 </ul>
-
+</li>
+</ul>
   </nav></div>
 
 </div></div>
