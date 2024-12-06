@@ -47,3 +47,7 @@ chapters:
   - file: slides/module10-1_diffeq.ipynb
   - file: slides/module10-2_stiff_equations.ipynb
   - file: slides/module10-3_cfd.ipynb
+  - file: slides/module10-4_fem.ipynb
+  - file: slides/module10-5_careers.md
+  - file: slides/module10-6_extra_sparse_la.ipynb
+  - file: slides/module10-7_extra-fast_transforms.ipynb
