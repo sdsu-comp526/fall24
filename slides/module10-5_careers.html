@@ -62,7 +62,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="43) Extra: Sparse Linear Algebra" href="module10-6_extra_sparse_la.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="module10-4_fem.html" />
+    <link rel="prev" title="41) FEM/SEM" href="module10-4_fem.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -229,6 +229,7 @@
 <li class="toctree-l2"><a class="reference internal" href="module10-2_stiff_equations.html">39) Stiff Equations</a></li>
 
 <li class="toctree-l2"><a class="reference internal" href="module10-3_cfd.html">40) CFD examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module10-4_fem.html">41) FEM/SEM</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">42) Careers in computational science and scientific computing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module10-6_extra_sparse_la.html">43) Extra: Sparse Linear Algebra</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module10-7_extra-fast_transforms.html">44) Fast transforms</a></li>
@@ -406,7 +407,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -422,6 +425,21 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#national-labs">1. National Labs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-lab-agency-led-software">Examples of lab/agency-led software</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#industrial-r-d">2. Industrial R&amp;D</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#academia">3. Academia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#research-software-engineering">4. Research Software Engineering</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#personal-resources">5. Personal Resources</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -438,7 +456,112 @@ document.write(`
 <li><p>Industrial R&amp;D</p></li>
 <li><p>Academia</p></li>
 <li><p>Research Software Engineering</p></li>
+<li><p>Personal resources</p></li>
 </ol>
+<section id="national-labs">
+<h2>1. National Labs<a class="headerlink" href="#national-labs" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Department of Energy</p>
+<ul>
+<li><p>Office of Science (Berkeley, Argonne, Pacific Northwest, …)</p></li>
+<li><p>National Nuclear Security Administration (Livermore, Los Alamos, Sandia)</p></li>
+<li><p>Office of Renewable Energy (NREL)</p></li>
+</ul>
+</li>
+<li><p>National Oceanic and Atmospheric Administration (NOAA)</p>
+<ul>
+<li><p>Weather and climate, operational numerical weather prediction and research</p></li>
+</ul>
+</li>
+<li><p>National Center for Atmospheric Research (NCAR)</p>
+<ul>
+<li><p>Comprehensive climate focus (includes ocean, sea ice, land ice, land)</p></li>
+</ul>
+</li>
+<li><p>National Institute of Standards and Technology</p>
+<ul>
+<li><p>Fundamental materials (e.g., gas equations of state), metrology</p></li>
+</ul>
+</li>
+<li><p>National Aeronautics and Space Administration (NASA)</p>
+<ul>
+<li><p>Earth research, especially remote sensing (satellite and aerial)</p></li>
+<li><p>Fluid and structural mechanics for safe, reliable, efficient flight (includes partnerships with the Federal Aviation Administration (FAA))</p></li>
+<li><p>Materials science and engineering (overlapping scope with industry)</p></li>
+</ul>
+</li>
+</ul>
+<section id="examples-of-lab-agency-led-software">
+<h3>Examples of lab/agency-led software<a class="headerlink" href="#examples-of-lab-agency-led-software" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>HPC Middleware (MPI implementations, resource managers)</p></li>
+<li><p>Numerical Libraries (PETSc, hypre, Sundials, Trilinos, MFEM)</p></li>
+<li><p>Open source simulation applications (MOOSE library, LAMMPS, Nek, Albany)</p></li>
+<li><p>Internal/export controlled simulation (BLAST, FUN3D, Sierra, MCNP, MOOSE apps)</p>
+<ul>
+<li><p>Nuclear reactor safety, stockpile stewardship, proprietary designs</p></li>
+<li><p><a class="reference external" href="https://newsreleases.sandia.gov/goodyear-sandia/">Goodyear-Sandia partnership on tire simulation</a></p></li>
+</ul>
+</li>
+<li><p>Community Earth System Model (NCAR), Energy Exascale Earth System Model (E3SM)</p></li>
+<li><p>Some orgs publicly embrace open source <a class="reference external" href="https://software.llnl.gov/">LLNL Open Source</a></p></li>
+</ul>
+</section>
+</section>
+<section id="industrial-r-d">
+<h2>2. Industrial R&amp;D<a class="headerlink" href="#industrial-r-d" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Hardware vendors and cloud providers: CUDA, HIP, SYCL, OpenMP, MPI</p>
+<ul>
+<li><p>“Science/engineering should use our programming models/run fast on our hardware”</p></li>
+<li><p>“Data science” (statistical computing) should also be fast</p></li>
+</ul>
+</li>
+<li><p>High-stakes methods development</p>
+<ul>
+<li><p>Example: <a class="reference external" href="https://hiliftpw.larc.nasa.gov/">High-Lift Prediction Workshop</a> (<a class="reference external" href="https://hiliftpw.larc.nasa.gov/Workshop3/participantlist.html">participants</a>)</p></li>
+</ul>
+</li>
+<li><p>Research papers in specific venues are valuable</p></li>
+<li><p>Windows into industrial research culture</p>
+<ul>
+<li><p>Who participates in comparison studies, standards organizations, etc.?</p></li>
+<li><p>Who attends technical conferences (not trade shows) and holds elected positions in professional societies?</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="academia">
+<h2>3. Academia<a class="headerlink" href="#academia" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Tenure-track</p>
+<ul>
+<li><p>Teaching</p></li>
+<li><p>External funding is mainly to support students and research staff</p></li>
+<li><p>Eternally swimming in hats</p></li>
+</ul>
+</li>
+<li><p>Research faculty/research software engineer</p>
+<ul>
+<li><p>Usually reliant on external grants, often a “center”</p></li>
+<li><p>There are some “research software engineering” facility/service groups (e.g., <a class="reference external" href="https://researchcomputing.princeton.edu/news/2022/princeton-bets-big-research-software-engineering">Princeton</a>)</p></li>
+<li><p><a class="reference external" href="https://www.colorado.edu/research/research-institutes">CU Institutes</a> (CIRES, INSTAAR, LASP, JILA, BioFrontiers, …)</p></li>
+<li><p><a class="reference external" href="https://clima.caltech.edu/">CliMA</a></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="research-software-engineering">
+<h2>4. Research Software Engineering<a class="headerlink" href="#research-software-engineering" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Resources for community Scientific Software in CSE: <a class="reference external" href="https://bssw.io/">Better Scientific Software (BSSw)</a></p></li>
+<li><p>United States Research Software Engineering Association (<a class="reference external" href="https://us-rse.org/">US-RSE</a>)</p></li>
+</ul>
+</section>
+<section id="personal-resources">
+<h2>5. Personal Resources<a class="headerlink" href="#personal-resources" title="Link to this heading">#</a></h2>
+<p>You can find a talk on my <a class="reference external" href="https://valeriabarra.org/talks/">website</a> that I gave a few years ago to my Alma Mather. Let’s give a look together at the <a class="reference external" href="https://valeriabarra.org/talks/NJITAlumnaTalk22.pdf">slides</a>.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -477,7 +600,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title">41) FEM/SEM</p>
       </div>
     </a>
     <a class="right-next"
@@ -495,6 +618,28 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#national-labs">1. National Labs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-lab-agency-led-software">Examples of lab/agency-led software</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#industrial-r-d">2. Industrial R&amp;D</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#academia">3. Academia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#research-software-engineering">4. Research Software Engineering</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#personal-resources">5. Personal Resources</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
