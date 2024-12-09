@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>44) Fast transforms &#8212; Computational Methods for Scientists</title>
+    <title>44) Extra: Fast transforms &#8212; Computational Methods for Scientists</title>
   
   
   
@@ -230,9 +230,10 @@
 <li class="toctree-l2"><a class="reference internal" href="module10-2_stiff_equations.html">39) Stiff Equations</a></li>
 
 <li class="toctree-l2"><a class="reference internal" href="module10-3_cfd.html">40) CFD examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module10-4_fem.html">41) FEM/SEM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module10-5_careers.html">42) Careers in computational science and scientific computing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module10-6_extra_sparse_la.html">43) Extra: Sparse Linear Algebra</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">44) Fast transforms</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">44) Extra: Fast transforms</a></li>
 </ul>
 </details></li>
 </ul>
@@ -451,7 +452,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>44) Fast transforms</h1>
+    <h1>44) Extra: Fast transforms</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -495,8 +496,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="fast-transforms">
-<h1>44) Fast transforms<a class="headerlink" href="#fast-transforms" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="extra-fast-transforms">
+<h1>44) Extra: Fast transforms<a class="headerlink" href="#extra-fast-transforms" title="Link to this heading">#</a></h1>
 <ol class="arabic simple">
 <li><p>Discrete Signals</p></li>
 <li><p>Approximation by Fourier Basis</p></li>
@@ -605,8 +606,8 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[ f(x) \approx \sum_{k=1}^n \underbrace{\hat f(\theta_k)}_{\hat f_k} e^{i\theta_k x} . \]</div>
 <p>This is reminiscent of linear algebra… We saw how linear combinations can be expressed as column-wise matrix-vector products:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6ac4b6b9-6f58-4b7b-9afe-9b7d44b9693a">
-<span class="eqno">(27)<a class="headerlink" href="#equation-6ac4b6b9-6f58-4b7b-9afe-9b7d44b9693a" title="Permalink to this equation">#</a></span>\[\begin{align} \Bigg[ f(x) \Bigg] &amp;= \Bigg[ e^{i\theta_1 x} \Bigg| e^{i\theta_2 x} \Bigg| \dotsm \Bigg] \begin{bmatrix} \hat f_1 \\ \hat f_2 \\ \vdots \end{bmatrix} \\
+<div class="amsmath math notranslate nohighlight" id="equation-31528198-8b9b-45ba-8b33-62bdcb6a446e">
+<span class="eqno">(27)<a class="headerlink" href="#equation-31528198-8b9b-45ba-8b33-62bdcb6a446e" title="Permalink to this equation">#</a></span>\[\begin{align} \Bigg[ f(x) \Bigg] &amp;= \Bigg[ e^{i\theta_1 x} \Bigg| e^{i\theta_2 x} \Bigg| \dotsm \Bigg] \begin{bmatrix} \hat f_1 \\ \hat f_2 \\ \vdots \end{bmatrix} \\
 &amp;= \Bigg[ e^{i\theta_1 x} \Bigg] \hat f_1 + \Bigg[ e^{i\theta_2 x} \Bigg] \hat f_2 + \dotsb .
 \end{align}\]</div>
 <section id="continuous-theta-infinite-domain">
@@ -757,8 +758,8 @@ norm(F * F&#39; - I) =
 <div class="math notranslate nohighlight">
 \[ \hat f_k = \sum_\ell e^{-i\theta_k x_\ell} f_\ell \]</div>
 <p>where <span class="math notranslate nohighlight">\(f_\ell\)</span> are samples <span class="math notranslate nohighlight">\(f(x_\ell)\)</span> at integers <span class="math notranslate nohighlight">\(x_\ell = \ell\)</span> and <span class="math notranslate nohighlight">\(\theta_k\)</span> are the frequencies <span class="math notranslate nohighlight">\(2 \pi k/n\)</span> (because the branch <span class="math notranslate nohighlight">\(\theta \in (-\pi, \pi]\)</span> is arbitrary).</p>
-<div class="amsmath math notranslate nohighlight" id="equation-616da2ef-f559-487a-8b1a-ca618aeeaac0">
-<span class="eqno">(28)<a class="headerlink" href="#equation-616da2ef-f559-487a-8b1a-ca618aeeaac0" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-af19dc6b-49d7-44bc-84db-a5366cb2f759">
+<span class="eqno">(28)<a class="headerlink" href="#equation-af19dc6b-49d7-44bc-84db-a5366cb2f759" title="Permalink to this equation">#</a></span>\[\begin{align}
 \hat f_k &amp;= \sum_{\ell=0}^{n-1} e^{-2\pi i \frac{k \ell}{n}} f_\ell \\
  &amp;= \underbrace{\sum_{\ell=0}^{n/2-1} e^{-2\pi i \frac{k (2\ell)}{n}} f_{2\ell}}_{\text{even}} +
  \underbrace{\sum_{\ell=0}^{n/2-1} e^{-2\pi i \frac{k (2\ell+1)}{n}} f_{2\ell+1}}_{\text{odd}} \\
@@ -767,8 +768,8 @@ norm(F * F&#39; - I) =
 <section id="periodicity">
 <h3>Periodicity<a class="headerlink" href="#periodicity" title="Link to this heading">#</a></h3>
 <p>When the original signal <span class="math notranslate nohighlight">\(f\)</span> is periodic, <span class="math notranslate nohighlight">\(f_{\ell} = f_{(\ell + n) \bmod n}\)</span>, then</p>
-<div class="amsmath math notranslate nohighlight" id="equation-66a7d8e3-8c90-46dc-b38b-4eeb141d7a26">
-<span class="eqno">(29)<a class="headerlink" href="#equation-66a7d8e3-8c90-46dc-b38b-4eeb141d7a26" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-b7fd2129-fbf5-4b93-84c4-4cfcf4fb5a3e">
+<span class="eqno">(29)<a class="headerlink" href="#equation-b7fd2129-fbf5-4b93-84c4-4cfcf4fb5a3e" title="Permalink to this equation">#</a></span>\[\begin{align}
 \hat f_{k+n/2} &amp;= \sum_{\ell=0}^{n/2-1} e^{-2\pi i \frac{(k+n/2) \ell}{n/2}} f_{2\ell} + e^{-2\pi i \frac{(k+n/2)}{n}} \sum_{\ell=0}^{n/2-1} e^{-2\pi i \frac{(k+n/2) \ell}{n/2}} f_{2\ell+1} \\
 &amp;= \sum_{\ell=0}^{n/2-1} e^{-2\pi i \frac{k \ell}{n/2}} f_{2\ell} + e^{-2\pi i \frac{k}{n}} e^{-\pi i} \sum_{\ell=0}^{n/2-1} e^{-2\pi i \frac{k\ell}{n/2}} f_{2\ell+1} \\
 &amp;= \sum_{\ell=0}^{n/2-1} e^{-2\pi i \frac{k \ell}{n/2}} f_{2\ell} - e^{-2\pi i \frac{k}{n}} \sum_{\ell=0}^{n/2-1} e^{-2\pi i \frac{k \ell}{n/2}} f_{2\ell+1}
@@ -796,6 +797,9 @@ Repeating this recursively yields a complexity of <span class="math notranslate 
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">    Updating</span> registry at `~/.julia/registries/General.toml`
+</pre></div>
+</div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Resolving</span> package versions...
 </pre></div>
 </div>
