@@ -55,9 +55,11 @@
   * Eternally swimming in hats
 * Research faculty/research software engineer
   * Usually reliant on external grants, often a "center"
-  * There are some "research software engineering" facility/service groups (e.g., [Princeton](https://researchcomputing.princeton.edu/news/2022/princeton-bets-big-research-software-engineering))
+  * There are some "research software engineering" facility/service groups (e.g., [Princeton](https://researchcomputing.princeton.edu/news/2022/princeton-bets-big-research-software-engineering)) that may serve several projects. On the other hand, there are positions that are project specifc. See a few examples below:
+  * The [Institute of Computing for Climate Science (ICCS)](https://iccs.cam.ac.uk/) at the University of Cambridge
   * [CU Institutes](https://www.colorado.edu/research/research-institutes) (CIRES, INSTAAR, LASP, JILA, BioFrontiers, ...)
   * [CliMA](https://clima.caltech.edu/)
+  * [VESRI](https://www.schmidtsciences.org/virtual-earth-system-research-institute-vesri/)
 
 ## 4. Research Software Engineering
 
