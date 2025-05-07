@@ -26,15 +26,19 @@
 - DONE: After the module4-4_cholesky_qr.ipynb notebook, add a lecture on direct Vs iterative solvers for linear systems (my PhD linear algebra lecture notes from Tuesday 12/04/12) DONE
 
 - Lagrange Interpolation & Chebyshev Nodes DONE
-- Differentiation
+- Differentiation DONE
   - Forward/Backward and Centered Differences
   - First and Second order derivatives
-- Numerical Integration
+- Numerical Integration DONE
   - Gauss rule
 
-- Finite Elements?
+- Finite Elements? DONE
 
 ## For next year
 
 - In the Git assignment (HW1) specify that they will learn the workflow that is going to be used for _all_ assignments for the remainder of the course!
+- Stress more about what is expected that they submit and which formats
+- Stress more that they are not going to submit anything via Canvas!
+- For Final Project Community Contributions, assign them earlier! Ask Proposal and opening of the Issue as part of the Midterm Project
+- For Final Project Community Contributions, emphasize that they need to hasten multiple times feedback from community members in their Issues to receive approval before proceding with opening their PRs, and then need to encourage Reviews and respond timely to rounds of reviews
 

@@ -80,3 +80,7 @@ You can open these notebooks as normal notebooks (continuous scroll). If you wis
 
 * When saving, use `Kernel -> Restart & Clear Output` to keep the stored data and diffs in the notebook small.
 * For your images, several formats will do. Just keep in mind that PDF files are not web-friendly. PDF images can be converted to SVG using `pdf2svg`, and the result will still look sharp (unlike PNG) no matter the scale or zoom.
+
+## Acknowledgements
+
+For most of this course’s materials, I owe huge thanks to my postdoc mentor, [Jed Brown](https://jedbrown.org/), Professor at CU Boulder.
