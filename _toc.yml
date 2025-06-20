@@ -25,7 +25,7 @@ chapters:
   - file: slides/module4-3_householder.ipynb
   - file: slides/module4-4_cholesky_qr.ipynb
   - file: slides/module4-5_solving_systems.ipynb
-  - file: slides/module4-6_hw2_review.md
+  # - file: slides/module4-6_hw2_review.md
   - file: slides/module4-7_matrix_conditioning_and_svd.ipynb
   - file: slides/module4-8_svd_and_conditioning.ipynb
   - file: slides/module4-9_low_rank.ipynb
@@ -34,8 +34,8 @@ chapters:
   - file: slides/module7-1_interpolation.ipynb
   - file: slides/module7-2_chebyshev_poly.ipynb
   - file: slides/module7-3_splines.ipynb
-  - file: slides/module7-4_midterm_sol.md
-  - file: slides/module7-5_hw3_solution.ipynb
+  # - file: slides/module7-4_midterm_sol.md
+  # - file: slides/module7-5_hw3_solution.ipynb
   - file: slides/module7-6_higher_dimensions.ipynb
   - file: slides/module7-7_noisy-data.ipynb
   - file: slides/module8-1_integration.ipynb
