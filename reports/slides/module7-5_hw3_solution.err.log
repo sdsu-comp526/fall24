@@ -1,20 +1,27 @@
 Traceback (most recent call last):
-  File "/home/valeria/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+  File "/home/vbarra/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 154, in wrapped
+    asyncio.get_running_loop()
+RuntimeError: no running event loop
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/vbarra/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
     executenb(
-  File "/home/valeria/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/nbclient/client.py", line 1314, in execute
+  File "/home/vbarra/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/nbclient/client.py", line 1319, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/valeria/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+  File "/home/vbarra/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 158, in wrapped
     return loop.run_until_complete(inner)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/usr/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
     return future.result()
            ^^^^^^^^^^^^^^^
-  File "/home/valeria/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/nbclient/client.py", line 709, in async_execute
+  File "/home/vbarra/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/nbclient/client.py", line 709, in async_execute
     await self.async_execute_cell(
-  File "/home/valeria/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+  File "/home/vbarra/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/nbclient/client.py", line 1062, in async_execute_cell
     await self._check_raise_for_error(cell, cell_index, exec_reply)
-  File "/home/valeria/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+  File "/home/vbarra/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
@@ -32,7 +39,7 @@ x_data = LinRange(0,2,5)
 y_data = f.(x_data)
 
 # open output.txt data and store values in the array called p
-open("./fortran_programs/midterm/output.txt","r") do f
+open("../fortran_programs/midterm/output.txt","r") do f
     line = 1
     while ! eof(f)
         l = readline(f)
@@ -46,30 +53,25 @@ scatter(x_data,y_data, markersize = 6, label = L"(x_i, y_i)")
 
 plot!(x_domain, [f.(x_domain) p ], linestyle = [:solid :dash], label = [" exp(-3x)" "p(x)"], title="Lagrange interpolation")
 
-# to save in pngcfile format, uncomment and use the following line (commented for Jupyter Book execution)
+# to save in png file format, uncomment and use the following line (commented for Jupyter Book execution)
 # png(plot!(x_domain, [f.(x_domain) p ], linestyle = [:solid :dash], label = [" exp(-3x)" "p(x)"], title="Lagrange interpolation"), "lagrange_plot.png")
 ------------------
 
 
-SystemError: opening file "./fortran_programs/midterm/output.txt": No such file or directory
+ArgumentError: Package LaTeXStrings not found in current path.
+- Run `import Pkg; Pkg.add("LaTeXStrings")` to install the LaTeXStrings package.
 
 Stacktrace:
- [1] systemerror(p::String, errno::Int32; extrainfo::Nothing)
-   @ Base ./error.jl:176
- [2] systemerror
-   @ ./error.jl:175 [inlined]
- [3] open(fname::String; lock::Bool, read::Bool, write::Nothing, create::Nothing, truncate::Nothing, append::Nothing)
-   @ Base ./iostream.jl:293
- [4] open
-   @ ./iostream.jl:275 [inlined]
- [5] open(fname::String, mode::String; lock::Bool)
-   @ Base ./iostream.jl:356
- [6] open(fname::String, mode::String)
-   @ Base ./iostream.jl:355
- [7] open(::var"#1#2", ::String, ::Vararg{String}; kwargs::@Kwargs{})
-   @ Base ./io.jl:394
- [8] open(::Function, ::String, ::String)
-   @ Base ./io.jl:393
- [9] top-level scope
-   @ In[1]:15
+ [1] [0m[1mmacro expansion[22m
+[90m   @[39m [90m./[39m[90m[4mloading.jl:1842[24m[39m[90m [inlined][39m
+ [2] [0m[1mmacro expansion[22m
+[90m   @[39m [90m./[39m[90m[4mlock.jl:267[24m[39m[90m [inlined][39m
+ [3] [0m[1m__require[22m[0m[1m([22m[90minto[39m::[0mModule, [90mmod[39m::[0mSymbol[0m[1m)[22m
+[90m   @[39m [90mBase[39m [90m./[39m[90m[4mloading.jl:1823[24m[39m
+ [4] [0m[1m#invoke_in_world#3[22m
+[90m   @[39m [90m./[39m[90m[4messentials.jl:926[24m[39m[90m [inlined][39m
+ [5] [0m[1minvoke_in_world[22m
+[90m   @[39m [90m./[39m[90m[4messentials.jl:923[24m[39m[90m [inlined][39m
+ [6] [0m[1mrequire[22m[0m[1m([22m[90minto[39m::[0mModule, [90mmod[39m::[0mSymbol[0m[1m)[22m
+[90m   @[39m [90mBase[39m [90m./[39m[90m[4mloading.jl:1816[24m[39m
 

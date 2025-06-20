@@ -1,31 +1,77 @@
 Traceback (most recent call last):
-  File "/home/valeria/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+  File "/home/vbarra/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 154, in wrapped
+    asyncio.get_running_loop()
+RuntimeError: no running event loop
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/vbarra/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
     executenb(
-  File "/home/valeria/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/nbclient/client.py", line 1314, in execute
+  File "/home/vbarra/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/nbclient/client.py", line 1319, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/valeria/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+  File "/home/vbarra/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 158, in wrapped
     return loop.run_until_complete(inner)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/usr/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
     return future.result()
            ^^^^^^^^^^^^^^^
-  File "/home/valeria/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/nbclient/client.py", line 709, in async_execute
+  File "/home/vbarra/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/nbclient/client.py", line 709, in async_execute
     await self.async_execute_cell(
-  File "/home/valeria/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+  File "/home/vbarra/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/nbclient/client.py", line 1062, in async_execute_cell
     await self._check_raise_for_error(cell, cell_index, exec_reply)
-  File "/home/valeria/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+  File "/home/vbarra/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-plot(runge1, xlims=(-1, 1))
-scatter!(x_cos, y_cos)
+using LinearAlgebra
+using Plots
+using LaTeXStrings
+default(linewidth=4, legendfontsize=12)
+
+function vander(x, k=nothing)
+    if isnothing(k)
+        k = length(x)
+    end
+    m = length(x)
+    V = ones(m, k)
+    for j in 2:k
+        V[:, j] = V[:, j-1] .* x
+    end
+    V
+end
+
+function vander_newton(x, abscissa=nothing)
+    if isnothing(abscissa)
+        abscissa = x
+    end
+    n = length(abscissa)
+    A = ones(length(x), n)
+    for i in 2:n
+        A[:,i] = A[:,i-1] .* (x .- abscissa[i-1])
+    end
+    A
+end
+
+CosRange(a, b, n) = (a + b)/2 .+ (b - a)/2 * cos.(LinRange(-pi, 0, n))
 ------------------
 
 
-UndefVarError: `runge1` not defined
+ArgumentError: Package LaTeXStrings not found in current path.
+- Run `import Pkg; Pkg.add("LaTeXStrings")` to install the LaTeXStrings package.
 
 Stacktrace:
- [1] top-level scope
-   @ In[6]:1
+ [1] [0m[1mmacro expansion[22m
+[90m   @[39m [90m./[39m[90m[4mloading.jl:1842[24m[39m[90m [inlined][39m
+ [2] [0m[1mmacro expansion[22m
+[90m   @[39m [90m./[39m[90m[4mlock.jl:267[24m[39m[90m [inlined][39m
+ [3] [0m[1m__require[22m[0m[1m([22m[90minto[39m::[0mModule, [90mmod[39m::[0mSymbol[0m[1m)[22m
+[90m   @[39m [90mBase[39m [90m./[39m[90m[4mloading.jl:1823[24m[39m
+ [4] [0m[1m#invoke_in_world#3[22m
+[90m   @[39m [90m./[39m[90m[4messentials.jl:926[24m[39m[90m [inlined][39m
+ [5] [0m[1minvoke_in_world[22m
+[90m   @[39m [90m./[39m[90m[4messentials.jl:923[24m[39m[90m [inlined][39m
+ [6] [0m[1mrequire[22m[0m[1m([22m[90minto[39m::[0mModule, [90mmod[39m::[0mSymbol[0m[1m)[22m
+[90m   @[39m [90mBase[39m [90m./[39m[90m[4mloading.jl:1816[24m[39m
 

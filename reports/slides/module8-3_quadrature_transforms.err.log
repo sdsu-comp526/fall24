@@ -1,0 +1,93 @@
+Traceback (most recent call last):
+  File "/home/vbarra/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 154, in wrapped
+    asyncio.get_running_loop()
+RuntimeError: no running event loop
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/vbarra/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/vbarra/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/nbclient/client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vbarra/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 158, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/vbarra/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/home/vbarra/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/vbarra/.local/share/pipx/venvs/jupyter-book/lib/python3.12/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+using LinearAlgebra
+using Plots
+using LaTeXStrings
+default(linewidth=4, legendfontsize=12)
+
+function vander_legendre(x, k=nothing)
+    if isnothing(k)
+        k = length(x) # Square by default
+    end
+    m = length(x)
+    Q = ones(m, k)
+    Q[:, 2] = x
+    for n in 1:k-2
+        Q[:, n+2] = ((2*n + 1) * x .* Q[:, n+1] - n * Q[:, n]) / (n + 1)
+    end
+    Q
+end
+
+CosRange(a, b, n) = (a + b)/2 .+ (b - a)/2 * cos.(LinRange(-pi, 0, n))
+
+F_expx(x) = exp(2x) / (1 + x^2)
+f_expx(x) = 2*exp(2x) / (1 + x^2) - 2x*exp(2x)/(1 + x^2)^2
+
+F_dtanh(x) = tanh(x)
+f_dtanh(x) = cosh(x)^-2
+
+F_rsqrt(x) = 2 * sqrt(x + 1)
+f_rsqrt(x) = 1 / sqrt(x + 1)
+
+integrands = [f_expx, f_dtanh, f_rsqrt]
+antiderivatives = [F_expx, F_dtanh, F_rsqrt]
+tests = zip(integrands, antiderivatives)
+
+function plot_accuracy(fint, tests, ns; ref=[1,2])
+    a, b = -1, 1
+    p = plot(xscale=:log10, yscale=:log10, xlabel="n", ylabel="error")
+    for (f, F) in tests
+        Is = [fint(f, a, b, n=n) for n in ns]
+        Errors = abs.(Is .- (F(b) - F(a)))
+        scatter!(ns, Errors, label=f)
+    end
+    for k in ref
+        plot!(ns, ns.^(-1. * k), label="\$n^{-$k}\$")
+    end
+    p
+end
+------------------
+
+
+ArgumentError: Package LaTeXStrings not found in current path.
+- Run `import Pkg; Pkg.add("LaTeXStrings")` to install the LaTeXStrings package.
+
+Stacktrace:
+ [1] [0m[1mmacro expansion[22m
+[90m   @[39m [90m./[39m[90m[4mloading.jl:1842[24m[39m[90m [inlined][39m
+ [2] [0m[1mmacro expansion[22m
+[90m   @[39m [90m./[39m[90m[4mlock.jl:267[24m[39m[90m [inlined][39m
+ [3] [0m[1m__require[22m[0m[1m([22m[90minto[39m::[0mModule, [90mmod[39m::[0mSymbol[0m[1m)[22m
+[90m   @[39m [90mBase[39m [90m./[39m[90m[4mloading.jl:1823[24m[39m
+ [4] [0m[1m#invoke_in_world#3[22m
+[90m   @[39m [90m./[39m[90m[4messentials.jl:926[24m[39m[90m [inlined][39m
+ [5] [0m[1minvoke_in_world[22m
+[90m   @[39m [90m./[39m[90m[4messentials.jl:923[24m[39m[90m [inlined][39m
+ [6] [0m[1mrequire[22m[0m[1m([22m[90minto[39m::[0mModule, [90mmod[39m::[0mSymbol[0m[1m)[22m
+[90m   @[39m [90mBase[39m [90m./[39m[90m[4mloading.jl:1816[24m[39m
+

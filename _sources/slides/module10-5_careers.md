@@ -1,4 +1,4 @@
-# 42) Careers in computational science and scientific computing
+# 39) Careers in computational science and scientific computing
 
 1. National Labs
 2. Industrial R&D
