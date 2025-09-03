@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>17) Cholesky QR &#8212; Computational Methods for Scientists</title>
+    <title>17) Cholesky QR &#8212; Computational Methods for Scientists Fall 24</title>
   
   
   
@@ -156,8 +156,8 @@
       
     
     
-    <img src="../_static/SDSU-comp526_logo.svg" class="logo__image only-light" alt="Computational Methods for Scientists - Home"/>
-    <script>document.write(`<img src="../_static/SDSU-comp526_logo.svg" class="logo__image only-dark" alt="Computational Methods for Scientists - Home"/>`);</script>
+    <img src="../_static/SDSU-comp526_logo.svg" class="logo__image only-light" alt="Computational Methods for Scientists Fall 24 - Home"/>
+    <script>document.write(`<img src="../_static/SDSU-comp526_logo.svg" class="logo__image only-dark" alt="Computational Methods for Scientists Fall 24 - Home"/>`);</script>
   
   
 </a></div>
@@ -842,8 +842,8 @@ norm(v) = 1.4245900685395503
 </section>
 <section id="composition-of-reflectors">
 <h2>2. Composition of reflectors<a class="headerlink" href="#composition-of-reflectors" title="Link to this heading">#</a></h2>
-<div class="amsmath math notranslate nohighlight" id="equation-0820d388-4322-4c19-9d25-d0a2f960eb23">
-<span class="eqno">(7)<a class="headerlink" href="#equation-0820d388-4322-4c19-9d25-d0a2f960eb23" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-3172335d-e520-4cf5-8623-6cb9d214d694">
+<span class="eqno">(7)<a class="headerlink" href="#equation-3172335d-e520-4cf5-8623-6cb9d214d694" title="Permalink to this equation">#</a></span>\[\begin{align}
 (I - 2 v v^T) (I - 2 w w^T) &amp;= I - 2 v v^T - 2 w w^T + 4 v (v^T w) w^T \\
 &amp;= I - \Bigg[v \Bigg| w \Bigg] \begin{bmatrix} 2 &amp; -4 v^T w \\ 0 &amp; 2 \end{bmatrix} \begin{bmatrix} v^T \\ w^T \end{bmatrix}
 \end{align}\]</div>
@@ -928,7 +928,7 @@ norm(Q * R - A) = 4.181859677183379e-12
 <section id="cholesky-decomposition">
 <h2>3. Cholesky decomposition<a class="headerlink" href="#cholesky-decomposition" title="Link to this heading">#</a></h2>
 <p>First some definitions:</p>
-<p>A matrix <span class="math notranslate nohighlight">\(A \in \R^{n \times n}\)</span> is <em>symmetric</em> if <span class="math notranslate nohighlight">\(A = A^{T}\)</span> and <em>positive definite</em> if <span class="math notranslate nohighlight">\(x^{T}Ax &gt; 0\)</span> for all nonzero <span class="math notranslate nohighlight">\(x \in \R^n\)</span>. Symmetric <em>and</em> positive definite matrices, i.e., <em>symmetric positive definite (SPD)</em> matrices, are the most important class of specially structured matrices that arise in applications.</p>
+<p>A matrix <span class="math notranslate nohighlight">\(A \in \mathbb{R}^{n \times n}\)</span> is <em>symmetric</em> if <span class="math notranslate nohighlight">\(A = A^{T}\)</span> and <em>positive definite</em> if <span class="math notranslate nohighlight">\(x^{T}Ax &gt; 0\)</span> for all nonzero <span class="math notranslate nohighlight">\(x \in \mathbb{R}^n\)</span>. Symmetric <em>and</em> positive definite matrices, i.e., <em>symmetric positive definite (SPD)</em> matrices, are the most important class of specially structured matrices that arise in applications.</p>
 <p>Intuitively, the largest entry in an SPD matrix is on the diagonal and, more qualitatively, SPD matrices have more “mass” on the diagonal than off the diagonal.</p>
 <p>If <span class="math notranslate nohighlight">\(A\)</span> can be factored in a QR-factorization, i.e., <span class="math notranslate nohighlight">\(A = QR\)</span>, then we can write:</p>
 <div class="math notranslate nohighlight">

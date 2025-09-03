@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>36) Stiff Equations &#8212; Computational Methods for Scientists</title>
+    <title>36) Stiff Equations &#8212; Computational Methods for Scientists Fall 24</title>
   
   
   
@@ -156,8 +156,8 @@
       
     
     
-    <img src="../_static/SDSU-comp526_logo.svg" class="logo__image only-light" alt="Computational Methods for Scientists - Home"/>
-    <script>document.write(`<img src="../_static/SDSU-comp526_logo.svg" class="logo__image only-dark" alt="Computational Methods for Scientists - Home"/>`);</script>
+    <img src="../_static/SDSU-comp526_logo.svg" class="logo__image only-light" alt="Computational Methods for Scientists Fall 24 - Home"/>
+    <script>document.write(`<img src="../_static/SDSU-comp526_logo.svg" class="logo__image only-dark" alt="Computational Methods for Scientists Fall 24 - Home"/>`);</script>
   
   
 </a></div>
@@ -604,7 +604,22 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">Precompiling</span> packages...
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">ArgumentError</span>: Package LaTeXStrings not found in current path.
+<span class="o">-</span> <span class="n">Run</span> <span class="err">`</span><span class="kn">import</span><span class="w"> </span><span class="nn">Pkg</span><span class="p">;</span> <span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;LaTeXStrings&quot;</span><span class="p">)</span><span class="err">`</span> <span class="n">to</span> <span class="n">install</span> <span class="n">the</span> <span class="n">LaTeXStrings</span> <span class="n">package</span><span class="o">.</span>
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">macro</span> <span class="n">expansion</span>
+   <span class="o">@</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1842</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">macro</span> <span class="n">expansion</span>
+   <span class="o">@</span> <span class="o">./</span><span class="n">lock</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">267</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">__require</span><span class="p">(</span><span class="n">into</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">mod</span><span class="p">::</span><span class="n">Symbol</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1823</span>
+ <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="c1">#invoke_in_world#3</span>
+   <span class="o">@</span> <span class="o">./</span><span class="n">essentials</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">926</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">invoke_in_world</span>
+   <span class="o">@</span> <span class="o">./</span><span class="n">essentials</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">923</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="n">require</span><span class="p">(</span><span class="n">into</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">mod</span><span class="p">::</span><span class="n">Symbol</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1816</span>
 </pre></div>
 </div>
 </div>
@@ -833,8 +848,8 @@ y^{n+1} = \left(1 + h \lambda \right)^{n+1} y^0 .
 \dot{\mathbf{y}} = A \mathbf{y}
 \]</div>
 <p>For example, a system of two first-order linear ODEs:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6488af26-f2c9-4d06-81d9-105c9cef11ce">
-<span class="eqno">(21)<a class="headerlink" href="#equation-6488af26-f2c9-4d06-81d9-105c9cef11ce" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-6fa2baa8-4feb-438e-b608-7efcfa597439">
+<span class="eqno">(21)<a class="headerlink" href="#equation-6fa2baa8-4feb-438e-b608-7efcfa597439" title="Permalink to this equation">#</a></span>\[\begin{align}
 y_1' &amp;= y_2\\
 y_2' &amp;= - y_1\\
 \end{align}\]</div>
@@ -1281,7 +1296,7 @@ Evidently only <span class="math notranslate nohighlight">\(\theta=1\)</span> is
 \frac{\partial u}{\partial t} = - c  \frac{\partial u}{\partial x}
 \]</div>
 <p>on <span class="math notranslate nohighlight">\([-1,1]\)</span>, with an initial condition <span class="math notranslate nohighlight">\(u(x,t=0)  = u_0 = e^{-9x^2}\)</span>, and periodic boundary conditions: <span class="math notranslate nohighlight">\(u(-1)=u(1)\)</span>.</p>
-<p>Here <span class="math notranslate nohighlight">\(u(x,t)\)</span>, <span class="math notranslate nohighlight">\(x \in \R\)</span> is a scalar (wave), advected by a nonezero constant <span class="math notranslate nohighlight">\(c\)</span> during time <span class="math notranslate nohighlight">\(t\)</span>. The sign of <span class="math notranslate nohighlight">\(c\)</span>  characterise the direction of wave propagation. If <span class="math notranslate nohighlight">\(c&gt;0\)</span>, the wave propagates in the positive direction of <span class="math notranslate nohighlight">\(x\)</span>-axis. On the other hand, if <span class="math notranslate nohighlight">\(c&lt;0\)</span>  then the wave propagates to the negative direction of <span class="math notranslate nohighlight">\(x\)</span>-axis. The mangitude of <span class="math notranslate nohighlight">\(c\)</span> tells us how fast the wave propagates. The exact solution of this equation is given by its initial value. Assuming that the initial condition is given as <span class="math notranslate nohighlight">\(u_0(x,t)= u(x,0)\)</span>, then the exact solution of equation is <span class="math notranslate nohighlight">\(u(x,t) = u_0 (x-ct)\)</span>.</p>
+<p>Here <span class="math notranslate nohighlight">\(u(x,t)\)</span>, <span class="math notranslate nohighlight">\(x \in \mathbb{R}\)</span> is a scalar (wave), advected by a nonezero constant <span class="math notranslate nohighlight">\(c\)</span> during time <span class="math notranslate nohighlight">\(t\)</span>. The sign of <span class="math notranslate nohighlight">\(c\)</span>  characterise the direction of wave propagation. If <span class="math notranslate nohighlight">\(c&gt;0\)</span>, the wave propagates in the positive direction of <span class="math notranslate nohighlight">\(x\)</span>-axis. On the other hand, if <span class="math notranslate nohighlight">\(c&lt;0\)</span>  then the wave propagates to the negative direction of <span class="math notranslate nohighlight">\(x\)</span>-axis. The mangitude of <span class="math notranslate nohighlight">\(c\)</span> tells us how fast the wave propagates. The exact solution of this equation is given by its initial value. Assuming that the initial condition is given as <span class="math notranslate nohighlight">\(u_0(x,t)= u(x,0)\)</span>, then the exact solution of equation is <span class="math notranslate nohighlight">\(u(x,t) = u_0 (x-ct)\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">advect_matrix</span><span class="p">(</span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">upwind</span><span class="o">=</span><span class="nb">false</span><span class="p">)</span>

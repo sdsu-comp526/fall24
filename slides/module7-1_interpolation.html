@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>24) Interpolation &#8212; Computational Methods for Scientists</title>
+    <title>24) Interpolation &#8212; Computational Methods for Scientists Fall 24</title>
   
   
   
@@ -156,8 +156,8 @@
       
     
     
-    <img src="../_static/SDSU-comp526_logo.svg" class="logo__image only-light" alt="Computational Methods for Scientists - Home"/>
-    <script>document.write(`<img src="../_static/SDSU-comp526_logo.svg" class="logo__image only-dark" alt="Computational Methods for Scientists - Home"/>`);</script>
+    <img src="../_static/SDSU-comp526_logo.svg" class="logo__image only-light" alt="Computational Methods for Scientists Fall 24 - Home"/>
+    <script>document.write(`<img src="../_static/SDSU-comp526_logo.svg" class="logo__image only-dark" alt="Computational Methods for Scientists Fall 24 - Home"/>`);</script>
   
   
 </a></div>
@@ -629,8 +629,8 @@ document.write(`
 \begin{bmatrix} y_0 \\ y_1 \\ \vdots \\ y_n \end{bmatrix}
 \end{split}\]</div>
 <p>which is the matrix form of the system of equations:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2674cc8a-7cd9-4633-ae10-69414d81ad1f">
-<span class="eqno">(9)<a class="headerlink" href="#equation-2674cc8a-7cd9-4633-ae10-69414d81ad1f" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-e10a36cd-e112-4121-a19e-060e52316cc8">
+<span class="eqno">(9)<a class="headerlink" href="#equation-e10a36cd-e112-4121-a19e-060e52316cc8" title="Permalink to this equation">#</a></span>\[\begin{align}
 p(x_0) &amp;= a_0 + a_1 x_0 + a_2 x_0^2 + \ldots + a_n x_0^m = y_0\\
 p(x_1) &amp;= a_0 + a_1 x_1 + a_2 x_1^2 + \ldots + a_n x_1^m = y_1\\
 p(x_2) &amp;= a_0 + a_1 x_2 + a_2 x_2^2 + \ldots + a_n x_2^m = y_2\\ 
@@ -710,12 +710,11 @@ l_i(x)= \frac{(x-x_0)(x-x_1) \cdots (x-x_{i-1})(x-x_{i+1}) \cdots (x-x_m)}{(x_i-
 <section id="example">
 <h3>Example:<a class="headerlink" href="#example" title="Link to this heading">#</a></h3>
 <p>Find an interpolating polynomial for the data points <span class="math notranslate nohighlight">\((0, 1)\)</span>, <span class="math notranslate nohighlight">\((2, 2)\)</span>, and <span class="math notranslate nohighlight">\((3, 4)\)</span>. Substituting into Lagrange’s formula yields:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f0cfb539-b893-4505-bf31-6e672bb4a095">
-<span class="eqno">(10)<a class="headerlink" href="#equation-f0cfb539-b893-4505-bf31-6e672bb4a095" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-03c163c1-cac2-4fe7-add0-d6c546541103">
+<span class="eqno">(10)<a class="headerlink" href="#equation-03c163c1-cac2-4fe7-add0-d6c546541103" title="Permalink to this equation">#</a></span>\[\begin{align}
 p_2(x) =&amp; 1 \frac{(x-2)(x-3)}{(0-2)(0-3)} +2 \frac{(x-0)(x-3)}{(2-0)(2-3)} +4\frac{(x-0)(x-2)}{(3-0)(3-2)} = \\
        =&amp; \frac{1}{6}(x^2 - 5x +6) +2\left(-\frac{1}{2} \right)(x^2 - 3x) +4\left( \frac{1}{3} \right) (x^2 -2x) = \\
        =&amp; \frac{x^2}{2} - \frac{x}{2} +1.
-
 \end{align}\]</div>
 <p>Check that <span class="math notranslate nohighlight">\(p_2(0)=1\)</span>, <span class="math notranslate nohighlight">\(p_2(2)=2\)</span>, and <span class="math notranslate nohighlight">\(p_2(3)=4\)</span>.</p>
 <div class="cell docutils container">

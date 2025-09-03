@@ -1,0 +1,645 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Assignment 3: &#8212; Computational Methods for Scientists Fall 24</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'grading-fall24/HW3-grading/assignment3-starter/README';</script>
+    <link rel="icon" href="../../../_static/SDSU-comp526_logo.svg"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/SDSU-comp526_logo.svg" class="logo__image only-light" alt="Computational Methods for Scientists Fall 24 - Home"/>
+    <script>document.write(`<img src="../../../_static/SDSU-comp526_logo.svg" class="logo__image only-dark" alt="Computational Methods for Scientists Fall 24 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../index.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../syllabus.html">Syllabus</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../slides.html">Slides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module1-1_first_class.html">1) First Class: Reproducibility and Git</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module1-2_linux.html">2) The Linux Filesystem and commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module1-3_functions_and_fpa.html">3) Functions</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module2-1_intro_to_c.html">4) Intro to C</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module2-2_c_pointers.html">5) Intro to C pointers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module2-3_c_structs_and_functions.html">6) C structs and functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module2-4_c_memory.html">7) C memory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module3-1_function_errors.html">8) Function errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module3-2_conditioning.html">9) Conditioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module3-3_root_finding.html">10) Rootfinding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module3-4_convergence_classes.html">11) Convergence classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module3-5_newton.html">12) Newton methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module3-6_stability.html">13) Stability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module4-1_linear_algebra.html">14) Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module4-2_gram_schmidt.html">15) Gram-Schmidt and QR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module4-3_householder.html">16) Householder QR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module4-4_cholesky_qr.html">17) Cholesky QR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module4-5_solving_systems.html">18) Solving Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module4-7_matrix_conditioning_and_svd.html">19) Matrix condition number and SVD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module4-8_svd_and_conditioning.html">20) SVD Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module4-9_low_rank.html">21) Low Rank</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module5-1_community_projects.html">22) Community Projects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module6-1_intro_to_fortran.html">23) Introduction to Fortran</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module7-1_interpolation.html">24) Interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module7-2_chebyshev_poly.html">25) Chebyshev Polynomials and Piecewise Interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module7-3_splines.html">26) Spline Interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module7-6_higher_dimensions.html">27) Higher Dimensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module7-7_noisy-data.html">28) Noisy data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module8-1_integration.html">29) Numerical Intergration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module8-2_quadrature.html">30) Quadrature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module8-3_quadrature_transforms.html">31) Transformed Quadrature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module8-4_beyond_linear_models.html">32) Beyond Linear Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module8-5_gradient_descent.html">33) Gradient Descent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module9-1_differentiation.html">34) Differentiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module10-1_diffeq.html">35) Differential Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module10-2_stiff_equations.html">36) Stiff Equations</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module10-3_cfd.html">37) CFD examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module10-4_fem.html">38) FEM/SEM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module10-5_careers.html">39) Careers in computational science and scientific computing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module10-6_extra_sparse_la.html">40) Extra: Sparse Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../slides/module10-7_extra-fast_transforms.html">41) Extra: Fast transforms</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/sdsu-comp526/fall24" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/sdsu-comp526/fall24/issues/new?title=Issue%20on%20page%20%2Fgrading-fall24/HW3-grading/assignment3-starter/README.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/grading-fall24/HW3-grading/assignment3-starter/README.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Assignment 3:</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment-overview-and-learning-outcomes">🤓 Assignment overview and learning outcomes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment-steps">📝 Assignment steps:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submission-requirements">Submission requirements:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-skeleton-and-hints">Code skeleton and hints:</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hints">Hints:</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="assignment-3">
+<h1>Assignment 3:<a class="headerlink" href="#assignment-3" title="Link to this heading">#</a></h1>
+<section id="assignment-overview-and-learning-outcomes">
+<h2>🤓 Assignment overview and learning outcomes<a class="headerlink" href="#assignment-overview-and-learning-outcomes" title="Link to this heading">#</a></h2>
+<p>This assignment will cover some of the topics of the Fortran programming language seen in class, such as some basic I/O.</p>
+<p>We will revist here an interpolation method seen in class, <a class="reference external" href="https://sdsu-comp526.github.io/fall24/slides/module7-1_interpolation.html">Lagrange’s interpolation method</a>, and we will learn how to use Lagrange’s interpolating formula to approximate a function <span class="math notranslate nohighlight">\(f(x)\)</span> over a domain <span class="math notranslate nohighlight">\([a,b]\)</span>.</p>
+</section>
+<section id="assignment-steps">
+<h2>📝 Assignment steps:<a class="headerlink" href="#assignment-steps" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p>Write your own Fortran program, in a file called <code class="docutils literal notranslate"><span class="pre">main_lagrange.f90</span></code>, to find the interpolating polynomial for the following data points <span class="math notranslate nohighlight">\((x_i,y_i)\)</span>: <span class="math notranslate nohighlight">\((0.0, 1.0)\)</span>, <span class="math notranslate nohighlight">\((0.5, 0.223)\)</span>, <span class="math notranslate nohighlight">\((1.0, 0.05)\)</span>, <span class="math notranslate nohighlight">\((1.5, 0.011)\)</span>, <span class="math notranslate nohighlight">\((2.0, 0.002)\)</span>. The abscissae <span class="math notranslate nohighlight">\(x_i\)</span> are defined to be 5 equi-spaced points on the domain <span class="math notranslate nohighlight">\([a,b] = [0,2]\)</span>, and the corresponding ordinates <span class="math notranslate nohighlight">\(y_i\)</span> are defined as <span class="math notranslate nohighlight">\(y_i \equiv f(x_i) = e^{-3 x_i}\)</span> .</p></li>
+<li><p>(20%) In your program, you need to read the data points from the input file provided, called <code class="docutils literal notranslate"><span class="pre">input_data.txt</span></code>, and properly store their values in arrays called <code class="docutils literal notranslate"><span class="pre">x_data</span></code> and <code class="docutils literal notranslate"><span class="pre">y_data</span></code> (one for the abscissae and one for the ordinates, respectively).</p></li>
+<li><p>(10%) Write these input data points to standard output (i.e., your screen) to make sure that you have read and formatted the input values correctly.</p></li>
+<li><p>(20%) Read the domain points (which are 50 equi-spaced points in <span class="math notranslate nohighlight">\([a,b]\)</span>) provided in the file called <code class="docutils literal notranslate"><span class="pre">domain_points.txt</span></code> and properly store their values in an array called <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p></li>
+<li><p>(30%) Write your lagrange interpolation in a Fortran subroutine with the following <code class="docutils literal notranslate"><span class="pre">INTERFACE</span></code>:</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="k">INTERFACE</span>
+<span class="k">        SUBROUTINE </span><span class="n">lagrange_interpolation</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span><span class="n">y_data</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+
+<span class="w">            </span><span class="kt">REAL</span><span class="p">,</span><span class="w"> </span><span class="k">dimension</span><span class="p">(:),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">x_data</span>
+<span class="w">            </span><span class="kt">REAL</span><span class="p">,</span><span class="w"> </span><span class="k">dimension</span><span class="p">(:),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">y_data</span>
+<span class="w">            </span><span class="kt">REAL</span><span class="p">,</span><span class="w"> </span><span class="k">dimension</span><span class="p">(:),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">x</span>
+<span class="w">            </span><span class="kt">REAL</span><span class="p">,</span><span class="w"> </span><span class="k">dimension</span><span class="p">(:),</span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">y</span>
+
+<span class="w">        </span><span class="k">END SUBROUTINE </span><span class="n">lagrange_interpolation</span>
+<span class="w">    </span><span class="k">END INTERFACE</span>
+</pre></div>
+</div>
+<p>and call this subroutine from your main program</p>
+</li>
+<li><p>(20%) Finally, write the output <span class="math notranslate nohighlight">\(y\)</span> from your <code class="docutils literal notranslate"><span class="pre">lagrange_interpolation</span></code> subroutine in a file called <code class="docutils literal notranslate"><span class="pre">output.txt</span></code>.</p></li>
+<li><p>Other requirements and specs for your Fortran program (i.e., a non-exhaustive list of things that might get you points off):
+a. Forgetting to use <code class="docutils literal notranslate"><span class="pre">IMPLICIT</span> <span class="pre">NONE</span></code> or using it improperly (-20%)
+b. Misuses of or changes in the interface (-10% each)</p></li>
+<li><p><strong>Extra Credit (+15%)</strong>: use Julia to plot the approximated polynomial, the original function <span class="math notranslate nohighlight">\(f(x) = e^{-3x}\)</span>, and the discrete data points <span class="math notranslate nohighlight">\((x_i,y_i)\)</span> (all of these overlayed on the same plot). Save the generated plot to file, with a <code class="docutils literal notranslate"><span class="pre">png</span></code> file format.</p></li>
+</ol>
+</section>
+<section id="submission-requirements">
+<h2>Submission requirements:<a class="headerlink" href="#submission-requirements" title="Link to this heading">#</a></h2>
+<p>Follow the <a class="reference external" href="https://sdsu-comp526.github.io/fall24/slides/module4-6_review.html#submission-expectations">submission expectations</a> that we covered in the Review lecture in class. Mainly, you are required to work on a <em>feature</em> branch in your assignment repository (do NOT work off <code class="docutils literal notranslate"><span class="pre">main</span></code>), push your <code class="docutils literal notranslate"><span class="pre">main_lagrange.f90</span></code> and <code class="docutils literal notranslate"><span class="pre">output.txt</span></code> files, and any accompanying files for the Extra Credit question (if you decide to complete it) in an open Pull Request. Always test your program compilation and execution locally, before submitting it.</p>
+<p>Do <strong>not</strong> close or merge your Pull Request. Leave it open so that your teacher can Review it.</p>
+<p>If you decide to complete the EC question, follow the <a class="reference external" href="https://sdsu-comp526.github.io/fall24/slides/module4-6_review.html#assignments-in-julia">submission expectations for assignments in Julia</a>, mainly, submit your julia file with the <code class="docutils literal notranslate"><span class="pre">.jl</span></code> extension, the <code class="docutils literal notranslate"><span class="pre">Project.toml</span></code> and <code class="docutils literal notranslate"><span class="pre">Manifest.toml</span></code> file.</p>
+</section>
+<section id="code-skeleton-and-hints">
+<h2>Code skeleton and hints:<a class="headerlink" href="#code-skeleton-and-hints" title="Link to this heading">#</a></h2>
+<p>Here is some Fortran pseudo-code that will help you get started:</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="k">PROGRAM </span><span class="n">lagrange_program</span>
+
+<span class="w">    </span><span class="c">! Specify interface of subroutine here</span>
+
+<span class="w">    </span><span class="c">! Define parameters and arrays here</span>
+
+<span class="w">    </span><span class="c">! I/O requested in Steps 2, 3, and 4 of the Assignment Steps</span>
+
+<span class="w">    </span><span class="k">CALL </span><span class="n">lagrange_interpolation</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span><span class="n">y_data</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c">! I/O requested in Step 6 of the Assignment Steps</span>
+
+<span class="w">    </span><span class="mi">100</span><span class="w"> </span><span class="k">FORMAT</span><span class="p">(</span><span class="n">F3</span><span class="p">.</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">F6</span><span class="p">.</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="c">! Format specifier for two floating point values: one 3 columns wide, with 1 decimal place, and the other one 6 columns wide (counting from the end of the previous one), with 3 decimal places</span>
+<span class="w">    </span><span class="mi">101</span><span class="w"> </span><span class="k">FORMAT</span><span class="p">(</span><span class="n">F19</span><span class="p">.</span><span class="mi">17</span><span class="p">)</span><span class="w"> </span><span class="c">! Floating point format specifier 19 columns wide, with 17 decimal places</span>
+<span class="w">    </span><span class="mi">102</span><span class="w"> </span><span class="k">FORMAT</span><span class="p">(</span><span class="n">F0</span><span class="p">.</span><span class="mi">17</span><span class="p">)</span><span class="w"> </span><span class="c">! the 0 here means that processor selects the smallest positive field width necessary</span>
+
+<span class="w">    </span><span class="k">END PROGRAM </span><span class="n">lagrange_program</span>
+
+<span class="w">    </span><span class="k">SUBROUTINE </span><span class="n">lagrange_interpolation</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span><span class="n">y_data</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c">! your subroutine code here</span>
+
+<span class="w">    </span><span class="k">END SUBROUTINE </span><span class="n">lagrange_interpolation</span>
+</pre></div>
+</div>
+<section id="hints">
+<h3>Hints:<a class="headerlink" href="#hints" title="Link to this heading">#</a></h3>
+<p><strong>I/O in Julia</strong>: for the EC question, you will need the following block of code:</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># open output.txt data and store values in the array called p</span>
+<span class="n">open</span><span class="p">(</span><span class="s">&quot;output.txt&quot;</span><span class="p">,</span><span class="s">&quot;r&quot;</span><span class="p">)</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">f</span>
+<span class="w">    </span><span class="n">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="o">!</span><span class="w"> </span><span class="n">eof</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="w">        </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">readline</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="w">        </span><span class="n">p</span><span class="p">[</span><span class="n">line</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parse</span><span class="o">.</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span><span class="n">l</span><span class="p">)</span>
+<span class="w">        </span><span class="n">line</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "sdsu-comp526/fall24",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./grading-fall24/HW3-grading/assignment3-starter"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment-overview-and-learning-outcomes">🤓 Assignment overview and learning outcomes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment-steps">📝 Assignment steps:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submission-requirements">Submission requirements:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-skeleton-and-hints">Code skeleton and hints:</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hints">Hints:</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Valeria Barra
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
