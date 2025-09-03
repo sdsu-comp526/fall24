@@ -1,7 +1,7 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 
-title: Computational Methods for Scientists
+title: Computational Methods for Scientists Fall 24
 author: Valeria Barra
 logo: img/SDSU-comp526_logo.svg
 
@@ -22,8 +22,9 @@ execute:
 
 # Define the name of the latex output file for PDF builds
 latex:
+  use_jupyterbook_latex: true
   latex_documents:
-    targetname: book.tex
+    targetname: fall24book.tex
 
 # Add a bibtex file so that we can create citations
 bibtex_bibfiles:
