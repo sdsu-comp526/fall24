@@ -24,7 +24,7 @@ execute:
 latex:
   use_jupyterbook_latex: true
   latex_documents:
-    targetname: fall24book.tex
+    targetname: comp526_fall24_book.tex
 
 # Add a bibtex file so that we can create citations
 bibtex_bibfiles:
